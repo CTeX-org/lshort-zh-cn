@@ -1,0 +1,825 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 中文~4.20~翻译：
+% 5.2.5-5.2.11 gprsnl@bbs.ctex
+% 其他章节     zpxing@bbs.ctex  email: zpxing at gmail dot com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{chapter}{4}
+\newcommand{\graphicscompanion}{\emph{The \LaTeX{} Graphics Companion}~\cite{graphicscompanion}}
+\newcommand{\hobby}{\emph{A User's Manual for MetaPost}~\cite{metapost}}
+\newcommand{\hoenig}{\emph{\TeX{} Unbound}~\cite{unbound}}
+\newcommand{\graphicsinlatex}{\emph{Graphics in \LaTeXe{}}~\cite{ursoswald}}
+
+%\chapter{Producing Mathematical Graphics}
+%\label{chap:graphics}
+\chapter{数学图形}
+\label{chap:graphics}
+
+%\begin{intro}
+%Most people use \LaTeX\ for typesetting their text. But as the non content and
+%structure oriented approach to authoring is so convenient, \LaTeX\ also offers a,
+%if somewhat restricted, possibility for producing graphical output from textual
+%descriptions. Furthermore, quite a number of \LaTeX\ extensions have been created
+%in order to overcome these restrictions. In this section, you will learn about a
+%few of them.
+%\end{intro}
+\begin{intro}
+大部分人使用 \LaTeX 来排版文本内容。 因其不面向内容和结构的特点给写作提供了巨大的方便，
+我们还可以有办法从文本描述生成图形输出。此外，大量的 \LaTeX 扩展
+被开发出来以克服种种限制。 在本节中，我们将学习其中的一些。
+\end{intro}
+%\section{Overview}
+\section{概述}
+
+%The \ei{picture} environment allows programming pictures directly in
+%\LaTeX. A detailed
+%description can be found in the \manual. On the one hand, there are rather
+%severe constraints, as the slopes of line segments as well as the radii of
+%circles are restricted to a narrow choice of values.  On the other hand, the
+%\ei{picture} environment of \LaTeXe\ brings with it the \ci{qbezier}
+%command, ``\texttt{q}'' meaning ``quadratic''.  Many frequently used curves
+%such as circles, ellipses, or catenaries can be satisfactorily approximated
+%by quadratic B\'ezier curves, although this may require some mathematical
+%toil. If, in addition, a programming language like Java is used to generate
+%\ci{qbezier} blocks of \LaTeX\ input files, the \ei{picture} environment
+%becomes quite powerful.
+
+\ei{picture} 环境可以在 \LaTeX{} 里直接设计图形。详细的介绍请参考 \manual。
+一方面，这种方法有严重的局限性，比如线段的斜率和圆的半径只能在一个很小的范围内取值。
+另一方面， \LaTeXe 的 \ei{picture} 环境提供了 \ci{qbezier} 命令，
+``\texttt{q}'' 表示 ``quadratic''。许多常用的曲线如圆、椭圆、或者悬链线都
+可以用二次 B\'ezier 曲线得到令人满意的近似，虽然这可能需要一些辛苦的数学准备。
+另外，如果有一种编程语言如 Java 能用来生成 \LaTeX 源文档的 \ci{qbezier} 模块，
+\ei{picture} 环境会更强大。
+
+%Although programming pictures directly in \LaTeX\ is severely
+%restricted, and often rather tiresome, there are still reasons for
+%doing so. The documents thus produced are ``small'' with respect to
+%bytes, and there are no additional graphics files to be dragged
+%along.
+%
+%Packages like \pai{epic} and \pai{eepic} (described, for instance,
+%in \companion), or \pai{pstricks} help to eliminate the restrictions
+%hampering the original \ei{picture} environment, and greatly
+%strengthen the graphical power of \LaTeX.
+%
+%While the former two packages just enhance the \ei{picture}
+%environment, the \pai{pstricks} package has its own drawing
+%environment, \ei{pspicture}. The power of \pai{pstricks} stems from
+%the fact that this package makes extensive use of \PSi{}
+%possibilities. In addition, numerous packages have been written for
+%specific purposes. One of them is \texorpdfstring{\Xy}{Xy}-pic,
+%described at the end of this chapter. A wide variety of these
+%packages is described in detail in \graphicscompanion{} (not to be
+%confused with \companion).
+
+虽然直接在 \LaTeX 里设计图形的方法有严重的局限性而且通常比较繁琐，
+但它还是很有用的。这份文档就是用它才变得体积很小，不需要插入额外的图片。
+
+一些宏包，如 \pai{epic} 和 \pai{eepic}（\companion 里有介绍），或者
+ \pai{pstricks} 可以排除 \ei{picture} 环境的局限，并大大地增强了 \LaTeX 的图形功能。
+
+跟前两个宏包只是加强了 \ei{picture} 环境不同，\pai{pstricks} 宏包有自己的绘图环境，
+\ei{pspicture}。 \pai{pstricks} 的强大之处在于它广泛应用了 \PSi{}。
+另外，许多宏包可以用来处理专门的问题。其一是 \texorpdfstring{\Xy}{Xy}-pic，
+本章最后会讲到它。
+\graphicscompanion{} （勿与 \companion 混淆）里详细介绍了大量的宏包.
+%
+%Perhaps the most powerful graphical tool related with \LaTeX\ is \texttt{MetaPost}, the twin of
+%Donald E. Knuth's \texttt{METAFONT}. \texttt{MetaPost} has the very powerful and
+%mathematically sophisticated programming language of \texttt{METAFONT}. Contrary to \texttt{METAFONT},
+%which generates bitmaps, \texttt{MetaPost} generates encapsulated \PSi{} files,
+%which can be imported in \LaTeX. For an introduction, see \hobby, or the tutorial on \cite{ursoswald}.
+
+\LaTeX 最强大的图形工具可能是 \texttt{MetaPost}， Donald E.
+Knuth 编写的 \texttt{METAFONT} 的孪生兄弟。
+\texttt{MetaPost} 使用非常强大的数学编程语言： \texttt{METAFONT}。
+与 \texttt{METAFONT} 生成点阵图片不同，\texttt{MetaPost} 生成的是封装的 \PSi{} 文件，
+可以导入 \LaTeX 中。其介绍可以看 \hobby，或者 \cite{ursoswald}。
+
+%
+%A very thorough discussion of \LaTeX{} and \TeX{} strategies for graphics (and fonts) can
+%be found in \hoenig.
+
+关于 \LaTeX{} 和 \TeX{} 图形（以及字体）支持方法的详细讨论请参考 \hoenig。
+
+%\section{The \texttt{picture} Environment}
+%\secby{Urs Oswald}{osurs@bluewin.ch}
+\section{\texttt{picture} 环境}
+\secby{Urs Oswald}{osurs@bluewin.ch}
+
+
+%\subsection{Basic Commands}
+\subsection{基本命令}
+
+%A \ei{picture} environment\footnote{Believe it or not, the picture environment works out of the
+%box, with standard \LaTeXe{} no package loading necessary.} is created with one of the two commands
+一个 \ei{picture} 环境\footnote{信不信由你，picture 环境仅需标准的 \LaTeXe{}，“开箱即用”，无需载入宏包。}可以用下面两个命令中的一个来创建
+\begin{lscommand}
+\ci{begin}\verb|{picture}(|$x,y$\verb|)|\ldots\ci{end}\verb|{picture}|
+\end{lscommand}
+\noindent 或者
+\begin{lscommand}
+\ci{begin}\verb|{picture}(|$x,y$\verb|)(|$x_0,y_0$\verb|)|\ldots\ci{end}\verb|{picture}|
+\end{lscommand}
+%The numbers $x,\,y,\,x_0,\,y_0$ refer to \ci{unitlength}, which can be reset any time
+%(but not within a \ei{picture} environment) with a command such as
+数字 $x,\,y,\,x_0,\,y_0$ 是相对于 \ci{unitlength} 而言的，任何时候（除了在 \ei{picture} 环境之内以外），都可以
+使用命令如
+\begin{lscommand}
+\ci{setlength}\verb|{|\ci{unitlength}\verb|}{1.2cm}|
+\end{lscommand}
+%The default value of \ci{unitlength} is \texttt{1pt}. The first
+%pair, $(x,y)$, effects the reservation, within the document, of
+%rectangular space for the picture. The optional second pair,
+%$(x_0,y_0)$, assigns arbitrary coordinates to the bottom left corner
+%of the reserved rectangle.
+\noindent
+来改变。\ci{unitlength} 的默认值是 \texttt{1 pt}。第一个数对，
+$(x,y)$， 在文档中为图形保留一个矩形的区域。可选的第二个数对，
+$(x_0,y_0)$，为矩形左下角指派任意的坐标。
+
+%Most drawing commands have one of the two forms
+大多数的绘图命令是下面两种格式之一
+\begin{lscommand}
+\ci{put}\verb|(|$x,y$\verb|){|\emph{object}\verb|}|
+\end{lscommand}
+\noindent 或者
+\begin{lscommand}
+\ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta
+y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|\end{lscommand}
+%B\'ezier curves are an exception. They are drawn with the command
+B\'ezier 曲线是一个例外。 它们需要用命令
+\begin{lscommand}
+\ci{qbezier}\verb|(|$x_1,y_1$\verb|)(|$x_2,y_2$\verb|)(|$x_3,y_3$\verb|)|
+\end{lscommand}
+\noindent 来画。
+\newpage
+
+%\subsection{Line Segments}
+\subsection{线段}
+\begin{example}
+\setlength{\unitlength}{5cm}
+\begin{picture}(1,1)
+  \put(0,0){\line(0,1){1}}
+  \put(0,0){\line(1,0){1}}
+  \put(0,0){\line(1,1){1}}
+  \put(0,0){\line(1,2){.5}}
+  \put(0,0){\line(1,3){.3333}}
+  \put(0,0){\line(1,4){.25}}
+  \put(0,0){\line(1,5){.2}}
+  \put(0,0){\line(1,6){.1667}}
+  \put(0,0){\line(2,1){1}}
+  \put(0,0){\line(2,3){.6667}}
+  \put(0,0){\line(2,5){.4}}
+  \put(0,0){\line(3,1){1}}
+  \put(0,0){\line(3,2){1}}
+  \put(0,0){\line(3,4){.75}}
+  \put(0,0){\line(3,5){.6}}
+  \put(0,0){\line(4,1){1}}
+  \put(0,0){\line(4,3){1}}
+  \put(0,0){\line(4,5){.8}}
+  \put(0,0){\line(5,1){1}}
+  \put(0,0){\line(5,2){1}}
+  \put(0,0){\line(5,3){1}}
+  \put(0,0){\line(5,4){1}}
+  \put(0,0){\line(5,6){.8333}}
+  \put(0,0){\line(6,1){1}}
+  \put(0,0){\line(6,5){1}}
+\end{picture}
+\end{example}
+%Line segments are drawn with the command
+线段用命令
+\begin{lscommand}
+\ci{put}\verb|(|$x,y$\verb|){|\ci{line}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
+\end{lscommand}
+%Line segments are drawn with the command
+\noindent 来画。 命令 \ci{line} 有两个参量：
+%\begin{enumerate}
+%  \item a direction vector,
+%  \item a length.
+%\end{enumerate}
+\begin{enumerate}
+  \item 一个方向向量，
+  \item 一个长度。
+\end{enumerate}
+%The components of the direction vector are restricted to the integers
+方向向量需由以下整数构成
+\[
+  -6,\,-5,\,\ldots,\,5,\,6,
+\]
+%and they have to be coprime (no common divisor except 1). The figure illustrates all
+%25 possible slope values in the first quadrant. The length is relative to \ci{unitlength}.
+%The length argument is the vertical coordinate in the case of a vertical line segment, the
+%horizontal coordinate in all other cases.
+而且它们需要互质（除 1 以外，没有公约数），图形显示了第一象限中所有 25 个可能的斜率值。
+长度是相对于 \ci{unitlength} 来说的。长度的参量当一个垂直线段时是垂直坐标，其他情况都是水平坐标。
+
+%\subsection{Arrows}
+\subsection{箭头}
+
+\begin{example}
+\setlength{\unitlength}{0.75mm}
+\begin{picture}(60,40)
+  \put(30,20){\vector(1,0){30}}
+  \put(30,20){\vector(4,1){20}}
+  \put(30,20){\vector(3,1){25}}
+  \put(30,20){\vector(2,1){30}}
+  \put(30,20){\vector(1,2){10}}
+  \thicklines
+  \put(30,20){\vector(-4,1){30}}
+  \put(30,20){\vector(-1,4){5}}
+  \thinlines
+  \put(30,20){\vector(-1,-1){5}}
+  \put(30,20){\vector(-1,-4){5}}
+\end{picture}
+\end{example}
+%Arrows are drawn with the command
+画箭头要用命令
+\begin{lscommand}
+\ci{put}\verb|(|$x,y$\verb|){|\ci{vector}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
+\end{lscommand}
+%For arrows, the components of the direction vector are even more narrowly restricted than
+%for line segments, namely to the integers
+箭头的方向向量元素比线段的限制更严格，需由以下整数构成
+\[
+  -4,\,-3,\,\ldots,\,3,\,4.
+\]
+%Components also have to be coprime (no common divisor except 1). Notice the effect  of the
+%\ci{thicklines} command on the two arrows pointing to the upper left.
+而且需要互质（除 1 以外，没有公约数）。注意命令 \ci{thicklines} 对指向左上方的两个箭头产生的效果。
+
+%\subsection{Circles}
+\subsection{圆}
+
+\begin{example}
+\setlength{\unitlength}{1mm}
+\begin{picture}(60, 40)
+  \put(20,30){\circle{1}}
+  \put(20,30){\circle{2}}
+  \put(20,30){\circle{4}}
+  \put(20,30){\circle{8}}
+  \put(20,30){\circle{16}}
+  \put(20,30){\circle{32}}
+
+  \put(40,30){\circle{1}}
+  \put(40,30){\circle{2}}
+  \put(40,30){\circle{3}}
+  \put(40,30){\circle{4}}
+  \put(40,30){\circle{5}}
+  \put(40,30){\circle{6}}
+  \put(40,30){\circle{7}}
+  \put(40,30){\circle{8}}
+  \put(40,30){\circle{9}}
+  \put(40,30){\circle{10}}
+  \put(40,30){\circle{11}}
+  \put(40,30){\circle{12}}
+  \put(40,30){\circle{13}}
+  \put(40,30){\circle{14}}
+
+  \put(15,10){\circle*{1}}
+  \put(20,10){\circle*{2}}
+  \put(25,10){\circle*{3}}
+  \put(30,10){\circle*{4}}
+  \put(35,10){\circle*{5}}
+\end{picture}
+\end{example}
+%The command
+命令
+\begin{lscommand}
+  \ci{put}\verb|(|$x,y$\verb|){|\ci{circle}\verb|{|\emph{diameter}\verb|}}|
+\end{lscommand}
+%\noindent draws a circle with center $(x,y)$ and diameter (not radius) \emph{diameter}.
+%The \ei{picture} environment only admits diameters up to approximately 14\,mm,
+%and even below this limit, not all diameters are possible. The \ci{circle*}
+%command produces disks (filled circles).
+\noindent
+画了一个圆心在 $(x,y)$ 直径（不是半径）为 \emph{diameter} 的圆。
+\ei{picture} 环境只允许直径最大是 14\,mm， 而且即使在这个限制之下，
+也不是所有的直径都可获得。命令 \ci{circle*} 生成圆盘 （填充的圆形）。
+
+
+%As in the case of line segments, one may have to resort to additional packages,
+%such as \pai{eepic} or \pai{pstricks}.
+%For a thorough description of these packages, see \graphicscompanion.
+
+跟线段的情况一样，你可能需要其他宏包的帮助，比如 \pai{eepic} 或者 \pai{pstricks}。
+这些宏包的详细说明请参考 \graphicscompanion。
+
+%There is also a possibility within the
+%\ei{picture} environment. If one is not afraid of doing the necessary calculations
+%(or leaving them to a program), arbitrary circles and ellipses can be patched
+%together from quadratic B\'ezier curves.
+%See \graphicsinlatex\ for examples and Java source files.
+\ei{picture} 环境还有另外一个可能。如果你不怕麻烦的必要的计算（或者交给一个程序来处理），
+任意的圆和矩形都可以由二次 B\'ezier 曲线拼成。请看例子 \graphicsinlatex 以及 Java 源文件。
+
+
+% \subsection{Text and Formulas}
+\subsection{文本与公式}
+
+\begin{example}
+\setlength{\unitlength}{0.8cm}
+\begin{picture}(6,5)
+  \thicklines
+  \put(1,0.5){\line(2,1){3}}
+  \put(4,2){\line(-2,1){2}}
+  \put(2,3){\line(-2,-5){1}}
+  \put(0.7,0.3){$A$}
+  \put(4.05,1.9){$B$}
+  \put(1.7,2.95){$C$}
+  \put(3.1,2.5){$a$}
+  \put(1.3,1.7){$b$}
+  \put(2.5,1.05){$c$}
+  \put(0.3,4){$F=
+    \sqrt{s(s-a)(s-b)(s-c)}$}
+  \put(3.5,0.4){$\displaystyle
+    s:=\frac{a+b+c}{2}$}
+\end{picture}
+\end{example}
+% As this example shows, text and formulas can be written into a \ei{picture} environment with
+% the \ci{put} command in the usual way.
+如本例所示，文本与公式可以使用 \ci{put} 命令按照正常方式在 \ei{picture} 环境中使
+用。
+
+% \subsection{\ci{multiput} and \ci{linethickness}}
+\subsection{\ci{multiput}~与~\ci{linethickness}}
+
+\begin{example}
+\setlength{\unitlength}{2mm}
+\begin{picture}(30,20)
+  \linethickness{0.075mm}
+  \multiput(0,0)(1,0){26}%
+    {\line(0,1){20}}
+  \multiput(0,0)(0,1){21}%
+    {\line(1,0){25}}
+  \linethickness{0.15mm}
+  \multiput(0,0)(5,0){6}%
+    {\line(0,1){20}}
+  \multiput(0,0)(0,5){5}%
+    {\line(1,0){25}}
+  \linethickness{0.3mm}
+  \multiput(5,0)(10,0){2}%
+    {\line(0,1){20}}
+  \multiput(0,5)(0,10){2}%
+    {\line(1,0){25}}
+\end{picture}
+\end{example}
+% The command
+% \begin{lscommand}
+%   \ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|
+% \end{lscommand}
+% \noindent has 4 arguments: the starting point, the translation vector from one object to the next,
+% the number of objects, and the object to be drawn. The \ci{linethickness} command applies to
+% horizontal and vertical line segments, but neither to oblique line segments, nor to circles.
+% It does, however, apply to quadratic B\'ezier curves!
+命令
+\begin{lscommand}
+  \ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|
+\end{lscommand}
+\noindent
+有 4 个参量：初始点，从一个对象到下一个的平移向量，对象的数目和要绘制
+的对象。命令 \ci{linethickness} 可作用于水平和垂直方向的线段，但不能作用于倾斜的
+线段和圆。然而，该命令可作用于二次 B\'ezier 曲线。
+
+% \subsection{Ovals}
+\subsection{椭圆}
+
+\begin{example}
+\setlength{\unitlength}{0.75cm}
+\begin{picture}(6,4)
+  \linethickness{0.075mm}
+  \multiput(0,0)(1,0){7}%
+    {\line(0,1){4}}
+  \multiput(0,0)(0,1){5}%
+    {\line(1,0){6}}
+  \thicklines
+  \put(2,3){\oval(3,1.8)}
+  \thinlines
+  \put(3,2){\oval(3,1.8)}
+  \thicklines
+  \put(2,1){\oval(3,1.8)[tl]}
+  \put(4,1){\oval(3,1.8)[b]}
+  \put(4,3){\oval(3,1.8)[r]}
+  \put(3,1.5){\oval(1.8,0.4)}
+\end{picture}
+\end{example}
+% The command
+% \begin{lscommand}
+%   \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)}|
+% \end{lscommand}
+% \noindent or
+% \begin{lscommand}
+%   \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)[|\emph{position}\verb|]}|
+% \end{lscommand}
+% \noindent produces an oval centered at $(x,y)$ and having width $w$ and height $h$. The optional
+% \emph{position} arguments \texttt{b}, \texttt{t}, \texttt{l}, \texttt{r} refer to
+% ``top'', ``bottom'', ``left'', ``right'', and can be combined, as the example illustrates.
+命令
+\begin{lscommand}
+  \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)}|
+\end{lscommand}
+\noindent 或
+\begin{lscommand}
+  \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)[|\emph{position}\verb|]}|
+\end{lscommand}
+\noindent
+可以产生一个中心在 $(x,y)$ 处、宽为 $w$ 高为 $h$ 的椭圆。如本例所示，可选
+参量 \emph{position} 可以是 \texttt{b}, \texttt{t}, \texttt{l},
+\texttt{r}, 分别
+表示仅绘制椭圆的“下部”、“上部”、“左部”和“右部”，如例所示，这些参数可以进行组合。
+
+% Line thickness can be controlled by two kinds of commands: \\
+% \ci{linethickness}\verb|{|\emph{length}\verb|}|
+% on the one hand, \ci{thinlines} and \ci{thicklines} on the other. While \ci{linethickness}\verb|{|\emph{length}\verb|}|
+% applies only to horizontal and vertical lines (and quadratic B\'ezier curves), \ci{thinlines} and \ci{thicklines}
+% apply to oblique line segments as well as to circles and ovals.
+以下两类命令可以控制线宽：一类
+为 \ci{linethickness}\verb|{|\emph{length}\verb|}|，另一类
+为 \ci{thinlines} 与 \ci{thicklines}。命
+令 \ci{linethickness}\verb|{|\emph{length}\verb|}| 仅对水平和垂直直线（及二次 B\'ezier 曲线）有作用，
+\ci{thinlines} 与 \ci{thicklines} 则可以作用于倾斜的线段、圆和椭圆。
+
+
+% \subsection{Multiple Use of Predefined Picture Boxes}
+\subsection{重复使用预定义的图形盒子}
+
+\begin{example}
+\setlength{\unitlength}{0.5mm}
+\begin{picture}(120,168)
+\newsavebox{\foldera}
+\savebox{\foldera}
+  (40,32)[bl]{% definition
+  \multiput(0,0)(0,28){2}
+    {\line(1,0){40}}
+  \multiput(0,0)(40,0){2}
+    {\line(0,1){28}}
+  \put(1,28){\oval(2,2)[tl]}
+  \put(1,29){\line(1,0){5}}
+  \put(9,29){\oval(6,6)[tl]}
+  \put(9,32){\line(1,0){8}}
+  \put(17,29){\oval(6,6)[tr]}
+  \put(20,29){\line(1,0){19}}
+  \put(39,28){\oval(2,2)[tr]}
+}
+\newsavebox{\folderb}
+\savebox{\folderb}
+  (40,32)[l]{%         definition
+  \put(0,14){\line(1,0){8}}
+  \put(8,0){\usebox{\foldera}}
+}
+\put(34,26){\line(0,1){102}}
+\put(14,128){\usebox{\foldera}}
+\multiput(34,86)(0,-37){3}
+  {\usebox{\folderb}}
+\end{picture}
+\end{example}
+% A picture box can be \emph{declared} by the command
+% \begin{lscommand}
+%   \ci{newsavebox}\verb|{|\emph{name}\verb|}|
+% \end{lscommand}
+% \noindent then \emph{defined} by
+% \begin{lscommand}
+%   \ci{savebox}\verb|{|\emph{name}\verb|}(|\emph{width,height}\verb|)[|\emph{position}\verb|]{|\emph{content}\verb|}|
+% \end{lscommand}
+% \noindent and finally arbitrarily often be \emph{drawn} by
+% \begin{lscommand}
+%   \ci{put}\verb|(|$x,y$\verb|)|\ci{usebox}\verb|{|\emph{name}\verb|}|
+% \end{lscommand}
+一个图形盒子可以使用命令
+\begin{lscommand}
+  \ci{newsavebox}\verb|{|\emph{name}\verb|}|
+\end{lscommand}
+\noindent 进行\textbf{声明}，然后使用命令
+\begin{lscommand}
+  \ci{savebox}\verb|{|\emph{name}\verb|}(|\emph{width,height}\verb|)[|\emph{position}\verb|]{|\emph{content}\verb|}|
+\end{lscommand}
+\noindent 进行\textbf{定义}，最后使用命令
+\begin{lscommand}
+  \ci{put}\verb|(|$x,y$\verb|)|\ci{usebox}\verb|{|\emph{name}\verb|}|
+\end{lscommand}
+\noindent 进行任意次数的重复\textbf{绘制}。
+
+% The optional \emph{position} parameter has the effect of defining the
+% `anchor point' of the savebox. In the example it is set to \texttt{bl} which
+% puts the anchor point into the bottom left corner of the savebox. The other
+% position specifiers are \texttt{t}op and \texttt{r}ight.
+可选参数 \emph{position} 的作用是定义图形存放盒子的“锚点”。在本例中该参数被设置
+为 \texttt{bl}，从而将锚点设置为图形存放盒子的左下角。其他的位置描述
+有 \texttt{t} 和 \texttt{r}，分别表示“上”和“右”。
+
+% The \emph{name} argument refers to a \LaTeX{} storage bin and therefore is
+% of a command nature (which accounts for the backslashes in the current
+% example). Boxed pictures can be nested: In this example, \ci{foldera} is
+% used within the definition of \ci{folderb}.
+参量 \emph{name} 指明了 \LaTeX{} 存储槽，揭示了其命令本质（在本例中指反斜线）。图
+形盒子可以嵌套：在本例中，\ci{foldera} 被用在了 \ci{folderb} 的定义中。
+
+% The \ci{oval} command had to be used as the \ci{line} command does not work if
+% the segment length is less than about 3\,mm.
+由于命令 \ci{line} 在线段长度小于大约 3\,mm 的时候不能正常工作，所以必须使用命令 \ci{oval}。
+
+% \subsection{Quadratic B\'ezier Curves}
+\subsection{二次~B\'ezier~曲线}
+
+\begin{example}
+\setlength{\unitlength}{0.8cm}
+\begin{picture}(6,4)
+  \linethickness{0.075mm}
+  \multiput(0,0)(1,0){7}
+    {\line(0,1){4}}
+  \multiput(0,0)(0,1){5}
+    {\line(1,0){6}}
+  \thicklines
+  \put(0.5,0.5){\line(1,5){0.5}}
+  \put(1,3){\line(4,1){2}}
+  \qbezier(0.5,0.5)(1,3)(3,3.5)
+  \thinlines
+  \put(2.5,2){\line(2,-1){3}}
+  \put(5.5,0.5){\line(-1,5){0.5}}
+  \linethickness{1mm}
+  \qbezier(2.5,2)(5.5,0.5)(5,3)
+  \thinlines
+  \qbezier(4,2)(4,3)(3,3)
+  \qbezier(3,3)(2,3)(2,2)
+  \qbezier(2,2)(2,1)(3,1)
+  \qbezier(3,1)(4,1)(4,2)
+\end{picture}
+\end{example}
+% As this example illustrates, splitting up a circle into 4 quadratic B\'ezier curves
+% is not satisfactory. At least 8 are needed. The figure again shows the effect of
+% the \ci{linethickness} command on horizontal or vertical lines, and of the
+% \ci{thinlines} and the \ci{thicklines} commands on oblique line segments. It also
+% shows that both kinds of commands affect quadratic B\'ezier curves, each command
+% overriding all previous ones.
+如本例所示，将圆分割为 4 条二次 B\'ezier 曲线的效果不能令人满意，至少需要 8 条。该图
+再一次展示了命令 \ci{linethickness} 对水平或垂直直线以及命
+令 \ci{thinlines} 和 \ci{thicklines} 对倾斜线段的影响。该例同时显示：这两类命令都
+会影响二次 B\'ezier 曲线，每一条命令都会覆盖以前所有命令。
+
+% Let $P_1=(x_1,\,y_1),\,P_2=(x_2,\,y_2)$ denote the end points, and $m_1,\,m_2$ the
+% respective slopes, of a quadratic B\'ezier curve. The intermediate control point
+% $S=(x,\,y)$ is then given by the equations
+令 $P_1=(x_1,\,y_1),\,P_2=(x_2,\,y_2)$ 和 $m_1,\,m_2$ 分别表示一条二次 B\'ezier 曲线
+的两个端点及其对应斜率。中间控制点 $S=(x,\,y)$ 则由下述方程给出
+\begin{equation} \label{zwischenpunkt}
+  \left\{
+    \begin{array}{rcl}
+      x & = & \displaystyle \frac{m_2 x_2-m_1x_1-(y_2-y_1)}{m_2-m_1}, \\
+      y & = & y_i+m_i(x-x_i)\qquad (i=1,\,2).
+    \end{array}
+  \right.
+\end{equation}
+% \noindent See \graphicsinlatex\ for a Java program which generates
+% the necessary \ci{qbezier} command line.
+\noindent
+关于生成必要的 \ci{qbezier} 命令的 Java 程序参见 \graphicsinlatex。
+
+% \subsection{Catenary}
+\subsection{悬链线}
+
+\begin{example}
+\setlength{\unitlength}{1cm}
+\begin{picture}(4.3,3.6)(-2.5,-0.25)
+\put(-2,0){\vector(1,0){4.4}}
+\put(2.45,-.05){$x$}
+\put(0,0){\vector(0,1){3.2}}
+\put(0,3.35){\makebox(0,0){$y$}}
+\qbezier(0.0,0.0)(1.2384,0.0)
+  (2.0,2.7622)
+\qbezier(0.0,0.0)(-1.2384,0.0)
+  (-2.0,2.7622)
+\linethickness{.075mm}
+\multiput(-2,0)(1,0){5}
+  {\line(0,1){3}}
+\multiput(-2,0)(0,1){4}
+  {\line(1,0){4}}
+\linethickness{.2mm}
+\put( .3,.12763){\line(1,0){.4}}
+\put(.5,-.07237){\line(0,1){.4}}
+\put(-.7,.12763){\line(1,0){.4}}
+\put(-.5,-.07237){\line(0,1){.4}}
+\put(.8,.54308){\line(1,0){.4}}
+\put(1,.34308){\line(0,1){.4}}
+\put(-1.2,.54308){\line(1,0){.4}}
+\put(-1,.34308){\line(0,1){.4}}
+\put(1.3,1.35241){\line(1,0){.4}}
+\put(1.5,1.15241){\line(0,1){.4}}
+\put(-1.7,1.35241){\line(1,0){.4}}
+\put(-1.5,1.15241){\line(0,1){.4}}
+\put(-2.5,-0.25){\circle*{0.2}}
+\end{picture}
+\end{example}
+
+% In this figure, each symmetric half of the catenary $y=\cosh x -1$ is approximated by a quadratic
+% B\'ezier curve. The right half of the curve ends in the point \((2,\,2.7622)\), the slope there having the value
+% \(m=3.6269\). Using again equation (\ref{zwischenpunkt}), we can
+% calculate the intermediate control points. They turn out to be $(1.2384,\,0)$ and $(-1.2384,\,0)$.
+% The crosses indicate points of the \emph{real} catenary. The error is barely noticeable, being less
+% than one percent.
+在本图中，悬链线 $y=\cosh x
+-1$ 对称的两半由二次 B\'ezier 曲线分别近似地绘成。曲线的右
+半部分终止于点 \((2,\,2.7622)\)，对应的斜率为 \(m=3.6269\)。再次使用公
+式 (\ref{zwischenpunkt})，我们可以计算中间控制点。计算结果
+为 $(1.2384,\,0)$ 和 $(-1.2384,\,0)$。图中的十字为{\textbf
+真正}的悬链线上的点。误差 小于百分之一，很难被发现。
+
+% This example points out the use of the optional argument of the \\
+% \verb|\begin{picture}| command.
+% The picture is defined in convenient ``mathematical'' coordinates, whereas by the command
+% \begin{lscommand}
+%   \ci{begin}\verb|{picture}(4.3,3.6)(-2.5,-0.25)|
+% \end{lscommand}
+% \noindent its lower left corner (marked by the black disk) is assigned the
+% coordinates $(-2.5,-0.25)$.
+该例指出了命令 \verb|\begin{picture}| 的可选参数的用法。该图通过使用命令
+\begin{lscommand}
+  \ci{begin}\verb|{picture}(4.3,3.6)(-2.5,-0.25)|
+\end{lscommand}
+\noindent 定义了方便的“数学”坐标：左下角（由黑色圆点标出）坐标是
+$(-2.5,-0.25)$。
+
+% \subsection{Rapidity in the Special Theory of Relativity}
+\subsection{坐标的相对性}
+
+\begin{example}
+\setlength{\unitlength}{0.8cm}
+\begin{picture}(6,4)(-3,-2)
+  \put(-2.5,0){\vector(1,0){5}}
+  \put(2.7,-0.1){$\chi$}
+  \put(0,-1.5){\vector(0,1){3}}
+  \multiput(-2.5,1)(0.4,0){13}
+    {\line(1,0){0.2}}
+  \multiput(-2.5,-1)(0.4,0){13}
+    {\line(1,0){0.2}}
+  \put(0.2,1.4)
+    {$\beta=v/c=\tanh\chi$}
+  \qbezier(0,0)(0.8853,0.8853)
+    (2,0.9640)
+  \qbezier(0,0)(-0.8853,-0.8853)
+    (-2,-0.9640)
+  \put(-3,-2){\circle*{0.2}}
+\end{picture}
+\end{example}
+% The control points of the two B\'ezier curves were calculated with formulas (\ref{zwischenpunkt}).
+% The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2),\,m_2=1/\cosh^2 2$.
+% Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
+% is assigned the mathematical coordinates $(-3,-2)$ (black disk).
+公式 (\ref{zwischenpunkt}) 给出了两条 B\'ezier 曲线的控制点。正向分支
+由 $P_1=(0,\,0),\,m_1=1$ 和 $P_2=(2,\,\tanh 2),\,m_2=1/\cosh^2 2$ 确定。与前例相
+同，本图也定义了在数学上方便的坐标，左下角的坐标是 $(-3,-2)$ （黑点）。
+
+%\section{\texorpdfstring{\Xy}{Xy}-pic}
+%\secby{Alberto Manuel Brand\~ao Sim\~oes}{albie@alfarrabio.di.uminho.pt}
+\section{\texorpdfstring{\Xy}{Xy}-pic}
+\secby{Alberto Manuel Brand\~ao Sim\~oes}{albie@alfarrabio.di.uminho.pt}
+
+%\pai{xy} is a special package for drawing diagrams. To use it,
+%simply add the following line to the preamble of your document:
+%\begin{lscommand}
+%\verb|\usepackage[|\emph{options}\verb|]{xy}|
+%\end{lscommand}
+%\emph{options} is a list of functions from \Xy-pic you want to
+%load. These options are primarily useful when debugging the package.  I recommend
+%you pass the \verb!all! option, making \LaTeX{} load all the \Xy{} commands.
+
+\pai{xy} 是绘制流程图的专用宏包。要想使用它，只需在导言区加上：
+\begin{lscommand}
+\verb|\usepackage[|\emph{options}\verb|]{xy}|
+\end{lscommand}
+\emph{options} 列出你需要载入的 \Xy-pic 的选项。这些选项基本上被用于调试这个宏包的使用。
+建议你使用 \verb!all!，可以让 \LaTeX{} 载入 \Xy{} 的所有命令。
+
+%\Xy-pic diagrams are drawn over a matrix-oriented canvas, where
+%each diagram element is placed in a matrix slot:
+\Xy-pic 流程图被绘制在一幅以矩阵定位的画布上，每一个流程图元素被放在矩阵的一个单元中：
+\begin{example}
+\begin{displaymath}
+\xymatrix{A & B \\
+          C & D }
+\end{displaymath}
+\end{example}
+%The \ci{xymatrix} command must be used in math mode. Here, we
+%specified two lines and two columns. To make this matrix a diagram we
+%just add directed arrows using the \ci{ar} command.
+命令 \ci{xymatrix} 必须置于数学模式中。这里，我们设定了一个两行两列的矩阵。
+为了画出流程，我们只需要使用命令 \ci{ar} 增加带方向的箭头即可。
+\begin{example}
+\begin{displaymath}
+\xymatrix{ A \ar[r] & B \ar[d] \\
+           D \ar[u] & C \ar[l] }
+\end{displaymath}
+\end{example}
+%The arrow command is placed on the origin cell for the arrow. The
+%arguments are the direction the arrow should point to (\texttt{u}p,
+%\texttt{d}own, \texttt{r}ight and \texttt{l}eft).
+箭头命令要放在其出发的那个单元里。参量是箭头的方向 （\texttt{u}：上，
+\texttt{d}：下， \texttt{r}：右以及 \texttt{l}：左）.
+
+
+\begin{example}
+\begin{displaymath}
+\xymatrix{
+  A \ar[d] \ar[dr] \ar[r] & B \\
+  D                       & C }
+\end{displaymath}
+\end{example}
+%To make diagonals, just use more than one direction. In
+%fact, you can repeat directions to make bigger arrows.
+要画对角线，可以指定不只一个方向参量。实际上，你还可以重复同一个方向来得到更大的箭头。
+\begin{example}
+\begin{displaymath}
+\xymatrix{
+ A \ar[d] \ar[dr] \ar[drr] &&\\
+ B                   & C & D }
+\end{displaymath}
+\end{example}
+
+%We can draw even more interesting diagrams by adding
+%labels to the arrows. To do this, we use the common superscript and
+%subscript operators.
+我们还可以绘制一些更有趣的流程图，给箭头加上标签，只需要使用普通的上标和下标。
+\begin{example}
+\begin{displaymath}
+\xymatrix{
+  A \ar[r]^f \ar[d]_g &
+             B \ar[d]^{g'} \\
+  D \ar[r]_{f'}       & C }
+\end{displaymath}
+\end{example}
+
+%As shown, you use these operators as in math mode. The only
+%difference is that that superscript means ``on top of the arrow,''
+%and subscript means ``under the arrow.'' There is a third operator, the vertical bar: \verb+|+
+%It causes text to be placed \emph{in} the arrow.
+如图所示，就像数学模式里一样使用上下标。唯一的区别在于：上标表示放在 “箭头的上方”，
+下标表示放在“箭头的下方”。 把文本放到箭头上可以用 \verb+|+。
+\begin{example}
+\begin{displaymath}
+\xymatrix{
+  A \ar[r]|f \ar[d]|g &
+             B \ar[d]|{g'} \\
+  D \ar[r]|{f'}       & C }
+\end{displaymath}
+\end{example}
+
+%To draw an arrow with a hole in it, use \verb!\ar[...]|\hole!.
+绘制空心箭头的命令是 \verb!\ar[...]|\hole!。
+
+%In some situations, it is important to distinguish between different types of
+%arrows. This can be done by putting labels on them, or changing their appearance:
+某些情况下，需要区分不同类型的箭头。可以给它们标上标签，或者使用不同的外观来实现：
+
+\begin{example}
+\shorthandoff{"}
+\begin{displaymath}
+\xymatrix{
+\bullet\ar@{->}[rr] && \bullet\\
+\bullet\ar@{.<}[rr] && \bullet\\
+\bullet\ar@{~)}[rr] && \bullet\\
+\bullet\ar@{=(}[rr] && \bullet\\
+\bullet\ar@{~/}[rr] && \bullet\\
+\bullet\ar@{^{(}->}[rr] &&
+                       \bullet\\
+\bullet\ar@2{->}[rr] && \bullet\\
+\bullet\ar@3{->}[rr] && \bullet\\
+\bullet\ar@{=+}[rr]  && \bullet
+}
+\end{displaymath}
+\shorthandon{"}
+\end{example}
+
+%Notice the difference between the following two diagrams:
+注意下面两幅流程图的区别：
+
+\begin{example}
+\begin{displaymath}
+\xymatrix{
+ \bullet \ar[r]
+         \ar@{.>}[r] &
+ \bullet
+}
+\end{displaymath}
+\end{example}
+
+\begin{example}
+\begin{displaymath}
+\xymatrix{
+ \bullet \ar@/^/[r]
+         \ar@/_/@{.>}[r] &
+ \bullet
+}
+\end{displaymath}
+\end{example}
+
+%The modifiers between the slashes define how the curves are drawn.
+%\Xy-pic offers many ways to influence the drawing of curves;
+%for more information, check \Xy-pic documentation.
+两条斜线间的修饰元素决定了曲线应该如何被画出。
+\Xy-pi 提供了很多办法来改变曲线的形状；更详细的内容请参考 \Xy-pic 的文档。
+
+% \begin{example}
+% \begin{lscommand}
+% \ci{dum}
+% \end{lscommand}
+% \end{example}

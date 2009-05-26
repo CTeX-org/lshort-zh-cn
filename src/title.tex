@@ -1,0 +1,84 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: The title page
+% $Id: title.tex,v 1.2 2003/03/19 20:57:47 oetiker Exp $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 中文~4.20~翻译：zpxing@bbs.ctex email: zpxing at gmail dot com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifx\pdfoutput\undefined % We're not running pdftex
+\else
+%\pdfbookmark{Title Page}{title}
+\pdfbookmark{标题页}{title}
+\fi
+\newlength{\centeroffset}
+\setlength{\centeroffset}{-0.5\oddsidemargin}
+\addtolength{\centeroffset}{0.5\evensidemargin}
+%\addtolength{\textwidth}{-\centeroffset}
+\thispagestyle{empty}
+\vspace*{\stretch{1}}
+\noindent\hspace*{\centeroffset}\makebox[0pt][l]{\begin{minipage}{\textwidth}
+\flushright
+{\huge \bfseries 一份不太简短的~\LaTeXe{}~介绍}
+\noindent\rule[-1ex]{\textwidth}{5pt}\\[2.5ex]
+\hfill\emph{\Large 或~\pageref{verylast}~分钟学会~\LaTeXe}
+%{\Huge\bfseries The Not So Short\\
+%Introduction to \LaTeXe
+%
+%}
+%\noindent\rule[-1ex]{\textwidth}{5pt}\\[2.5ex]
+%\hfill\emph{\Large Or \LaTeXe{} in \pageref{verylast} minutes}
+\end{minipage}}
+
+\vspace{\stretch{1}}
+\noindent\hspace*{\centeroffset}\makebox[0pt][l]{\begin{minipage}{\textwidth}
+\flushright
+{\bfseries 原版作者：} Tobias Oetiker\\[1.5ex]
+　　　　　             Hubert Partl, Irene Hyna and  Elisabeth Schlegl\\[1.5ex]
+{\bfseries 原版版本：} Version~4.20, May 31, 2006\\[3ex]
+{\bfseries 中文翻译：} 中文~\TeX{}~学会\\[1.5ex]
+{\bfseries 中文版本：} 版本~4.20，二零零七年九月
+\end{minipage}}
+
+
+%\addtolength{\textwidth}{\centeroffset}
+\vspace{\stretch{2}}
+
+
+\pagebreak
+\begin{small}
+%  Copyright \copyright 1995-2005 Tobias Oetiker and Contributers.  All rights reserved.
+   Tobias\ Oetiker~及贡献者拥有版权~\copyright\ 1995 -- 2005。
+   保留所有权利。
+
+%  This document is free; you can redistribute it and/or modify it
+%  under the terms of the GNU General Public License as published by
+%  the Free Software Foundation; either version 2 of the License, or
+%  (at your option) any later version.
+   这份文档是免费的；在~Free Software Foundation~颁布的~GNU~通用出版许可证的条款下，
+   你可以再版或者修改它。许可证可以是第二版，或者任何后继版本（随你意）。
+
+%  This document is distributed in the hope that it will be useful, but
+%  WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\@.  See the GNU
+%  General Public License for more details.
+   发布这份文档是希望它会有用，但并不提供任何保障；甚至没有用于商业的或者
+   适用某一特定目的的暗含保证。更多的细节请查看~GNU~通用出版许可证。
+
+%  You should have received a copy of the GNU General Public License
+%  along with this document; if not, write to the Free Software
+%  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+   你应该随这份文档收到一份~GNU~通用出版许可证的拷贝；如果没有，写信到
+   ~Free Software Foundation，地址：675 Mass Ave, Cambridge, MA 02139, USA。
+
+\end{small}
+
+
+\endinput
+
+%
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:

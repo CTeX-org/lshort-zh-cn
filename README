@@ -1,0 +1,5 @@
+In order to compile this document for yourself, XeTeX and Adobe Song Std, Adobe Hei Std, 
+Adobe Kaiti Std fonts are needed to be able embeding.
+
+We have employed zhspacing for better Chinese output. To adapt xelatex with zhspacing, 
+the fonts, simsun, simkai, simhei and simfang, are also reqired in your system.

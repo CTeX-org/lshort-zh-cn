@@ -1,0 +1,1197 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Things you need to know
+% $Id: things.tex,v 1.2 2003/03/19 20:57:47 oetiker Exp $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%中文~4.20~翻译：Frogge@bbs.ctex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter{Things You Need to Know}
+\chapter{基础知识}
+%\begin{intro}
+%The first part of this chapter presents a short overview of the
+%philosophy and history of \LaTeXe. The second part focuses on the
+%basic structures of a \LaTeX{} document. After reading this chapter,
+%you should have a rough knowledge of how \LaTeX{} works, which you
+%will need to understand the rest of this book.
+%\end{intro}
+\begin{intro}
+本章的第一部分给出了 \LaTeXe{} 原理及历史的简短介绍。第二部分集中讲
+解 \LaTeX{} 文档的基本结构。读完本章之后，你应该大致了解 \LaTeX{} 的工作原理，这对你理解
+本书的其余部分来说是必须的。
+\end{intro}
+
+%\section{The Name of the Game}
+\section{游戏的名目}
+%\subsection{\TeX}
+\subsection{\TeX}
+
+%\TeX{} is a computer program created by \index{Knuth, Donald
+%E.}Donald E. Knuth \cite{texbook}. It is aimed at typesetting text
+%and mathematical formulae. Knuth started writing the \TeX{}
+%typesetting engine in 1977 to explore the potential of the digital
+%printing equipment that was beginning to infiltrate the publishing
+%industry at that time, especially in the hope that he could reverse
+%the trend of deteriorating typographical quality that he saw
+%affecting his own books and articles. \TeX{} as we use it today was
+%released in 1982, with some slight enhancements added in 1989 to
+%better support 8-bit characters and multiple languages. \TeX{} is
+%renowned for being extremely stable, for running on many different
+%kinds of computers, and for being virtually bug free. The version
+%number of \TeX{} is converging to $\pi$ and is now at $3.141592$.
+
+\TeX{} 是 \index{Knuth, Donald E.}Donald E.
+Knuth 编写的一个以排版文章及数学公式为目标的计算机程序 \cite{texbook}。1977 年，在意识到恶劣的排版质量正在影响自己的著
+作及文章后，Knuth 开始编写 \TeX{} 排版系统引擎，探索当时开始进入出版工业的数字印刷设备的潜力，尤为希望能扭转排版质量下滑
+的这一趋势。我们现在使用的 \TeX{} 系统发布于 1982 年，在 1989 年又稍做改进，增加了对 8 字节字符及多语言的支
+持。\TeX{} 以其卓越的稳定性、可在不同类型的电脑上运行以及几乎没有缺
+陷而著称。\TeX{} 的版本号不断趋近于 $\pi$，现在为 3.141592。
+
+%\TeX{} is pronounced ``Tech,'' with a ``ch'' as in the German word
+%``Ach''\footnote{In german there are actually two pronounciations
+%for ``ch'' and one might assume that the soft ``ch'' sound from
+%``Pech'' would be a more appropriate. Asked about this, Knuth wrote
+%in the German Wikipedia: \emph{I do not get angry when people
+%pronounce \TeX{} in their favorite way \ldots{} and in Germany many
+%use a soft ch because the X follows the vowel e, not the harder ch
+%that follows the vowel a. In Russia, `tex' is a very common word,
+%pronounced `tyekh'. But I believe the most proper pronunciation is
+%heard in Greece, where you have the harsher ch of ach and Loch.}} or
+%in the Scottish ``Loch.'' The ``ch'' originates from the Greek
+%alphabet where X is the letter ``ch'' or ``chi''. \TeX{} is also the
+%first syllable of the Greek word texnologia (technology). In an
+%ASCII environment, \TeX{} becomes \texttt{TeX}.
+
+\TeX{} 发音为 ``Tech''，其中 ``ch'' 和德语 ``Ach''\footnote{在德语中，``ch'' 有两种发音，有的人可能认为 ``Pech'' 中
+较软的 ``ch'' 更加合适。被问及这个问题时，Knuth 在德文 Wikipedia 中写道： \textsf{
+当人们以他们喜欢的方式来拼读 \TeX{} 时，我并不感到生气……在德国，更多的人喜欢较软的 ch，因为 X 跟
+在元音 e 的后面。在俄语中，`tex' 是一个非常普遍的单词，读作 `tyekh'。但我相信最合适的发音来自希腊
+语，其中 ach 和 Loch 中 ch 的发音稍尖。}} 及苏格兰语 ``Loch'' 中的 ``ch'' 类似。``ch'' 源自希腊字母，希腊文中，X 是字
+母 ``ch'' 或 ``chi''。 \TeX{} 同时也是希腊单词 texnologia (technology) 的第一个音节。在 \texttt{ASCII} 文本环
+境中，\TeX{} 写作 \texttt{TeX}。
+
+
+\subsection{\LaTeX}
+%\LaTeX{} is a macro package that enables authors to typeset and
+%print their work at the highest typographical quality, using a
+%predefined, professional layout. \LaTeX{} was originally written by
+%\index{Lamport, Leslie}Leslie Lamport \cite{manual}. It uses the
+%\TeX{} formatter as its typesetting engine. These days \LaTeX{} is
+%maintained by \index{Mittelbach, Frank}Frank Mittelbach.
+
+\LaTeX{} 是一个宏集，它使用一个预先定义好的专业版面，可以使作者们高质量的排版和打印他们的作品。\LaTeX{} 最初
+由 \index{Lamport, Leslie}Leslie
+Lamport 编写 \cite{manual}，它使用 \TeX{} 程序作为排版引擎。现
+在 \LaTeX{} 由 \index{Mittelbach, Frank}Frank Mittelbach 负责维护。
+
+%In 1994 the \LaTeX{} package was updated by the \index{LaTeX3@\LaTeX
+%  3}\LaTeX 3 team, led by \index{Mittelbach, Frank}Frank Mittelbach,
+%to include some long-requested improvements, and to re\-unify all the
+%patched versions which had cropped up since the release of
+%\index{LaTeX 2.09@\LaTeX{} 2.09}\LaTeX{} 2.09 some years earlier. To
+%distinguish the new version from the old, it is called \index{LaTeX
+%2e@\LaTeXe}\LaTeXe. This documentation deals with \LaTeXe. These days you
+%might be hard pressed to find the venerable \LaTeX{} 2.09 installed
+%anywhere.
+
+%\LaTeX{} is pronounced ``Lay-tech'' or ``Lah-tech.'' If you refer to
+%\LaTeX{} in an \texttt{ASCII} environment, you type \texttt{LaTeX}.
+%\LaTeXe{} is pronounced ``Lay-tech two e'' and typed
+%\texttt{LaTeX2e}.
+
+\LaTeX{} 的发音为 ``Lay-tech'' 或 ``Lah-tech''。
+如果在 \texttt{ASCII} 环境中引用 \LaTeX{}，你可以输入 \texttt{LaTeX}。
+\LaTeXe{} 的发音为 ``Lay-tech two e''，在 \texttt{ASCII} 环境中写作 \texttt{LaTeX2e}。
+
+
+%Figure \ref{components} above % on page \pageref{components}
+%shows how \TeX{} and \LaTeXe{} work together. This figure is taken from
+%\texttt{wots.tex} by Kees van der Laan.
+
+%\begin{figure}[btp]
+%\begin{lined}{0.8\textwidth}
+%\begin{center}
+%\input{kees.fig}
+%\end{center}
+%\end{lined}
+%\caption{Components of a \TeX{} System.} \label{components}
+%\end{figure}
+
+%\section{Basics}
+\section{基础}
+
+%\subsection{Author, Book Designer, and Typesetter}
+\subsection{作者、图书设计者和排版者}
+%To publish something, authors give their typed manuscript to a
+%publishing company. One of their book designers then
+%decides the layout of the document (column width, fonts, space before
+%and after headings, \ldots). The book designer writes his instructions
+%into the manuscript and then gives it to a typesetter, who typesets the
+%book according to these instructions.
+
+出版的第一步就是作者把打好字的手稿交给出版公司，然后由图书设计者来决定整个文档的布局（栏宽、字体、标题前后的间距、……）。图书
+设计者会把他的排版说明写进作者的手稿里，再交给排版者，由排版者根
+据这些说明来排版全书。
+
+%A human book designer tries to find out what the author had in mind
+%while writing the manuscript. He decides on chapter headings,
+%citations, examples, formulae, etc.\ based on his professional
+%knowledge and from the contents of the manuscript.
+
+一个图书设计者要试图理解作者写作时的意图。他要根据手稿的内容
+和他自己的职业知识来决定章节标题、文献引用、例子及公式等等。
+
+%In a \LaTeX{} environment, \LaTeX{} takes the role of the book
+%designer and uses \TeX{} as its typesetter. But \LaTeX{} is ``only'' a
+%program and therefore needs more guidance. The author has to provide
+%additional information to describe the logical structure of his
+%work. This information is written into the text as ``\LaTeX{}
+%commands.''
+
+在一个 \LaTeX{} 环境中，\LaTeX{} 充当了图书设计者的角色，而 \TeX{} 则是其排版者。但是 \LaTeX “仅仅”是
+一个程序，因此它需要很多的指导。作者必须提供额外的信息，来描述其著作的逻辑结构。这些信息是以 “\LaTeX{} 命令” 的形
+式写入文档中的。
+
+%This is quite different from the \wi{WYSIWYG}\footnote{What you see is
+%  what you get.} approach that most modern word processors, such as
+%\emph{MS Word} or \emph{Corel WordPerfect}, take. With these
+%applications, authors specify the document layout interactively while
+%typing text into the computer. They can see on the
+%screen how the final work will look when it is printed.
+\hyphenation{WordPerfect}
+这和大多数现代文字处理工具，如 \emph{MS Word} 及 \emph{Corel
+WordPerfect} 所采用的所见即所得 (\wi{WYSIWYG}\footnote{What you see
+is what you
+get.}) 的方式有很大区别。使用这些工具时，作者在向计算机中输入文档的同时，通过互
+动的方式确定文章的布局。作者可以从屏幕上看到作品的最终打印效果。
+
+%When using \LaTeX{} it is not normally possible to see the final output
+%while typing the text, but the final output can be previewed on the
+%screen after processing the file with \LaTeX. Then corrections can be
+%made before actually sending the document to the printer.
+
+而使用 \LaTeX 时，一般是不能在输入文档的同时看到最终的输出效果的，但是使用 \LaTeX 处理文档之后，便可以在屏幕上预览
+最终的输出效果。因此在真正打印文档之前还是可以做出改正的。
+
+%\subsection{Layout Design}
+\subsection{版面设计}
+
+%Typographical design is a craft. Unskilled authors often commit
+%serious formatting errors by assuming that book design is mostly a
+%question of aesthetics---``If a document looks good artistically,
+%it is well designed.'' But as a document has to be read and not hung
+%up in a picture gallery, the readability and understandability is
+%much more important than the beautiful look of it.
+%Examples:
+%\begin{itemize}
+%\item The font size and the numbering of headings have to be chosen to make
+%  the structure of chapters and sections clear to the reader.
+%\item The line length has to be short enough not to strain
+%  the eyes of the reader, while long enough to fill the page
+%  beautifully.
+%\end{itemize}
+
+排版设计是一门工艺。不熟练的作者认为书籍设计仅仅是个美学问题，因而经常会犯严重的格式错误 \pozhehao “如果一份文档从艺术的
+角度看起来不错，那么它的设计就是成功的”。不过作为一份用来阅读而不是挂在画廊里的文档，可读性和可理解性远比漂亮的
+外观重要。例如：
+\begin{itemize}
+\item 必须选定字号和标题的序号，使读者能清楚的理解章节的结构。
+\item
+每一行既要足够短以避免读者眼睛疲劳，又要足够长以维持页面的美观。
+\end{itemize}
+
+%With \wi{WYSIWYG} systems, authors often generate aesthetically
+%pleasing documents with very little or inconsistent structure.
+%\LaTeX{} prevents such formatting errors by forcing the author to
+%declare the \emph{logical} structure of his document. \LaTeX{} then
+%chooses the most suitable layout.
+
+在使用所见即所得系统 (\wi{WYSIWYG}) 时，作者经常会写出一些看上去漂亮，但结构欠清晰或不连贯的文章来。\LaTeX{} 通过强制
+作者声明文档的\textbf{逻辑}结构，来避免这些排版格式错误。然后，\LaTeX{} 再根据文档的结构选择最合适的版面格式。
+
+%\subsection{Advantages and Disadvantages}
+\subsection{优势和不足}
+
+%When people from the \wi{WYSIWYG} world meet people who use \LaTeX{},
+%they often discuss ``the \wi{advantages of \LaTeX{}} over a normal
+%word processor'' or the opposite.  The best thing you can do when such
+%a discussion starts is to keep a low profile, since such discussions
+%often get out of hand. But sometimes you cannot escape \ldots
+
+使用所见即所得 (\wi{WYSIWYG}) 的人和使用 \LaTeX{} 的人遇到一起时，他们经常讨论的话题
+就是“相比一般文字处理软件，\LaTeX{} 的优势 (\wi{advantages of
+\LaTeX{}})”或者不足。当
+这样的讨论开始时，你最好保持低调，因为讨论往往会失控。但有时你也不能逃避……
+
+%\medskip\noindent So here is some ammunition. The main advantages
+%of \LaTeX{} over normal word processors are the following:
+
+下面便是一些武器。\LaTeX{} 优于一般文字处理软件之处可归纳如下：
+
+%\begin{itemize}
+%
+%\item Professionally crafted layouts are available, which make a
+%  document really look as if ``printed.''
+%\item The typesetting of mathematical formulae is supported in a
+%  convenient way.
+%\item Users only need to learn a few easy-to-understand commands
+%  that specify the logical structure of a document. They almost never
+%  need to tinker with the actual layout of the document.
+%\item Even complex structures such as footnotes, references, table of
+%  contents, and bibliographies can be generated easily.
+%\item Free add-on packages exist for many typographical tasks not directly supported by basic
+%  \LaTeX. For example, packages are
+%  available to include \PSi{} graphics or to typeset
+%  bibliographies conforming to exact standards. Many of these add-on
+%  packages are described in \companion.
+%\item \LaTeX{} encourages authors to write well-structured texts,
+%  because this is how \LaTeX{} works---by specifying structure.
+%\item \TeX, the formatting engine of \LaTeXe, is highly portable and free.
+%  Therefore the system runs on almost any hardware platform
+%  available.
+%
+%%
+%% Add examples ...
+%%
+%\end{itemize}
+
+\begin{itemize}
+
+\item 提供专业的版面设计，可以使一份文档看起来就像“印刷品”一样。
+\item 可以方便的排版数学公式。
+\item
+用户只需要学一些声明文档逻辑结构的简单易懂的命令，而不必对文档的实际版面修修补补。
+\item 可以容易的生成像脚注、引用、目录和参考文献等很多复杂的结构。
+\item 很多不被基本 \LaTeX 支持的排版工作，可以由添加免费的宏包来完成。例如，支持在文件中插入 \PSi{} 格式图像的宏包及排版
+符合各类准确标准的参考文献的宏包等。很多这类宏包在 \companion 中都有说明。
+\item
+\LaTeX{} 鼓励作者按照合理的结构写作，因为 \LaTeX{} 就是通过指明文档结构来进行排版工作的。
+\item \TeX{}，作为 \LaTeXe 的排版引擎，不仅免费，而且具有很高的可移植性，几乎可以在任何硬件平台上运行。
+
+%
+% Add examples ...
+%
+\end{itemize}
+
+\medskip
+
+%\noindent\LaTeX{} also has some disadvantages, and I guess it's a
+%bit difficult for me to find any sensible ones, though I am sure
+%other people can tell you hundreds \texttt{;-)}
+
+\noindent\LaTeX{} 也有一些不足之处。尽管我可以确定别人可以列出几百条，我自己却很难找到一些比较理智的 \texttt{;-)}
+
+%\begin{itemize}
+%\item \LaTeX{} does not work well for people who have sold their
+%  souls \ldots
+%\item Although some parameters can be adjusted within a predefined
+%  document layout, the design of a whole new layout is difficult and
+%  takes a lot of time.\footnote{Rumour says that this is one of the
+%    key elements that will be addressed in the upcoming \LaTeX 3
+%    system.}\index{LaTeX3@\LaTeX 3}
+%\item It is very hard to write unstructured and disorganized documents.
+%\item Your hamster might, despite some encouraging first steps, never be
+%able to fully grasp the concept of Logical Markup.
+%\end{itemize}
+
+\begin{itemize}
+\item 没有原则的人不能使用 \LaTeX{} 很好地工作……
+\item 尽管可以调节预先定义好的文档版面布局中的一些参数，但设计一个全新的版面还是很困难的，并会耗费大量时
+间\footnote{传闻这将是未来的 \LaTeX 3 系统中的一个重要组成部分。}。
+\index{LaTeX3@\LaTeX 3}
+\item 很难用 \LaTeX{} 来写结构不明、组织无序的文档。
+\item 即使有一个令人鼓舞的开端，你也可能无法完全掌握其精髓。
+\end{itemize}
+
+%\section{\LaTeX{} Input Files}
+\section{\LaTeX{} 源文件}
+
+%The input for \LaTeX{} is a plain \texttt{ASCII} text file. You can create it
+%with any text editor. It contains the text of the document, as well as
+%the commands that tell \LaTeX{} how to typeset the text.
+
+\LaTeX{} 源文件为普通的 \texttt{ASCII} 文件，你可以使用任何文本编辑器来创建。\LaTeX{} 源文件不仅包含了
+要排版的文本，而且也包含了告诉 \LaTeX{} 如何排版这些文本内容的命令。
+
+%\subsection{Spaces}
+\subsection{空白距离}
+
+%``Whitespace'' characters, such as blank or tab, are
+%treated uniformly as ``\wi{space}'' by \LaTeX{}. \emph{Several
+%  consecutive} \wi{whitespace} characters are treated as \emph{one}
+%``space.''  Whitespace at the start of a line is generally ignored, and
+%a single line break is treated as ``whitespace.''
+%\index{whitespace!at the start of a line}
+
+空格和制表符等空白字符在 \LaTeX{} 中被看作相同的空白距离 (\wi{space})。{\textbf
+多}个连续的空白字符等同于\textbf{一}个空白字符。在句首的
+空白距离一般会被忽略，单个空行也被认为是一个“空白距离”。
+\index{whitespace!at the start of a line}
+
+
+%An empty line between two lines of text defines the end of a
+%paragraph. \emph{Several} empty lines are treated the same as
+%\emph{one} empty line. The text below is an example. On the left hand
+%side is the text from the input file, and on the right hand side is the
+%formatted output.
+
+两行文本间的空白行标志着上段的结束和下段的开始。{\textbf
+多}个空白行的作用等同于\textbf{一}个空白行。下面便是一个例子，左边
+是源文件中的文本，右边是排版后的结果。
+
+\begin{example}
+It does not matter whether you
+enter one or several     spaces
+after a word.
+
+An empty line starts a new
+paragraph.
+\end{example}
+
+%\subsection{Special Characters}
+\subsection{特殊字符}
+
+%The following symbols are \wi{reserved characters} that either have
+%a special meaning under \LaTeX{} or are not available in all the
+%fonts. If you enter them directly in your text, they will normally
+%not print, but rather coerce \LaTeX{} to do things you did not
+%intend.
+
+下面的这些字符是 \LaTeX{} 中的保留字符 (\wi{reserved
+characters})，它们或在 \LaTeX{} 中有特殊的意义，或不一定存在于所有字库中。如果你直接在文本中
+输入这些字符，通常它们不会被输出，而且还会导致 \LaTeX{} 做一些你不希望发生的事情。
+\begin{code}
+\verb.#  $  %  ^  &  _  {  }     \ . %$
+\end{code}
+
+%As you will see, these characters can be used in your documents all
+%the same by adding a prefix backslash:
+
+如你看到的，在这些字符前加上反斜线，它们就可以正常的输出到文档中。
+
+\begin{example}
+\# \$ \% \^{} \& \_ \{ \} \ {}
+\end{example}
+
+%The other symbols and many more can be printed with special commands
+%in mathematical formulae or as accents. The backslash character
+%$\backslash$ can \emph{not} be entered by adding another backslash
+%in front of it (\verb|\\|); this sequence is used for
+%line breaking.\footnote{Try the \texttt{\$}\ci{backslash}\texttt{\$} command instead. It
+%  produces a `$\backslash$'.}
+
+其他一些特殊符号可以由数学环境中的特殊命令或重音命令得到。反斜线 $\backslash$ {\textbf
+不}能通过在其前面加另一个反斜线得
+到 (\verb|\\|)；这是一个用来换行的命令\footnote{试试 \texttt{\$}\ci{backslash}\texttt{\$} 命令，它将生成一个 `$\backslash$'。}。
+
+%\subsection{\LaTeX{} Commands}
+\subsection{\LaTeX{} 命令}
+
+%\LaTeX{} \wi{commands} are case sensitive, and take one of the
+%following two formats:
+
+\LaTeX{} 命令 (\wi{commands}) 是大小写敏感的，有以下两种格式：
+%\begin{itemize}
+%\item They start with a \wi{backslash} \verb|\| and then have a name
+% consisting of letters only. Command names are terminated by a
+% space, a number or any other `non-letter.'
+%\item They consist of a backslash and exactly one non-letter.
+%\end{itemize}
+\begin{itemize}
+\item 以一个反斜线 (\wi{backslash}) \verb|\| 开始，命令名只由字母组成。命令名后的空格符、数字或任何非字母的字符都标志着该命令的结束。
+\item 由一个反斜线和非字母的字符组成。
+\end{itemize}
+
+%
+% \\* doesn't comply !
+%
+
+%
+% Can \3 be a valid command ? (jacoboni)
+%
+\label{whitespace}
+
+%\LaTeX{} ignores whitespace after commands. If you want to get a
+%\index{whitespace!after commands}space after a command, you have to
+%put either \verb|{}| and a blank or a special spacing command after the
+%command name. The \verb|{}| stops \LaTeX{} from eating up all the space after
+%the command name.
+
+\LaTeX{} 忽略命令之后的空白字符。如果你希望在命令后得到一个空
+格，可以在命令后加上 \verb|{}| 和一个空格，或加上一个特殊的空格命令。\verb|{}| 将阻止 \LaTeX{} 吃掉命令后的所有空格。
+\index{whitespace!after commands}
+
+\begin{example}
+I read that Knuth divides the
+people working with \TeX{} into
+\TeX{}nicians and \TeX perts.\\
+Today is \today.
+\end{example}
+
+%Some commands need a \wi{parameter}, which has to be given between
+%\wi{curly braces} \verb|{ }| after the command name. Some commands support
+%\wi{optional parameters}, which are added after the command name in
+%\wi{square brackets} \verb|[ ]|. The next examples use some \LaTeX{}
+%commands. Don't worry about them; they will be explained later.
+
+有些命令需要一个参数 (\wi{parameter})，该参数用花括号 (\wi{curly
+braces}) \verb|{ }| 括住并写在命令的后面。一些命令支持可选参数 (\wi{optional
+parameters})，可 选参数可用方括号 (\wi{square brackets}) \verb|[ ]| 括住，
+然后写在命令的后面。下面的例子中使用了一些 \LaTeX{} 命令，不要着急，后面
+将解释它们的含义。
+
+\begin{example}
+You can \textsl{lean} on me!
+\end{example}
+\begin{example}
+Please, start a new line
+right here!\newline
+Thank you!
+\end{example}
+
+%\subsection{Comments}
+\subsection{注释}
+\index{comments}
+
+%When \LaTeX{} encounters a \verb|%| character while processing an input file,
+%it ignores the rest of the present line, the line break, and all
+%whitespace at the beginning of the next line.
+
+当 \LaTeX{} 处理一个源文件时，如果遇到一个百分号 \verb|%|，\LaTeX{} 将忽略 \verb|%| 后的该行内容，换行符以及下
+一行前的空白字符。
+
+%This can be used to write notes into the input file, which will not show up
+%in the printed version.
+
+我们可以据此在源文件中写一些注释，而且这些注释并不会出现在最后的排版结果中。
+
+\begin{example}
+This is an % stupid
+% Better: instructive <----
+example: Supercal%
+              ifragilist%
+    icexpialidocious
+\end{example}
+
+%The \texttt{\%} character can also be used to split long input lines where no
+%whitespace or line breaks are allowed.
+
+符号 \texttt{\%} 也可以用来断开不能含有空白字符或换行符的较长输入内容。
+
+%For longer comments you could use the \ei{comment} environment
+%provided by the \pai{verbatim} package. This means, that you have to add the
+%line \verb|\usepackage{verbatim}| to the preamble of your document as
+%explained below before you can use this command.
+
+如果注释的内容较长，你可以使用 \pai{verbatim} 宏包提供的 \ei{comment} 环境。当然，在使用该环境前，你要在文档的
+导言区 （后面将会解释其含义） 加上命令 \verb|\usepackage{verbatim}|。
+\begin{example}
+This is another
+\begin{comment}
+rather stupid,
+but helpful
+\end{comment}
+example for embedding
+comments in your document.
+\end{example}
+
+%Note that this won't work inside complex environments, like math for example.
+需要注意的是以上做法在数学环境等复杂环境中不起作用。
+
+%\section{Input File Structure}
+\section{源文件的结构}\label{inputfilestructure}
+
+%When \LaTeXe{} processes an input file, it expects it to follow a
+%certain \wi{structure}. Thus every input file must start with the
+%command
+
+当 \LaTeXe{} 处理源文件时，它希望源文件遵从一定的结构 (\wi{structure})。因此，每个源文件都要以如下命令开始
+\begin{code}
+\verb|\documentclass{...}|
+\end{code}
+%This specifies what sort of document you intend to write. After
+%that, you can include commands that influence the style of the whole
+%document, or you can load \wi{package}s that add new features to the
+%\LaTeX{} system. To load such a package you use the command
+这条命令指明了你所写的源文档的类型。然后，你就可以加入控制整篇文档样式的命令，或者载入一些为 \LaTeX{} 增加新特性
+的宏包 (\wi{package})。可以用如下命令载入一个宏包
+\begin{code}
+\verb|\usepackage{...}|
+\end{code}
+
+%When all the setup work is done,\footnote{The area between \texttt{\bs
+%    documentclass} and \texttt{\bs
+%    begin$\mathtt{\{}$document$\mathtt{\}}$} is called the
+%  \emph{\wi{preamble}}.} you start the body of the text with the
+%command
+
+当完成所有的设置工作后\footnote{在 \texttt{\bs
+    documentclass} 和 \texttt{\bs
+    begin$\mathtt{\{}$document$\mathtt{\}}$}之间的部分称作\textbf{导言区} (\wi{preamble})。}，你可以用下面的命令开始文档的主体
+\begin{code}
+\verb|\begin{document}|
+\end{code}
+
+%Now you enter the text mixed with some useful \LaTeX{} commands.  At
+%the end of the document you add the
+
+现在你就可以输入带有 \LaTeX{} 命令的正文了。在文章末尾使用命令
+\begin{code}
+\verb|\end{document}|
+\end{code}
+%command, which tells \LaTeX{} to call it a day. Anything that
+%follows this command will be ignored by \LaTeX.
+来告诉 \LaTeX{} 文档已经结束。\LaTeX{} 会忽略此命令后的所有内容。
+
+%Figure \ref{mini} shows the contents of a minimal \LaTeXe{} file. A
+%slightly more complicated \wi{input file} is given in
+%Figure \ref{document}.
+
+图 \ref{mini} 显示的是一个简单的 \LaTeXe 文档的结构。一个较为复杂的源文件 (\wi{input
+file}) 结构如图 \ref{document} 所示。
+
+\begin{figure}[!bp]
+\begin{lined}{6cm}
+\begin{verbatim}
+\documentclass{article}
+\begin{document}
+Small is beautiful.
+\end{document}
+\end{verbatim}
+\end{lined}
+\caption{一个简单的 \LaTeX{} 源文件。} \label{mini}
+\end{figure}
+
+\begin{figure}[!bp]
+\begin{lined}{10cm}
+\begin{verbatim}
+\documentclass[a4paper,11pt]{article}
+% define the title
+\author{H. Partl}
+\title{Minimalism}
+\begin{document}
+% generates the title
+\maketitle
+% insert the table of contents
+\tableofcontents
+\section{Some Interesting Words}
+Well, and here begins my lovely article.
+\section{Good Bye World}
+\ldots{} and here it ends.
+\end{document}
+\end{verbatim}
+\end{lined}
+\caption[article 类例子。]{article 类 \LaTeX{} 源文件例子，该例中的所有命令后面都会讲到。}
+\label{document}
+
+\end{figure}
+
+%\section{A Typical Command Line Session}
+\section{一个典型的命令行过程}
+
+%I bet you must be dying to try out the neat small \LaTeX{} input file
+%shown on page \pageref{mini}. Here is some help:
+%\LaTeX{} itself comes without a GUI or
+%fancy buttons to press. It is just a program that crunches away at your
+%input file. Some \LaTeX{} installations feature a graphical front-end where
+%you can click \LaTeX{} into compiling your input file. On other systems
+%there might be some typing involved, so here is how to coax \LaTeX{} into
+%compiling your input file on a text based system. Please note: this
+%description assumes that a working \LaTeX{} installation already sits on
+%your computer.\footnote{This is the case with most well groomed Unix
+%Systems, and \ldots{} Real Men use Unix, so \ldots{} \texttt{;-)}}
+
+我敢打赌你现在一定非常渴望尝试第 \pageref{mini} 页上短小简洁的 \LaTeX{} 源文件。下面便是一些帮助：\LaTeX{} 本身没有图形
+用户界面或漂亮的按钮，它仅仅是一个处理你提供的源文件的程序。有些 \LaTeX{} 安装版本提供了一个前端图形界面，你可以通过点
+击按钮来编译你的源文件。其他的一些系统上可能就要使用命令来编译源文件，下面演示的就是如何在一个基于文本的系统上
+让 \LaTeX{} 编译你的源文件。需要注意：以下演示的前提是 \LaTeX{} 已经正确的安装到了你的电脑中\footnote{这是在大部分 Unix 系
+统下的情况……高手使用 Unix，所以…… \texttt{;-)}}。
+
+%\begin{enumerate}
+%\item
+%
+%  Edit/Create your \LaTeX{} input file. This file must be plain ASCII
+%  text.  On Unix all the editors will create just that. On Windows you
+%  might want to make sure that you save the file in ASCII or
+%  \emph{Plain Text} format.  When picking a name for your file, make
+%  sure it bears the extension \eei{.tex}.
+%
+%\item
+%
+%Run \LaTeX{} on your input file. If successful you will end up with a
+%\texttt{.dvi} file. It may be necessary to run \LaTeX{} several times to get
+%the table of contents and all internal references right. When your input
+%file has a bug \LaTeX{} will tell you about it and stop processing your
+%input file. Type \texttt{ctrl-D} to get back to the command line.
+%\begin{lscommand}
+%\verb+latex foo.tex+
+%\end{lscommand}
+%
+%\item
+%Now you may view the DVI file. There are several ways to do that. You can show the file on screen with
+%\begin{lscommand}
+%\verb+xdvi foo.dvi &+
+%\end{lscommand}
+%This only works on Unix with X11. If you are on Windows you might want to try \texttt{yap} (yet another previewer).
+%
+%You can also convert the dvi file to \PSi{} for printing or viewing with Ghostscript.
+%\begin{lscommand}
+%\verb+dvips -Pcmz foo.dvi -o foo.ps+
+%\end{lscommand}
+%
+%If you are lucky your \LaTeX{} system even comes with the \texttt{dvipdf} tool, which allows
+%you to convert your \texttt{.dvi} files straight into pdf.
+%\begin{lscommand}
+%\verb+dvipdf foo.dvi+
+%\end{lscommand}
+%
+%\end{enumerate}
+
+\begin{enumerate}
+\item
+
+  创建并编辑你的源文件。源文件必须是普通的 ASCII 格式。在 Unix 系统下，所有的编辑器都可以创建这样的文件。在 Windows 系统
+  下，你必须确保文件以 ASCII 或\textbf{普通文本}格式保存。当选取你源文件的文件名时，确保它的扩展名是 \eei{.tex}。
+
+\item
+
+运行 \LaTeX{} 编译你的源文件。如果成功的话，你将会得到一个 \texttt{.dvi} 文件。为了得到目录和所有的内部引用，可能要多次运
+行 \LaTeX{}。当源文件中存在错误时，\LaTeX{} 会告诉你错误并停止处理源文件。输入 \texttt{ctrl-D} 可以返回到命令行。
+\begin{lscommand}
+\verb+latex foo.tex+
+\end{lscommand}
+
+\item
+现在可以通过几种方法来预览得到的 DVI 文件。你可以使用下列命令将文件显示到屏幕上
+\begin{lscommand}
+\verb+xdvi foo.dvi &+
+\end{lscommand}
+这种方法只适用于安装了 X11 的 Unix 系统。如果你使用的是 Windows 系统，可以使用 \texttt{yap} 来预览（或其他预览程序）。
+
+你也可以使用 Ghostscript 将 dvi 文件转换成 \PSi{} 文件来打印或预览。
+\begin{lscommand}
+\verb+dvips -Pcmz foo.dvi -o foo.ps+
+\end{lscommand}
+
+如果你的 \LaTeX{} 系统中带有 \texttt{dvipdf} 工具的话，就可以直接将 \texttt{.dvi} 文件转换成 pdf 文件。
+\begin{lscommand}
+\verb+dvipdf foo.dvi+
+\end{lscommand}
+
+\end{enumerate}
+
+%\section{The Layout of the Document}
+\section{文档布局}
+
+%\subsection {Document Classes}\label{sec:documentclass}
+\subsection{文档类}\label{sec:documentclass}
+
+%The first information \LaTeX{} needs to know when processing an
+%input file is the type of document the author wants to create. This
+%is specified with the \ci{documentclass} command.
+
+当 \LaTeX{} 处理源文件时，首先需要知道的就是作者所要创建的文档类型。文档类型可由 \ci{documentclass} 命令来指定。
+\begin{lscommand}
+\ci{documentclass}\verb|[|\emph{options}\verb|]{|\emph{class}\verb|}|
+\end{lscommand}
+%\noindent Here \emph{class} specifies the type of document to be
+%created. Table \ref{documentclasses} lists the document classes
+%explained in this introduction. The \LaTeXe{} distribution provides
+%additional classes for other documents, including letters and
+%slides.  The \emph{\wi{option}s} parameter customises the behaviour
+%of the document class. The options have to be separated by commas.
+%The most common options for the standard document classes are listed
+%in Table \ref{options}.
+
+\noindent
+\emph{class} 指定想要的文档类型。表 \ref{documentclasses} 给出了一些文档类型的解释。\LaTeXe{} 发行版中还提供了其他一些文档类，像信件和幻灯片等。通过 \emph{\wi{option}s} 参数可以定制文档类的属性。不同的选项之间须用逗号
+隔开。标准文档类的最常用选项如表 \ref{options} 所示。
+
+%\begin{table}[!bp]
+%\caption{Document Classes.} \label{documentclasses}
+%\begin{lined}{\textwidth}
+%\begin{description}
+%
+%\item [\normalfont\texttt{article}] for articles in scientific journals, presentations,
+%  short reports, program documentation, invitations, \ldots
+%  \index{article class}
+%\item [\normalfont\texttt{proc}] a class for proceedings based on the article class.
+%  \index{proc class}
+%\item [\normalfont\texttt{minimal}] is as small as it can get.
+%It only sets a page size and a base font. It is mainly used for debugging
+%purposes.
+%  \index{minimal class}
+%\item [\normalfont\texttt{report}] for longer reports containing several chapters, small
+%  books, PhD theses, \ldots \index{report class}
+%\item [\normalfont\texttt{book}] for real books \index{book class}
+%\item [\normalfont\texttt{slides}] for slides. The class uses big sans serif
+%  letters. You might want to consider using Foil\TeX{}\footnote{%
+%        \CTANref|macros/latex/contrib/supported/foiltex|} instead.
+%        \index{slides class}\index{foiltex}
+%\end{description}
+%\end{lined}
+%\end{table}
+%
+%\begin{table}[!bp]
+%\caption{Document Class Options.} \label{options}
+%\begin{lined}{\textwidth}
+%\begin{flushleft}
+%\begin{description}
+%\item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad Sets the size
+%  of the main font in the document. If no option is specified,
+%  \texttt{10pt} is assumed.  \index{document font size}\index{base
+%    font size}
+%\item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad Defines
+%  the paper size. The default size is \texttt{letterpaper}. Besides
+%  that, \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper},
+%  and \texttt{legalpaper} can be specified.  \index{legal paper}
+%  \index{paper size}\index{A4 paper}\index{letter paper} \index{A5
+%    paper}\index{B5 paper}\index{executive paper}
+%
+%\item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
+%  instead of centred.
+%
+%\item[\normalfont\texttt{leqno}] \quad Places the numbering of formulae on the
+%  left hand side instead of the right.
+%
+%\item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad Specifies
+%  whether a new page should be started after the \wi{document title}
+%  or not. The \texttt{article} class does not start a new page by
+%  default, while \texttt{report} and \texttt{book} do.  \index{title}
+%
+%\item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad Instructs \LaTeX{} to typeset the
+%  document in \wi{one column} or \wi{two column}s.
+%
+%\item[\normalfont\texttt{twoside, oneside}] \quad Specifies whether double or
+%  single sided output should be generated. The classes
+%  \texttt{article} and \texttt{report} are \wi{single sided} and the
+%  \texttt{book} class is \wi{double sided} by default. Note that this
+%  option concerns the style of the document only. The option
+%  \texttt{twoside} does \emph{not} tell the printer you use that it
+%  should actually make a two-sided printout.
+%\item[\normalfont\texttt{landscape}] \quad Changes the layout of the document to print in landscape mode.
+%\item[\normalfont\texttt{openright, openany}] \quad Makes chapters begin either
+%  only on right hand pages or on the next page available. This does
+%  not work with the \texttt{article} class, as it does not know about
+%  chapters. The \texttt{report} class by default starts chapters on
+%  the next page available and the \texttt{book} class starts them on
+%  right hand pages.
+%
+%\end{description}
+%\end{flushleft}
+%\end{lined}
+%\end{table}
+
+\begin{table}[!bp]
+\caption{文档类。} \label{documentclasses}
+\begin{lined}{\textwidth}
+\begin{description}
+
+\item [\normalfont\texttt{article}] 排版科学期刊、演示文档、短报告、程序文档、邀请函……
+  \index{article class}
+\item [\normalfont\texttt{proc}] 一个基于 article 的会议文集类。
+  \index{proc class}
+\item [\normalfont\texttt{minimal}] 非常小的文档类。只设置了页面尺寸和基本字体。主要用来查错。
+  \index{minimal class}
+\item [\normalfont\texttt{report}] 排版多章节长报告、短篇书籍、博士论文……\index{report class}
+\item [\normalfont\texttt{book}] 排版书籍。\index{book class}
+\item [\normalfont\texttt{slides}] 排版幻灯片。该文档类使用大号 sans
+serif 字体。也可以选用 Foil\TeX{}\footnote{%
+        \CTANref|macros/latex/contrib/supported/foiltex|} 来得到相同的效果。
+        \index{slides class}\index{foiltex}
+\end{description}
+\end{lined}
+\end{table}
+
+\begin{table}[!bp]
+\caption{文档类选项。} \label{options}
+\begin{lined}{\textwidth}
+\begin{flushleft}
+\begin{description}
+\item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad 设置文档中所使用的字体的大小。如果该项没有指
+  定，默认使用 \texttt{10pt} 字体。\index{document font size}\index{base
+    font size}
+\item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad 定义纸张的尺寸。缺省设置为 \texttt{letterpaper}。此
+  外，还可以使用 \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper} 以及 \texttt{legalpaper}。\index{legal paper}
+  \index{paper size}\index{A4 paper}\index{letter paper} \index{A5
+    paper}\index{B5 paper}\index{executive paper}
+
+\item[\normalfont\texttt{fleqn}] \quad 设置行间公式为左对齐，而不是居中对齐。
+
+\item[\normalfont\texttt{leqno}] \quad
+设置行间公式的编号为左对齐，而不是右对齐。
+
+\item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad 指定是否在文档标题 (\wi{document title}) 后另起一
+  页。\texttt{article} 文档类缺省设置为不开始新页，\texttt{report} 和 \texttt{book} 类则相反。\index{title}
+
+\item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad
+  \LaTeX{} 以单栏 (\wi{one column}) 或双栏 (\wi{two
+  column}) 的方式来排版文档。
+
+\item[\normalfont\texttt{twoside}, \texttt{oneside}] \quad 指定文档为双面或单面打印格式。\texttt{article} 和 \texttt{report} 类为
+  单面 (\wi{single sided}) 格式，\texttt{book} 类缺省为双面 (\wi{double sided}) 格式。注意该选项只是作用于文档样式，而\textbf{不会}通知打印机以双面格式打印文档。
+
+\item[\normalfont\texttt{landscape}] \quad
+将文档的打印输出布局设置为 landscape 模式。
+
+\item[\normalfont\texttt{openright}, \texttt{openany}] \quad 决定新的一章仅在奇数页开始还是在下一页开始。在文档类型为 \texttt{article} 时该选项不起作用，因为该类中没有定义“章” (chapter)。 \texttt{report} 类默认在下一页开始新一章而 \texttt{book} 类的新一章总是在奇数页开始。
+
+\end{description}
+\end{flushleft}
+\end{lined}
+\end{table}
+
+%Example: An input file for a \LaTeX{} document could start with the
+%line
+
+例子：一个 \LaTeX{} 源文件以下面一行开始
+\begin{code}
+\ci{documentclass}\verb|[11pt,twoside,a4paper]{article}|
+\end{code}
+%which instructs \LaTeX{} to typeset the document as an \emph{article}
+%with a base font size of \emph{eleven points}, and to produce a
+%layout suitable for \emph{double sided} printing on \emph{A4 paper}.
+这条命令会引导 \LaTeX{} 使用 \emph{article} 格式、\textbf{11 磅大小的字体}来排版该文档，并得到在 \emph{A4} 纸上\textbf{双面打印}的效果。 \pagebreak[2]
+
+%\subsection{Packages}
+\subsection{宏包}
+\index{package} %While writing your document, you will probably find
+%that there are some areas where basic \LaTeX{} cannot solve your
+%problem. If you want to include \wi{graphics}, \wi{coloured text} or
+%source code from a file into your document, you need to enhance the
+%capabilities of \LaTeX.  Such enhancements are called packages.
+%Packages are activated with the
+
+排版文档时，你可能会发现某些时候基本的 \LaTeX{} 并不能解决你的问题。如果想插入图形 (\wi{graphics})、
+彩色文本 (\wi{coloured text}) 或源代码到你的文档中，你就
+需要使用宏包来增强 \LaTeX{} 的功能。可使用如下命令调用宏包
+\begin{lscommand}
+\ci{usepackage}\verb|[|\emph{options}\verb|]{|\emph{package}\verb|}|
+\end{lscommand}
+\noindent%command, where \emph{package} is the name of the package and
+%\emph{options} is a list of keywords that trigger special features in
+%the package. Some packages come with the \LaTeXe{} base distribution
+%(See Table \ref{packages}). Others are provided separately. You may
+%find more information on the packages installed at your site in your
+%\guide. The prime source for information about \LaTeX{} packages is \companion.
+%It contains descriptions on hundreds of packages, along with
+%information of how to write your own extensions to \LaTeXe.
+这里 \emph{package} 是宏包的名称，\emph{options} 是用来激活宏包特殊功能的一组关键词。很多宏包随 \LaTeX{} 基本发行版一起
+发布 (见表 \ref{packages})，其他的则单独发布。你可以在所安装的 \LaTeX{} 系统中找到更多的宏包相关信息。\companion 提供了关
+于宏包的重要信息，它包含了数百个宏包的描述及如何写作自己的 \LaTeXe{} 扩展的信息。
+
+%Modern \TeX{} distributions come with a large number of packages
+%preinstalled. If you are working on a Unix system, use the command
+%\texttt{texdoc} for accessing package documentation.
+
+现代的 \TeX 发行版包含了大量免费的宏包。如果你使用的是 Unix 系统，可以使用命令 \texttt{texdoc} 搜索宏包的说明文档。
+%\begin{table}[btp]
+%\caption{Some of the Packages Distributed with \LaTeX.} \label{packages}
+%\begin{lined}{\textwidth}
+%\begin{description}
+%\item[\normalfont\pai{doc}] Allows the documentation of \LaTeX{} programs.\\
+% Described in \texttt{doc.dtx}\footnote{This file should be installed
+%   on your system, and you should be able to get a \texttt{dvi} file
+%   by typing \texttt{latex doc.dtx} in any directory where you have
+%   write permission. The same is true for all the
+%   other files mentioned in this table.}  and in \companion.
+%
+%\item[\normalfont\pai{exscale}] Provides scaled versions of the
+%  math extension  font.\\
+%  Described in \texttt{ltexscale.dtx}.
+%
+%\item[\normalfont\pai{fontenc}] Specifies which \wi{font encoding}
+%  \LaTeX{} should use.\\
+%  Described in \texttt{ltoutenc.dtx}.
+%
+%\item[\normalfont\pai{ifthen}] Provides commands of the form\\
+%  `if\ldots then do\ldots otherwise do\ldots.'\\ Described in
+%  \texttt{ifthen.dtx} and \companion.
+%
+%\item[\normalfont\pai{latexsym}] To access the \LaTeX{} symbol
+%  font, you should use the \texttt{latexsym} package. Described in
+%  \texttt{latexsym.dtx} and in \companion.
+%
+%\item[\normalfont\pai{makeidx}] Provides commands for producing
+%  indexes.  Described in section \ref{sec:indexing} and in \companion.
+%
+%\item[\normalfont\pai{syntonly}] Processes a document without
+%  typesetting it.
+%
+%\item[\normalfont\pai{inputenc}] Allows the specification of an
+%  input encoding such as ASCII, ISO Latin-1, ISO Latin-2, 437/850 IBM
+%  code pages,  Apple Macintosh, Next, ANSI-Windows or user-defined one.
+%  Described in \texttt{inputenc.dtx}.
+%\end{description}
+%\end{lined}
+%\end{table}
+
+\begin{table}[btp]
+\caption{随 \LaTeX 一起发行的宏包。} \label{packages}
+\begin{lined}{\textwidth}
+\begin{description}
+\item[\normalfont\pai{doc}] 排版 \LaTeX{} 的说明文档。具体描述见 \texttt{doc.dtx}\footnote{你的系统中应该安装了该文
+   件，输入命令 \texttt{latex doc.dtx} 处理该文件可得到一个 \texttt{dvi} 文件。类似的方法适用于本表格中的其
+   他 \texttt{.dtx} 文件。} 及 \companion。
+
+\item[\normalfont\pai{exscale}] 提供了按比例伸缩的数学扩展字体。\\
+  具体描述见 \texttt{ltexscale.dtx}。
+
+\item[\normalfont\pai{fontenc}] 指明使用哪种 \LaTeX{} 字体编码 (\wi{font
+  encoding})。\\
+  具体描述见 \texttt{ltoutenc.dtx}。
+
+\item[\normalfont\pai{ifthen}] 提供如下形式的命令\\
+  `if \ldots then do \ldots otherwise do \ldots.'\\具体描述见 
+  \texttt{ifthen.dtx} 及 \companion。
+
+\item[\normalfont\pai{latexsym}]
+  提供 \LaTeX{} 符号字体。具体描述见 \texttt{latexsym.dtx} 及 \companion。
+
+\item[\normalfont\pai{makeidx}]
+  提供排版索引的命令。具体描述见第 \ref{sec:indexing} 节及 \companion。
+
+\item[\normalfont\pai{syntonly}] 编译文档而不生成 dvi 文件 （常用于查错）。
+
+\item[\normalfont\pai{inputenc}] 指明使用哪种输入编码，如 ASCII, ISO Latin-1, ISO Latin-2, 437/850 IBM
+  code pages,  Apple Macintosh, Next,
+  ANSI-Windows 或用户自定义编码。
+  具体描述见 \texttt{inputenc.dtx}。
+\end{description}
+\end{lined}
+\end{table}
+
+%\subsection{Page Styles}
+\subsection{页面样式}
+
+%\LaTeX{} supports three predefined \wi{header}/\wi{footer}
+%combinations---so-called \wi{page style}s. The \emph{style}
+%parameter of the
+\index{page
+style!plain@\texttt{plain}}\index{plain@\texttt{plain}} \index{page
+style!headings@\texttt{headings}}\index{headings@texttt{headings}}
+\index{page style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
+
+\LaTeX{} 支持三种预定义的页眉/页脚 (\wi{header}/\wi{footer}) 样式，称为页面样式 (\wi{page
+style})。如下命令
+\begin{lscommand}
+\ci{pagestyle}\verb|{|\emph{style}\verb|}|
+\end{lscommand}
+\noindent%command defines which one to use.
+%Table \ref{pagestyle}
+%lists the predefined page styles.
+中的 \emph{style} 参数确定了使用哪一种页面样式。表 \ref{pagestyle} 列出了预定义的页面样式。
+
+%\begin{table}[!hbp]
+%\caption{The Predefined Page Styles of \LaTeX.} \label{pagestyle}
+%\begin{lined}{\textwidth}
+%\begin{description}
+%
+%\item[\normalfont\texttt{plain}] prints the page numbers on the bottom
+%  of the page, in the middle of the footer. This is the default page
+%  style.
+%
+%\item[\normalfont\texttt{headings}] prints the current chapter heading
+%  and the page number in the header on each page, while the footer
+%  remains empty.  (This is the style used in this document)
+%\item[\normalfont\texttt{empty}] sets both the header and the footer
+%  to be empty.
+%
+%\end{description}
+%\end{lined}
+%\end{table}
+\begin{table}[!hbp]
+\caption{\LaTeX 预定义的页面样式。} \label{pagestyle}
+\begin{lined}{\textwidth}
+\begin{description}
+
+\item[\normalfont\texttt{plain}] 在页脚正中显示页码。这是页面样式的缺省设置。
+
+\item[\normalfont\texttt{headings}]
+在页眉中显示章节名及页码，页脚空白。（本文即采用此样式）
+\item[\normalfont\texttt{empty}] 将页眉页脚都设为空白。
+
+\end{description}
+\end{lined}
+\end{table}
+
+%It is possible to change the page style of the current page
+%with the command
+\hyphenation{Companion}
+可以通过如下命令来改变当前页面的页面样式
+\begin{lscommand}
+\ci{thispagestyle}\verb|{|\emph{style}\verb|}|
+\end{lscommand}
+%A description how to create your own
+%headers and footers can be found in \companion{} and in section \ref{sec:fancy} on page \pageref{sec:fancy}.
+如何创建自定义页眉页脚的说明可以参见 \companion{} 及第 \pageref{sec:fancy} 页的第 \ref{sec:fancy} 节。
+%
+% Pointer to the Fancy headings Package description !
+%
+
+%\section{Files You Might Encounter}
+\section{各类 \LaTeX{} 文件}
+
+%When you work with \LaTeX{} you will soon find yourself in a maze of
+%files with various \wi{extension}s and probably no clue. The
+%following list explains the various \wi{file types} you might
+%encounter when working with \TeX{}. Please note that this table does
+%not claim to be a complete list of extensions, but if you find one
+%missing that you think is important, please drop me a line.
+使用 \LaTeX{} 时，你可能很快发现自己置身于各种不同扩展名 (\wi{extension}) 或毫无线索的文件形成的迷宫之中。下面的列表解释了
+在使用 \LaTeX{} 时可能遇到的文件类型。要注意的是，下表不是所有的扩展名列表，如果你发现有重要的文件类型没有收录
+进来，请通知我。
+%\begin{description}
+%
+%\item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
+%  \texttt{latex}.
+%\item[\eei{.sty}] \LaTeX{} Macro package. This is a file you can load
+%  into your \LaTeX{} document using the \ci{usepackage} command.
+%\item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
+%  format for \LaTeX{} style files. If you process a .dtx file you get
+%  documented macro code of the \LaTeX{} package contained in the .dtx
+%  file.
+%\item[\eei{.ins}] The installer for the files contained in the
+%  matching .dtx file. If you download a \LaTeX{} package from the net,
+%  you will normally get a .dtx and a .ins file. Run \LaTeX{} on the
+%  .ins file to unpack the .dtx file.
+%\item[\eei{.cls}] Class files define what your document looks
+%  like. They are selected with the \ci{documentclass} command.
+%\item[\eei{.fd}] Font description file telling  \LaTeX{} about new fonts.
+%\end{description}
+\begin{description}
+
+\item[\eei{.tex}]
+  \LaTeX{} 或 \TeX{} 源文件。可以使用 \texttt{latex} 命令编译。
+\item[\eei{.sty}]
+  \LaTeX{} 宏包文件。可以使用 \ci{usepackage} 命令将宏包文件载入到你的 \LaTeX{} 文档中。
+\item[\eei{.dtx}]
+  文档化 \TeX{} 文件。这是 \LaTeX{} 宏包文件的主要发布格式。如果编译 \texttt{.dtx} 文档，将会得到其中包含的 \LaTeX{} 宏包文件
+  的文档化宏代码。
+\item[\eei{.ins}] 对应 \texttt{.dtx} 文件的安装文件。如果你从网上下载了一个 \LaTeX{} 的宏包文件，其中一般会包含一
+  个 \texttt{.dtx} 文件和一个 \texttt{.ins} 文件。使用 \LaTeX{} 处理 \texttt{.ins} 文件可以解开 \texttt{.dtx} 文件。
+\item[\eei{.cls}] 定义文档外观形式的类文件，可以通过使用 \ci{documentclass} 命令选取。
+\item[\eei{.fd}] 字体描述文件，可以告诉 \LaTeX{} 有关新字体的信息。
+\end{description}
+%The following files are generated when you run \LaTeX{} on your input
+%file:
+下面这些文件是使用 \LaTeX{} 处理源文件时产生的：
+
+%\begin{description}
+%\item[\eei{.dvi}] Device Independent File. This is the main result of a \LaTeX{}
+%  compile run. You can look at its content with a DVI previewer
+%  program or you can send it to a printer with \texttt{dvips} or a
+%  similar application.
+%\item[\eei{.log}] Gives a detailed account of what happened during the
+%  last compiler run.
+%\item[\eei{.toc}] Stores all your section headers. It gets read in for the
+%  next compiler run and is used to produce the table of content.
+%\item[\eei{.lof}] This is like .toc but for the list of figures.
+%\item[\eei{.lot}] And again the same for the list of tables.
+%\item[\eei{.aux}] Another file that transports information from one
+%  compiler run to the next. Among other things, the .aux file is used
+%  to store information associated with cross-references.
+%\item[\eei{.idx}] If your document contains an index. \LaTeX{} stores all
+%  the words that go into the index in this file. Process this file with
+%  \texttt{makeindex}. Refer to section \ref{sec:indexing} on
+%  page \pageref{sec:indexing} for more information on indexing.
+%\item[\eei{.ind}] The processed .idx file, ready for inclusion into your
+%  document on the next compile cycle.
+%\item[\eei{.ilg}] Logfile telling what \texttt{makeindex} did.
+%\end{description}
+\begin{description}
+\item[\eei{.dvi}] 设备无关文件。这是运行 \LaTeX{} 编译的主要结果。你可以使用 DVI 预览器预览其内容或使
+  用 \texttt{dvips} 或其他程序输出到打印机。
+\item[\eei{.log}] 记录了上次编译时的详细信息。
+\item[\eei{.toc}]
+  储存了所有的章节标题。下次编译时将读取该文件并生成目录。
+\item[\eei{.lof}] 和 \texttt{.toc} 文件类似，可生成图形目录。
+\item[\eei{.lot}] 和 \texttt{.toc} 文件类似，可生成表格目录。
+\item[\eei{.aux}] 用来向下次编译传递信息的辅助文件。主要储存交叉引用的相关信息。
+\item[\eei{.idx}] 如果文档中包含索引，\LaTeX{} 将使用该文件存储所有的索引词条。此文件需要使
+  用 \texttt{makeindex} 处理，详见位于 \pageref{sec:indexing} 页的第 \ref{sec:indexing} 节。
+\item[\eei{.ind}] 处理过的 \texttt{.idx} 文件。下次编译时将读入到你的文档中。
+\item[\eei{.ilg}]
+  和 \texttt{.log} 文件类似，记录了 \texttt{makeindex} 命令运行的详细信息。
+\end{description}
+
+% Package Info pointer
+%
+%
+
+
+
+%
+% Add Info on page-numbering, ...
+% \pagenumbering
+
+%\section{Big Projects}
+\section{大型项目}
+%When working on big documents, you might want to split the input
+%file into several parts. \LaTeX{} has two commands that help you to
+%do that.
+
+当处理大型文档时，最好将文档分割成为几部分。\LaTeX{} 有两个命令可以帮助你完成这项工作。
+
+\begin{lscommand}
+\ci{include}\verb|{|\emph{filename}\verb|}|
+\end{lscommand}
+\noindent %You can use this command in the document body to insert the
+%contents of another file named \emph{filename.tex}. Note that \LaTeX{}
+%will start a new page
+%before processing the material input from \emph{filename.tex}.
+你可以使用该命令将名为 \emph{filename.tex} 的文档内容插入到当前文档中。需要注意的是，在处理插入的 \emph{filename.tex} 文
+档前，\LaTeX{} 会另起一页。
+
+%The second command can be used in the preamble. It allows you to
+%instruct \LaTeX{} to only input some of the \verb|\include|d files.
+
+第二个命令只能在导言区使用。它可以让 \LaTeX{} 仅读入某些 \verb|\include| 文件。
+\begin{lscommand}
+\ci{includeonly}\verb|{|\emph{filename}\verb|,|\emph{filename}%
+\verb|,|\ldots\verb|}|
+\end{lscommand}
+%After this command is executed in the preamble of the document, only
+%\ci{include} commands for the filenames that are listed in the
+%argument of the \ci{includeonly} command will be executed. Note that
+%there must be no spaces between the filenames and the commas.
+这条命令在文档的导言区执行后，在所有的 \ci{include} 命令中，只有文档名出现在 \ci{includeonly} 的命令参数中的文档
+才会被导入。注意文档名和逗号之间不能有空格。
+
+%The \ci{include} command starts typesetting the included text on a new
+%page. This is helpful when you use \ci{includeonly}, because the
+%page breaks will not move, even when some included files are omitted.
+%Sometimes this might not be desirable. In this case, you can use the
+
+\ci{include} 命令会在新的一页上排版载入的文本。当使用 \ci{includeonly} 命令时会很有帮助，因为即使一些载入的文本被忽略，分页
+处也不会发生变化。有些时候可能不希望在新的一页上排版载入的文本，这时可以使用命令
+\begin{lscommand}
+\ci{input}\verb|{|\emph{filename}\verb|}|
+\end{lscommand}
+\noindent% command. It simply includes the file specified.
+%No flashy suits, no strings attached.
+\ci{input} 命令只是简单的载入指定的文本，没有其他限制。
+
+%To make \LaTeX{} quickly check your document you can use the \pai{syntonly}
+%package. This makes \LaTeX{} skim through your document only checking for
+%proper syntax and usage of the commands, but doesn't produce any (DVI) output.
+%As \LaTeX{} runs faster in this mode you may save yourself valuable time.
+%Usage is very simple:
+
+如果想让 \LaTeX{} 快速的检查文档中的错误，可以使用 \pai{syntonly} 宏包。它可以使 \LaTeX{} 浏览整个文档，检查语法错误
+和使用的命令，但并不生成 DVI 输出。在这种模式下，\LaTeX{} 运行速度很快，可以为你节省宝贵的时间。\pai{syntonly} 宏
+包的使用非常简单：
+\begin{verbatim}
+\usepackage{syntonly}
+\syntaxonly
+\end{verbatim}
+%When you want to produce pages, just comment out the second line
+%(by adding a percent sign).
+如果想产生分页，只要注释掉第二行即可 (在前面加上一个百分号 \verb|%|)。
+
+
+%
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:

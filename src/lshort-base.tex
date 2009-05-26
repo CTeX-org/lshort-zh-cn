@@ -1,0 +1,123 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Main Input File of the LaTeX2e Introduction
+% $Id: lshort.tex,v 1.2 2003/03/19 20:57:46 oetiker Exp $
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% lshort.tex - The not so short introduction to LaTeX
+%                                                      by Tobias Oetiker
+%                                                     oetiker@ee.ethz.ch
+%
+%                           based on LKURTZ.TEX Uni Graz & TU Wien, 1987
+%-----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 中文~4.20~翻译：中文~CTeX~学会
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% To compile lshort, you need TeX 3.x, LaTeX and makeindex
+%
+% The sources files of the Intro are:
+%      lshort.tex (this file),
+%      titel.tex, contrib.tex, biblio.tex
+%      things.tes, typeset.tex, math.tex, lssym.tex, spec.tex,
+%      lshort.sty, fancyheadings.sty
+%
+% Further the  verbatim.sty and the layout.sty
+% from the LaTeX Tools distribution is
+% required.
+%
+%
+% To print the AMS symbols you need the AMS fonts and the packages
+% amsfonts, eufrak and eucal from (AMS LaTeX 1.2)
+%
+% ---------------------------------------------------------------------
+
+
+\usepackage{ifpdf}
+\ifpdf
+\usepackage{thumbpdf}
+\pdfcompresslevel=9
+\RequirePackage[colorlinks,hyperindex,plainpages=false,bookmarks]{hyperref}
+\def\pdfBorderAttrs{/Border [0 0 0] } % No border arround Links
+\else
+\RequirePackage[dvipdf,colorlinks,hyperindex,plainpages=true,bookmarks]{hyperref}
+\usepackage{color}
+\fi
+
+\usepackage{lshort}
+\usepackage{makeidx,shortvrb,latexsym}
+% 中文破折号
+\newcommand{\pozhehao}{\kern0.5ex\rule[.2\baselineskip]{1.5em}{.4pt}\kern0.5ex}
+
+\usepackage{zhfont}
+\zhspacing
+\setzhmainfont[BoldFont=Adobe Heiti Std]{Adobe Song Std}
+\setzhsansfont[BoldFont=Adobe Heiti Std]{Adobe Kaiti Std}
+\let\emph=\textit
+% This document is ``public domain''. It may be printed and
+% distributed free of charge in its original form (including the
+% list of authors). If it is changed or if parts of it are used
+% within another document, then the author list must include
+% all the original authors AND that author (those authors) who
+% has (have) made the changes.
+%
+% Original Copyright H.Partl, E.Schlegl, and I.Hyna (1987).
+% English Version Copyright by Tobias Oetiker (1994,1995),
+%
+% ---------------------------------------------------------------------
+%
+%
+% Formats also with\textt{letterpaper} option, but the pagebreaks might not
+% fall as nicely.
+%
+% To produce a A5 booklet, use a tool like  pstops or dvitodvi
+% to  past them together in the right order. Most dvi printer drivers
+% can shrink the resulting output to fit on a A4 sheet.
+%
+\makeindex
+\typeout{Copyright T.Oetiker, H.Partl, E.Schlegl, I.Hyna}
+
+\begin{document}
+\selectlanguage{english}
+\frontmatter
+\include{title}
+\include{contrib}
+\include{overview}
+\renewcommand{\contentsname}{目录}
+\tableofcontents
+\renewcommand{\listfigurename}{图形清单}
+\listoffigures
+\renewcommand{\listtablename}{表格清单}
+\listoftables
+\enlargethispage{\baselineskip}
+\mainmatter
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\include{things}
+\include{typeset}
+\include{math}
+\include{lssym}
+\include{spec}
+\include{graphic}
+\include{custom}
+\backmatter
+\renewcommand{\bibname}{参考文献}
+\include{biblio}
+\refstepcounter{chapter}
+%\addcontentsline{toc}{chapter}{Index}
+\renewcommand{\indexname}{索引}
+\phantomsection
+\addcontentsline{toc}{chapter}{索引}
+\printindex
+\refstepcounter{chapter}\label{verylast}\mbox{}
+\end{document}
+
+
+
+
+
+%
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:

@@ -1,0 +1,355 @@
+%% 
+%% This is file `mylayout.sty', generated 
+%% on <1995/7/3> with the docstrip utility (2.2i).
+%% 
+%% The original source files were:
+%% 
+%% layout.dtx  (with options: `package')
+%% 
+%% IMPORTANT NOTICE: 
+%% This file is part of the `tools' bundle 
+%% in the LaTeX2e distribution. 
+%% 
+%% You are not allowed to distribute this file. 
+%% For distribution of the original source see 
+%% the copyright notice in the source file, and 
+%% in the file readme.txt distributed with the 
+%% tools bundle. 
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mylayout}
+                [1995/06/25 v1.1i
+                 Show layout parameters]
+\DeclareOption{dutch}{%
+  \def\Headertext{Kopregel}
+  \def\Bodytext{Broodtekst}
+  \def\Footertext{Voetregel}
+  \def\MarginNotestext{Marge\\Notities}
+  \def\oneinchtext{een inch}
+  \def\notshown{niet getoond}
+  }
+\DeclareOption{english}{%
+  \def\Headertext{Header}
+  \def\Bodytext{Body}
+  \def\Footertext{Footer}
+  \def\MarginNotestext{Margin\\Notes}
+  \def\oneinchtext{one inch}
+  \def\notshown{not shown}
+  }
+\DeclareOption{french}{%
+  \def\Headertext{Ent\^{e}te}
+  \def\Bodytext{Corps}
+  \def\Footertext{Pied de page}
+  \def\MarginNotestext{Marge\\Notes}
+  \def\oneinchtext{un pouce}
+  \def\notshown{non affich\'{e}}
+  }
+\DeclareOption{francais}{\ExecuteOptions{french}}
+\DeclareOption{verbose}{\let\type\typeout}
+\DeclareOption{silent}{\let\type\@gobble}
+\def\lay@value{}
+\DeclareOption{integers}{%
+  \renewcommand*{\lay@value}[2]{%
+    \expandafter\number\csname #1@#2\endcsname pt}}
+\DeclareOption{reals}{%
+  \renewcommand*{\lay@value}[2]{\the\csname #2\endcsname}}
+\ExecuteOptions{english,silent,integers}
+\ProcessOptions
+\@ifundefined{bs}{\newcommand\bs{\char '134 }}%
+  {\renewcommand\bs{\char '134 }}
+\def\ConvertToCount#1#2{%
+  #1=#2
+  \divide #1 by 65536}
+\def\SetToHalf#1#2{#1=#2\relax\divide#1by\tw@}
+\def\SetToQuart#1#2{#1=#2\relax\divide#1by4}
+\def\Identify#1{%
+  \put(\PositionX,\PositionY){\circle{20}}
+  \put(\PositionX,\PositionY){\makebox(0,0){\tiny #1}}
+}
+\def\InsideHArrow#1{{%
+  \ArrowLength = #1
+  \divide\ArrowLength by \tw@
+  \advance\ArrowLength by -10
+  \advance\PositionX by -10
+  \ifnum\ArrowLength<\z@
+    \put(\PositionX,\PositionY){\vector(1,0){-\ArrowLength}}
+    \advance\PositionX by 20
+    \put(\PositionX,\PositionY){\vector(-1,0){-\ArrowLength}}
+  \else
+    \put(\PositionX,\PositionY){\vector(-1,0){\ArrowLength}}
+    \advance\PositionX by 20
+    \put(\PositionX,\PositionY){\vector(+1,0){\ArrowLength}}
+  \fi
+}}
+\def\InsideVArrow#1{{%
+  \ArrowLength = #1
+  \divide\ArrowLength by \tw@
+  \advance\ArrowLength by -10
+  \advance\PositionY by -10
+  \put(\PositionX,\PositionY){\vector(0,-1){\ArrowLength}}
+  \advance\PositionY by 20
+  \put(\PositionX,\PositionY){\vector(0,+1){\ArrowLength}}
+}}
+\def\OutsideHArrow#1#2#3{{%
+  \PositionX = #1
+  \advance\PositionX by #3
+  \put(\PositionX,\PositionY){\vector(-1,0){#3}}
+  \PositionX = #1 \advance\PositionX-#2
+  \advance\PositionX by -#3
+  \put(\PositionX,\PositionY){\vector(+1,0){#3}}
+}}
+\def\OutsideVArrow#1#2#3#4{{%
+  \PositionY = #1
+  \advance\PositionY by -#3
+  \put(\PositionX,\PositionY){\vector(0,+1){#3}}
+  \PositionY = #1
+  \advance\PositionY#2
+  \advance\PositionY#4
+  \put(\PositionX,\PositionY){\vector(0,-1){#4}}
+}}
+\def\Show#1#2{\bs #2 = \lay@value{#1}{#2}}
+\def\Type#1#2{%
+  \type{#2 = \lay@value{#1}{#2}}}
+\newcount\oneinch
+\oneinch=72
+\newcount\cnt@paperwidth
+\newcount\cnt@paperheight
+\ConvertToCount\cnt@paperwidth\paperwidth
+\ConvertToCount\cnt@paperheight\paperheight
+\newcount\cnt@hoffset
+\newcount\cnt@voffset
+\ConvertToCount\cnt@hoffset\hoffset
+\ConvertToCount\cnt@voffset\voffset
+\newcount\cnt@textheight
+\newcount\cnt@textwidth
+\ConvertToCount\cnt@textheight\textheight
+\ConvertToCount\cnt@textwidth\textwidth
+\newcount\cnt@topmargin
+\newcount\cnt@oddsidemargin
+\newcount\cnt@evensidemargin
+\ConvertToCount\cnt@topmargin\topmargin
+\ConvertToCount\cnt@oddsidemargin\oddsidemargin
+\ConvertToCount\cnt@evensidemargin\evensidemargin
+\newcount\cnt@headheight
+\newcount\cnt@headsep
+\ConvertToCount\cnt@headheight\headheight
+\ConvertToCount\cnt@headsep\headsep
+\newcount\cnt@marginparsep
+\newcount\cnt@marginparwidth
+\newcount\cnt@marginparpush
+\ConvertToCount\cnt@marginparsep\marginparsep
+\ConvertToCount\cnt@marginparwidth\marginparwidth
+\ConvertToCount\cnt@marginparpush\marginparpush
+\newcount\cnt@footskip
+\ConvertToCount\cnt@footskip\footskip
+\newcount\fheight
+\fheight=12
+\newcount\ref@top
+\ref@top=\cnt@paperheight \advance\ref@top by -\oneinch
+\newcount\ref@hoffset
+\newcount\ref@voffset
+\ref@hoffset=\cnt@hoffset  \advance\cnt@hoffset by \oneinch
+\ref@voffset=\cnt@voffset
+\cnt@voffset=\ref@top
+\advance\cnt@voffset by -\ref@voffset
+\newcount\ref@head
+\ref@head=\ref@top
+  \advance\ref@head by -\ref@voffset
+  \advance\ref@head by -\cnt@topmargin
+  \advance\ref@head by -\cnt@headheight
+\newcount\ref@body
+\ref@body=\ref@head
+  \advance\ref@body by -\cnt@headsep
+  \advance\ref@body by -\cnt@textheight
+\newcount\ref@foot
+  \ref@foot=\ref@body
+  \advance\ref@foot by -\cnt@footskip
+\newcount\ref@margin
+\newcount\ref@marginwidth
+\newcount\ref@marginpar
+\newcount\Interval
+\newcount\ExtraYPos
+\newcount\PositionX
+\newcount\PositionY
+\newcount\ArrowLength
+\newcommand\layout{%
+  \@mylayout
+  \if@twoside
+    \@mylayout
+  \fi}
+\newcommand\@mylayout{%
+  \thispagestyle{empty}
+  \if@twoside
+    \ifodd\count\z@
+      \typeout{Two-sided document style, odd page.}
+      \ref@marginwidth=\cnt@oddsidemargin
+      \ref@marginpar=\oneinch
+      \advance\ref@marginpar by \ref@hoffset
+      \advance\ref@marginpar by \cnt@oddsidemargin
+      \ref@margin\ref@marginpar
+      \if@reversemargin
+        \advance\ref@marginpar by -\cnt@marginparsep
+        \advance\ref@marginpar by -\cnt@marginparwidth
+      \else
+        \advance\ref@marginpar by \cnt@textwidth
+        \advance\ref@marginpar by \cnt@marginparsep
+      \fi
+    \else
+  \typeout{Two-sided document style, even page.}
+      \ref@marginwidth=\cnt@evensidemargin
+      \ref@marginpar=\oneinch
+      \advance\ref@marginpar by \ref@hoffset
+      \advance\ref@marginpar by \cnt@evensidemargin
+      \ref@margin\ref@marginpar
+      \if@reversemargin
+        \advance\ref@marginpar by \cnt@textwidth
+        \advance\ref@marginpar by \cnt@marginparsep
+      \else
+        \advance\ref@marginpar by -\cnt@marginparsep
+        \advance\ref@marginpar by -\cnt@marginparwidth
+      \fi
+    \fi
+  \else
+    \typeout{One-sided document style.}
+    \ref@marginwidth=\cnt@oddsidemargin
+    \ref@marginpar=\oneinch
+    \advance\ref@marginpar by \ref@hoffset
+    \advance\ref@marginpar by \cnt@oddsidemargin
+    \ref@margin\ref@marginpar
+    \if@reversemargin
+      \advance\ref@marginpar by -\cnt@marginparsep
+      \advance\ref@marginpar by -\cnt@marginparwidth
+    \else
+      \advance\ref@marginpar by \cnt@textwidth
+      \advance\ref@marginpar by \cnt@marginparsep
+    \fi
+  \fi
+  \setlength{\unitlength}{.5pt}
+  \begin{picture}(\cnt@paperwidth,\cnt@paperheight)
+    \centering
+    \thicklines
+    \put(0,0){\framebox(\cnt@paperwidth,\cnt@paperheight){\mbox{}}}
+    \put(0,\cnt@voffset){\dashbox{10}(\cnt@paperwidth,0){\mbox{}}}
+    \put(\cnt@hoffset,0){\dashbox{10}(0,\cnt@paperheight){\mbox{}}}
+    \put(\ref@margin,\ref@head){%
+      \framebox(\cnt@textwidth,\cnt@headheight)%
+        {\footnotesize\Headertext}}
+    \put(\ref@margin,\ref@body){%
+      \framebox(\cnt@textwidth,\cnt@textheight){\Bodytext}}
+    \put(\ref@margin,\ref@foot){%
+      \framebox(\cnt@textwidth,\fheight){\footnotesize\Footertext}}
+    \put(\ref@marginpar,\ref@body){%
+      \framebox(\cnt@marginparwidth,\cnt@textheight)%
+               {\footnotesize\shortstack{\MarginNotestext}}}
+    \thinlines
+    \SetToHalf\PositionX\cnt@textwidth
+    \advance\PositionX by \ref@margin
+    \PositionY = \ref@body
+    \advance\PositionY by 50
+    \Identify{8}
+    \InsideHArrow\cnt@textwidth
+    \SetToHalf\PositionY\cnt@textheight
+    \advance\PositionY by \ref@body
+    \PositionX = \cnt@textwidth
+    \divide\PositionX by 5
+    \multiply \PositionX by 4
+    \advance\PositionX by \ref@margin
+    \Identify{7}
+    \InsideVArrow\cnt@textheight
+    \PositionY = \ref@foot
+    \SetToHalf\PositionX\cnt@hoffset
+    \Identify{1}
+    \InsideHArrow\cnt@hoffset
+    \SetToQuart\PositionY\cnt@textheight
+    \advance\PositionY by \ref@body
+    \OutsideHArrow\ref@margin\ref@marginwidth{20}
+    \PositionX = \cnt@hoffset
+    \advance\PositionX by -30
+    \Identify{3}
+    \SetToQuart\PositionY\cnt@textheight
+    \advance\PositionY by \ref@body
+    \advance\PositionY by 30
+    \SetToHalf\PositionX\cnt@marginparwidth
+    \advance\PositionX by \ref@marginpar
+    \Identify{10}
+    \InsideHArrow\cnt@marginparwidth
+    \advance\PositionY by 30
+    \if@twoside
+      \ifodd\count\z@
+        \OutsideHArrow\ref@marginpar\cnt@marginparsep{20}
+        \PositionX = \ref@marginpar
+      \else
+        \OutsideHArrow\ref@margin\cnt@marginparsep{20}
+        \PositionX = \ref@margin
+      \fi
+    \else
+      \OutsideHArrow\ref@marginpar\cnt@marginparsep{20}
+      \PositionX = \ref@marginpar
+    \fi
+    \advance\PositionX by 30
+    \Identify{9}
+    \PositionX = \cnt@textwidth
+    \divide\PositionX by 8
+    \advance\PositionX by \ref@margin
+    \OutsideVArrow\ref@foot\cnt@footskip{20}{20}
+    \PositionY = \ref@foot
+    \advance\PositionY by -30
+    \Identify{11}
+    \PositionX = \cnt@paperwidth
+    \advance\PositionX by -50
+    \PositionY = \cnt@paperheight
+    \ExtraYPos = \PositionY
+    \advance\ExtraYPos by -\cnt@voffset
+    \advance\PositionY by \cnt@voffset
+    \divide\PositionY by \tw@
+    \Identify{2}
+    \InsideVArrow\ExtraYPos
+    \Interval = \cnt@textwidth
+    \divide\Interval by 8
+    \PositionX = \ref@margin
+    \advance\PositionX by \Interval
+    \Identify{4}
+    \ExtraYPos = \ref@head
+    \advance\ExtraYPos\cnt@headheight
+    \ArrowLength = \PositionY
+    \advance\ArrowLength-\ExtraYPos
+    \advance\ArrowLength-\cnt@topmargin
+    \advance\ArrowLength-10%
+    \OutsideVArrow\ExtraYPos\cnt@topmargin{20}{\ArrowLength}
+    \advance\PositionX by \Interval
+    \Identify{5}
+    \advance\ArrowLength\cnt@topmargin
+    \OutsideVArrow\ref@head\cnt@headheight{20}{\ArrowLength}
+    \advance\PositionX by \Interval
+    \Identify{6}
+    \advance\ArrowLength\cnt@headheight
+    \ExtraYPos=\ref@body
+    \advance\ExtraYPos\cnt@textheight
+    \OutsideVArrow\ExtraYPos\cnt@headsep{20}{\ArrowLength}
+  \end{picture}
+
+  \medskip
+  \vtop to 0pt{%
+    \@minipagerestore\footnotesize\ttfamily
+    \begin{tabular}{@{}rl@{\hspace{20pt}}rl}
+      1 & \oneinchtext\ + \bs\texttt{hoffset}   & 2 & \oneinchtext\ + \bs\texttt{voffset} \\
+      3 & \Show{cnt}{oddsidemargin} &  4 & \Show{cnt}{topmargin} \\
+        & or \bs\texttt{evensidemargin} & & \\ 
+      5 & \Show{cnt}{headheight} & 6 & \Show{cnt}{headsep} \\
+      7 & \Show{cnt}{textheight} & 8 & \Show{cnt}{textwidth} \\
+      9 & \Show{cnt}{marginparsep}&10& \Show{cnt}{marginparwidth} \\
+      11& \Show{cnt}{footskip}   &   & \Show{cnt}{marginparpush}
+       \rlap{(\notshown)}\\
+        & \Show{ref}{hoffset}    &   & \Show{ref}{voffset} \\
+        & \Show{cnt}{paperwidth} &   & \Show{cnt}{paperheight} \\
+
+  \end{tabular}\vss}
+  \Type{ref}{hoffset}
+  \Type{ref}{voffset}
+  \Type{cnt}{textheight}
+  \Type{cnt}{textwidth}
+  \newpage
+}
+\endinput
+%% 
+%% End of file `layout.sty'.
