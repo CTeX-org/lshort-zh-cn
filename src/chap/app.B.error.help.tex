@@ -1,0 +1,233 @@
+\chapter{排除错误、寻求帮助}\label{chap:error-helps}
+
+\begin{intro}
+\LaTeX\ 入门用户总会为两大问题头疼：我写的代码到底哪里出错了？如果想要实现某种用法该怎么办？
+本章首先总结了常见的 \LaTeX\ 错误及应对的办法。
+\end{intro}
+
+\section{\LaTeX\ 错误}\label{sec:errors}
+
+当我们用排版引擎编译 \LaTeX\ 代码时，命令行的窗口（终端）会显示大量信息（\TeX works 等编辑器会有一个区域显示这些信息）。
+当编译过程中出现错误时，信息将会停止在出错的地方，等待我们接下来的操作。
+
+比如说我们有一个明显出错的例子：
+\begin{verbatim}
+\documentclass{article}
+\begin{document}
+Test \LaTEx{} and it's friends.
+\end{document}
+\end{verbatim}
+
+编译过程中遇到这个错误将会停顿下来，提示错误，并等待用户输入指令：
+\begin{verbatim}
+! Undefined control sequence.
+l.3 Test \LaTEx
+             {} and it's friends.
+\end{verbatim}
+
+这种错误信息分两部分，前一部分（一行或多行）提示了错误的原因，后一部分指出了错误发生的行号，
+以及通过错落的文字告知发生错误的命令所在位置。如上错误显示 \cmd{LaTEx} 位置发生了错误，错误提示是“未定义的控制序列”，
+意思是 \cmd{LaTEx} 是 \TeX\ 程序无法识别的一个命令，很显然是我们把 \cmd{LaTeX} 的大小写写错了。
+
+\subsubsection{处理方式}
+
+出现错误时，编译过程将暂停，等待用户输入命令。用户可以直接敲回车跳过当前的错误，继续编译，相当于丢掉了写错的命令，
+将``Test and it's friends.''编译出来。但这个例子过于简单，有些复杂的代码中，有可能会由于一个小问题导致一连串的错误。
+此时可以选择按 \textbf{S/R/Q} 选择跳过接下来的所有错误，或者按 \textbf{X} 直接退出编译。
+
+\subsubsection{常见的 \LaTeX\ 错误信息}
+
+笔者在此总结一些经常发生、问题比较明确的 \LaTeX\ 错误：
+
+\long\def\LaTeXerror#1{\begingroup\color{red}\bfseries\ttfamily{}#1\endgroup}
+
+\begin{itemize}
+\item \LaTeXerror{! Undefined control sequences.}
+
+使用了未定义的命令。拼写错误是原因之一，如把 \cmd{LaTeX} 写作 \cmd{Latex} 这样。
+也有可能是没有调用某个宏包，但用了该宏包定义的命令。
+
+\item \LaTeXerror{! Missing \$ inserted.}
+
+缺少数学环境的符号 \texttt\$。多由于将数学符号用在公式之外而导致。
+
+\item \LaTeXerror{Runaway argument? \\
+                  ! Paragraph ended before \ldots\ was complete.}
+
+\item \LaTeXerror{! File ended while scanning use of \ldots}.
+
+两个错误都是主要由于漏写了包裹命令参数的花括号，导致识别参数时出现错误。
+
+\item \LaTeXerror{! Extra alignment tab has been changed to \cmd{cr}.}
+
+\item \LaTeXerror{! Misplaced \cmd{noalign}.}
+
+两个错误都与表格有关。
+\begin{itemize}
+  \item 前者的字面意义是“一行中使用的列分隔符 \texttt\& 太多”，有的时候可能确实是 \texttt\& 的个数和列格式不匹配，
+  但多数情况是漏了行尾的 \crcmd。
+  \item 后者常出现于漏掉了行尾的 \crcmd\ 而接着使用 \cmd{hline} 画横线的时候。
+\end{itemize}
+
+\item \LaTeXerror{!  LaTeX Error: Lonely \cmd{item}--perhaps a missing list environment.}
+
+\item \LaTeXerror{!  LaTeX Error: Something's wrong--perhaps a missing \cmd{item}.}
+
+两个错误信息都与列表环境和 \cmd{item} 命令有关。前者意味着在没有使用列表环境的情况下用了 \cmd{item}；
+后者则相反，是在列表环境中漏了 \cmd{item}。
+
+\item \LaTeXerror{! I can't find file `\ldots'.}
+
+\item \LaTeXerror{!  LaTeX Error: File `\ldots' not found.}
+
+两个错误都意味着缺少文件。
+\begin{itemize}
+  \item 如果使用 \cmd{input} 或者 \cmd{include} 命令添加文件，文件不存在，文件名或路径不正确，将会出现上述错误；
+  \item 如果错误提示里的文件名带 \texttt{.cls} 或者 \texttt{.sty} 扩展名，那么很显然，是因为\textbf{没有安装所需的宏包或文档类}。
+\end{itemize}
+
+\item \LaTeXerror{!  LaTeX Error: Missing \cmd{begin}\marg*{document}.}
+
+字面上是缺少 \cmd{begin}\marg*{docu\-ment}，实际上往往是由于在 \cmd{begin}\marg*{docu\-ment} 之前（导言区）输入了文字。
+
+\item \LaTeXerror{!  LaTeX Error: Cam be used only in preamble.}
+
+与上一条相反，由于将必须用于导言区的命令放到了 \cmd{begin}\marg*{docu\-ment} 之后使用而产生。
+
+\item \LaTeXerror{!  LaTeX Error: \cmd{begin}\marg*{\ldots} on input line \ldots ended by \cmd{end}\marg*{\ldots}.}
+
+环境首尾不匹配。比如 \cmd{begin}\marg*{enumerate} 用了 \cmd{end}\marg*{itemize} 结尾。往往是由于漏写了 \cmd{begin}
+或者 \cmd{end} 命令。
+
+\item \LaTeXerror{!  LaTeX Error: Option clash for package `\ldots'.}
+
+以\textbf{不同选项}重复调用宏包造成冲突。有可能是因为其它宏包内部事先调用了这个宏包，用户再次带选项调用而导致冲突。
+可尝试去掉重复调用的宏包避免冲突。如果宏包允许的话，尽量使用其定义的命令改变设置，避免将设置作为宏包选项。
+
+\item \LaTeXerror{!  LaTeX Error: Command \ldots already defined, \\
+                     or name \cmd{end}\ldots illegal \ldots}
+
+使用 \cmd{newcommand} 或 \cmd{newenvironment} 定义已有的命令/环境时产生的错误。如果自己确实使用了前述命令，可考虑改成
+\cmd{re\-new\-command} 或 \cmd{re\-new\-environment}；如果是宏包定义的命令产生了这个错误，则属于隐性的宏包冲突。
+
+相比之前的 ``Option Clash''，隐性宏包冲突是更难以解决的问题，对各种宏包不熟悉的用户，尤其是使用模板的用户而言，往往难以下手。
+用户可尝试查找冲突的命令所在宏包的帮助手册。详尽的手册里通常会告知用户这个宏包应当用在某个宏包的前面/后面。
+如果是模板调用了大量宏包导致冲突，可联系模板的作者解决。
+
+\item \LaTeXerror{!  LaTeX Error: Unknown option `\ldots' for package `\ldots'.}
+
+调用宏包时使用了不能被其识别的选项。此时应该查找宏包的帮助文档来解决问题。
+
+\item \LaTeXerror{!  Package `\ldots' error: \ldots}
+
+宏包或文档类自定义的错误，由于不正确地使用宏包里的命令而导致。
+此时应该查找宏包的帮助文档来解决问题。
+
+\end{itemize}
+
+\section{查看帮助文档}\label{sec:texdoc}
+
+\index{texdoc@\texttt{texdoc} 工具}
+无论是 \TeX\ Live 还是 Mik\TeX\ ，提供了一个命令行模式的程序 \texttt{texdoc}。
+比如对 \ref{subsec:fancyhdr} 小节的 \pkg{fancyhdr} 宏包感兴趣，这时在 Windows 命令提示符或者 Linux 终端输入以下命令，
+则会弹出宏包的帮助手册 \texttt{fancyhdr.pdf}：
+\begin{verbatim}
+texdoc fancyhdr
+\end{verbatim}
+
+除了宏包的帮助手册外，\TeX\ 发行版还包括了各类有用的文档，有一部分在参考文献中给出。
+
+如果不熟悉命令行工具的话，\TeX\ Live 提供了一个图形界面的程序 TeXdoc GUI。打开后，可以看到程序里的许多按钮，分别代表某一类的帮助文档。
+除此之外，点击 File Search 弹出搜索框，输入想要搜索的宏包和文件并按回车键，TeXdoc GUI 会弹出它搜索到的所有结果，可点击任意一项来打开文档。
+
+当然对于初学者，有一个现实而棘手的问题：\textbf{某个命令到底是 \LaTeX\ 自有的，还是哪个宏包提供的？}
+很遗憾地说，除了通过慢慢积累、熟悉较多宏包之外，没有很方便的办法解决这个问题，因为 \LaTeX\ 的宏包实在太丰富了。
+本手册末尾的索引给出了所有在本手册见到的命令和环境，其中哪些命令和环境需要调用哪个宏包才能使用，一目了然。但是这个索引远远不够。
+
+解决这个问题有几点可行的办法：
+\begin{enumerate}
+  \item 查询一些综述性的资料，如总结所有 \LaTeX\ 自带命令的文档 \cite{latex2e}、\LaTeX\ 符号大全 \cite{symbols} 等；
+  \item 在互联网上搜索自己不清楚的命令；
+  \item 在论坛上提问求助有经验的人。
+\end{enumerate}
+
+\section{常用宏包简介}\label{sec:pkg-list}
+
+\def\pkglabel#1{\makebox[60pt][l]{\pkg{#1}}}
+\newenvironment{pkglist}%
+  {\list{}{%
+    \labelwidth=60pt 
+    \itemindent=0pt 
+    \leftmargin=60pt 
+    \labelsep=0pt 
+    \let\makelabel\pkglabel}}%
+  {\endlist}
+
+此处不包含设置字体或数学符号的宏包，它们已经在表 \ref{tbl:font-pkgs} 中列出。
+
+\subsection{文字、公式和符号}\label{subsec:text-math-symbols}
+
+\begin{pkglist}
+  \item[amsmath]  \AmS\ 数学公式扩展。
+  \item[mathtools] 数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等。
+  \item[amsfonts] \AmS\ 扩展符号的基础字体支持。
+  \item[amssymb]  在 \pkg{amsfonts} 基础上将 \AmS\ 扩展符号定义成命令。
+  \item[bm]       提供将符号加粗的命令 \cmd{bm}。
+  \item[siunitx]  以国际单位规范排版物理量的单位。
+  \item[mhchem]   排版化学公式。
+  \item[tipa]     排版国际音标。
+\end{pkglist}
+
+\subsection{排版元素}\label{subsec:pkg-elements}
+
+\begin{pkglist}
+  \item[ulem]     提供排版可断行下划线的命令 \cmd{uline} 以及其它装饰文字的命令。
+  \item[endnote]  排版尾注。
+  \item[multicol] 提供将内容自由分栏的 \env{multicols} 环境。
+  \item[multitoc] 生成多栏排版的目录。
+  \item[minitoc]  为章节生成独立的小目录。
+  \item[glossaries] 生成词汇表。
+  \item[verbatim] 对原始的 \env{verbatim} 环境的改善。提供了命令 \cmd{verbatim\-input} 调用源文件。
+  \item[fancyvrb] 提供了代码排版环境 \env{Verbatim} 以及对版式的自定义。
+  \item[listings] 提供了排版关键字高亮的代码环境 \env{lst\-listing} 以及对版式的自定义。类似宏包有 \pkg{minted}。
+  \item[algorithm2e] 排版算法。
+  \item[ntheorem] 定制定理环境。类似宏包包括 \pkg{theorem}、\pkg{thmtools}、\pkg{amsthm} 等。
+\end{pkglist}
+
+\subsection{图表和浮动体}\label{subsec:pkg-tab-fig}
+
+\begin{pkglist}
+  \item[booktabs]  制作三线表。
+  \item[array]    对表格列格式的扩展。
+  \item[tabularx] 提供 \env{tabularx} 环境排版定宽表格，支持自动计算宽度的 X 列格式。
+  \item[colortbl] 支持修改表格的行、列、单元格的颜色。
+  \item[multirow] 支持合并多行单元格。
+  \item[makecell] 支持在单元格里排版多行内容（嵌套一个单列的小表格）。
+  \item[diagbox]  制作斜线表头。
+  \item[longtable] 提供排版跨页长表格的 \env{longtable} 环境。
+  \item[ltxtable] 跨页长表格可使用 \env{tabularx} 的 X 列格式。
+  \item[tabu]     提供排版复杂格式表格的 \env{tabu} 环境。与 \pkg{longtable} 一同调用时，提供排版复杂格式跨页长表格的 \env{longtabu} 环境。
+  \item[graphicx] 支持插图。
+  \item[bmpsize]  \texttt{latex} + \texttt{dvipdfmx} 命令下支持 BMP/JPG/PNG 等格式的位图。
+  \item[epstopdf] \texttt{pdflatex} 命令下支持 EPS 格式的矢量图。
+  \item[wrapfig]  支持简单的文字在图片周围的绕排。
+  \item[subfig]   提供子图表和子标题的排版。类似宏包有 \pkg{subfigure} 和 \pkg{subcaption} 等。
+  \item[caption]  控制图表标题的格式。
+  \item[float]    为浮动体提供不浮动的 H 模式；提供自定义的浮动体结构。
+\end{pkglist}
+
+\subsection{修改版式}\label{subsec:pkg-layout}
+
+\begin{pkglist}
+  \item[geometry] 修改页面尺寸、页边距、页眉页脚等参数。
+  \item[fancyhdr] 修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐。
+  \item[titlesec] 修改章节标题 \cmd{chapter}、\cmd{section} 等的格式。
+  \item[titletoc] 修改目录中各条目的格式。
+  \item[tocloft]  类似 \pkg{titletoc} 的修改目录条目格式的宏包。
+  \item[tocbibind] 支持将目录、参考文献、索引本身写入目录项。
+  \item[footmisc] 修改脚注 \cmd{footnote} 的格式。
+  \item[indentfirst] 令章节标题后的第一段首行缩进。
+  \item[enumitem] 修改列表环境 \env{enumerate} 和 \env{itemize} 等的格式。
+\end{pkglist}
+
+\endinput

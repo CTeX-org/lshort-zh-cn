@@ -1,0 +1,8 @@
+headings_flag     1
+heading_prefix    "  \n  \\centerline{\\large\\bfseries "
+heading_suffix    "}\n  \\indexspace\n"
+preamble          "\\begin{theindex}\n  \\parindent=0pt\n  \\def\\seename{参见}\n  \\def\\seealsoname{又见}"
+numhead_positive  "数字"
+numhead_negative  "数字"
+symhead_positive  "符号"
+symhead_negative  "符号"

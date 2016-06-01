@@ -1,0 +1,379 @@
+% Definitions
+\def\lsym{$\mathsurround=0pt {}^\ell$}
+\def\LSYM    #1{$#1$     & \texttt{\string#1}\lsym}
+
+\def\SYM     #1{$#1$     & \texttt{\string#1}}
+\def\BIGSYM  #1{$#1$     & $\displaystyle #1$ & \texttt{\string#1}}
+\def\ACC   #1#2{$#1{#2}$ & \texttt{\string#1}\marg*{#2}}
+\def\DEL     #1{$\big#1 \bigg#1$ & \texttt{\string#1}}
+
+\def\AMSSYM  #1{$#1$     & \texttt{\string#1}}
+% These symbols rely on `amsmath' package
+\def\AMSM    #1{$#1$     & \textcolor{blue}{\texttt{\string#1}}}
+\def\AMSACC#1#2{$#1{#2}$ & \textcolor{blue}{\texttt{\string#1}}\marg*{#2}}
+\def\AMSBIG  #1{$#1$     & $\displaystyle #1$ & \textcolor{blue}{\texttt{\string#1}}}
+
+\def\SC      #1{#1       & \texttt{\string#1}}
+
+
+\newsavebox{\symbbox}
+\newenvironment{symbols}[1]%
+  {\def\arraystretch{1.1}
+  \begin{lrbox}{\symbbox}
+  \begin{tabular}{@{}#1@{}}}%
+  {\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}}
+
+\newcount\savesecdepth
+
+\clearpage
+\section{符号表}\label{sec:math-tables}
+
+\pkgindex{latexsym}
+有几个注意事项：
+\begin{enumerate}
+  \item \textcolor{blue}{蓝色}的命令依赖 \pkg{amsmath} 宏包（非 \pkg{amssymb} 宏包）；
+  \item 带有角标\lsym 的符号命令依赖 \pkg{latexsym} 宏包。
+\end{enumerate}
+
+\subsection{\LaTeX\ 普通符号}
+\symindex{dag,ddag,P,S,copyright,pounds}
+
+\begin{table}[htp]
+\caption{文本/数学模式通用符号}\label{tbl:general-syms}
+\begin{quote}\footnotesize%
+这些符号可用于文本和数学模式。
+\end{quote}
+\begin{symbols}{*4{cl}}
+\hline
+ \SC{\{}    &  \SC{\}}  &  \SC{\$}         &  \SC{\%}               \\
+ \SC{\dag}  &  \SC{\S}  &  \SC{\copyright} &  \SC{\dots}            \\
+ \SC{\ddag} &  \SC{\P}  &  \SC{\pounds}    &                        \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{希腊字母。} \label{tbl:math-greek}
+\begin{quote}\footnotesize%
+\cmd{Alpha}，\cmd{Beta} 等希腊字母符号不存在，因为它们和拉丁字母 A,B 等一模一样；
+小写字母里也不存在 \cmd{omicron}，直接用 $o$ 代替。
+\end{quote}
+\begin{symbols}{*4{cl}}
+\hline
+ \SYM{\alpha}     & \SYM{\theta}     & \SYM{o}          & \SYM{\upsilon}  \\
+ \SYM{\beta}      & \SYM{\vartheta}  & \SYM{\pi}        & \SYM{\phi}      \\
+ \SYM{\gamma}     & \SYM{\iota}      & \SYM{\varpi}     & \SYM{\varphi}   \\
+ \SYM{\delta}     & \SYM{\kappa}     & \SYM{\rho}       & \SYM{\chi}      \\
+ \SYM{\epsilon}   & \SYM{\lambda}    & \SYM{\varrho}    & \SYM{\psi}      \\
+ \SYM{\varepsilon}& \SYM{\mu}        & \SYM{\sigma}     & \SYM{\omega}    \\
+ \SYM{\zeta}      & \SYM{\nu}        & \SYM{\varsigma}  &                 \\
+ \SYM{\eta}       & \SYM{\xi}        & \SYM{\tau}       &                 \\[1ex]
+ \SYM{\Gamma}     & \SYM{\Lambda}    & \SYM{\Sigma}     & \SYM{\Psi}      \\
+ \SYM{\Delta}     & \SYM{\Xi}        & \SYM{\Upsilon}   & \SYM{\Omega}    \\
+ \SYM{\Theta}     & \SYM{\Pi}        & \SYM{\Phi}       &                 \\
+ \AMSM{\varGamma} & \AMSM{\varLambda}& \AMSM{\varSigma}  & \AMSM{\varPsi}      \\
+ \AMSM{\varDelta} & \AMSM{\varXi}    & \AMSM{\varUpsilon}& \AMSM{\varOmega}    \\
+ \AMSM{\varTheta} & \AMSM{\varPi}    & \AMSM{\varPhi}    &                 \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{二元关系符。} \label{tbl:math-rel}
+\begin{quote}\footnotesize%
+所有的二元关系符都可以加 \cmd{not} 前缀得到相反意义的关系符，例如 \cmd{not}\texttt{=} 就得到不等号（同 \cmd{ne}）。
+\end{quote}
+\begin{symbols}{*3{cl}}
+\hline
+ \SYM{<}              & \SYM{>}                    & \SYM{=}          \\
+ \SYM{\leq} or \cmd{le}   & \SYM{\geq} or \cmd{ge} & \SYM{\equiv}     \\
+ \SYM{\ll}            & \SYM{\gg}                  & \SYM{\doteq}     \\
+ \SYM{\prec}          & \SYM{\succ}                & \SYM{\sim}       \\
+ \SYM{\preceq}        & \SYM{\succeq}              & \SYM{\simeq}     \\
+ \SYM{\subset}        & \SYM{\supset}              & \SYM{\approx}    \\
+ \SYM{\subseteq}      & \SYM{\supseteq}            & \SYM{\cong}      \\
+ \LSYM{\sqsubset}     & \LSYM{\sqsupset}           & \LSYM{\Join}     \\
+ \SYM{\sqsubseteq}    & \SYM{\sqsupseteq}          & \SYM{\bowtie}    \\
+ \SYM{\in}            & \SYM{\ni}, \cmd{owns}      & \SYM{\propto}    \\
+ \SYM{\vdash}         & \SYM{\dashv}               & \SYM{\models}    \\
+ \SYM{\mid}           & \SYM{\parallel}            & \SYM{\perp}      \\
+ \SYM{\smile}         & \SYM{\frown}               & \SYM{\asymp}     \\
+ \SYM{:}              & \SYM{\notin}               & \SYM{\neq} or \cmd{ne} \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{二元运算符。}\label{tbl:math-op}
+\begin{symbols}{*3{cl}}
+\hline
+ \SYM{+}              & \SYM{-}              &                     \\
+ \SYM{\pm}            & \SYM{\mp}            & \SYM{\triangleleft} \\
+ \SYM{\cdot}          & \SYM{\div}           & \SYM{\triangleright}\\
+ \SYM{\times}         & \SYM{\setminus}      & \SYM{\star}         \\
+ \SYM{\cup}           & \SYM{\cap}           & \SYM{\ast}          \\
+ \SYM{\sqcup}         & \SYM{\sqcap}         & \SYM{\circ}         \\
+ \SYM{\vee}, \cmd{lor}& \SYM{\wedge},\cmd{land}  & \SYM{\bullet}   \\
+ \SYM{\oplus}         & \SYM{\ominus}        & \SYM{\diamond}      \\
+ \SYM{\odot}          & \SYM{\oslash}        & \SYM{\uplus}        \\
+ \SYM{\otimes}        & \SYM{\bigcirc}       & \SYM{\amalg}        \\
+ \SYM{\bigtriangleup} &\SYM{\bigtriangledown}& \SYM{\dagger}       \\
+ \LSYM{\lhd}          & \LSYM{\rhd}          & \SYM{\ddagger}      \\
+ \LSYM{\unlhd}        & \LSYM{\unrhd}        & \SYM{\wr}           \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{巨算符。}\label{tbl:math-bigop}
+\def\arraystretch{1.8}
+\begin{symbols}{*3{ccl}}
+\hline
+ \BIGSYM{\sum}      & \BIGSYM{\bigcup}   & \BIGSYM{\bigvee}  \\
+ \BIGSYM{\prod}     & \BIGSYM{\bigcap}   & \BIGSYM{\bigwedge} \\
+ \BIGSYM{\coprod}   & \BIGSYM{\bigsqcup} & \BIGSYM{\biguplus} \\
+ \BIGSYM{\int}      & \BIGSYM{\oint}     & \BIGSYM{\bigodot} \\
+ \BIGSYM{\bigoplus} & \BIGSYM{\bigotimes} & \\
+ \AMSBIG{\iint}     & \AMSBIG{\iiint}    & \AMSBIG{\iiiint}  \\
+ \AMSBIG{\idotsint} &                    & \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{数学重音符号。}\label{tbl:math-accents}
+\begin{quote}\footnotesize%
+最后一个 \cmd{wideparen} 依赖 \pkg{yhmath} 宏包。
+\end{quote}
+\begin{symbols}{*3{cl}}
+\hline
+\ACC{\hat}{a}   & \ACC{\check}{a} & \ACC{\tilde}{a}       \\
+\ACC{\acute}{a} & \ACC{\grave}{a} & \ACC{\breve}{a}       \\
+\ACC{\bar}{a}   & \ACC{\vec}{a}   & \ACC{\mathring}{a}    \\
+\ACC{\dot}{a}   & \ACC{\ddot}{a}  & \AMSACC{\dddot}{a}    \\
+\AMSACC{\ddddot}{a} \\[1ex]
+\ACC{\widehat}{AAA} & \ACC{\widetilde}{AAA} & \ACC{\wideparen}{AAA} \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{箭头。} \label{tbl:math-arrows}
+\begin{symbols}{*2{cl}}
+\hline
+ \SYM{\leftarrow} or \cmd{gets} & \SYM{\longleftarrow} \\
+ \SYM{\rightarrow} or \cmd{to}   & \SYM{\longrightarrow} \\
+ \SYM{\leftrightarrow}    & \SYM{\longleftrightarrow} \\
+ \SYM{\Leftarrow}         & \SYM{\Longleftarrow}     \\
+ \SYM{\Rightarrow}        & \SYM{\Longrightarrow}    \\
+ \SYM{\Leftrightarrow}    & \SYM{\Longleftrightarrow}\\
+ \SYM{\mapsto}            & \SYM{\longmapsto}        \\
+ \SYM{\hookleftarrow}     & \SYM{\hookrightarrow}    \\
+ \SYM{\leftharpoonup}     & \SYM{\rightharpoonup}    \\
+ \SYM{\leftharpoondown}   & \SYM{\rightharpoondown}  \\
+ \SYM{\rightleftharpoons} & \SYM{\iff}               \\
+ \SYM{\uparrow}           & \SYM{\downarrow} \\
+ \SYM{\updownarrow}       & \SYM{\Uparrow} \\
+ \SYM{\Downarrow}         & \SYM{\Updownarrow} \\
+ \SYM{\nearrow}           & \SYM{\searrow} \\
+ \SYM{\swarrow}           & \SYM{\nwarrow} \\
+ \LSYM{\leadsto}          &              \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{作为重音的箭头符号。}  \label{tbl:math-arrow-accents}
+\begin{symbols}{*2{cl}}
+\hline
+\ACC{\overrightarrow}{AB}     & \AMSACC{\underrightarrow}{AB}     \\
+\ACC{\overleftarrow}{AB}      & \AMSACC{\underleftarrow}{AB}      \\
+\AMSACC{\overleftrightarrow}{AB} & \AMSACC{\underleftrightarrow}{AB} \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{定界符。}\label{tbl:math-delims}
+\begin{symbols}{*3{cl}}
+\hline
+ \SYM{(}                  & \SYM{)}                 & \SYM{\uparrow} \\
+ \SYM{[} or \cmd{lbrack}   & \SYM{]} or \cmd{rbrack}  & \SYM{\downarrow}   \\
+ \SYM{\{} or \cmd{lbrace}  & \SYM{\}} or \cmd{rbrace} & \SYM{\updownarrow} \\
+ \SYM{\langle}            & \SYM{\rangle}           & \SYM{\Uparrow} \\
+ \SYM{|} or \cmd{vert}     & \SYM{\|} or \cmd{Vert}   & \SYM{\Downarrow} \\
+ \SYM{/}            & \SYM{\backslash}   &   \SYM{\Updownarrow}  \\ 
+ \SYM{\lfloor}      & \SYM{\rfloor}      &   \\
+ \SYM{\rceil}       &  \SYM{\lceil}      & & \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{用于行间公式的大定界符。}\label{tbl:math-large-delims}
+\def\arraystretch{1.8}
+\begin{symbols}{*3{cl}}
+\hline
+ \DEL{\lgroup}      & \DEL{\rgroup}      & \DEL{\lmoustache}  \\
+ \DEL{\arrowvert}   & \DEL{\Arrowvert}   & \DEL{\bracevert} \\
+ \DEL{\rmoustache} \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{其他符号。}\label{tbl:math-misc}
+\begin{symbols}{*4{cl}}
+\hline
+ \SYM{\dots}       & \SYM{\cdots}      & \SYM{\vdots}      & \SYM{\ddots}     \\
+ \SYM{\hbar}       & \SYM{\imath}      & \SYM{\jmath}      & \SYM{\ell}       \\
+ \SYM{\Re}         & \SYM{\Im}         & \SYM{\aleph}      & \SYM{\wp}        \\
+ \SYM{\forall}     & \SYM{\exists}     & \LSYM{\mho}       & \SYM{\partial}   \\
+ \SYM{'}           & \SYM{\prime}      & \SYM{\emptyset}   & \SYM{\infty}     \\
+ \SYM{\nabla}      & \SYM{\triangle}   & \LSYM{\Box}       & \LSYM{\Diamond}  \\
+ \SYM{\bot}        & \SYM{\top}        & \SYM{\angle}      & \SYM{\surd}      \\
+ \SYM{\diamondsuit} & \SYM{\heartsuit} & \SYM{\clubsuit}   & \SYM{\spadesuit} \\
+ \SYM{\neg} or \cmd{lnot} & \SYM{\flat} & \SYM{\natural}    & \SYM{\sharp}     \\
+\hline
+\end{symbols}
+\end{table}
+
+\clearpage
+\subsection{\AmS\ 符号}
+
+本小节所有符号依赖 \pkg{amssymb} 宏包。
+
+\begin{table}[htp]
+\caption{\AmS\ 希腊字母和希伯来字母。} \label{tbl:ams-greek-hebrew}
+\begin{symbols}{*5{cl}}
+\hline
+\AMSSYM{\digamma}   &\AMSSYM{\varkappa} & \AMSSYM{\beth} &\AMSSYM{\gimel} & \AMSSYM{\daleth}\\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{\AmS\ 二元关系符。} \label{tbl:ams-rel}
+\begin{symbols}{*3{cl}}
+\hline
+ \AMSSYM{\lessdot}           & \AMSSYM{\gtrdot}            & \AMSSYM{\doteqdot} \\
+ \AMSSYM{\leqslant}          & \AMSSYM{\geqslant}          & \AMSSYM{\risingdotseq}     \\
+ \AMSSYM{\eqslantless}       & \AMSSYM{\eqslantgtr}        & \AMSSYM{\fallingdotseq}    \\
+ \AMSSYM{\leqq}              & \AMSSYM{\geqq}              & \AMSSYM{\eqcirc}           \\
+ \AMSSYM{\lll} or \cmd{llless}& \AMSSYM{\ggg}               & \AMSSYM{\circeq}  \\
+ \AMSSYM{\lesssim}           & \AMSSYM{\gtrsim}            & \AMSSYM{\triangleq}        \\
+ \AMSSYM{\lessapprox}        & \AMSSYM{\gtrapprox}         & \AMSSYM{\bumpeq}           \\
+ \AMSSYM{\lessgtr}           & \AMSSYM{\gtrless}           & \AMSSYM{\Bumpeq}           \\
+ \AMSSYM{\lesseqgtr}         & \AMSSYM{\gtreqless}         & \AMSSYM{\thicksim}         \\
+ \AMSSYM{\lesseqqgtr}        & \AMSSYM{\gtreqqless}        & \AMSSYM{\thickapprox}      \\
+ \AMSSYM{\preccurlyeq}       & \AMSSYM{\succcurlyeq}       & \AMSSYM{\approxeq}         \\
+ \AMSSYM{\curlyeqprec}       & \AMSSYM{\curlyeqsucc}       & \AMSSYM{\backsim}          \\
+ \AMSSYM{\precsim}           & \AMSSYM{\succsim}           & \AMSSYM{\backsimeq}        \\
+ \AMSSYM{\precapprox}        & \AMSSYM{\succapprox}        & \AMSSYM{\vDash}            \\
+ \AMSSYM{\subseteqq}         & \AMSSYM{\supseteqq}         & \AMSSYM{\Vdash}            \\
+ \AMSSYM{\shortparallel}     & \AMSSYM{\Supset}            & \AMSSYM{\Vvdash}           \\
+ \AMSSYM{\blacktriangleleft} & \AMSSYM{\sqsupset}          & \AMSSYM{\backepsilon}      \\
+ \AMSSYM{\vartriangleright}  & \AMSSYM{\because}           & \AMSSYM{\varpropto}        \\
+ \AMSSYM{\blacktriangleright}& \AMSSYM{\Subset}            & \AMSSYM{\between}          \\
+ \AMSSYM{\trianglerighteq}   & \AMSSYM{\smallfrown}        & \AMSSYM{\pitchfork}        \\
+ \AMSSYM{\vartriangleleft}   & \AMSSYM{\shortmid}          & \AMSSYM{\smallsmile}       \\
+ \AMSSYM{\trianglelefteq}    & \AMSSYM{\therefore}         & \AMSSYM{\sqsubset}         \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{\AmS\ 二元运算符。} \label{tbl:ams-op}
+\begin{symbols}{*3{cl}}
+\hline
+ \AMSSYM{\dotplus}        & \AMSSYM{\centerdot}      &       \\
+ \AMSSYM{\ltimes}         & \AMSSYM{\rtimes}         & \AMSSYM{\divideontimes} \\
+ \AMSSYM{\doublecup}      & \AMSSYM{\doublecap}      & \AMSSYM{\smallsetminus} \\
+ \AMSSYM{\veebar}         & \AMSSYM{\barwedge}       & \AMSSYM{\doublebarwedge}\\
+ \AMSSYM{\boxplus}        & \AMSSYM{\boxminus}       & \AMSSYM{\circleddash}   \\
+ \AMSSYM{\boxtimes}       & \AMSSYM{\boxdot}         & \AMSSYM{\circledcirc}   \\
+ \AMSSYM{\intercal}       & \AMSSYM{\circledast}     & \AMSSYM{\rightthreetimes} \\
+ \AMSSYM{\curlyvee}       & \AMSSYM{\curlywedge}     & \AMSSYM{\leftthreetimes} \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{\AmS\ 箭头。}\label{tbl:ams-arrows}
+\begin{symbols}{*2{cl}}
+\hline
+ \AMSSYM{\dashleftarrow}      & \AMSSYM{\dashrightarrow}     \\
+ \AMSSYM{\leftleftarrows}     & \AMSSYM{\rightrightarrows}   \\
+ \AMSSYM{\leftrightarrows}    & \AMSSYM{\rightleftarrows}    \\
+ \AMSSYM{\Lleftarrow}         & \AMSSYM{\Rrightarrow}        \\
+ \AMSSYM{\twoheadleftarrow}   & \AMSSYM{\twoheadrightarrow}  \\
+ \AMSSYM{\leftarrowtail}      & \AMSSYM{\rightarrowtail}     \\
+ \AMSSYM{\leftrightharpoons}  & \AMSSYM{\rightleftharpoons}  \\
+ \AMSSYM{\Lsh}                & \AMSSYM{\Rsh}                \\
+ \AMSSYM{\looparrowleft}      & \AMSSYM{\looparrowright}     \\
+ \AMSSYM{\curvearrowleft}     & \AMSSYM{\curvearrowright}    \\
+ \AMSSYM{\circlearrowleft}    & \AMSSYM{\circlearrowright}   \\
+ \AMSSYM{\multimap}           & \AMSSYM{\upuparrows}         \\
+ \AMSSYM{\downdownarrows}     & \AMSSYM{\upharpoonleft}      \\
+ \AMSSYM{\upharpoonright}     & \AMSSYM{\downharpoonright}   \\
+ \AMSSYM{\rightsquigarrow}    & \AMSSYM{\leftrightsquigarrow}\\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{\AmS\ 反义二元关系符和箭头。}\label{tbl:ams-negative}
+\begin{symbols}{*3{cl}}
+\hline
+ \AMSSYM{\nless}           & \AMSSYM{\ngtr}            & \AMSSYM{\varsubsetneqq}  \\
+ \AMSSYM{\lneq}            & \AMSSYM{\gneq}            & \AMSSYM{\varsupsetneqq}  \\
+ \AMSSYM{\nleq}            & \AMSSYM{\ngeq}            & \AMSSYM{\nsubseteqq}     \\
+ \AMSSYM{\nleqslant}       & \AMSSYM{\ngeqslant}       & \AMSSYM{\nsupseteqq}     \\
+ \AMSSYM{\lneqq}           & \AMSSYM{\gneqq}           & \AMSSYM{\nmid}           \\
+ \AMSSYM{\lvertneqq}       & \AMSSYM{\gvertneqq}       & \AMSSYM{\nparallel}      \\
+ \AMSSYM{\nleqq}           & \AMSSYM{\ngeqq}           & \AMSSYM{\nshortmid}      \\
+ \AMSSYM{\lnsim}           & \AMSSYM{\gnsim}           & \AMSSYM{\nshortparallel} \\
+ \AMSSYM{\lnapprox}        & \AMSSYM{\gnapprox}        & \AMSSYM{\nsim}           \\
+ \AMSSYM{\nprec}           & \AMSSYM{\nsucc}           & \AMSSYM{\ncong}          \\
+ \AMSSYM{\npreceq}         & \AMSSYM{\nsucceq}         & \AMSSYM{\nvdash}         \\
+ \AMSSYM{\precneqq}        & \AMSSYM{\succneqq}        & \AMSSYM{\nvDash}         \\
+ \AMSSYM{\precnsim}        & \AMSSYM{\succnsim}        & \AMSSYM{\nVdash}         \\
+ \AMSSYM{\precnapprox}     & \AMSSYM{\succnapprox}     & \AMSSYM{\nVDash}         \\
+ \AMSSYM{\subsetneq}       & \AMSSYM{\supsetneq}       & \AMSSYM{\ntriangleleft}  \\
+ \AMSSYM{\varsubsetneq}    & \AMSSYM{\varsupsetneq}    & \AMSSYM{\ntriangleright} \\
+ \AMSSYM{\nsubseteq}       & \AMSSYM{\nsupseteq}       & \AMSSYM{\ntrianglelefteq}\\
+ \AMSSYM{\subsetneqq}      & \AMSSYM{\supsetneqq}      &\AMSSYM{\ntrianglerighteq}\\[0.5ex]
+ \AMSSYM{\nleftarrow}      & \AMSSYM{\nrightarrow}     & \AMSSYM{\nleftrightarrow}\\
+ \AMSSYM{\nLeftarrow}      & \AMSSYM{\nRightarrow}     & \AMSSYM{\nLeftrightarrow} \\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp]
+\caption{\AmS\ 定界符}\label{tbl:ams-delims}
+\begin{symbols}{*4{cl}}
+\hline
+\AMSSYM{\ulcorner}&\AMSSYM{\urcorner}&\AMSSYM{\llcorner}&\AMSSYM{\lrcorner}\\
+\AMSSYM{\lvert}   &\AMSSYM{\rvert}   &\AMSSYM{\lVert}   &\AMSSYM{\rVert}\\
+\hline
+\end{symbols}
+\end{table}
+
+\begin{table}[htp] 
+\caption{\AmS\ 其它符号。}\label{tbl:ams-misc}
+\begin{symbols}{*3{cl}}
+\hline
+ \AMSSYM{\hbar}             & \AMSSYM{\hslash}           & \AMSSYM{\Bbbk}            \\
+ \AMSSYM{\square}           & \AMSSYM{\blacksquare}      & \AMSSYM{\circledS}        \\
+ \AMSSYM{\vartriangle}      & \AMSSYM{\blacktriangle}    & \AMSSYM{\complement}      \\
+ \AMSSYM{\triangledown}     & \AMSSYM{\blacktriangledown}& \AMSSYM{\Game}            \\
+ \AMSSYM{\lozenge}          & \AMSSYM{\blacklozenge}     & \AMSSYM{\bigstar}         \\
+ \AMSSYM{\angle}            & \AMSSYM{\measuredangle}    & \\
+ \AMSSYM{\diagup}           & \AMSSYM{\diagdown}         & \AMSSYM{\backprime}       \\
+ \AMSSYM{\nexists}          & \AMSSYM{\Finv}             & \AMSSYM{\varnothing}      \\
+ \AMSSYM{\eth}              & \AMSSYM{\sphericalangle}   & \AMSSYM{\mho}             \\
+\hline
+\end{symbols}
+\end{table}
+
+\endinput

@@ -1,0 +1,424 @@
+\chapter{\LaTeX\ 须知}\label{chap:basics}
+\addtocontents{los}{\protect\addvspace{10pt}}
+
+\begin{intro}
+欢迎加入 \LaTeX\ 使用者的队伍！本章开头用简短的篇幅介绍了 \LaTeX\ 的来源，
+然后介绍了 \LaTeX\ 源代码的写法，如何编译 \LaTeX\ 源代码生成文档，以及理解接下来的章节所必须的一些知识。
+\end{intro}
+
+\section{概述}\label{sec:intro}
+
+\subsection{\protect\TeX}\label{subsec:tex}
+
+\index{Knuth@Knuth, Donald E. (\textit{高德纳})} 
+\index{TeX@\TeX}
+\TeX\ 是高德纳 (Donald E.Knuth)开发的、以排版文字和数学公式为目的的一个计算机软件 \cite{texbook}。
+高德纳从 1977 年开始开发 \TeX\ ，以发掘当时开始用于出版工业的数字印刷设备的潜力。
+正在编写著作《计算机程序设计艺术》的高德纳，意图扭转排版质量每况愈下的状况，以免影响他的出书。
+我们现在使用的 \TeX\ 排版引擎发布于 1982 年，在 1989 年又稍加改进以更好地支持 8-bit 字符和多语言排版。
+\TeX\ 以其卓越的稳定性、跨平台、几乎没有 Bug 而著称。\TeX\ 的版本号不断趋近于 $\pi$，当前为 3.141592653。
+
+\TeX\ 读作 ``Tech'' ，其中 ``ch'' 的发音类似于 ``h'' ，与汉字“泰赫”的发音类似。\TeX\ 的拼写来自希腊词语
+{\fontencoding{LGR}\selectfont teqnik'h} (technique，技术) 的开头几个字母。在 ASCII 字符环境，\TeX\ 写作 \texttt{TeX}。
+
+\subsection{\LaTeX}\label{subsec:latex}
+
+\index{LaTeX@\LaTeX}
+\index{LaTeX2e@\LaTeXe}
+\LaTeX\ 为 \TeX\ 基础上的一套格式，令作者能够使用预定义的专业格式以较高质量排版和印刷他们的作品。
+\LaTeX\ 的最初开发者为 Leslie Lamport 博士\cite{manual}。\LaTeX\ 使用 \TeX\ 程序作为自己的排版引擎。
+当下 \LaTeX\ 主要的维护者为 Frank Mittelbach。
+
+\LaTeX\ 读作 ``Lah-tech'' 或者 ``Lay-tech'' ，近似于汉字“拉泰赫”或“雷泰赫”。\LaTeX\ 在 ASCII 字符环境写作 \texttt{LaTeX}。
+当前的 \LaTeX\ 版本为 \LaTeXe\ ，意思是超出了第二版，接近但没达到第三版，在 ASCII 字符环境写作 \texttt{LaTeX2e}。
+
+\subsection{\LaTeX 的优缺点}\label{subec:advs}
+
+\LaTeX\ 总会拿来和一些“所见即所得”（What You See Is What You Get）的文字处理和排版工具比较优缺点。
+笔者认为这种比较并不值得提倡，毕竟所有工具都有自己值得使用的原因。
+
+当然笔者还是会总结一些 \LaTeX\ 的优点：
+
+\begin{itemize}
+  \item 专业的排版输出，产生的文档看上去就像“印刷品”一样。
+
+  \item 方便而强大的数学公式排版能力，无出其右。
+
+  \item 绝大多数时候，用户只需掌握一些简单易懂的命令来组织文档结构，无需（或很少）操心文档的版面设计。
+
+  \item 很容易生成复杂的专业排版元素，如脚注、交叉引用、参考文献、目录等。
+
+  \item 强大的扩展性。世界各地的人开发了数以千计的 \LaTeX\ 宏包用于补充和扩展 \LaTeX\ 的功能。
+  本手册附录中的 \ref{sec:pkg-list} 小节可见一瞥。更多的宏包参考 \textit{The \LaTeX\ companion}\cite{companion}。
+
+  \item \LaTeX\ 促使用户写出结构良好的文档——而这也是 \LaTeX\ 存在的初衷。
+
+  \item \LaTeX\ 依赖的 \TeX\ 排版引擎和其它软件是跨平台、免费、开源的。
+  无论用户使用的是 Windows，OS X，GNU/Linux 还是 FreeBSD 等系统，都能轻松获得并使用这一强大的排版工具。
+\end{itemize}
+
+\LaTeX\ 的缺点也是显而易见的：
+\begin{itemize}
+  \item 入门门槛高。本手册的副标题叫做 “\pageref{lshort-minutes}~分钟了解 \LaTeXe ”，
+  实际上 \pageref{lshort-minutes} 是本手册正文部分的页数。如果你以平均一页一分钟的速度看完了本手册，
+  你只是粗窥门径而已，离学会它还很远。
+
+  \item 排查错误困难。\LaTeX\ 作为一个依靠编写代码工作的排版工具，其使用的宏语言比 C++ 或 Python 等程序设计语言在错误排查方面困难得多。
+  它虽然能够提示错误，但不提供调试的机制，有时错误提示还很难理解。
+
+  \item 样式定制困难。\LaTeX\ 提供了一个基本上良好的样式，为了让用户不去关注样式而专注于文档结构。
+  但如果想要改进 \LaTeX\ 生成的文档样式则是十分困难。
+
+  \item 相比“所见即所得”的模式有一些不便，为了查看生成的文档，用户总要不停地编译。
+\end{itemize}
+
+\section{\LaTeX\ 命令和代码结构}\label{sec:src}
+
+\LaTeX\ 的源代码本质上是文本文件。哪怕用 Windows 的记事本或者 Linux 的 gedit 等简单的编辑器，
+也可以编写一份 \LaTeX\ 源代码并编译出文档来。专用于编辑 \LaTeX\ 源代码的编辑器如
+TeXworks / TeXstudio / WinEdt 等提供了一些语法高亮、命令补全等功能，以及调用排版引擎的一些按钮。
+
+除了文字本身，\LaTeX\ 源代码之中还包括大量的命令，用在排版公式、划分文档结构、控制样式等等不同的地方。
+
+\subsection{\LaTeX\ 命令和环境}\label{subsec:cmds}
+
+\index{LaTeX macro@\LaTeX\ 命令}
+\LaTeX\ 命令以反斜线 \texttt\textbackslash 开头，为以下两种形式之一：
+\begin{itemize}
+  \item 反斜线和后面的一串字母，如 \cmd{LaTeX}。它们以任意非字母符号（空格、数字、标点等）作为分隔符。
+  \item 反斜线和后面的一个非字母符号，如 \cmd{\$}。它们无需分隔符。
+\end{itemize}
+
+要注意 \LaTeX\ 命令是\textbf{对大小写敏感}的，比如输入 \cmd{LaTeX} 命令可以生成错落有致的 \LaTeX\ 字母组合，
+但输入 \cmd{Latex} 或者 \cmd{LaTex} 什么都得不到，还会报错。
+
+字母形式的 \LaTeX\ 命令忽略其后的所有空格。如果要人为引入空格，需要在命令后面加一对括号阻止其忽略空格%
+\footnote{另外也可以在命令后面紧跟一个 \cmd{\textvisiblespace} 命令（反斜线加空格），代表插入一个间距。
+比如 \cmd{TeX}\cmd{\textvisiblespace}\texttt{user} 的输出效果就是 \TeX\ user。}：
+\begin{example}
+Shall we call ourselves 
+\TeX users 
+
+or \TeX{} users?
+\end{example}
+
+\pinyinindex{canshu}{参数}
+大多数的 \LaTeX\ 命令是带一个或多个参数，每个参数用花括号 \texttt\{ 和 \texttt\} 包裹。
+有些命令带一个或多个可选参数，以方括号 \texttt[ 和 \texttt] 包裹。
+还有些命令在命令名称后可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异。
+
+\pinyinindex{fenzu}{分组}
+\LaTeX\ 的花括号本身也起到\textbf{分组}的作用，可以将字体、格式等的更改限制在大括号范围之内。
+
+\index{LaTeX environment@\LaTeX\ 环境}
+\cmdindex{begin,end}
+\LaTeX\ 还引入了\textbf{环境}的用法，用以令一些效果在局部生效，或是生成特定的文档元素。
+\LaTeX\ 环境的用法为一对命令 \cmd{begin} 和 \cmd{end}：
+\begin{command}
+\cmd{begin}\marg{environment name}\marg{arguments} \\
+\ldots \\
+\cmd{end}\marg{environment name} 
+\end{command}
+
+其中 \Arg{environment name} 为环境名，\cmd{begin} 和 \cmd{end} 中填写的环境名应当一致。
+\cmd{begin} 在 \Arg{environment name} 后可以带一个或多个参数，甚至可选参数。环境允许嵌套使用。
+
+\subsection{\LaTeX\ 源代码结构}\label{subsec:struct}
+
+\cmdindex{documentclass}
+\pinyinindex{wendanglei}{文档类}
+\LaTeX\ 源代码以一个 \cmd{document\-class} 命令作为开头，它规定了文档使用的\textbf{文档类}：
+\begin{verbatim}
+\documentclass{...}
+\end{verbatim}
+
+\cmdindex{usepackage}
+\pinyinindex{hongbao}{宏包}
+紧接着我们可以用 \cmd{usepackage} 命令调用\textbf{宏包}：
+\begin{verbatim}
+\usepackage{...}
+\end{verbatim}
+
+\envindex{document}
+再接着，我们需要用以下一对命令来标记正文内容的开始位置和结束位置，而将正文内容写入其中：
+\begin{verbatim}
+\begin{document}
+\end{document}
+\end{verbatim}
+
+\pinyinindex{daoyanqu}{导言区}
+在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}，除了使用 \cmd{use\-package}
+调用宏包之外，一些对文档的全局设置命令也在这里使用。当然也可以什么都不写，一个宏包都不调用。一切视自己需求。
+
+\section{用命令行操作 \LaTeX}
+
+相信你看到这里已经急不可耐地想要写一个 \LaTeX\ 源代码试一试了。我们这就给一个最小的例子，见源代码 \ref{code:hello-world}。
+
+\begin{sourcecode}[htp]
+\begin{Verbatim}
+\documentclass{article}
+\begin{document}
+``Hello world!'' from \LaTeX.
+\end{document}
+\end{Verbatim}
+\caption{\LaTeX\ 的一个最简单的源代码示例。}\label{code:hello-world}
+\end{sourcecode}
+
+有相当多的编辑器会提供一个按钮完成编译，不过笔者仍然觉得有必要了解一下其背后的工作原理。\LaTeX\ 调用的程序都是基于命令行的，
+所以建议打开 Windows 命令提示符或者 Linux / OS X 的终端，按照本手册的范例尝试一下调用命令行程序编译。
+
+\subsection{引擎、格式和命令}
+
+\pinyinindex{paibanyinqing}{排版引擎}
+\index{pdfTeX@\hologo{pdfTeX}}
+\index{XeTeX@\hologo{XeTeX}}
+在开始示例编译过程之前，有必要澄清几个概念：
+\begin{description}
+  \item[引擎] 全称为排版引擎，是读入源代码并编译生成文档的程序，如 \hologo{pdfTeX}、\hologo{XeTeX} 等。有时也直接称为编译器。
+  \item[格式] 是定义了一组命令的代码集。\LaTeX\ 就是最广泛应用的一个格式，高德纳本人还编写了一个简单的 plain \TeX\ 格式，
+  没有定义诸如 \cmd{document\-class} 和 \cmd{section} 等等命令。
+  \item[命令] 是引擎和格式二者的结合体。如下文要用到的 \texttt{pdflatex} 命令是结合 \hologo{pdfTeX} 
+  引擎和 \LaTeX\ 格式的一个命令，用于编译类似源代码 \ref{code:hello-world} 的代码并输出 PDF。
+\end{description}
+
+\texttt{latex} 命令和 \LaTeX\ 格式往往容易混淆，在同他人讨论关于 \LaTeX\ 的时候需要明确。
+本手册为避免混淆，文中的 \LaTeX\ 一律指的是\textbf{格式}，\textbf{命令}则用等宽字体 \texttt{latex} 表示。
+
+用一个简单的表格总结一下：
+\begin{center}
+\begin{tabular}{ccc}
+ \hline
+                     & plain \TeX\ 格式 & \LaTeX\ 格式 \\
+ \hline
+\TeX\ 引擎           & \texttt{tex}     & N/A \\
+\hologo{pdfTeX} 引擎 & \texttt{etex}    & \texttt{latex}\footnotemark \\
+                     & \texttt{pdftex}  & \texttt{pdflatex} \\
+\hologo{XeTeX} 引擎  & \texttt{xetex}   & \texttt{xelatex} \\
+ \hline
+\end{tabular}
+\end{center}
+\footnotetext{现今的发行版中 \texttt{latex} 命令也用 \hologo{pdfTeX} 引擎结合 \LaTeX\ 格式，输出扩展名为 DVI 的文档。}
+
+\subsection{\texttt{latex}命令}
+
+假使你的计算机上已经安装了 \LaTeX\ 依赖的程序和工具（安装方法在附录 \ref{app:install} 有简单介绍）。
+我们将源代码 \ref{code:hello-world} 拷贝到一个文本文件中，保存为 \texttt{helloworld.tex}。然后在命令行输入：
+\begin{verbatim}
+latex helloworld.tex
+\end{verbatim}
+（也可以输入不带扩展名的 \texttt{latex helloworld}）。
+
+此时命令行界面会闪过许多信息。如果一切正常，再行检查目录，会发现生成了 \texttt{hello\-world.dvi} 以及其它文件。
+这个扩展名为 DVI 的文件就是编译输出的文档。
+
+Linux 系统下，可以在命令行调用 \texttt{xdvi} 程序打开这个文档：
+\begin{verbatim}
+xdvi helloworld.dvi
+\end{verbatim}
+
+Windows 系统下大多预装了 yap 软件（Mik\TeX) 或 dviout 软件（\TeX\ Live），可以双击 \texttt{hello\-world.dvi} 打开它。
+
+\index{dvipdfmx@\texttt{dvipdfmx} 命令}
+要进一步生成现今流行的 PDF 文档格式，我们还需要用额外的命令将 DVI 转为 PDF：
+\begin{verbatim}
+dvipdfmx helloworld.dvi
+\end{verbatim}
+
+然后就可以用查看 PDF 的软件 （Adobe Reader / Foxit Reader 等）打开生成的 \texttt{hello\-world.pdf} 查看了。
+
+\subsection{\texttt{pdflatex} 和 \texttt{xelatex} 命令}
+
+\index{pdflatex@\texttt{pdflatex} 命令}
+这两个命令相比于 \texttt{latex} 命令更为方便，我们可以直接生成 PDF：
+\begin{verbatim}
+pdflatex helloworld.tex
+\end{verbatim}
+
+或者
+\begin{verbatim}
+xelatex helloworld.tex
+\end{verbatim}
+
+\index{xelatex@\texttt{xelatex} 命令}
+\texttt{xelatex} 命令（有时写作 \hologo{XeLaTeX}）有着各种新的特性，如能够直接支持使用系统预装的字体、
+原生支持 UTF-8 编码等。尤其是排版中文，\texttt{xelatex} 命令配合适当的宏包是现在最新、最方便的方式（详见 \ref{sec:chinese} 节）。
+
+\section{宏包和文档类}\label{sec:latex-pkgs}
+
+我们在 \ref{subsec:struct} 小节描述的 \LaTeX\ 源代码架构中已经见识了宏包和文档类。本节将仔细解释它们。
+
+\subsection{文档类}\label{subsec:classes}
+
+\pinyinindex{wendanglei}{文档类}
+文档类规定了 \LaTeX\ 源代码所要生成的文档的性质——普通文章、书籍、演示文稿、个人简历等等。\LaTeX\ 源代码的开头须用
+\cmd{document\-class}指定文档类：
+\begin{command}
+\cmd{documentclass}\oarg{options}\marg{class-name}
+\end{command}
+
+\clsindex{article,book,report}
+\clsindex{ctexart,ctexrep,ctexbook}
+其中 \Arg{class-name} 为文档类的名称，如 \LaTeX\ 提供的 \cls{article}, \cls{book}, \cls{report}，
+在其基础上派生的一些文档类如支持中文排版的 \cls{ctexart} / \cls{ctexbook} / \cls{ctexrep}，
+或者有其它功能的一些文档类，如 \cls{moderncv} / \cls{beamer} 等。
+\LaTeX\ 提供的基础文档类见表 \ref{tbl:ltx-classes}，前三个习惯上称为“标准文档类”。
+
+\begin{table}[htp]
+\caption{\LaTeX\ 提供的基础文档类}\label{tbl:ltx-classes}
+\hrule
+\begin{description}
+  \item [\texttt{article}] 文章格式的文档类，广泛用于科技论文、报告、说明文档等。
+  \item [\texttt{report}] 长篇报告格式的文档类，具有章节结构，用于综述、长篇论文、简单的书籍等。
+  \item [\texttt{book}] 书籍文档类，包含章节结构和前言、正文、后记等结构。
+\end{description}
+\hrule
+\begin{description}
+  \item [\texttt{proc}] 基于 \cls{article} 文档类的一个简单的学术文档模板。
+  \item [\texttt{slides}] 幻灯格式的文档类，使用无衬线字体。
+  \item [\texttt{minimal}] 一个极其精简的文档类，只设定了纸张大小和字号，
+  用作代码测试的最小工作示例（Minimal Working Example）。
+\end{description}
+\hrule
+\end{table}
+
+\pinyinindex{xuanxiang}{选项（宏包/文档类）}
+可选参数 \Arg{options} 为文档类指定选项，以全局地影响文档布局的参数，如字号、纸张大小、单双面等等。
+\LaTeX\ 的三个标准文档类可指定的选项见表 \ref{tbl:ltx-options}。
+
+比如调用 \cls{article} 文档类排版文章，指定纸张为 A4 大小，基本字号为 11pt，双面排版：
+\begin{verbatim}
+\documentclass[11pt,twoside,a4paper]{article}
+\end{verbatim}
+
+\begin{table}[htp]
+\caption{\LaTeX\ 的三个标准文档类可指定的选项}\label{tbl:ltx-options}
+\hrule
+\begin{description}
+\item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。缺省为 \texttt{10pt}。
+
+\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，默认为美式纸张 \texttt{letterpaper}。
+可指定选项还包括 \texttt{a5paper}，\texttt{b5paper}，\texttt{executivepaper} 和 \texttt{legalpaper}。
+
+\item[\texttt{fleqn}] \quad 令行间公式左对齐（缺省为居中）。
+
+\item[\texttt{leqno}] \quad 将公式编号放在左边（缺省为右边）。
+
+\item[\texttt{titlepage, notitlepage}] 指定标题命令 \cmd{maketitle} 是否生成单独的标题页。
+\cls{article} 缺省为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 缺省为 \texttt{titlepage}。
+
+\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。
+
+\item[\texttt{twoside, oneside}] \quad 指定单面/双面排版。双面排版时，奇偶页的页眉页脚、页边距不同。
+\cls{article} 和 \cls{report} 缺省为单面排版，\cls{book} 缺省为双面。
+
+\item[\texttt{landscape}] \quad 指定横向排版。缺省为纵向。
+
+\item[\texttt{openright, openany}] \quad 指定新的一章 \cmd{chapter} 是在奇数页（右侧）开头，还是直接紧跟着上一页开头。
+\cls{report} 缺省为 \texttt{openany}，\cls{book} 缺省为 \texttt{openright}。【对 \cls{article} 无效】
+\end{description}
+\hrule
+\end{table}
+
+\subsection{宏包}\label{subsec:packages}
+
+\cmdindex{usepackage}
+\pinyinindex{hongbao}{宏包}
+\pinyinindex{xuanxiang}{选项（宏包/文档类）}
+在编写 \LaTeX\ 源代码时，你时常会发现 \LaTeX\ 的基础功能不能满足你的需求，比如排版复杂的表格、插入图片、增加颜色甚至超链接等等。
+这时你需要依赖一些扩展来增强或补充 \LaTeX\ 的功能。这些扩展称为\textbf{宏包}。调用宏包的方法非常类似调用文档类的方法：
+\begin{command}
+\cmd{usepackage}\oarg{options}\marg{package-name}
+\end{command}
+
+\cmd{usepackage}的参数里可以使用不止一个宏包，多个宏包用逗号隔开。这种用法一般不要指定选项%
+\footnote{使用多个宏包时指定选项，相当于给每个宏包指定同样的选项。如果有某个宏包不能识别某个选项，则会出错。}：
+\begin{verbatim}
+% 一次性载入三个排版表格常用的宏包
+\usepackage{tabularx,longtable,multirow}
+\end{verbatim}
+
+附录 \ref{sec:pkg-list} 汇总了常用的一些宏包。我们在手册接下来的章节中，也会穿插介绍一些最常用的宏包的使用方法。
+
+在使用宏包和文档类之前，一定要首先确认它们是否安装在你的计算机中，否则 \cmd{use\-package} 等命令会报错误。
+详见附录 \ref{sec:pkg-manager} 。
+
+每个宏包（包括前面所说的文档类）都定义了许多命令和环境，或者修改了 \LaTeX\ 已有的命令和环境。
+为了明白它们的用法，需要查阅宏包和文档类的帮助手册。使用方法是在 Windows 命令提示符或者 Linux 终端下输入命令：
+\begin{command}
+\texttt{texdoc} \Arg{pkg-name}
+\end{command}
+
+其中 \Arg{pkg-name} 是宏包或者文档类的名称。更多获得帮助的方法见附录 \ref{sec:texdoc}。
+
+\section{\LaTeX\ 用到的文件一览}\label{sec:latex-files}
+
+除了我们需要编写的源代码 \texttt{.tex} 文件，我们还可能接触到形形色色的文件。本节简单介绍一下这些文件。
+
+每个宏包和文档类都是带特定扩展名的文件，除此之外也有一些文件出现于 \LaTeX\ 模板中：
+\begin{description}
+  \item[\texttt{.sty}] 宏包文件。宏包的名称就是去掉扩展名的文件名。
+  \item[\texttt{.cls}] 文档类文件。同样地，文档类名称就是文件名。
+  \item[\texttt{.bib}] \hologo{BibTeX} 参考文献数据库文件。
+  \item[\texttt{.bst}] \hologo{BibTeX} 用到的参考文献格式模板。详见 \ref{subsec:bibtex-use} 小节。
+\end{description}
+
+\LaTeX\ 在编译过程中生成相当多的辅助文件和日志。一些功能如交叉引用、参考文献、目录、索引等，需要先编译生成辅助文件，
+然后再次编译时读入辅助文件得到正确的结果，所以复杂的 \LaTeX\ 源代码可能要编译多次：
+\begin{description}
+  \item[\texttt{.log}] 排版引擎生成的日志文件，供排查错误使用。
+  \item[\texttt{.aux}] \LaTeX\ 生成的主辅助文件，记录交叉引用、目录、参考文献的引用等。
+  \item[\texttt{.toc}] \LaTeX\ 生成的目录记录文件。
+  \item[\texttt{.lof}] \LaTeX\ 生成的图片目录记录文件。
+  \item[\texttt{.lot}] \LaTeX\ 生成的表格目录记录文件。
+  \item[\texttt{.bbl}] \hologo{BibTeX} 生成的参考文献记录文件。
+  \item[\texttt{.blg}] \hologo{BibTeX} 生成的日志文件。
+  \item[\texttt{.idx}] \LaTeX\ 生成的供 makeindex 处理的索引记录文件。
+  \item[\texttt{.ind}] makeindex 处理 \texttt{.idx} 生成的格式化索引记录文件。
+  \item[\texttt{.ilg}] makeindex 生成的日志文件。
+  \item[\texttt{.out}] \pkg{hyperref} 宏包生成的 PDF 书签记录文件。
+\end{description}
+
+\section{文件的组织方式}\label{sec:latex-multi-files}
+
+当编写较大规模的 \LaTeX\ 源代码，如书籍、毕业论文等，你有理由将源代码分成若干个文件而不是写到一堆，比如很自然地每章写一个文件，
+可参考源代码 \ref{code:book-struct} 的写法。
+
+\cmdindex{include}
+\LaTeX\ 提供了命令 \cmd{include} 用来在源代码里插入文件：
+\begin{command}
+\cmd{include}\marg{filename}
+\end{command}
+\Arg{filename} 为文件名，如果和要编译的主文件不在一个目录中，则要加上相对或绝对路径，例如：
+\begin{verbatim}
+\include{chapters/a.tex} % 相对路径
+\include{/home/Bob/file.tex} % Linux 绝对路径
+\include{D:/file.tex} % Windows 绝对路径
+\end{verbatim}
+
+\Arg{filename} 可以不带扩展名，此时默认为 \texttt{.tex}；其它文件必须带扩展名。
+
+\cmdindex{input}
+值得注意的是 \cmd{include} 在读入 \Arg{filename} 之前会另起一页。有的时候我们并不需要这样，而是用 \cmd{input} 命令，它纯粹是把文件里的内容插入：
+\begin{command}
+\cmd{input}\marg{filename}
+\end{command}
+
+\cmdindex{includeonly}
+另外 \LaTeX\ 提供了一个 \cmd{includeonly} 命令来组织文件，用于\textbf{导言区}，指定只载入某些文件：
+\begin{command}
+\cmd{includeonly}\marg*{\Arg{filename1},\Arg{filename2},\ldots}
+\end{command}
+
+导言区使用了 \cmd{includeonly} 后，正文中不在其列表范围的 \cmd{include} 命令不会起效。
+
+\pkgindex{syntonly}
+最后介绍一个实用的工具宏包 \pkg{syntonly}。加载这个宏包后，在导言区使用 \cmd{syntaxonly} 命令，
+可令 \LaTeX\ 编译后不生成 DVI 或者 PDF 文档，只排查错误，编译速度会快不少：
+\begin{verbatim}
+\usepackage{syntonly}
+\syntaxonly
+\end{verbatim}
+
+如果想生成文档，则将 \cmd{syntaxonly} 命令那一行用 \texttt\% 注释掉即可。
+
+\endinput

@@ -1,0 +1,1021 @@
+\chapter{文档元素}\label{chap:elements}
+\addtocontents{los}{\protect\addvspace{10pt}}
+
+\begin{intro}
+在知道了如何输入文字后，我们将在本章了解一个结构化的文档所依赖的各种元素——章节、目录、列表、图表、交叉引用、脚注等等。
+\end{intro}
+
+\section{章节和目录}\label{sec:secs}
+
+\subsection{章节标题}\label{subsec:secs}
+
+\cmdindex{section,subsection,subsubsection,paragraph,subparagraph}
+一篇结构化的、条理清晰文档一定是层次分明的，通过不同的命令分割为章、节、小节。\LaTeX\ 的三个标准文档类 \cls{article}、\cls{report} 和 \cls{book}%
+\footnote{千万注意是\textbf{标准文档类}，其它文档类可能没有定义或只定义了一部分，如 \cls{beamer} 或 \cls{moderncv} 等。}%
+提供了一系列命令，用以划分章节、生成章节标题并自动编号：
+\begin{command}
+\cmd{section}\marg{title} \quad
+\cmd{subsection}\marg{title} \quad
+\cmd{subsubsection}\marg{title} \\
+\cmd{paragraph}\marg{title} \quad
+\cmd{subparagraph}\marg{title}
+\end{command}
+
+\cmdindex{part}
+\cmd{part} 命令用以将整个文档分割为大的分块，但不影响 \cmd{section} 等的编号：
+\begin{command}
+\cmd{part}\marg{title}
+\end{command}
+
+\cmdindex{chapter}
+\clsindex{book,report}
+\cls{book} 和 \cls{report} 提供了章一级的结构：
+\begin{command}
+\cmd{chapter}\marg{title}
+\end{command}
+
+上述命令除了生成带编号的标题之外，还向目录中添加条目，并影响页眉页脚的内容（详见 \ref{sec:pagestyle} 节）。每个命令有两种变体：
+\begin{itemize}
+  \item 带可选参数的变体：\cmd{section}\oarg{short title}\marg{title}\par
+  标题使用 \Arg{title} 参数，在目录和页眉页脚中使用 \Arg{short title} 参数；
+  \item 带星号的变体：\cmd{section*}\marg{title}\par
+  标题不带编号，也不生成目录项和页眉页脚。
+\end{itemize}
+
+\pkgindex{titlesec}
+\LaTeX\ 并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助手册。
+
+\subsection{目录}\label{sec:toc}
+
+\cmdindex{tableofcontents}
+在 \LaTeX\ 中生成目录非常容易，只需在合适的地方使用命令：
+\begin{command}
+\cmd{tableofcontents}
+\end{command}
+
+正确生成目录项，一般需要多次编译源代码。
+
+\cmdindex{addcontentsline}
+有时我们使用了 \cmd{chapter*} 或 \cmd{section*} 这样不生成目录项的命令，而又想手动生成该章节的目录，可以在标题命令后面使用：
+\begin{command}
+\cmd{addcontentsline}\marg*{toc}\marg{level}\marg{title}
+\end{command}
+
+其中 \Arg{level} 为章节层次 \texttt{chapter} 或 \texttt{section} 等，\Arg{title} 为需要生成目录项的章节标题。
+
+\subsection{文档结构的划分}\label{sec:matters}
+
+\cmdindex{appendix}
+所有标准文档类都提供了一个 \cmd{appendix} 命令将正文和附录分开%
+\footnote{有的地方可能写作 \cmd{begin} \marg*{appendix} \ldots \cmd{end} \marg*{appendix} 这样，
+虽然有效，但并不规范，只要使用 \cmd{appendix} 命令就够了。}，
+使用 \cmd{appendix} 后，最高一级章节改为使用拉丁字母编号，从 A 开始。
+
+\clsindex{book}
+\cmdindex{frontmatter,mainmatter,backmatter}
+\cls{book} 文档类还提供了前言、正文、后记结构的划分命令：
+\begin{description}
+  \item[\cmd{frontmatter}] 前言部分，页码为小写罗马字母格式；其后的章节不编号（但生成页眉页脚和目录项）。
+  \item[\cmd{mainmatter}] 正文部分，页码改回数字格式，并从 1 开始计数；其后的章节正常编号。
+  \item[\cmd{backmatter}] 后记部分，页码继续正常计数，格式不变；其后的章节不编号，类似 \cmd{frontmatter} 命令。
+\end{description}
+
+\cmdindex{include}
+以上三个命令还可和 \cmd{appendix} 命令结合，生成有前言、正文、附录、后记四部分的文档。
+源代码 \ref{code:book-struct} 结合 \ref{sec:latex-multi-files} 节的 \cmd{include} 命令和其它一些命令示意了一份完整的文档结构。
+
+\begin{sourcecode}[hbp]
+\begin{Verbatim}
+\documentclass[...]{book}
+% 导言区，加载宏包和各项设置
+\usepackage{...}
+% 此处示意对参考文献和索引的设置
+\usepackage{makeidx}
+\makeindex
+\bibliographystyle{...}
+
+\begin{document}
+\frontmatter
+\maketitle % 标题页
+\include{preface} % 前言章节 preface.tex 
+\tableofcontents
+
+\mainmatter
+\include{chapter1} % 第一章 chapter1.tex
+\include{chapter2} % 第二章 chapter2.tex
+...
+\appendix
+\include{appendixA} % 附录 A appendixA.tex
+...
+
+\backmatter
+\include{prologue} % 后记 prologue.tex
+\bibliography{...} % 利用 BibTeX 工具生成参考文献
+\printindex        % 利用 makeindex 工具生成索引
+\end{document}
+\end{Verbatim}
+\caption{\cls{book} 文档类的文档结构示例。}\label{code:book-struct}
+\end{sourcecode}
+
+\section{标题页}\label{sec:titlepage}
+
+\cmdindex{title,author,date,today}
+\LaTeX\ 支持生成简单的标题页。首先需要给定标题和作者等信息：
+\begin{command}
+\cmd{title}\marg{title} \quad
+\cmd{author}\marg{author} \quad
+\cmd{date}\marg{date}
+\end{command}
+其中前两个命令是必须的，\cmd{date} 命令可选。\LaTeX\ 还提供了一个 \cmd{today} 命令自动生成当前日期，
+可用在 \cmd{date} 的参数里，或者别的地方。
+
+\cmdindex{thanks}
+在 \cmd{title}、\cmd{author} 等命令内可以使用 \cmd{thanks} 命令生成标题页的脚注，如：
+\begin{verbatim}
+\author{Mary\thanks{E-mail:*****@***.com}}
+\end{verbatim}
+
+\cmdindex{maketitle}
+\pinyinindex{biaotiye}{标题页}
+在信息给定后，就可以使用
+\begin{command}
+\cmd{maketitle}
+\end{command}
+生成一个简单的标题页了。\cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
+可在 \cmd{document\-class} 命令中指定 \texttt{titlepage / notitlepage} 选项修改。
+
+\section{交叉引用}\label{sec:crossref}
+
+\cmdindex{label}
+交叉引用是 \LaTeX\ 强大的自动排版功能的体现之一。在能够被交叉引用的地方，如章节、公式、图表、定理等位置使用 \cmd{label} 命令：
+\begin{command}
+\cmd{label}\marg{label-name}
+\end{command}
+
+\cmdindex{ref,pageref}
+之后可以在别处使用 \cmd{ref} 或 \cmd{pageref} 命令，分别生成交叉引用的编号和页码：
+\begin{command}
+\cmd{ref}\marg{label-name} \quad
+\cmd{pageref}\marg{label-name}
+\end{command}
+\begin{example}
+A reference to this subsection
+\label{sec:this} looks like:
+``see section~\ref{sec:this} on
+page~\pageref{sec:this}.''
+\end{example}
+
+为了生成正确的交叉引用，一般也需要多次编译源代码。
+
+\cmd{label} 命令可用于记录各种类型的交叉引用，使用位置分别为：
+\begin{description}
+  \item[章节标题] 在章节标题命令 \cmd{section} 等之后紧接着使用。
+  \item[行间公式] 单行公式在公式内任意位置使用；多行公式在每一行公式的任意位置使用。
+  \item[有序列表] 在 \env{enumerate} 环境的每个 \cmd{item} 命令之后、下一个 \cmd{item} 命令之前任意位置使用。
+  \item[图表标题] 在图表标题命令 \cmd{caption} 之后紧接着使用。
+  \item[定理环境] 在定理环境内部任意位置使用。
+\end{description}
+
+在使用不记编号的命令形式（\cmd{section*}、\cmd{caption*}、带可选参数的 \cmd{item} 命令等）时不要使用 \cmd{label} 命令，
+否则生成的引用编号不正确。
+
+\section{脚注}\label{sec:footnote}
+
+\cmdindex{footnote}
+使用 \cmd{footnote} 命令可以在页面底部生成一个脚注：
+\begin{command}
+\cmd{footnote}\marg{footnote}
+\end{command}
+
+假如我们输入以下文字和命令：
+\begin{verbatim}
+“天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。”\footnote{出自《千字文》。}
+\end{verbatim}
+
+在正文中则为：%
+“天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。”\footnote{出自《千字文》。}
+
+\cmdindex{footnotemark,footnotetext}
+有些情况下（比如在表格环境、盒子内）使用 \cmd{footnote} 并不能正确生成脚注。我们可以分两步进行，
+先使用 \cmd{foot\-note\-mark} 为脚注计数，再在合适的位置用 \cmd{foot\-note\-text} 生成脚注。
+
+比如：
+\begin{verbatim}
+\begin{tabular}{l}
+\hline
+“天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。”\footnotemark \\
+\hline
+\end{tabular}
+\footnotetext{表格里的名句出自《千字文》。}
+\end{verbatim}
+
+效果为：
+
+\leavevmode\begin{tabular}{l}
+\hline
+“天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。”\footnotemark \\
+\hline
+\end{tabular}
+\footnotetext{表格里的名句出自《千字文》。}
+
+\section{特殊环境}\label{sec:envs}
+
+\subsection{列表}\label{subsec:lists}
+
+\envindex{enumerate,itemize}
+\cmdindex{item}
+\LaTeX\ 提供了基本的有序和无序列表环境 \env{enumerate} 和 \env{itemize}，两者的用法很类似，都用 \cmd{item} 标明每个列表项。
+\env{enumerate} 环境会自动对列表项编号。
+\begin{command}
+\cmd{begin}\marg*{enumerate} \\
+\cmd{item} \ldots \\
+\cmd{end}\marg*{enumerate}
+\end{command}
+
+其中 \cmd{item} 可带一个可选参数，将有序列表的计数或者无序列表的符号替换成自定义的符号。
+列表可以嵌套使用，最多嵌套四层。
+\begin{example}
+\begin{enumerate}
+  \item An item. 
+  \begin{enumerate}
+    \item A nested item.
+    \item[*] A starred item.
+    \item Another item. \label{itref}
+  \end{enumerate}
+  \item Go back to upper level.
+  \item Reference(\ref{itref}).
+\end{enumerate}
+\end{example}
+
+\begin{example}
+\begin{itemize}
+  \item An item.
+  \begin{itemize}
+    \item A nested item.
+    \item[+] A `plus' item.
+    \item Another item.
+  \end{itemize}
+  \item Go back to upper level.
+\end{itemize}
+\end{example}
+
+\envindex{description}
+关键字环境 \env{description} 的用法与以上两者类似，不同的是 \cmd{item} 后的可选参数用来写关键字，以粗体显示，一般是必填的：
+\begin{command}
+\cmd{begin}\marg*{description} \\
+  \cmd{item}\oarg{item title} \ldots \\
+\cmd{end}\marg*{description}
+\end{command}
+
+\begin{example}
+\begin{description}
+  \item[Enumerate] Numbered list.
+  \item[Itemize] Non-numbered list.
+\end{description}
+\end{example}
+
+默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，而要用到 \pkg{enumitem} 宏包。有兴趣的读者可参考其帮助手册。
+
+\subsection{对齐环境}\label{subsec:flush}
+
+\envindex{center,flushleft,flushright}
+\env{center}、\env{flush\-left} 和 \env{flush\-right} 环境分别用于生成居中、左对齐和右对齐的文本环境。
+\begin{command}
+\cmd{begin}\marg*{center}
+\ldots
+\cmd{end}\marg*{center}
+\end{command}
+
+\begin{example}
+\begin{center}
+Centered text using a
+\verb|center| environment.
+\end{center}
+\begin{flushleft}
+Left-aligned text using a
+\verb|flushleft| environment.
+\end{flushleft}
+\begin{flushright}
+Right-aligned text using a
+\verb|flushright| environment.
+\end{flushright}
+\end{example}
+
+\cmdindex{centering,raggedleft,raggedright}
+除此之外，还可以用以下命令直接改变文字的对齐方式：
+\begin{command}
+\cmd{centering} \quad
+\cmd{raggedright} \quad
+\cmd{raggedleft}
+\end{command}
+
+\begin{example}
+\centering
+Centered text paragraph.
+
+\raggedright
+Left-aligned text paragraph.
+
+\raggedleft
+Right-aligned text paragraph.
+\end{example}
+
+三个命令和对应的环境经常被误用，有直接用所谓 \cmd{flushleft} 命令或者 \env{raggedright} 环境的，都是不合理的用法（即使它们可能有效）。
+有一点可以将两者区分开来：\env{center} 等环境会在上下文产生一个额外间距，而 \cmd{centering} 等命令不产生，只是改变对齐方式。
+比如在浮动体环境 \env{table} 或 \env{figure} 内实现居中对齐，用 \cmd{centering} 命令即可，没必要再用 \env{center} 环境。
+
+\subsection{引用环境}\label{subsec:quote}
+
+\envindex{quote,quotation}
+\LaTeX\ 提供了两种引用的环境：\env{quote} 用于引用较短的文字，首行不缩进；\env{quotation} 用于引用若干段文字，首行缩进。
+引用环境较一般文字有额外的左右缩进。
+\begin{example}
+Francis Bacon says:
+\begin{quote}
+Knowledge is power.
+\end{quote}
+\end{example}
+
+\begin{example}
+《木兰诗》：
+\begin{quotation}
+万里赴戎机，关山度若飞。
+朔气传金柝，寒光照铁衣。
+将军百战死，壮士十年归。
+
+归来见天子，天子坐明堂。
+策勋十二转，赏赐百千强。……
+\end{quotation}
+\end{example}
+
+\envindex{verse}
+\env{verse} 用于排版诗歌，与 \env{quotation} 恰好相反，\env{verse} 是首行悬挂缩进的。
+\begin{example}
+Rabindranath Tagore's short poem:
+\begin{verse}
+Beauty is truth’s smile 
+when she beholds her own face in 
+a perfect mirror.
+\end{verse}
+\end{example}
+
+\subsection{摘要环境}\label{subsec:abstract}
+
+\envindex{abstract}
+摘要环境 \env{abstract} 只在 \cls{article} 和 \cls{report} 文档类可用，一般用于紧跟 \cmd{maketitle} 命令之后介绍文档的摘要。
+如果文档类给定了 \texttt{titlepage} 选项，则单独成页；反之相当于一个小标题加一个 \env{quotation} 环境%
+（双栏下相当于 \cmd{section*} 定义的一节）。
+
+\subsection{代码环境}\label{subsec:verbatim}
+
+\envindex{verbatim}
+有时我们需要将一段代码原样转义输出，这就要用到代码环境 \env{verbatim}，它以等宽字体排版代码，回车和空格也分别起到换行和空位的作用；
+带星号的版本更进一步将空格显示成 \textvisiblespace 。
+\begin{example}
+\begin{verbatim}
+#include <iostream>
+int main()
+{
+  std::cout << "Hello, world!"
+            << std::endl;
+  return 0;
+}
+\end{verbatim}
+\end{example}
+
+\begin{example}
+\begin{verbatim*}
+for (int i=0; i<4; ++i)
+  printf("Number %d\n",i);
+\end{verbatim*}
+\end{example}
+
+\cmdindex{verb}
+要排版简短的代码或关键字，可使用 \cmd{verb} 命令：
+\begin{command}
+\cmd{verb}\Arg{delim}\Arg{code}\Arg{delim}
+\end{command}
+
+\Arg{delim} 标明代码的分界位置，不能是字母、空格或星号，前后必须一致，可任意选择使得不与代码本身冲突，习惯上使用 \texttt| 符号。
+
+同 \env{verbatim} 环境，\cmd{verb} 后也可以带一个星号，以显示空格：
+\begin{example}
+\verb|\LaTeX| \\
+\verb+(a || b)+ \verb*+(a || b)+
+\end{example}
+
+\cmd{verb} 命令对符号的处理比较复杂，一般\textbf{不能用在其它命令的参数里}，否则多半会出错。
+
+\pkg{verbatim} 宏包优化了 \env{verbatim} 环境的内部命令，并提供了 \cmd{verbatiminput} 命令用来直接读入文件生成代码环境。
+\pkg{fancyvrb} 宏包提供了可定制格式的 \env{Verbatim} 环境；\pkg{listings} 宏包更进一步，可生成关键字高亮的代码环境，
+支持各种程序设计语言的语法和关键字。详情请参考各自的帮助手册。
+
+\section{表格}\label{sec:tabular}
+
+\pinyinindex{biaoge}{表格|(}
+\LaTeX\ 里排版表格不如 Word 等所见即所得的工具简便和自由，不过对于不太复杂的表格来讲，完全能够胜任。
+
+\envindex{tabular}
+\cmdindex{hline}
+\index{&@\texttt\& (\textit{单元格/对齐})}
+\index{\@\crcmd\ (\textit{换行})}
+排版表格最基本的 \env{tabular} 环境用法为：
+\begin{command}
+\cmd{begin}\marg*{tabular}\marg{column-spec}\\
+ \Arg{item1} \texttt\& \Arg{item2} \texttt\& \ldots\ \crcmd \\
+ \cmd{hline} \\
+ \Arg{item1} \texttt\& \Arg{item2} \texttt\& \ldots\ \crcmd \\
+\cmd{end}\marg*{tabular}
+\end{command}
+其中 \Arg{column-spec} 是列格式标记，在接下来的内容将仔细介绍；\texttt\& 用来分隔单元格；
+\crcmd\ 用来换行；\cmd{hline} 用来在行与行之间绘制横线。
+
+直接使用 \env{tabular} 环境的话，会\textbf{和周围的文字混排}。\env{tabular} 环境可带一个可选参数控制垂直对齐（默认是垂直居中）：
+\begin{example}
+\begin{tabular}{|c|}
+  center-\\ aligned \\
+\end{tabular},
+\begin{tabular}[t]{|c|}
+  top-\\ aligned \\
+\end{tabular},
+\begin{tabular}[b]{|c|}
+  bottom-\\ aligned\\
+\end{tabular} tabulars.
+\end{example}
+
+但是通常情况下我们不这么用，\env{tabular} 环境一般会放置在 \env{table} 浮动体环境中，并用 \cmd{caption} 命令加标题。
+
+\subsection{列格式}\label{subsec:tabular-cols}
+
+\LaTeX\ 表格中基本的列格式如下表：
+\begin{center}
+\begin{tabular}{lp{24em}}
+ \hline
+ 列格式 & 说明 \\
+ \hline
+ \ttfamily l/c/r          & 单元格内容左对齐/居中/右对齐，不折行 \\
+ \ttfamily p\marg{width}  & 单元格宽度固定为 \Arg{width}，可自动折行 \\
+ \ttfamily |              & 绘制竖线 \\
+ \ttfamily @\marg{string} & 自定义内容 \Arg{string} \\
+ \hline
+\end{tabular}
+\end{center}
+
+\begin{example}
+\begin{tabular}{lcr|p{6em}}
+  \hline
+  left & center & right 
+       & par box with fixed width\\
+  L    & C      & R     & P \\
+ \hline
+\end{tabular}
+\end{example}
+
+\texttt{@} 格式可在单元格前后插入任意的文本，但同时它也消除了单元格前后额外添加的间距。
+\texttt{@} 格式可以适当使用以充当“竖线”。特别地，\texttt{@}\marg*{} 可直接用来消除单元格前后的间距：
+\begin{example}
+\begin{tabular}{@{} r@{:}lr @{}}
+  \hline
+  1  & 1 & one \\
+  11 & 3 & eleven \\
+  \hline
+\end{tabular}
+\end{example}
+
+另外 \LaTeX\ 还提供了简便的将格式参数重复的写法 \texttt*\marg{n}\marg{column-spec}，比如以下两种写法是等效的：
+\begin{verbatim}
+\begin{tabular}{|c|c|c|c|c|p{4em}|p{4em}|}
+\begin{tabular}{|*{5}{c|}*{2}{p{4em}|}}
+\end{verbatim}
+
+\pkgindex{array}
+有时需要为整列修饰格式，比如整列改变为粗体，如果每个单元格都加上 \cmd{bfseries} 命令会比较麻烦。
+\pkg{array} 宏包提供了辅助格式 \texttt> 和 \texttt<，用于给列格式前后加上修饰命令：
+\begin{example}
+\begin{tabular}{>{\itshape}r<{*}l}
+  \hline
+  italic & normal \\
+  column & column \\
+  \hline
+\end{tabular}
+\end{example}
+
+辅助格式甚至支持插入 \cmd{centering} 等命令改变 \texttt{p} 列格式的对齐方式，一般还要加额外的命令\cmd{array\-back\-slash} 以免出错%
+\footnote{\cmd{centering} 等对齐命令会破坏表格环境里 \crcmd\ 换行命令的定义，
+\cmd{array\-back\-slash} 用来恢复之。如果不加 \cmd{array\-back\-slash} 命令，
+也可以用 \cmd{tabular\-newline} 命令代替原来的 \crcmd\ 实现表格换行。}：
+\begin{example}
+\begin{tabular}
+{>{\centering\arraybackslash}p{9em}}
+  \hline
+  Some center-aligned long text. \\ 
+  \hline
+\end{tabular}
+\end{example}
+
+\subsection{列宽}\label{subsec:colwidth}
+
+在控制列宽方面，\LaTeX\ 表格有着明显的不足：\texttt{l/c/r} 格式的列宽是由文字内容的自然宽度决定的，
+而 \texttt{p} 格式给定了列宽却不好控制对齐（需要 \pkg{array} 宏包辅助），
+更何况列与列之间通常还有间距，所以直接生成给定总宽度的表格并不容易。
+
+\envindex{tabular*}
+\LaTeX\ 本身提供了 \env{tabular*} 环境用来排版定宽表格，但是不太方便使用，
+比如要用到 \texttt{@} 格式插入额外命令，令单元格之间的间距为 \cmd{fill}，但即使这样仍然有瑕疵：
+\begin{example}
+\begin{tabular*}{14em}%
+{@{\extracolsep{\fill}}|c|c|c|c|}
+  \hline
+  A & B & C & D \\ \hline
+  a & b & c & d \\ \hline
+\end{tabular*}
+\end{example}
+
+\pkgindex{tabularx}
+\envindex[tabularx]{tabularx}
+\pkg{tabularx} 宏包为我们提供了方便的解决方案。它引入了一个 \texttt{X} 格式，类似 \texttt{p} 格式，
+不过会根据表格宽度自动计算列宽，多个 \texttt{X} 格式平均分配列宽。\texttt{X} 格式也可以用 \pkg{array} 里的辅助格式修饰对齐方式：
+\begin{example}
+\begin{tabularx}{14em}%
+{|*{4}{>{\centering\arraybackslash}X|}}
+  \hline
+  A & B & C & D \\ \hline
+  a & b & c & d \\ \hline
+\end{tabularx}
+\end{example}
+
+\subsection{横线}\label{subsec:hline}
+
+\cmdindex{hline,cline}
+我们已经在之前的例子见过许多次绘制表格线的 \cmd{hline} 命令。另外 \cmd{cline}\marg*{\Arg{i}-\Arg{j}} 用来绘制跨越部分单元格的横线：
+\begin{example}
+\begin{tabular}{|c|c|c|}
+  \hline
+  4 & 9 & 2 \\ \cline{2-3}
+  3 & 5 & 7 \\ \cline{1-1}
+  8 & 1 & 6 \\ \hline
+\end{tabular}
+\end{example}
+
+\pkgindex{booktabs}
+\cmdindex[booktabs]{toprule,midrule,bottomrule}
+在科技论文排版中广泛应用的表格形式是三线表，形式干净简明。
+三线表由 \pkg{booktabs} 宏包支持，它提供了 \cmd{toprule}、\cmd{midrule} 和 \cmd{bottomrule} 命令用以排版三线表的三条线，
+除此之外，最好不要用其它横线以及竖线：
+\begin{example}
+\begin{tabular}{cccc}
+  \toprule
+           & 1 & 2 & 3 \\
+  \midrule
+  Alphabet & A & B & C \\
+  Roman    & I & II& III \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+\subsection{合并单元格}\label{subsec:tabular-multicol}
+
+\LaTeX\ 是一行一行排版表格的，横向合并单元格较为容易，由 \cmd{multi\-column} 命令实现：
+\begin{command}
+\cmd{multicolumn}\marg{n}\marg{column-spec}\marg{item}
+\end{command}
+其中 \Arg{n} 为要合并的列数，\Arg{column-spec} 为合并单元格后的列格式，只允许出现一个 \texttt{l/c/r} 或 \texttt{p} 格式。
+如果合并前的单元格前后带表格线 \texttt|，合并后的列格式也要带 \texttt| 以使得表格的竖线一致。
+\begin{example}
+\begin{tabular}{|c|c|c|}
+  \hline
+  1 & 2 & Center \\ \hline
+  \multicolumn{2}{|c|}{3} &
+  \multicolumn{1}{r|}{Right} \\ \hline
+  4 & \multicolumn{2}{c|}{C} \\ \hline
+\end{tabular}
+\end{example}
+
+上面的例子还体现了，形如 \cmd{multicolumn}\marg*{1}\marg{column-spec}\marg{item} 的命令\textbf{可以用来修改某一个单元格的列格式。}
+
+\pkgindex{multirow}
+\cmdindex[multirow]{multirow}
+纵向合并单元格需要用到 \pkg{multirow} 宏包提供的 \cmd{multirow} 命令：
+\begin{command}
+\cmd{multirow}\marg{n}\marg{width}\marg{item}
+\end{command}
+\Arg{width} 为合并后单元格的宽度，可以填 \texttt{*} 以使用自然宽度。
+
+我们看一个结合 \cmd{cline}、\cmd{multi\-column} 和 \cmd{multi\-row} 命令的例子：
+\begin{example}
+\begin{tabular}{ccc}
+  \hline
+  \multirow{2}{*}{Item} & 
+    \multicolumn{2}{c}{Value} \\
+  \cline{2-3}
+    & First & Second \\ \hline
+  A & 1     & 2 \\ \hline
+\end{tabular}
+\end{example}
+
+\subsection{嵌套表格}\label{subsec:tabular-embed}
+
+相对于合并单元格，拆分单元格对于 \LaTeX\ 来说并非易事。在单元格中嵌套一个小表格可以起到“拆分单元格”的效果。
+在以下的例子中，注意要用 \cmd{multi\-column} 命令配合 \texttt{@\{\}} 格式把单元格的额外边距去掉，使得嵌套的表格线能和外层的表格线正确相连：
+
+\begin{example}
+\begin{tabular}{|c|l|c|}
+ \hline
+ a & bbb & c \\ \hline
+ a & \multicolumn{1}{@{}l@{}|}
+ {\begin{tabular}{c|c}
+   a & b \\ \hline 
+   aa & bb \\
+  \end{tabular}}
+       & c \\ \hline
+ a & b & c \\ \hline
+\end{tabular}
+\end{example}
+
+\pkgindex{makecell}
+如果不要求画横线，并且只需要在垂直方向“拆分单元格”的话，\pkg{makecell} 宏包提供的 \cmd{make\-cell} 命令是一个简单的解决方案：
+
+\begin{example}
+\begin{tabular}{|c|c|}
+ \hline
+ a & \makecell{d1 \\ d2} \\
+ \hline
+ b & c \\
+ \hline
+\end{tabular}
+\end{example}
+
+\subsection{行距控制}\label{subsec:tabular-colht}
+
+\cmdindex{arraystretch}
+\LaTeX\ 生成的表格看起来通常比较紧凑。修改参数 \cmd{array\-stretch} 可以得到行距更加宽松的表格
+（相关命令参考 \ref{sec:newcommands} 节）：
+\begin{example}
+\renewcommand\arraystretch{1.8}
+\begin{tabular}{|c|}
+  \hline
+  Really loose \\ \hline
+  tabular rows.\\ \hline
+\end{tabular}
+\end{example}
+
+\index{\@\crcmd\ (\textit{换行})}
+另一种增加间距的办法是给换行命令 \crcmd\ 添加可选参数，在这一行下面加额外的间距，适合用于在行间不加横线的表格：
+\begin{example}
+\begin{tabular}{c}
+  \hline
+  Head lines \\[6pt]
+  tabular lines \\
+  tabular lines \\ \hline
+\end{tabular}
+\end{example}
+
+但是这种换行方式的存在导致了一个缺陷——\textbf{表格的首个单元格不能直接使用中括号 \texttt{[]}}，
+否则 \crcmd\ 往往会将下一行的中括号当作自己的可选参数，因而出错。如果要使用中括号，应当放在花括号 \marg*{} 里面。
+或者也可以选择将换行命令写成 \crcmd\texttt{[0pt]}。
+
+\pinyinindex{biaoge}{表格|)}
+
+\section{图片}\label{sec:figures}
+
+\pkgindex{graphicx}
+
+\LaTeX\ 本身不支持插图功能，需要由 \pkg{graphicx} 宏包辅助支持。
+
+使用 \texttt{latex + dvipdfmx} 编译命令时，调用 \pkg{graphicx} 宏包时要给定 \texttt{dvipdfmx} 选项%
+\footnote{早期常使用 \texttt{latex + dvips} 组合命令，后者将 \texttt{.dvi} 文件转为 \texttt{.ps} 文件（PostScript），
+可进一步通过 \texttt{ps2pdf} 工具生成 PDF。\texttt{dvips} 和 \texttt{dvipdfmx} 在图形、颜色、超链接等功能的实现上有差别，而 \LaTeX\ 无法识别
+用户是用 \texttt{dvips} 还是 \texttt{dvipdfmx}，所以要给定选项（缺省为 \texttt{dvips}）。
+\ref{sec:hyperlinks} 节中的 \pkg{hyperref} 宏包同理。}；而使用 \texttt{pdflatex} 或 \texttt{xelatex} 命令编译时不需要。
+
+读者可能听说过“\LaTeX\ 只能插入 \texttt{.eps} 格式的图片，需要把 \texttt{.jpg} 转成 \texttt{.eps} 格式”的观点。
+\LaTeX\ 发展到今天，这个观点早已过时。事实上不同的编译命令支持的图片格式范围各异，见表 \ref{tbl:figure-format}。
+这个表格也能解答诸如“为什么 \texttt{.eps} 格式图片在 \texttt{pdflatex} 编译命令下出错”之类的问题。本表格也再一次说明，使用
+\texttt{xelatex} 命令是笔者最推荐的方式。
+
+\begin{table}[htp]
+\centering
+\caption{各种编译方式支持的主流图片格式。}\label{tbl:figure-format}
+\begin{tabular}{l>{\ttfamily}l>{\ttfamily}l}
+ \hline
+ 格式  & 矢量图 & 位图 \\
+ \hline
+ \texttt{latex + dvipdfmx}           & .eps      & n/a \\
+ \quad $\llcorner$（调用 \pkg{bmpsize} 宏包 ）   & .eps .pdf     & .jpg .png .bmp \\[.3\baselineskip]
+ \texttt{pdflatex}                   & .pdf      & .jpg .png \\
+ \quad $\llcorner$（调用 \pkg{epstopdf} 宏包）   & .pdf .eps & .jpg .png \\[.3\baselineskip]
+ \texttt{xelatex}                    & .pdf .eps & .jpg .png .bmp \\
+ \hline
+\end{tabular}
+\begin{quote}\footnotesize
+注：在较新的 \TeX\ 发行版中，\texttt{latex + dvipdfmx} 和 \texttt{pdf\-latex} 命令可不依赖宏包，支持原来需要宏包扩展的图片格式
+（但 \texttt{pdf\-latex} 命令仍不支持除 \texttt{.jpg} 和 \texttt{.png} 以外的位图）。
+\end{quote}
+\end{table}
+
+\cmdindex[graphicx]{includegraphics}
+在调用了 \pkg{graphicx} 宏包以后，就可以使用 \cmd{include\-graphics} 命令加载图片了：
+\begin{command}
+\cmd{includegraphics}\oarg{options}\marg{filename}
+\end{command}
+
+\cmdindex[graphicx]{graphicspath}
+其中 \Arg{filename} 为图片文件名，与使用 \cmd{include} 命令类似，文件名有时需要使用相对路径或绝对路径（见 \ref{sec:latex-multi-files} 节）。
+图片文件的扩展名可写可不写。
+
+另外 \pkg{graphicx} 宏包还提供了 \cmd{graphics\-path} 命令，用于声明一个或多个图片文件存放的目录，
+使用这些目录里的图片时可不用写路径：
+\begin{verbatim}
+% 假设主要的图片放在 figures 子目录下，标志放在 logo 子目录下
+\graphicspath{{figures/}{logo/}}
+\end{verbatim}
+
+\cmd{includegraphics} 命令的可选参数 \Arg{options} 支持 \Arg{key}=\Arg{value} 形式赋值，常用的选项如下：
+\begin{center}
+\begin{tabular}{lp{18em}}
+ \hline
+ 选项 & 含义 \\
+ \hline
+ width=\Arg{width}    &  将图片缩放到宽度为 \Arg{width} \\
+ height=\Arg{height}  &  将图片缩放到高度为 \Arg{height} \\
+ scale=\Arg{scale}    &  将图片相对于原尺寸缩放 \Arg{scale} 倍 \\
+ angle=\Arg{angle}    &  令图片逆时针旋转 \Arg{angle} 度 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\section{盒子}\label{sec:box}
+
+盒子是 \LaTeX\ 排版的基础单元，虽然解释上去有些抽象：每一行是一个盒子，
+里面的文字从左到右依次排列；每一页也是一个盒子，各行文字从上到下依次排布……颇有一些活字印刷术的味道。
+
+不管如何，\LaTeX\ 提供了一些实用的命令让我们生成一些有用的盒子。
+
+\subsection{水平盒子}\label{subsec:mbox}
+
+\cmdindex{mbox,makebox}
+生成水平盒子的命令如下：
+\begin{command}
+\cmd{mbox}\marg*{\ldots} \\
+\cmd{makebox}\oarg{width}\oarg{align}\marg*{\ldots}
+\end{command}
+
+\cmd{mbox} 生成一个基本的水平盒子，内容只有一行（除非嵌套下文的垂直盒子），不允许分段。
+外表看上去，\cmd{mbox} 的内容与正常的文本无二，不过断行时文字不会从盒子里断开。
+
+\cmd{makebox} 更进一步，可以加上可选参数用于控制盒子的宽度 \Arg{width}，以及内容的对齐方式 \Arg{align}，
+可选居中 \texttt{c}（默认值）、左对齐 \texttt{l}、右对齐 \texttt{r} 和分散对齐 \texttt{s}%
+\footnote{分散对齐方式强行拉开单词的间距，往往会报 \texttt{Underfull} \cmd{hbox} 的消息。}。
+\begin{example}
+|\mbox{Test some words.}|\\
+|\makebox[10em]{Test some words.}|\\
+|\makebox[10em][l]{Test some words.}|\\
+|\makebox[10em][r]{Test some words.}|\\
+|\makebox[10em][s]{Test some words.}|
+\end{example}
+
+\subsection{带框的水平盒子}\label{subsec:fbox}
+
+\cmdindex{fbox,framebox}
+\cmd{fbox} 和 \cmd{framebox} 让我们可以为水平盒子添加边框。使用的语法与 \cmd{mbox} 和 \cmd{makebox} 一模一样：
+\begin{command}
+\cmd{fbox}\marg*{\ldots} \\
+\cmd{framebox}\oarg{width}\oarg{align}\marg*{\ldots}
+\end{command}
+\begin{example}
+\fbox{Test some words.}\\
+\framebox[10em][r]{Test some words.}
+\end{example}
+
+\cmdindex{setlength}
+\cmdindex{fboxrule,fboxsep}
+可以通过 \cmd{setlength} 命令（见 \ref{subsec:lengths} 小节）调节边框的宽度 \cmd{fbox\-rule} 和内边距 \cmd{fbox\-sep}：
+\begin{example}
+\framebox[10em][r]{Test box}\\[1ex]
+\setlength{\fboxrule}{1.6pt}
+\setlength{\fboxsep}{1em}
+\framebox[10em][r]{Test box}
+\end{example}
+
+\subsection{垂直盒子}\label{subsec:parbox}
+
+\cmdindex{parbox}
+\envindex{minipage}
+如果需要排版一个文字可以换行的盒子，\LaTeX\ 提供了两种方式：
+\begin{command}
+\cmd{parbox}\oarg{align}\oarg{height}\oarg{inner-align}\marg{width}\marg*{\ldots} \\[0.5ex]
+\cmd{begin}\marg*{minipage}\oarg{align}\oarg{height}\oarg{inner-align}\marg{width} \\
+\ldots \\
+\cmd{end}\marg*{minipage}
+\end{command}
+
+其中 \Arg{align} 为盒子和周围文字的对齐情况（类似 \env{tabular} 环境）；
+\Arg{height} 和 \Arg{inner-align} 设置盒子的高度和内容的对齐方式，类似水平盒子 \cmd{makebox} 的设置，
+不过 \Arg{inner-align} 接受的选项是顶部 \texttt{t}、底部 \texttt{b}、居中 \texttt{c} 和分散对齐 \texttt{s}。
+
+\begin{example}
+三字经：\parbox[t]{3em}%
+{人之初 性本善 性相近 习相远}
+\quad
+千字文：
+\begin{minipage}[b][8ex][t]{4em}
+天地玄黄 宇宙洪荒
+\end{minipage}
+\end{example}
+
+\cmdindex{footnote,footnotetext,footnotemark}
+如果在 \env{minipage} 里使用 \cmd{footnote} 命令，生成的脚注会出现在盒子底部，编号是独立的，并且使用小写字母编号。
+这也是 \env{minipage} 环境之被称为“迷你页”（Mini-page）的原因。
+而在 \cmd{parbox} 里无法正常使用 \cmd{footnote} 命令，只能在盒子里使用 \cmd{foot\-note\-mark}，在盒子外使用 \cmd{foot\-note\-text}。
+\begin{example}
+\fbox{\begin{minipage}{15em}%
+  这是一个垂直盒子的测试。
+  \footnote{脚注来自 minipage。}
+\end{minipage}}
+\end{example}
+
+\subsection{标尺盒子}\label{subsec:rules}
+
+\cmdindex{rule}
+\cmd{rule} 命令用来画一个实心的矩形盒子，也可适当调整以用来画线（标尺）：
+\begin{command}
+\cmd{rule}\oarg{raise}\marg{width}\marg{height}
+\end{command}
+\begin{example}
+Black \rule{12pt}{4pt} box. 
+
+Upper \rule[4pt]{6pt}{8pt} and
+lower \rule[-4pt]{6pt}{8pt} box.
+
+A \rule[-.4pt]{3em}{.4pt} line.
+\end{example}
+
+\section{浮动体}\label{sec:float}
+
+内容丰富的文章或者书籍往往包含丰富的图片和表格等内容。这些内容的尺寸往往太大，导致分页困难。
+\LaTeX\ 为此引入了浮动体的机制，令大块的内容可以脱离上下文，放置在合适的位置。
+
+\envindex{figure,table}
+\LaTeX\ 预定义了两类浮动体环境 \env{figure} 和 \env{table}。习惯上 \env{figure} 里放图片，\env{table} 里放表格，
+但并没有严格限制，可以在任何一个浮动体里放置表格、文字、列表等等任意内容。
+
+以 \env{table} 环境的用法举例，\env{figure} 同理：
+\begin{command}
+\cmd{begin}\marg*{table}\oarg{placement} \\
+\ldots \\
+\cmd{end}\marg*{table}
+\end{command}
+
+\Arg{placement} 参数提供了一些符号用来表示浮动体允许排版的位置，如 \texttt{[hbp]} 允许浮动体排版在当前位置、底部或者单独成页。
+\env{table} 和 \env{figure} 浮动体的默认设置为 \texttt{[tbp]}。
+\begin{center}
+\begin{tabular}{>{\ttfamily}lp{14em}}
+ \hline
+ h & 当前位置（代码所处的上下文） \\
+ t & 顶部 \\
+ b & 底部 \\
+ p & 单独成页 \\[0.5ex]
+ ! & 在决定位置时忽视限制 \\
+ \hline
+\end{tabular}
+\end{center}
+\begin{quote}\footnotesize
+注 1：排版位置的选取与参数里符号的顺序无关，\LaTeX\ 总是以 \texttt{h-t-b-p} 的优先级顺序选取位置。
+也就是说 \texttt{[!htp]} 和 \texttt{[ph!t]} 没有区别。\par
+注 2：限制包括浮动体个数（除单独成页外，默认每页不超过 3 个浮动体，其中顶部不超过 2 个，底部不超过 1 个）
+以及浮动体空间占页面的百分比（默认顶部不超过 70\%，底部不超过 30\%）。
+\end{quote}
+
+\envindex{table*,figure*}
+双栏排版环境下，\LaTeX\ 提供了 \env{table*} 和 \env{figure*} 环境用来排版跨栏的浮动体。
+它们的用法与 \env{table} 和 \env{figure} 一样，不同之处为双栏的 \Arg{placement} 参数只能用 \texttt{tp} 两个位置。
+
+\cmdindex{clearpage}
+浮动体的位置选取受到先后顺序的限制。如果某个浮动体由于参数限制、空间限制等原因在当前页无法放置，就要推迟到后一页，
+并使得之后的同类浮动体一并推迟。\cmd{clearpage} 命令会在另起一页之前，先将所有推迟放置的浮动体排版成页。
+
+\pkgindex{float}
+
+\pkg{float} 宏包为浮动体提供了 \texttt{H} 选项，不与 \texttt{htbp} 及 \texttt{!} 混用。使用 \texttt{H} 选项时，
+会取消浮动机制，将浮动体视为一般的盒子插入当前位置。这在一些特殊情况下很有用（如使用 \pkg{multicol} 宏包排版分栏内容的时候），
+但尺寸过大的浮动体可能影响到分页。
+
+\subsection{浮动体的标题}\label{subsec:caption}
+
+\cmdindex{caption,label}
+图表等浮动体提供了 \cmd{caption} 命令加标题，并且自动给浮动体编号：
+\begin{command}
+\cmd{caption}\marg*{\ldots}
+\end{command}
+\cmd{caption} 的用法非常类似于 \cmd{section} 等命令，可以用带星号的命令 \cmd{caption*} 生成不带编号的标题，
+也可以使用带可选参数的形式 \cmd{caption}\oarg*{\ldots}\marg*{\ldots}，使得在目录里使用短标题。
+
+\cmd{caption} 之后还可以紧跟 \cmd{label} 命令标记交叉引用。
+
+\cmdindex{listoftables,listoffigures}
+\env{table} 和 \env{figure} 两种浮动体分别有各自的生成目录的命令：
+\begin{command}
+\cmd{listoftables} \\
+\cmd{listoffigures}
+\end{command}
+
+\subsection{并排和子图表}\label{subsec:subfig}
+
+我们时常有在一个浮动体里面放置多张图的用法。最简单的用法就是直接并排放置，
+也可以通过分段或者换行命令 \crcmd\ 排版多行多列的图片。以下为示意代码，效果大致如图 \ref{fig:parallel-fig} 所示。
+\begin{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=...]{...}
+  \qquad
+  \includegraphics[width=...]{...} \\[..pt]
+  \includegraphics[width=...]{...} 
+  \caption{...}
+\end{figure}
+\end{verbatim}
+
+\begin{figure}[htb]
+  \centering
+  \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 10ex\hfil}}
+  \qquad
+  \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
+  \par\bigskip
+  \fcolorbox[gray]{0}{0.96}{\parbox{20em}{\vrule width 0pt height 12ex\hfil}}
+  \caption{并排放置图片的示意。}\label{fig:parallel-fig}
+\end{figure}
+
+由于标题是横跨一行的，用 \cmd{caption} 命令为每个图片单独生成标题就需要借助前文提到的 \cmd{parbox}
+或者 \env{minipage} 环境，将标题限制在盒子内。效果见图 \ref{fig:parallel-cap1} 和图 \ref{fig:parallel-cap2}。
+\begin{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}
+    \centering
+    \includegraphics[width=...]{...}
+    \caption{...}
+  \end{minipage}
+  \qquad
+  \begin{minipage}
+    \centering
+    \includegraphics[width=...]{...}
+    \caption{...}
+  \end{minipage}  
+\end{figure}
+\end{verbatim}
+
+\begin{figure}[htb]
+  \centering
+  \begin{minipage}{12em}
+    \centering
+    \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
+    \caption{并排图1。}\label{fig:parallel-cap1}
+  \end{minipage}
+  \qquad
+  \begin{minipage}{12em}
+    \centering
+    \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
+    \caption{并排图2。}\label{fig:parallel-cap2}
+  \end{minipage}
+\end{figure}
+
+\pkgindex{subfig}
+\cmdindex[subfig]{subfloat}
+当我们需要更进一步，给每个图片定义小标题时，就要用到 \pkg{subfig} 宏包的功能了。
+这里仅举一例，效果见图 \ref{fig:subfig}。更详细的用法请参考 \pkg{subfig} 宏包的帮助文档。
+\begin{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \subfloat[...]{\label{sub-fig-1}% 为子图加交叉引用
+   \begin{minipage}
+    \centering
+    \includegraphics[width=...]{...}
+   \end{minipage}
+  }
+  \qquad
+  \subfloat[...]{%
+  \begin{minipage}
+    \centering
+    \includegraphics[width=...]{...}
+  \end{minipage}
+  }
+  \caption{...}
+\end{figure}
+\end{verbatim}
+
+\begin{figure}[htb]
+  \centering
+  \subfloat[并排子图1]{%
+  \begin{minipage}{12em}
+    \centering
+    \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
+  \end{minipage}}
+  \qquad
+  \subfloat[并排子图2]{%
+  \begin{minipage}{12em}
+    \centering
+    \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
+  \end{minipage}}
+  \caption{使用 \pkg{subfig} 宏包的 \cmd{subfloat} 命令排版子图。}\label{fig:subfig}
+\end{figure}
+
+\endinput

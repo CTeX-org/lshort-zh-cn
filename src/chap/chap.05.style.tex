@@ -1,0 +1,660 @@
+\chapter{排版样式设定}\label{chap:styles}
+\addtocontents{los}{\protect\addvspace{10pt}}
+
+\begin{intro}
+至此你已经基本学会排版内容丰富的文档，标题、目录、章节、公式、列表、图片、表格等等应有尽有。但是你可能已经有点不甘心了，
+因为似乎你排版出来的文档是千篇一律的模样——\LaTeX\ 默认的字体、单调的页眉页脚、不太令你满意的页边距，等等。
+本章的内容将带你一览如何修改 \LaTeX\ 的排版样式。
+\end{intro}
+
+\section{字体和字号}\label{sec:font}
+
+\LaTeX\ 根据文档的逻辑结构（章节、脚注等）来选择默认的字体样式以及字号。
+需要更改字体样式或字号的话，可以使用表 \ref{tbl:fonts} 和表 \ref{tbl:sizes} 中列出的命令。
+\begin{example}
+{\small The small and
+\textbf{bold} Romans ruled}
+{\Large all of great big
+{\itshape Italy}.}
+\end{example}
+
+\LaTeXe\ （相比于早期的 \LaTeX\ 2.09 版本）的一个重要特征是：字体的各种属性是相互独立的，
+这意味着用户可以改变字体的大小，而仍然保留字体原有的粗体或者斜体的特性。
+
+\subsection{字体样式}\label{subsec:fontshape}
+
+\pinyinindex{ziti}{字体}
+\pinyinindex{fenzu}{分组}
+\LaTeX\ 提供了两组修改字体的命令，见表 \ref{tbl:fonts}。其中诸如 \cmd{bfseries} 形式的命令将会影响之后所有的字符，
+如果想要让它在局部生效，需要用花括号\textbf{分组}，也就是写成 \marg*{\cmd{bfseries}\ \Arg{some text}} 这样的形式；
+对应的 \cmd{textbf} 形式带一个参数，只改变参数内部的字体，更为常用。
+
+在公式中，直接使用 \cmd{textbf} 等命令不会起效，甚至报错。\LaTeX\ 已有修改数学字体的命令，详见 \ref{subsec:math-alpha} 小节。
+
+\begin{table}[htp]
+\caption{字体命令。} \label{tbl:fonts}
+\centering
+\begin{tabular}{@{}rrcc@{}}
+\hline
+\cmd{rmfamily}\cmdindex{rmfamily} & \cmd{textrm}\cmdindex{textrm}\marg*{\ldots}   & \textrm{roman}      & 衬线字体（罗马体）\\
+\cmd{sffamily}\cmdindex{sffamily} & \cmd{textsf}\cmdindex{textsf}\marg*{\ldots}   & \textsf{sans serif} & 无衬线字体        \\
+\cmd{ttfamily}\cmdindex{ttfamily} & \cmd{texttt}\cmdindex{texttt}\marg*{\ldots}   & \texttt{typewriter} & 等宽字体          \\[\medskipamount]
+\cmd{mdseries}\cmdindex{mdseries} & \cmd{textmd}\cmdindex{textmd}\marg*{\ldots}   & \textrm{medium}     & 正常粗细（中等）  \\
+\cmd{bfseries}\cmdindex{bfseries} & \cmd{textbf}\cmdindex{textbf}\marg*{\ldots}   & \textbf{bold face}  & 粗体              \\[\medskipamount]
+\cmd{upshape}\cmdindex{upshape}   & \cmd{textup}\cmdindex{textup}\marg*{\ldots}   & \textup{upright}    & 直立体            \\
+\cmd{itshape}\cmdindex{itshape}   & \cmd{textit}\cmdindex{textit}\marg*{\ldots}   & \textit{italic}     & 意大利斜体        \\
+\cmd{slshape}\cmdindex{slshape}   & \cmd{textsl}\cmdindex{textsl}\marg*{\ldots}   & \textsl{slanted}    & 倾斜体            \\
+\cmd{scshape}\cmdindex{scshape}   & \cmd{textsc}\cmdindex{textsc}\marg*{\ldots}   & \textsc{Small Caps} & 小字母大写        \\[\medskipamount]
+\cmd{em}\cmdindex{em}             & \cmd{emph}\cmdindex{emph}\marg*{\ldots}     & \emph{emphasized}   & 强调，默认斜体    \\
+\cmd{normalfont}\cmdindex{normalfont}  & \cmd{textnormal}\cmdindex{textnormal}\marg*{\ldots}   & \textnormal{normal font} & 默认字体 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{字号}\label{subsec:fontsize}
+
+\pinyinindex{zihao}{字号}
+字号命令实际大小依赖于所使用的文档类及其选项。表 \ref{tbl:ptsizes} 列出了这些命令在标准文档类中的绝对大小，单位为 pt。
+
+\begin{table}[htp]
+\centering
+\caption{字号。} \label{tbl:sizes}
+\begin{tabular}{@{}ll}
+\hline
+\cmd{tiny}\cmdindex{tiny}         & \tiny        tiny font \\
+\cmd{scriptsize}\cmdindex{scriptsize}   & \scriptsize  very small font\\
+\cmd{footnotesize}\cmdindex{footnotesize} & \footnotesize  quite small font \\
+\cmd{small}\cmdindex{small}        &  \small            small font \\
+\cmd{normalsize}\cmdindex{normalsize}   &  \normalsize  normal font \\
+\cmd{large}\cmdindex{large}        &  \large       large font \\
+\hline
+\end{tabular}%
+\qquad\begin{tabular}{ll@{}}
+\hline
+\cmd{Large}\cmdindex{Large}        &  \Large       larger font \\[5pt]
+\cmd{LARGE}\cmdindex{LARGE}        &  \LARGE       very large font \\[5pt]
+\cmd{huge}\cmdindex{huge}         &  \huge        huge \\[5pt]
+\cmd{Huge}\cmdindex{Huge}         &  \Huge        largest \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htp]
+\centering
+\caption{标准文档类中的字号大小。}\label{tbl:ptsizes}
+\begin{tabular}{lrrr}
+\hline
+字号 & 10pt 选项（默认）& 11pt 选项 & 12pt 选项 \\
+\cmd{tiny}\cmdindex{tiny}       & 5pt  & 6pt & 6pt\\
+\cmd{scriptsize}\cmdindex{scriptsize} & 7pt  & 8pt & 8pt\\
+\cmd{footnotesize}\cmdindex{footnotesize} & 8pt & 9pt & 10pt \\
+\cmd{small}\cmdindex{small}        & 9pt & 10pt & 10.95pt \\
+\cmd{normalsize}\cmdindex{normalsize} & 10pt & 10.95pt & 12pt \\
+\cmd{large}\cmdindex{large}      & 12pt & 12pt & 14.4pt \\
+\cmd{Large}\cmdindex{Large}      & 14.4pt & 14.4pt & 17.28pt \\
+\cmd{LARGE}\cmdindex{LARGE}      & 17.28pt & 17.28pt & 20.74pt\\
+\cmd{huge}\cmdindex{huge}       & 20.74pt & 20.74pt & 24.88pt\\
+\cmd{Huge}\cmdindex{Huge}       & 24.88pt & 24.88pt & 24.88pt\\
+\hline
+\end{tabular}
+\end{table}
+
+使用字号命令的时候，通常也需要用花括号进行分组，如同 \cmd{rmfamily} 那样。
+\begin{example}
+He likes {\LARGE large and
+{\small small} letters}.
+\end{example}
+
+\cmdindex{fontsize}
+\LaTeX\ 还提供了一个基础的命令 \cmd{fontsize} 用于设定任意大小的字号：
+\begin{command}
+\cmd{fontsize}\marg{size}\marg{base line-skip}
+\end{command}
+
+\cmdindex{selectfont}
+\cmd{fontsize} 用到两个参数，\Arg{size} 为字号，\Arg{base line-skip} 为基础行距。
+表 \ref{tbl:ptsizes} 中的命令也都各自设定了与字号对应的基础行距，大小为字号的 1.2 倍。
+如果不是在导言区，\cmd{fontsize} 的设定需要 \cmd{selectfont} 命令才能立即生效，
+而表 \ref{tbl:sizes} 的字号设定都是立即生效的。
+
+\LaTeX\ 排版用到的一些老式字体宏包适用表 \ref{tbl:ptsizes} 给出的固定字号%
+\footnote{不难看出表 \ref{tbl:ptsizes} 中的许多字号大致呈等比数列，比例为 1.2；而10.95pt实际上是$10\times\sqrt{1.2}$。}，
+在使用任意的字号大小时往往会报一些警告。如果可能的话，应当尽量使用表 \ref{tbl:sizes} 中的命令设置字号。
+
+\subsection{选用字体宏包}\label{subsec:font-pkgs}
+
+尽管到了这里你知道了如何切换粗体、斜体等等，以及如何改变字号，
+但你依然用着 \LaTeX\ 默认的那套、由高德纳设计制作的 Computer Modern 字体。
+有的人可能很喜欢 Times、Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX\ 里还不太容易。
+
+幸好大部分时候，许多字体宏包为我们完成了整套配置，我们可以在调用宏包之后，照常使用 \cmd{bfseries} 或 \cmd{ttfamily} 等我们熟悉的命令。
+表 \ref{tbl:font-pkgs} 列出了较为常用的字体宏包，其中相当多的宏包还配置了数学字体，或者文本、数学字体兼而有之。
+更多的的字体配置参考 \cite{survey,fontcatalogue}。
+
+\subsection{字体编码}\label{subsec:font-encs}
+
+字体编码对于 \LaTeX\ 用户来讲是一个比较难懂的概念。它指定了一个字体里面包含了哪些符号、符号如何编码等等细节。
+需要明确一点：字体编码并不与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等一一对应。
+
+常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX\ 默认使用对原始 \TeX\ 兼容的 \texttt{OT1} 编码，使用起来有诸多限制：
+高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体（\cmd{rmfamily} 或 \cmd{sffamily}）里，
+这些符号所在的位置被其它符号所占据（事实上用户输入 \texttt< 和 \texttt> 得到的是\ !` 和\ ?` 两个倒立的标点符号，
+正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；\cmd{ttfamily} 字体下基本上是正常的）。
+
+扩展的 \texttt{T1} 编码则对 ASCII 字符的兼容好得多，不会出现上述的大于号、小于号的问题。
+\texttt{T1} 编码配合一些字体宏包如 \pkg{txfonts}、\pkg{lmodern} 等，还能够令用户使用 \cmd{textasciitilde} 命令
+输入位置居中的连字符 a\textasciitilde b，相比数学符号 \texttt\$\cmd{sim}\texttt\$ 来得合理一些。
+
+\pkgindex{fontenc}
+切换字体编码要用到 \pkg{fontenc} 宏包：
+\begin{verbatim}
+\usepackage[T1]{fontenc}
+\end{verbatim}
+
+\begin{table}[!p]
+\centering
+\caption{常见的 \LaTeX\ 字体宏包。}\label{tbl:font-pkgs}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}cp{0.65\linewidth}@{}}
+ \hline
+ \multicolumn{2}{c}{文本/数学字体搭配的宏包} \\
+ \hline
+ \pkg{lmodern}     & Latin Modern 字体，对 Computer Modern 字体的扩展  \\
+ \pkg{cmbright}    & 仿 Computer Modern 风格的无衬线字体 \\
+ \pkg{euler}       & Euler 风格数学字体，也出自于高德纳之手 \\
+ \pkg{ccfonts}     & Concrete 风格字体 \\
+ \pkg{txfonts}     & Times 风格的字体宏包  \\
+ \pkg{pxfonts}     & Palatino 风格的字体宏包  \\
+ \pkg{stix}        & Times 风格的字体宏包  \\
+ \pkg{newtxtext},\pkg{newtxmath}  & \pkg{txfonts} 的改进版本，分别设置文本和数学字体  \\
+ \pkg{newpxtext},\pkg{newpxmath}  & \pkg{pxfonts} 的改进版本，分别设置文本和数学字体  \\
+ \pkg{mathptmx}    & \pkg{psnfss} 组件之一，Times 风格，较为陈旧，不推荐使用  \\
+ \pkg{mathpazo}    & \pkg{psnfss} 组件之一，Palatino 风格，较为陈旧，不推荐使用  \\
+ \pkg{fourier}     & fourier 风格数学字体，配合 Utopia 正文字体 \\
+ \pkg{fouriernc}   & fourier 风格数学字体，配合 New Century Schoolbook 正文字体 \\
+ \pkg{arev}        & Arev 无衬线字体宏包，Bitstream Vera sans 风格 \\
+ \pkg{mathdesign}  & 配合 Charter/Garamond/Utopia 正文字体的数学字体宏包（Garamond 字体可能需要单独安装） \\
+ \hline
+ \multicolumn{2}{c}{文本字体宏包} \\
+ \hline
+ \pkg{dejavu}      & DejaVu 开源字体 \\
+ \pkg{droid}       & Droid 开源字体 \\
+ \pkg{inconsolata} & Inconsolata 开源等宽字体 \\
+ \pkg{libertine}   & Linux Libertine 衬线字体 \\
+ \pkg{sourcesanspro} & Source Sans Pro 开源无衬线字体 \\
+ \pkg{sourcecodepro} & Source Code Pro 开源等宽字体 \\
+ \hline
+ \multicolumn{2}{c}{符号宏包} \\
+ \hline
+ \pkg{mathabx}     & 数学符号宏包之一 \\
+ \pkg{MnSymbol}    & 数学符号宏包之一 \\
+ \pkg{fdsymbol}    & 数学符号宏包之一 \\
+ \pkg{pifont}      & Zapf Dingbats 符号字体宏包 \\
+ \hline
+\end{tabular*}
+\end{table}
+
+\subsection{使用 \pkg{fontspec} 宏包更改字体 (\texttt{xelatex})}\label{subsec:fontspec}
+
+\index{xelatex@\texttt{xelatex} 命令}
+\texttt{xelatex} 编译命令能够支持直接调用系统安装的 \texttt{.ttf} 或 \texttt{.otf} 格式字体%
+\footnote{Linux 下的 \TeX\ Live 为了支持系统安装的字体，需要额外的配置。详见附录 \ref{app:install}。}。相比于上一小节，我们有了更多修改字体的余地。
+
+\pkgindex{fontspec}
+\cmdindex[fontspec]{setmainfont,setsansfont,setmonofont}
+\texttt{xelatex} 命令下支持用户调用字体的宏包是 \pkg{fontspec}。宏包提供了几个设置全局字体的命令，设置 \cmd{rmfamily} 等对应命令的默认字体%
+\footnote{新版本 \pkg{fontspec} 的命令支持把必选参数 \Arg{font name} 放在可选参数 \Arg{font features} 的前面。}：
+\begin{command}
+\cmd{setmainfont}\oarg{font features}\marg{font name} \\
+\cmd{setsansfont}\oarg{font features}\marg{font name} \\
+\cmd{setmonofont}\oarg{font features}\marg{font name}
+\end{command}
+其中 \Arg{font name} 使用字体的文件名（带扩展名）或者字体的英文名称。\Arg{font features} 用来手动配置对应的粗体或斜体
+，比如为 Windows 下的无衬线字体 Arial 配置粗体和斜体（通常情况下自动检测并设置对应的粗体和斜体，无需手动指定）：
+\begin{verbatim}
+\setsansfont[BoldFont={Arial Bold}, ItalicFont={Arial Italic}]{Arial}
+\end{verbatim}
+\Arg{font features} 还能配置字体本身的各种特性，这里不再赘述，感兴趣的读者请参考 \pkg{fontspec} 宏包的帮助文档。
+
+需要注意的是：\pkg{fontspec} 宏包会覆盖数学字体设置。需要调用表 \ref{tbl:font-pkgs} 中列出的一些数学字体宏包时，
+应当在调用 \pkg{fontspec} 宏包时指定 \texttt{no-math} 选项。\pkg{fontspec} 宏包可能被其它宏包或文档类（如 \pkg{xeCJK}、\pkg{ctex} 文档类）自动调用时，
+则在文档开头的 \cmd{document\-class} 命令里指定 \texttt{no-math} 选项。
+
+\subsection{使用 \pkg{xeCJK} 宏包更改中文字体}\label{subsec:CJKfont}
+
+\pkgindex{xeCJK}
+\cmdindex[xeCJK]{setCJKmainfont,setCJKsansfont,setCJKmonofont}
+前文已经介绍过的 \pkg{xeCJK} 宏包使用了和 \pkg{fontspec} 宏包非常类似的语法设置中文字体：
+\begin{command}
+\cmd{setCJKmainfont}\oarg{font features}\marg{font name} \\
+\cmd{setCJKsansfont}\oarg{font features}\marg{font name} \\
+\cmd{setCJKmonofont}\oarg{font features}\marg{font name}
+\end{command}
+
+由于中文字体少有对应的粗体或斜体，\Arg{font features} 里多用其他字体来配置，
+比如习惯上将宋体的 \texttt{BoldFont} 配置为黑体，而 \texttt{ItalicFont} 配置为楷体。
+
+\section{段落格式和间距}\label{sec:par-lengths}
+
+\subsection{长度和长度变量}\label{subsec:lengths}
+
+在前面的一些章节，我们已经见到一些长度和长度变量的用法。本节首先统一介绍长度和长度变量。
+
+长度的数值 \Arg{length} 由数字和单位组成。常用的单位如下：
+
+\def\unitindex#1{\index{#1@\texttt{#1} (\textit{长度单位})}}
+
+\begin{center}
+\begin{tabular}{cl}
+ \hline
+ \texttt{pt}\unitindex{pt} & 点阵宽度，1/72.27\texttt{in} \\
+ \texttt{bp}\unitindex{bp} & 点阵宽度，1/72\texttt{in} \\
+ \texttt{in}\unitindex{in} & 英寸 \\
+ \texttt{cm}\unitindex{cm} & 厘米 \\
+ \texttt{mm}\unitindex{mm} & 毫米 \\
+ \hline
+ \texttt{em}\unitindex{em} & 当前字号下大写字母 M 的宽度，常用于水平距离的设定 \\
+ \texttt{ex}\unitindex{ex} & 当前字号下小写字母 x 的高度，常用于垂直距离的设定 \\
+ \hline
+\end{tabular}
+\end{center}
+
+在一些情况下还会用到可伸缩的“弹性长度”，如 \texttt{12pt plus 2pt minus 3pt} 
+表示基础长度为 \texttt{12pt}，可以伸展到 \texttt{14pt} ，也可以收缩到 \texttt{9pt}。
+也可只定义 \texttt{plus} 或者 \texttt{minus} 的部分，如 \texttt{0pt plus 5pt}。
+
+长度的数值还可以用长度变量本身或其倍数来表达，如 \texttt{2.5}\cmd{parindent} 等。
+
+\cmdindex{newlength,setlength,addtolength}
+\LaTeX\ 预定义了大量的长度变量用于控制版面格式。如页面宽度和高度、首行缩进、段落间距等。
+如果需要自定义长度变量，需使用如下命令：
+\begin{command}
+\cmd{newlength}\marg*{\cmd{\Arg{length command}}}
+\end{command}
+
+长度变量可以用 \cmd{setlength} 赋值，或用 \cmd{addtolength} 增加长度：
+\begin{command}
+\cmd{setlength}\marg*{\cmd{\Arg{length command}}}\marg{length} \\
+\cmd{addtolength}\marg*{\cmd{\Arg{length command}}}\marg{length}
+\end{command}
+
+\subsection{行距}\label{subsec:linespread}
+
+\pinyinindex{hangju}{行距}
+\cmdindex{linespread}
+前文中我们提到过 \cmd{fontsize} 命令可以为字号设定对应的行距，但我们很少那么用。
+更常用的办法是在导言区使用 \cmd{linespread} 命令，
+\begin{command}
+\cmd{linespread}\marg{factor}
+\end{command}
+
+此处的行距，指的是基本行距（相当于 \cmd{fontsize} 命令的第二个参数）而不是字号大小。所以设置 1.5 倍行距的命令 \cmd{line\-spread}\marg*{1.5}
+意味着最终行距为 1.8 倍的字号大小。
+
+\cmdindex{selectfont}
+如果不是在导言区全局修改，而想要局部地改变某个段落的行距，需要用 \cmd{select\-font} 命令使 \cmd{line\-spread} 命令的改动立即生效：
+\begin{example}
+{\linespread{2.0}\selectfont
+The baseline skip is set to twice
+the normal baseline skip. 
+Pay attention to the \verb|\par|
+command at the end. \par}
+
+In comparison, after the
+curly brace has been closed,
+everything is back to normal.
+\end{example}
+
+\cmdindex{par}
+字号的改变是即时生效的，而行距的改变直到文字\textbf{分段}时才生效。
+如果你想改变某一部分文字的行距，那么不能简单地将文字包含在花括号内。注意下面两个例子中 \cmd{par} 命令的位置，包括上一个例子的写法
+（\cmd{par} 相当于分段，见 \ref{subsec:spaces} 小节）：
+\begin{example}
+{\Large Don't read this!
+ It is not true.
+ You can believe me!\par}
+\end{example}
+
+\begin{example}
+{\Large This is not true either.
+But remember I am a liar.}\par
+\end{example}
+
+\subsection{段落格式}\label{subsec:par-shape}
+
+以下长度分别为段落的左缩进、右缩进和首行缩进：
+\begin{command}
+\cmd{setlength}\marg*{\cmd{leftskip}}\marg*{20pt}  \\
+\cmd{setlength}\marg*{\cmd{rightskip}}\marg*{20pt} \\
+\cmd{setlength}\marg*{\cmd{parindent}}\marg*{2em}
+\end{command}
+
+它们和设置行距的命令一样，在分段时生效。
+
+\cmdindex{indent,noindent}
+\LaTeX\ 默认在段落开始时缩进，长度为你用上述命令设置的 \cmd{parindent}。如果你在某一段不想使用缩进，可使用某一段开头使用
+\begin{command}
+\cmd{noindent}
+\end{command}
+命令。相反地，
+\begin{command}
+\cmd{indent}
+\end{command}
+命令强制开启一段首行缩进的段落。多个 \cmd{indent} 命令可以累加缩进量。
+
+\pkgindex{indentfirst}
+\LaTeX\ 还默认\textbf{在 \cmd{chapter}、\cmd{section} 等章节标题命令之后的第一段不缩进}%
+\footnote{\pkg{ctex} 宏包和文档类默认按照中文习惯保持标题后第一段的首行缩进。}。
+如果不习惯这种设定，可以调用 \pkg{indent\-first} 宏包：
+\begin{verbatim}
+\usepackage{indentfirst}
+\end{verbatim}
+
+\cmdindex{parskip}
+段落间的垂直间距为 \cmd{parskip}，如设置段落间距在 \texttt{0.8ex} 到 \texttt{1.5ex} 变动：
+\begin{command}
+\cmd{setlength}\marg*{\cmd{parskip}}\marg*{1ex plus 0.5ex minus 0.2ex}
+\end{command}
+
+\subsection{水平间距}\label{subsec:hspace}
+
+\cmdindex{hspace}
+\LaTeX 默认为将单词之间的“空格”转化为水平间距。如果需要在文中手动插入额外的水平间距，可使用如下命令：
+\begin{command}
+\cmd{hspace}\marg{length}
+\end{command}
+\begin{example}
+This\hspace{1.5cm}is a space
+of 1.5 cm.
+\end{example}
+
+\cmdindex{hspace*}
+\cmd{hspace} 命令生成的水平间距如果位于一行的开头或末尾，则有可能因为断行而被“吞掉”。可使用 \cmd{hspace*} 命令代替 \cmd{hspace} 命令
+得到不会因断行而消失的水平间距。
+
+\cmdindex{stretch,fill}
+命令 \cmd{stretch}\marg{n} 生成一个特殊弹性长度，参数 \Arg{n} 为权重。它的基础长度为零，但可以无限延伸，直到占满可用的空间。
+如果同一行内出现多个 \cmd{stretch}\marg{n}，这一行的所有可用空间将按每个 \cmd{stretch} 命令给定的权重 \Arg{n} 进行分配。
+
+命令 \cmd{fill} 相当于 \cmd{stretch}\marg*{1}。
+
+\begin{example}
+x\hspace{\stretch{1}}
+x\hspace{\stretch{3}}
+x\hspace{\fill}x
+\end{example}
+
+\cmdindex{quad,qquad}
+在正文中用 \cmd{hspace} 命令生成水平间距时，往往使用 \texttt{em} 作为单位，生成的间距随字号大小而变。
+我们在数学公式中见过 \cmd{quad} 和 \cmd{qquad} 命令，它们也可以用于文本中，分别相当于 \cmd{hspace}\marg*{1em} 和 \cmd{hspace}\marg*{2em}：
+
+\begin{example}
+{\Large big\hspace{1em}y}\\
+{\Large big\quad y}\\
+nor\hspace{2em}mal\\
+nor\qquad mal\\
+{\tiny tin\hspace{1em}y}\\
+{\tiny tin\quad y}
+\end{example}
+
+\subsection{垂直间距}\label{subsec:vspace}
+
+在页面中，段落、章节标题、行间公式、列表、浮动体等元素之间的间距是 \LaTeX\ 预设的。比如 \cmd{parskip} ，默认设置为 \texttt{0pt plus 1pt}。
+
+\cmdindex{vspace}
+如果我们想要人为地增加段落之间的垂直间距，可以在两个段落之间的位置使用如下命令：
+\begin{command}
+\cmd{vspace}\marg{length}
+\end{command}
+
+\cmdindex{vspace*}
+\cmd{vspace} 的间距在一页的顶端或底端可能被“吞掉”，类似 \cmd{hspace} 在一行的开头和末尾那样。
+对应地，\cmd{vspace*} 命令产生不会因断页而消失的垂直间距。\cmd{vspace} 也可用 \cmd{stretch} 设置无限延伸的垂直长度。
+
+\index{\@\crcmd\ (\textit{换行})}
+在段落内的两行之间增加垂直间距，一般通过给断行命令 \crcmd\ 加可选参数，如 \crcmd\texttt{[6pt]} 或 \crcmd\texttt{*[6pt]}。
+\cmd{vspace} 也可以在段落内使用：
+\begin{example}
+Use command \verb|\vspace| to
+add \vspace{12pt} some spaces
+between lines in a paragraph.
+\end{example}
+
+\cmdindex{bigskip,medskip,smallskip}
+另外 \LaTeX\ 还提供了\cmd{bigskip}, \cmd{medskip}, \cmd{smallskip} 来增加预定义长度的垂直间距。
+\begin{example}
+\parbox[t]{3em}{TeX\par TeX}
+\parbox[t]{3em}{TeX\par\smallskip TeX}
+\parbox[t]{3em}{TeX\par\medskip TeX}
+\parbox[t]{3em}{TeX\par\bigskip TeX}
+\end{example}
+
+\section{页面和分栏}\label{sec:page-columns}
+
+我们不妨回顾一下第一章介绍的文档类属性。\LaTeX\ 允许你通过文档类选项控制纸张的大小（见表 \ref{tbl:ltx-options}），
+包括 \texttt{a4paper}、\texttt{letterpaper}等等，并配合字号设置了适合的页边距。
+
+\cmdindex{textheight,textwidth}
+控制页边距的参数由图 \ref{fig:layouts} 里给出的各种长度变量控制。
+可以用 \cmd{setlength} 命令修改这些长度变量，以达到调节页面尺寸和边距的作用；
+反之也可以利用这些长度变量来决定排版内容的尺寸，如在 \env{tabularx} 环境或 \cmd{include\-graphics} 命令的参数里，
+设置图片或表格的宽度为 0.8\cmd{textwidth}：
+
+\begin{figure}[!p]
+\centering
+\layoutpicture*
+\caption{本文档的页面参数示意图（奇数页；由 \pkg{layout} 宏包生成）。} \label{fig:layouts}
+\end{figure}
+
+但是，如果你想要直接设置页边距等参数，着实是一件麻烦事。我们根据图 \ref{fig:layouts} 将各个方向的页边距计算公式给出（以奇数页为例）：
+\begin{align*}
+\text{\Arg{left-margin}}   &= \text{\ttfamily 1in} 
+                            + \text{\cmd{hoffset}}
+                            + \text{\cmd{oddsidemargin}} \\
+\text{\Arg{right-margin}}  &= \text{\cmd{paperwidth}} 
+                            - \text{\Arg{left-margin}}
+                            - \text{\cmd{textwidth}} \\
+\text{\Arg{top-margin}}    &= \text{\ttfamily 1in} 
+                            + \text{\cmd{voffset}}
+                            + \text{\cmd{topmargin}}
+                            + \text{\cmd{headheight}}
+                            + \text{\cmd{headsep}} \\
+\text{\Arg{bottom-margin}} &= \text{\cmd{paperheight}}
+                            - \text{\Arg{top-margin}}
+                            - \text{\cmd{textheight}}
+\end{align*}
+如果我们想设置合适的 \Arg{left-margin} 和 \Arg{right-margin}，就要靠上述方程组把 \cmd{odd\-sidemargin} 和 \cmd{text\-width} 等参数解出来！
+
+幸好 \pkg{geometry} 宏包提供了设置页面参数的简便方法，能够帮我们完成背后繁杂的计算。
+
+\subsection{利用 \pkg{geometry} 宏包设置页面参数}\label{subsec:geometry}
+
+\pkgindex{geometry}
+\pinyinindex{xuanxiang}{选项（宏包/文档类）}
+\pkg{geometry} 宏包的调用方式类似于 \pkg{graphicx}，在 \texttt{latex} + \texttt{dvipdfmx} 命令下需要指定选项 \texttt{dvipdfm}
+（注意这里不是 \texttt{dvipdfmx}）；\texttt{pdflatex} 和 \texttt{xelatex} 编译命令下不需要。
+
+\cmdindex[geometry]{geometry}
+你既可以调用 \pkg{geometry} 宏包然后用其提供的 \cmd{geometry} 命令设置页面参数：
+\begin{command}
+\cmd{usepackage}\marg*{geometry} \\
+\cmd{geometry}\marg{geometry-settings}
+\end{command}
+也可以将参数指定为宏包的选项：
+\begin{command}
+\cmd{usepackage}\oarg{geometry-settings}\marg*{geometry}
+\end{command}
+
+其中 \Arg{geometry-settings} 多以 \Arg{key}=\Arg{value} 的形式组织。
+
+比如，符合 Microsoft Word 习惯的页面设定是 A4 纸张，上下边距 1 英寸，左右边距 1.25 英寸，于是我们可以通过如下两种等效的方式之一设定页边距：
+\begin{verbatim}
+\usepackage[left=1.25in,right=1.25in,%
+  top=1in,bottom=1in]{geometry}
+% or like this:
+\usepackage[hmargin=1.25in,vmargin=1in]{geometry}
+\end{verbatim}
+
+又比如，需要设定周围的边距一致为1.25英寸，可以用更简单的语法：
+\begin{verbatim}
+\usepackage[margin=1.25in]{geometry}
+\end{verbatim}
+
+对于书籍等双面文档，习惯上奇数页右边、偶数页左边留出较多的页边距，而书脊一侧的奇数页左边、偶数页右边页边距较少。我们可以这样设定：
+\begin{verbatim}
+\usepackage[inner=1in,outer=1.25in]{geometry}
+\end{verbatim}
+
+\pkg{geometry} 宏包本身也能够修改纸张大小、页眉页脚高度、边注宽度等等参数。更详细的用法不再赘述，
+感兴趣的用户可查阅 \pkg{geometry} 宏包的帮助文档。
+
+\subsection{页面内容的垂直对齐}\label{subsec:raggedbottom}
+
+\LaTeX\ 默认将页面内容在垂直方向分散对齐。对于有大量图表的文档，许多时候想要做到排版匀称的页面很困难，
+垂直分散对齐会造成某些页面的垂直间距过宽，还可能报大量的 \texttt{Underfull} \cmd{vbox} 消息。
+
+\cmdindex{raggedbottom}
+\LaTeX\ 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。在导言区或者适合的位置使用
+以下命令开启顶部对齐的效果：
+\begin{command}
+\cmd{raggedbottom}
+\end{command}
+
+\cmdindex{flushbottom}
+相反地，\cmd{flushbottom} 命令用于设置成默认的分散对齐。
+
+\subsection{分栏}\label{subsec:columns}
+
+\cmdindex{onecolumn,twocolumn}
+\LaTeX\ 支持简单的单栏或双栏排版。标准文档类的全局选项 \texttt{onecolumn}、\texttt{twocolumn} 
+可控制全文分单栏或双栏排版。\LaTeX\ 也提供了切换单/双栏排版的命令：
+\begin{command}
+\cmd{onecolumn} \\
+\cmd{twocolumn}\oarg{one-column top material}
+\end{command}
+
+\cmd{twocolumn} 支持带一个可选参数，用于排版双栏之上的一部分单栏内容。
+
+\cmdindex{newpage,clearpage}
+切换单/双栏排版时总是会另起一页（\cmd{clearpage}）。
+在双栏模式下使用 \cmd{newpage} 会换栏而不是换页；\cmd{clearpage} 则能够换页。
+
+\pkgindex{multicol}
+\envindex[multicol]{multicols}
+一个比较好用的分栏解决方案是 \pkg{multicol}，它提供了简单的 \env{multicols} 环境
+（注意不要写成 \env{multicol} 环境）自动产生分栏，如以下环境将内容分为 3 栏：
+\begin{verbatim}
+\begin{multicols}{3}
+...
+\end{multicols}
+\end{verbatim}
+
+\pinyinindex{fudongti}{浮动体}
+\envindex{table,figure}
+\pkgindex{float}
+\pkg{multicol} 宏包能够在一页之中切换单栏/多栏，也能处理跨页的分栏，且各栏的高度分布平衡。但代价是%
+\textbf{在 \env{multicols} 环境中无法正常使用 \env{table} 和 \env{figure} 等浮动体环境}，它会直接让浮动体丢失。
+\env{multicols} 环境中只能用跨栏的 \env{table*} 和 \env{figure*} 环境，或者用 \pkg{float} 宏包提供的 \texttt{H} 选项固定浮动体的位置。
+
+\section{页眉页脚}\label{sec:pagestyle}
+
+\subsection{基本的页眉页脚样式}\label{subsec:basic-pagesyle}
+
+\cmdindex{pagestyle,thispagestyle}
+\pinyinindex{yemei}{页眉}
+\pinyinindex{yejiao}{页脚}
+\LaTeX\ 中提供了命令 \cmd{pagestyle} 来修改页眉页脚的样式：
+\begin{command}
+\cmd{pagestyle}\marg{page-style}
+\end{command}
+另外一个命令只影响当页的页眉页脚样式：
+\begin{command}
+\cmd{thispagestyle}\marg{page-style}
+\end{command}
+
+\Arg{page-style} 参数为样式的名称，在 \LaTeX\ 里预定义了四类样式，见表 \ref{tbl:pagestyle}。
+
+\begin{table}[htp]
+\centering
+\caption{\LaTeX\ 预定义的页眉页脚样式}\label{tbl:pagestyle}
+\begin{tabularx}{0.8\textwidth}{lX}
+ \hline
+ \texttt{empty}  & 页眉页脚为空 \\
+ \texttt{plain}  & 页眉为空，页脚为页码。（article 和 report 文档类默认；book 文档类的每章第一页也为 plain 格式） \\
+ \hline
+ \texttt{headings}  & 页眉为章节标题和页码，页脚为空。（book 文档类默认） \\
+ \texttt{myheadings}  & 页眉为页码及 \cmd{markboth} 和 \cmd{markright} 命令手动指定的内容，页脚为空。\\
+ \hline
+\end{tabularx}
+\end{table}
+
+\clsindex{article,report,book}
+其中 \texttt{headings} 的情况较为复杂：
+\begin{description}
+  \item[\cls{article} 文档类，\texttt{twoside} 选项：] 偶数页为页码和节标题，奇数页为小节标题和页码；
+  \item[\cls{article} 文档类，\texttt{oneside} 选项：] 页眉为节标题和页码；
+  \item[\cls{book/report} 文档类，\texttt{twoside} 选项：] 偶数页为页码和章标题，奇数页为节标题和页码；
+  \item[\cls{book/report} 文档类，\texttt{oneside} 选项：] 页眉为章标题和页码。
+\end{description}
+
+\subsection{手动更改页眉页脚的内容}\label{subsec:marks}
+
+\cmdindex{markright,markboth}
+对于 headings 或者 myheadings 样式，\LaTeX\ 允许用户使用命令手动修改页眉上面的内容，
+特别是因为使用了 \cmd{chapter*} 等命令而无法自动生成页眉页脚的情况：
+\begin{command}
+\cmd{markright}\marg{right-mark}\\
+\cmd{markboth}\marg{left-mark}\marg{right-mark}
+\end{command}
+
+在双面排版、\texttt{headings / myheadings} 页眉页脚样式下，\Arg{left-mark} 和 \Arg{right-mark} 的内容分别预期出现在左页（偶数页）和右页（奇数页）。
+
+事实上 \cmd{chapter}、\cmd{section} 等命令内部也使用 \cmd{mark\-both} 或者 \cmd{mark\-right} 写页眉。
+\LaTeX\ 默认将页眉的内容都转为大写字母。如果你不喜欢这样，可以尝试以下代码
+（相关命令的用法参照 \ref{sec:newcommands} 节）%
+\footnote{但是这不能改变页眉的斜体样式（\cmd{slshape}），斜体是定义在 \texttt{headings} 样式里的。
+如果不喜欢斜体，可在 \cmd{mark\-both} 等命令的参数里先使用 \cmd{normal\-font} ，再使用想要的字体样式命令，
+或直接尝试使用 \pkg{fancyhdr} 宏包。}：
+\begin{verbatim}
+\renewcommand\chaptermark[1]{%
+  \markboth{Chapter \thechapter\quad #1}{}}
+\renewcommand\sectionmark[1]{%
+  \markright{\thesection\quad #1}}
+\end{verbatim}
+
+其中 \cmd{thechapter}、\cmd{thesection} 等命令为章节计数器的数值（详见 \ref{sec:counters} 节）。以上代码适用于 \cls{report/book} 文档类。
+对于 \cls{article} 文档类，与两个页眉相关的命令分别为 \cmd{sec\-tion\-mark} 和 \cmd{sub\-sec\-tion\-mark} 。
+
+\subsection{\pkg{fancyhdr} 宏包}\label{subsec:fancyhdr}
+
+\pkgindex{fancyhdr}
+\pkg{fancyhdr} 宏包改善了页眉页脚样式的定义方式，允许我们将内容自由安置在页眉和页脚的左、中、右三个位置，还为页眉和页脚各加了一条横线。
+
+\pkg{fancyhdr} 自定义了样式名称 fancy。使用 \pkg{fancyhdr} 宏包定义页眉页脚之前，通常先用 \cmd{page\-style}\marg*{fancy} 调用这个样式。
+在 \pkg{fancyhdr} 中定义页眉页脚的命令为：
+\begin{command}
+\cmd{fancyhead}\oarg{position}\marg*{\ldots}\\
+\cmd{fancyfoot}\oarg{position}\marg*{\ldots}
+\end{command}
+其中 \Arg{position} 为 L（左）/C（中）/R（右） 以及与 O（奇数页）/E（偶数页）字母的组合。
+
+我们用一个示例说明 \pkg{fancyhdr} 的用法，这段代码可以用于导言区，它的效果为将章节标题放在和 headings 一致的位置，但使用加粗格式；
+页码都放在页脚正中；修改横线宽度，“去掉”页脚的横线。更多用法请参考 \pkg{fancyhdr} 宏包的帮助文档。
+
+\begin{sourcecode}[hbp]
+\begin{Verbatim}
+% 导言区部分
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % 清空当前的页眉页脚
+\fancyfoot[C]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.4pt} % 注意不用 \setlength
+\renewcommand{\footrulewidth}{0pt}
+\end{Verbatim}
+\caption{\pkg{fancyhdr} 宏包的使用方法示例。}\label{code:fancyhdr}
+\end{sourcecode}
+
+\endinput

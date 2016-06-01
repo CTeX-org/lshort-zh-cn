@@ -1,0 +1,211 @@
+\newif\ifoddsidelayout
+
+\expandafter\ifx\csname ver@layout.sty\endcsname\relax
+  \typeout{Package `layout' not loaded. Command \string\layoutpicture{} will have no effect.}
+  \def\layoutpicture{\@ifstar\@empty\@empty}
+  \expandafter\endinput
+\fi
+
+\newcommand\lay@layoutpic{%
+  \if@twoside
+    \ifoddsidelayout
+      \ref@marginwidth=\cnt@oddsidemargin
+      \ref@marginpar=\oneinch
+      \advance\ref@marginpar by \ref@hoffset
+      \advance\ref@marginpar by \cnt@oddsidemargin
+      \ref@margin\ref@marginpar
+      \if@reversemargin
+        \advance\ref@marginpar by -\cnt@marginparsep
+        \advance\ref@marginpar by -\cnt@marginparwidth
+      \else
+        \advance\ref@marginpar by \cnt@textwidth
+        \advance\ref@marginpar by \cnt@marginparsep
+      \fi
+    \else
+      \ref@marginwidth=\cnt@evensidemargin
+      \ref@marginpar=\oneinch
+      \advance\ref@marginpar by \ref@hoffset
+      \advance\ref@marginpar by \cnt@evensidemargin
+      \ref@margin\ref@marginpar
+      \if@reversemargin
+        \advance\ref@marginpar by \cnt@textwidth
+        \advance\ref@marginpar by \cnt@marginparsep
+      \else
+        \advance\ref@marginpar by -\cnt@marginparsep
+        \advance\ref@marginpar by -\cnt@marginparwidth
+      \fi
+    \fi
+  \else
+    \ref@marginwidth=\cnt@oddsidemargin
+    \ref@marginpar=\oneinch
+    \advance\ref@marginpar by \ref@hoffset
+    \advance\ref@marginpar by \cnt@oddsidemargin
+    \ref@margin\ref@marginpar
+    \if@reversemargin
+      \advance\ref@marginpar by -\cnt@marginparsep
+      \advance\ref@marginpar by -\cnt@marginparwidth
+    \else
+      \advance\ref@marginpar by \cnt@textwidth
+      \advance\ref@marginpar by \cnt@marginparsep
+    \fi
+  \fi
+  \setlength{\unitlength}{.5pt}
+  \begin{picture}(\cnt@paperwidth,\cnt@paperheight)
+    \centering
+    \thicklines
+    \put(0,0){\framebox(\cnt@paperwidth,\cnt@paperheight){\mbox{}}}
+    \put(0,\cnt@voffset){\dashbox{10}(\cnt@paperwidth,0){\mbox{}}}
+    \put(\cnt@hoffset,0){\dashbox{10}(0,\cnt@paperheight){\mbox{}}}
+    \put(\ref@margin,\ref@head){%
+      \begingroup\color{lightgray}\framebox(\cnt@textwidth,\cnt@headheight)%
+        {\tiny\sffamily\Headertext}\endgroup}
+    \put(\ref@margin,\ref@body){%
+      \framebox(\cnt@textwidth,\cnt@textheight){\sffamily\Bodytext}}
+    \put(\ref@margin,\ref@foot){%
+      \begingroup\color{lightgray}\framebox(\cnt@textwidth,\fheight){\tiny\sffamily\Footertext}\endgroup}
+    \put(\ref@marginpar,\ref@body){%
+      \begingroup\color{lightgray}\framebox(\cnt@marginparwidth,\cnt@textheight)%
+               {\small\sffamily\shortstack{\MarginNotestext}}\endgroup}
+    \thinlines
+    \SetToHalf\PositionX\cnt@textwidth
+    \advance\PositionX by \ref@margin
+    \PositionY = \ref@body
+    \advance\PositionY by 50
+    \Identify{8}
+    \InsideHArrow\cnt@textwidth
+    \SetToHalf\PositionY\cnt@textheight
+    \advance\PositionY by \ref@body
+    \PositionX = \cnt@textwidth
+    \divide\PositionX by 5
+    \multiply \PositionX by 4
+    \advance\PositionX by \ref@margin
+    \Identify{7}
+    \InsideVArrow\cnt@textheight
+    \PositionY = 50
+    \SetToHalf\PositionX\cnt@hoffset
+    \Identify{1}
+    \InsideHArrow\cnt@hoffset
+    \SetToQuart\PositionY\cnt@textheight
+    \advance\PositionY by \ref@body
+    \ifnum\ref@marginwidth > 0
+      \OutsideHArrow\ref@margin\ref@marginwidth{20}
+      \PositionX = \cnt@hoffset
+    \else
+      \OutsideHArrow\cnt@hoffset{-\ref@marginwidth}{20}
+      \PositionX = \ref@margin
+    \fi
+    \advance\PositionX by -30
+    \Identify{3}
+    \SetToQuart\PositionY\cnt@textheight
+    \advance\PositionY by \ref@body
+    \advance\PositionY by 30
+    \SetToHalf\PositionX\cnt@marginparwidth
+    \advance\PositionX by \ref@marginpar
+    \Identify{10}
+    \InsideHArrow\cnt@marginparwidth
+    \advance\PositionY by 30
+    \if@twoside
+      \if@reversemargin
+        \ifoddsidelayout
+          \OutsideHArrow\ref@margin\cnt@marginparsep{20}
+          \PositionX = \ref@margin
+        \else
+          \OutsideHArrow\ref@marginpar\cnt@marginparsep{20}
+          \PositionX = \ref@marginpar
+        \fi
+      \else
+        \ifoddsidelayout
+          \OutsideHArrow\ref@marginpar\cnt@marginparsep{20}
+          \PositionX = \ref@marginpar
+        \else
+          \OutsideHArrow\ref@margin\cnt@marginparsep{20}
+          \PositionX = \ref@margin
+        \fi
+      \fi
+    \else
+      \if@reversemargin
+        \OutsideHArrow\ref@margin\cnt@marginparsep{20}
+        \PositionX = \ref@margin
+      \else
+        \OutsideHArrow\ref@marginpar\cnt@marginparsep{20}
+        \PositionX = \ref@marginpar
+      \fi
+    \fi
+    \advance\PositionX by -\cnt@marginparsep
+    \advance\PositionX by -30
+    \Identify{9}
+    \PositionX = \cnt@textwidth
+    \divide\PositionX by 8
+    \advance\PositionX by \ref@margin
+    \OutsideVArrow\ref@foot\cnt@footskip{20}{20}
+    \PositionY = \ref@foot
+    \advance\PositionY by \cnt@footskip
+    \advance\PositionY by 30
+    \Identify{11}
+    \PositionX = \cnt@paperwidth
+    \advance\PositionX by -50
+    \PositionY = \cnt@paperheight
+    \ExtraYPos = \PositionY
+    \advance\ExtraYPos by -\cnt@voffset
+    \advance\PositionY by \cnt@voffset
+    \divide\PositionY by \tw@
+    \Identify{2}
+    \InsideVArrow\ExtraYPos
+    \Interval = \cnt@textwidth
+    \divide\Interval by 8
+    \PositionX = \ref@margin
+    \advance\PositionX by \Interval
+    \ifnum\cnt@topmargin > \z@
+      \ExtraYPos = \ref@head
+      \advance\ExtraYPos\cnt@headheight
+      \OutsideVArrow\ExtraYPos\cnt@topmargin{20}{20}
+      \PositionY = \ExtraYPos
+      \advance\PositionY by \cnt@topmargin
+    \else
+      \ExtraYPos = \cnt@voffset
+      \OutsideVArrow\ExtraYPos{-\cnt@topmargin}{20}{20}
+      \PositionY = \ExtraYPos
+      \advance\PositionY by -\cnt@topmargin
+    \fi
+    \advance\PositionY by 30
+    \Identify{4}
+    \advance\PositionX by \Interval
+    \OutsideVArrow\ref@head\cnt@headheight{20}{20}
+    \PositionY = \ref@head
+    \advance\PositionY by \cnt@headheight
+    \advance\PositionY by 30
+    \Identify{5}
+    \advance\PositionX by \Interval
+    \ExtraYPos=\ref@body
+    \advance\ExtraYPos\cnt@textheight
+    \OutsideVArrow\ExtraYPos\cnt@headsep{20}{20}
+    \PositionY = \ref@body
+    \advance\PositionY by \cnt@textheight
+    \advance\PositionY by -30
+    \Identify{6}
+  \end{picture}
+  \vskip\medskipamount
+  \begingroup\footnotesize\ttfamily
+    \begin{tabular}{@{}rl@{\hspace{20pt}}rl}
+      1 & \oneinchtext\ + \LayOutbs\texttt{hoffset}
+        & 2 & \oneinchtext\ + \LayOutbs\texttt{voffset} \\
+      3 & \if@twoside
+            \ifoddsidelayout \Show{cnt}{oddsidemargin}
+            \else \Show{cnt}{evensidemargin}
+            \fi
+          \else
+            \Show{cnt}{oddsidemargin}
+          \fi                    & 4 & \Show{cnt}{topmargin} \\
+      5 & \Show{cnt}{headheight} & 6 & \Show{cnt}{headsep} \\
+      7 & \Show{cnt}{textheight} & 8 & \Show{cnt}{textwidth} \\
+      9 & \Show{cnt}{marginparsep}&10& \Show{cnt}{marginparwidth} \\
+      11& \Show{cnt}{footskip}   &   & \Show{cnt}{marginparpush}
+       \rlap{(\notshown)}\\
+        & \Show{ref}{hoffset}    &   & \Show{ref}{voffset} \\
+        & \Show{cnt}{paperwidth} &   & \Show{cnt}{paperheight} \\
+    \end{tabular}
+  \endgroup
+}
+\def\layoutpicture{%
+  \@ifstar{\lay@getvalues\lay@layoutpic}{\lay@layoutpic}}
+\endinput

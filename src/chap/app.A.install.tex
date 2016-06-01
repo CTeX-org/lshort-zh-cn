@@ -1,0 +1,127 @@
+\chapter{安装 \protect\TeX\ 发行版}\label{app:install}
+
+\begin{intro}
+高德纳的 \TeX\ 程序开发于 20 世纪 80 年代，那时候电子计算机的运算能力有限，\TeX\ 还是大型服务器上的玩物。
+而如今个人计算机完全能够胜任排版的工作，并催生了用于个人计算机的工具集合—— \TeX\ 发行版的发展。
+
+本章会简单介绍如何安装 \TeX\ 发行版，以及保持发行版的内容紧跟最新。后者非常重要，
+因为 \LaTeX\ 宏包是不断更新换代的。
+\end{intro}
+
+\section{\protect\TeX\ 发行版简介}\label{sec:dists}
+
+一个\textbf{\TeX\ 发行版}是 \TeX\ 排版引擎、支持排版的文件（基本格式、\LaTeX\ 宏包、字体等）以及一些辅助工具的集合。
+各式各样的 \TeX\ 发行版经过十多年的发展，大浪淘沙，最终形成两个成熟的分支：
+\begin{itemize}
+  \item \textbf{\TeX\ Live}\par
+  \TeX\ Live 由类 Unix 系统上的 te\TeX\ 发展并取而代之，最终成为跨平台的 \TeX\ 发行版。
+  \TeX\ Live 自 2011 年起以年份作为发行版的版本号，保持了一年一更的频率。
+
+  Mac\TeX\ 是 OS X 系统下的一个定制化的 \TeX\ Live 版本，与 \TeX\ Live 同步更新。
+
+  \item \textbf{Mik\TeX}\par
+  Mik\TeX\ 是主要用于 Windows 平台的一个稳定发展的 \TeX\ 发行版。
+  中国的 \LaTeX\ 用户应该对“C\TeX\ 套装”比较熟悉，它是一个经过本地化配置的 Mik\TeX 。
+\end{itemize}
+
+\TeX\ Live 和 Mik\TeX\ 都集成了一个简单的 \LaTeX\ 源代码编辑器 \TeX works（Mac\TeX\ 则集成了类似的 \TeX shop）。
+用户在完成发行版的安装后，可直接打开编辑器开始编写 \LaTeX\ 源代码。
+
+\subsection{安装发行版}\label{subsec:install-dists}
+
+\subsubsection{\TeX\ Live}
+
+\TeX\ Live 在 \url{http://www.tug.org/texlive/} 上提供 ISO 光盘镜像%
+\footnote{Linux 发行版的软件源也提供 \TeX\ Live 的安装，不过不够完整，更新也不是很及时。建议直接从镜像安装。}。
+下载镜像到本地，挂载到虚拟光驱，或者用压缩工具解压后，在其根目录有几个用于安装的脚本：
+\begin{itemize}
+  \item 用于 Windows 的批处理文件：
+  \begin{itemize}
+    \item \texttt{install-tl-windows.bat} 双击启动图形界面安装程序（简单安装）；
+    \item \texttt{install-tl-advanced.bat} 双击启动图形界面安装程序（定制安装）；
+    \item 在命令提示符中输入 \texttt{install-tl-windows.bat -no-gui} 启动文本界面安装程序。
+  \end{itemize}
+  \item 用于 Linux 的 Perl 脚本 \texttt{install-tl} ：
+  \begin{itemize}
+    \item \texttt{install-tl} 启动文本界面安装程序；
+    \item \texttt{install-tl -gui=wizard} 启动图形界面安装程序（简单安装）；
+    \item \texttt{install-tl -gui=peritk} 启动图形界面安装程序（定制安装）。
+  \end{itemize}
+\end{itemize}
+
+Linux 下 \TeX\ Live 安装完毕后，还需要在 root 权限下进行以下操作，使得 \texttt{xelatex} 命令能正确通过 \pkg{fontspec}
+等宏包使用字体\footnote{\url{http://www.tug.org/texlive/doc/texlive-zh-cn/texlive-zh-cn.pdf}，%
+可用 \texttt{texdoc texlive-zh-cn} 在本地打开。}：
+\begin{enumerate}
+  \item 将 \texttt{texlive-fontconfig.conf} 文件复制到 \texttt{/etc/fonts/conf.d/09-texlive.conf}。
+  \item 运行 \texttt{fc-cache -fsv}。
+\end{enumerate}
+
+\subsubsection{Mik\TeX}
+从 Mik\TeX\ 官网 \url{http://www.miktex.org/} 下载名为 \texttt{basic-miktex-***.exe} 的 Windows 安装程序包。
+下载后直接双击打开，按照程序的提示进行安装即可。
+
+\section{安装和更新宏包}\label{sec:pkg-manager}
+
+\TeX\ Live 提供了图形界面的宏包管理器 \TeX\ Live Manager 用于安装和更新宏包，而 Mik\-\TeX\ 也提供了管理器
+Mik\-\TeX\ Package Manager。用户可直接打开程序，进行宏包的安装和更新
+（Mik\TeX\ Package Manager 有普通权限和管理员权限的版本，建议总是打开管理员权限的程序）。
+
+两者也可以通过各自的命令行工具安装更新宏包：
+\begin{verbatim}
+% TeX Live 命令行工具 tlmgr 的使用示例
+tlmgr install <package-name> % 安装某个宏包
+tlmgr remove <package-name>  % 卸载某个宏包
+tlmgr update --all --self    % 更新所有宏包（包括 tlmgr 本身）
+tlmgr update --list          % 列出所有可更新的宏包
+tlmgr repository set http://.../CTAN/systems/texlive/tlnet
+                             % 指定更新源（CTAN）地址
+tlmgr info <package-name>    % 查看宏包信息
+                             % 加 --list 选项可列出宏包的所有文件
+\end{verbatim}
+
+\begin{verbatim}
+% MikTeX 命令行工具 mpm 的使用示例
+% 建议始终加 --admin 选项使用
+mpm --admin --install <package-name>   % 安装某个宏包
+mpm --admin --uninstall <package-name> % 卸载某个宏包
+mpm --admin --update                   % 更新所有宏包
+mpm --admin --set-repository=http://.../CTAN/systems/win32/miktex/tm/packages
+                                       % 指定更新源（CTAN）地址
+mpm --admin --print-package-info <package-name>
+                                       % 查看宏包信息
+\end{verbatim}
+
+\TeX\ Live 默认安装所有宏包，而 Mik\TeX\ 的安装程序只包含了若干用于 \LaTeX\ 的基本宏包。从 \TeX\ Live 的光盘镜像和 Mik\-\TeX\ 的安装包体积可见一斑。
+默认情况下，编译过程中如果遇到宏包未安装而报错的情况下，Mik\TeX\ 会弹出一个对话框，让用户可以选择临时安装宏包，安装成功后继续编译。
+
+\subsection{手动安装宏包}\label{sec:pkg-manual-install}
+
+\textbf{\textcolor{red}{如非万不得已，尽量不要手动安装宏包}}。绝大多数宏包都已打包到 \TeX\ Live 和 Mik\TeX\ 两大发行版的安装源，
+可用宏包管理器安装。如果你知道某个宏包的名称，但不确定是否在发行版中已打包，可在 CTAN 中搜索。
+
+如果确实有手动安装宏包的需要，本小节的内容将有所帮助。在手动安装之前，有必要了解一下 \TeX\ 目录结构（\TeX\ Directory Structure, TDS）。
+它是 \TeX\ 发行版中宏包、字体、帮助文档等文件的组织结构。TDS 有时也称为 TEXMF 树，取 \TeX$+$\hologo{METAFONT} 之意。
+
+以 \TeX\ Live 为例，系统的 TEXMF 树根目录为 \nolinkurl{C:\\texlive\\2015\\texmf-dist}，其下有很多子目录，仅举几例：
+\begin{description}
+  \item[\texttt{tex/latex}] \LaTeX\ 宏包。
+  \item[\texttt{doc/latex}] \LaTeX\ 宏包的帮助文档。
+  \item[\texttt{source/latex}] \LaTeX\ 宏包的源代码。
+  \item[\texttt{fonts/tfm}] \TeX\ 使用的字体文件，TFM 格式。
+  \item[\texttt{fonts/type1}] PostScript 字体文件（Type1），PFB 格式。
+  \item[\texttt{fonts/opentype}] OpenType 格式的字体文件。
+\end{description}
+
+需要手动安装的宏包，一般已经按照上述目录结构打包完成。手动安装时，尽量不要拷贝到系统的 TEXMF 树，而是拷贝到发行版提供的用户 TEXMF 树，如
+\TeX Live 的 \nolinkurl{C:\\texlive\\texmf-local}。安装完成后，还需\textbf{刷新 \TeX\ 发行版的文件名数据库}，令新安装的宏包文件能够被系统找到。
+\TeX\ Live 用户须在 Windows 命令行或者 Linux 终端执行命令：
+\begin{verbatim}
+mktexlsr
+\end{verbatim}
+Mik\TeX\ 用户的命令为：
+\begin{verbatim}
+initexmf --update-fndb
+\end{verbatim}
+
+\endinput
