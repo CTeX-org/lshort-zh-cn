@@ -12,18 +12,18 @@
 \section{绘图语言简介}\label{sec:pict-lang}
 
 \LaTeX\ 提供了原始的 \env{picture} 环境，能够绘制一些基本的图形如点、线、矩形、圆、B\'ezier 曲线等等，
-不过受制于 \LaTeX\ 本身，它的绘图功能极为有限，效果也往往不够美观。
+不过受制于 \LaTeX\ 本身，它的绘图功能极为有限，效果也不够美观。
 
 现在流行的绘图代码有以下几种：
 \begin{itemize}
   \item PSTricks \par
-  基于 PostSciprt 绘图方式的宏包，具有优秀的绘图能力。它对老式的 \texttt{latex + dvips} 编译命令支持最好，
+  以 PostSciprt 语言的功能为基础的绘图语言宏包，具有优秀的绘图能力。它对老式的 \texttt{latex + dvips} 编译命令支持最好，
   而现在的几种编译命令下使用起来都不够方便。
 
   \item \TikZ\ \& \pkg{pgf} \par
-  德国的 Till Tantau 在开发著名的 \LaTeX 幻灯片文档类 \cls{beamer} 时一并开发了绘图宏包 \pkg{pgf}，
-  以令绘图语言能够在不同的编译方式下使用，如 \texttt{pdflatex} 和 \texttt{xelatex} 等。
-  \TikZ\ 是在 \pkg{pgf} 基础上的一个封装，提供了方便的绘图语言，绘图能力不输 PSTricks。
+  德国的 Till Tantau 在开发著名的 \LaTeX\ 幻灯片文档类 \cls{beamer} 时一并开发了绘图宏包 \pkg{pgf}，
+  目的是令其能够在 \texttt{pdflatex} 或 \texttt{xelatex} 等不同的编译命令下都能使用。
+  \TikZ\ 是在 \pkg{pgf} 基础上封装的一个宏包，提供了方便的绘图语言，绘图能力不输 PSTricks。
 
   \item \hologo{METAPOST} \& Asymptote \par
   \hologo{METAPOST} 脱胎于高德纳为 \TeX\ 配套开发的字体生成程序 \hologo{METAFONT}，
@@ -307,3 +307,5 @@
 \end{center}
 \caption{\TikZ\ 绘图示例源代码和效果。}\label{code:tikz-example}
 \end{sourcecode}
+
+\endinput

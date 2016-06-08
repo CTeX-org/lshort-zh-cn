@@ -54,7 +54,7 @@ l.3 Test \LaTEx
 \item \LaTeXerror{Runaway argument? \\
                   ! Paragraph ended before \ldots\ was complete.}
 
-\item \LaTeXerror{! File ended while scanning use of \ldots}.
+\item \LaTeXerror{! File ended while scanning use of \ldots}
 
 两个错误都是主要由于漏写了包裹命令参数的花括号，导致识别参数时出现错误。
 
@@ -82,7 +82,7 @@ l.3 Test \LaTEx
 
 两个错误都意味着缺少文件。
 \begin{itemize}
-  \item 如果使用 \cmd{input} 或者 \cmd{include} 命令添加文件，文件不存在，文件名或路径不正确，将会出现上述错误；
+  \item 如果使用 \cmd{input} 或者 \cmd{include} 命令添加文件，出现上述错误的原因当然是文件不存在或者文件名不对；
   \item 如果错误提示里的文件名带 \texttt{.cls} 或者 \texttt{.sty} 扩展名，那么很显然，是因为\textbf{没有安装所需的宏包或文档类}。
 \end{itemize}
 
@@ -94,7 +94,7 @@ l.3 Test \LaTEx
 
 与上一条相反，由于将必须用于导言区的命令放到了 \cmd{begin}\marg*{docu\-ment} 之后使用而产生。
 
-\item \LaTeXerror{!  LaTeX Error: \cmd{begin}\marg*{\ldots} on input line \ldots ended by \cmd{end}\marg*{\ldots}.}
+\item \LaTeXerror{!  LaTeX Error: \cmd{begin}\marg*{\ldots} on input line \ldots\ ended by \cmd{end}\marg*{\ldots}.}
 
 环境首尾不匹配。比如 \cmd{begin}\marg*{enumerate} 用了 \cmd{end}\marg*{itemize} 结尾。往往是由于漏写了 \cmd{begin}
 或者 \cmd{end} 命令。
@@ -102,26 +102,25 @@ l.3 Test \LaTEx
 \item \LaTeXerror{!  LaTeX Error: Option clash for package `\ldots'.}
 
 以\textbf{不同选项}重复调用宏包造成冲突。有可能是因为其它宏包内部事先调用了这个宏包，用户再次带选项调用而导致冲突。
-可尝试去掉重复调用的宏包避免冲突。如果宏包允许的话，尽量使用其定义的命令改变设置，避免将设置作为宏包选项。
+解决问题的办法是去掉重复调用的宏包。如果宏包允许的话，尽量使用其定义的命令改变设置，减少宏包选项的使用。
 
-\item \LaTeXerror{!  LaTeX Error: Command \ldots already defined, \\
-                     or name \cmd{end}\ldots illegal \ldots}
+\item \LaTeXerror{!  LaTeX Error: Command \ldots\ already defined, \\
+                     or name \cmd{end}\ldots\ illegal \ldots}
 
 使用 \cmd{newcommand} 或 \cmd{newenvironment} 定义已有的命令/环境时产生的错误。如果自己确实使用了前述命令，可考虑改成
 \cmd{re\-new\-command} 或 \cmd{re\-new\-environment}；如果是宏包定义的命令产生了这个错误，则属于隐性的宏包冲突。
 
 相比之前的 ``Option Clash''，隐性宏包冲突是更难以解决的问题，对各种宏包不熟悉的用户，尤其是使用模板的用户而言，往往难以下手。
-用户可尝试查找冲突的命令所在宏包的帮助手册。详尽的手册里通常会告知用户这个宏包应当用在某个宏包的前面/后面。
+用户可尝试查找引起冲突的宏包的帮助手册。详尽的手册里通常会告知用户这个宏包应当在某个宏包的前面/后面调用，或者不能与某个宏包一起调用。
 如果是模板调用了大量宏包导致冲突，可联系模板的作者解决。
 
 \item \LaTeXerror{!  LaTeX Error: Unknown option `\ldots' for package `\ldots'.}
 
-调用宏包时使用了不能被其识别的选项。此时应该查找宏包的帮助文档来解决问题。
+调用宏包时指定了不能被其识别的选项。此时应该查找宏包的帮助文档来解决问题。
 
 \item \LaTeXerror{!  Package `\ldots' error: \ldots}
 
-宏包或文档类自定义的错误，由于不正确地使用宏包里的命令而导致。
-此时应该查找宏包的帮助文档来解决问题。
+宏包或文档类自定义的错误，由于不正确地使用宏包里的命令而导致。此时应该查找宏包的帮助文档来解决问题。
 
 \end{itemize}
 

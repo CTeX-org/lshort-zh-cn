@@ -18,17 +18,18 @@
 %
 % ctex 宏包 2.2(2015/06/24) 或以上版本
 % ctex 宏包的字号设定会让许多固定字号的字体宏包报太多 warning，应当抑制
+% 中文正文字体使用 Fandol
 %
 \RequirePackage[fontset=fandol,zihao=false,scheme=chinese,heading=true]{ctex}[2015/06/24]
 
 %
 % 字体和符号宏包
 % 
-\RequirePackage{lmodern}  % 正文字体使用 Latin Modern
+\RequirePackage{lmodern}  % 西文正文字体使用 Latin Modern
 \RequirePackage{amssymb,latexsym,textcomp,mathrsfs,euscript,yhmath} % 与默认字体不冲突的一些符号包
 \RequirePackage[LGR,T1]{fontenc}
 
-% layout 宏包生成能放入浮动体的命令，手动指定奇偶页的 layout
+% 调整 layout 宏包的命令使之能够放入浮动体，手动指定奇偶页的 layout
 \input lshort-zh-cn-layout
 \oddsidelayouttrue
 % layout 文字汉化
@@ -100,12 +101,13 @@
     \protect\@mkboth{\MakeUppercase\indexname}{\MakeUppercase\indexname}}
    \parskip\z@ \@plus .3\p@\relax
    \let\item\@idxitem
+   \small
    \begin{multicols}{2}}
    {\end{multicols}}
 
 %
 % 将主目录和源代码目录合并排版
-% 不依赖 \listof，因此要补充定义 \l@sourcecode
+% 不依赖 float 宏包的 \listof，因此要补充定义 \l@sourcecode
 % 
 \renewcommand\tableofcontents%
   {\chapter{\contentsname%

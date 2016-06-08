@@ -53,7 +53,9 @@
 \cmd{tableofcontents}
 \end{command}
 
-正确生成目录项，一般需要多次编译源代码。
+这个命令会生成单独的一个章节，标题默认为 ``Contents'' ，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
+
+正确生成目录项，一般需要编译两次源代码。
 
 \cmdindex{addcontentsline}
 有时我们使用了 \cmd{chapter*} 或 \cmd{section*} 这样不生成目录项的命令，而又想手动生成该章节的目录，可以在标题命令后面使用：
@@ -75,9 +77,9 @@
 \cmdindex{frontmatter,mainmatter,backmatter}
 \cls{book} 文档类还提供了前言、正文、后记结构的划分命令：
 \begin{description}
-  \item[\cmd{frontmatter}] 前言部分，页码为小写罗马字母格式；其后的章节不编号（但生成页眉页脚和目录项）。
-  \item[\cmd{mainmatter}] 正文部分，页码改回数字格式，并从 1 开始计数；其后的章节正常编号。
-  \item[\cmd{backmatter}] 后记部分，页码继续正常计数，格式不变；其后的章节不编号，类似 \cmd{frontmatter} 命令。
+  \item[\cmd{frontmatter}] 前言部分，页码为小写罗马字母格式；其后的章节不编号，但生成页眉页脚和目录项。
+  \item[\cmd{mainmatter}] 正文部分，页码为阿拉伯数字格式，从 1 开始计数；其后的章节编号、页眉页脚和目录项正常。
+  \item[\cmd{backmatter}] 后记部分，页码格式不变，继续正常计数；其后的章节不编号，但生成页眉页脚和目录项。
 \end{description}
 
 \cmdindex{include}
@@ -471,6 +473,8 @@ for (int i=0; i<4; ++i)
 \end{tabular}
 \end{example}
 
+表格中每行的单元格数目不能多于列格式里 \texttt{l/c/r/p} 的总数（可以少于这个总数），否则出错。
+
 \texttt{@} 格式可在单元格前后插入任意的文本，但同时它也消除了单元格前后额外添加的间距。
 \texttt{@} 格式可以适当使用以充当“竖线”。特别地，\texttt{@}\marg*{} 可直接用来消除单元格前后的间距：
 \begin{example}
@@ -558,13 +562,15 @@ for (int i=0; i<4; ++i)
 \end{example}
 
 \pkgindex{booktabs}
-\cmdindex[booktabs]{toprule,midrule,bottomrule}
+\cmdindex[booktabs]{toprule,midrule,bottomrule,cmidrule}
 在科技论文排版中广泛应用的表格形式是三线表，形式干净简明。
 三线表由 \pkg{booktabs} 宏包支持，它提供了 \cmd{toprule}、\cmd{midrule} 和 \cmd{bottomrule} 命令用以排版三线表的三条线，
-除此之外，最好不要用其它横线以及竖线：
+以及和 \cmd{cline} 对应的 \cmd{cmidrule}。除此之外，最好不要用其它横线以及竖线：
 \begin{example}
 \begin{tabular}{cccc}
   \toprule
+   & \multicolumn{3}{c}{Numbers} \\
+  \cmidrule{2-4}
            & 1 & 2 & 3 \\
   \midrule
   Alphabet & A & B & C \\

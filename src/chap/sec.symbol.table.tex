@@ -15,15 +15,10 @@
 
 \def\SC      #1{#1       & \texttt{\string#1}}
 
-
-\newsavebox{\symbbox}
 \newenvironment{symbols}[1]%
-  {\def\arraystretch{1.1}
-  \begin{lrbox}{\symbbox}
+  {\small\def\arraystretch{1.1}
   \begin{tabular}{@{}#1@{}}}%
-  {\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}}
-
-\newcount\savesecdepth
+  {\end{tabular}}
 
 \clearpage
 \section{符号表}\label{sec:math-tables}
@@ -39,6 +34,7 @@
 \symindex{dag,ddag,P,S,copyright,pounds}
 
 \begin{table}[htp]
+\centering
 \caption{文本/数学模式通用符号}\label{tbl:general-syms}
 \begin{quote}\footnotesize%
 这些符号可用于文本和数学模式。
@@ -53,6 +49,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{希腊字母。} \label{tbl:math-greek}
 \begin{quote}\footnotesize%
 \cmd{Alpha}，\cmd{Beta} 等希腊字母符号不存在，因为它们和拉丁字母 A,B 等一模一样；
@@ -79,6 +76,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{二元关系符。} \label{tbl:math-rel}
 \begin{quote}\footnotesize%
 所有的二元关系符都可以加 \cmd{not} 前缀得到相反意义的关系符，例如 \cmd{not}\texttt{=} 就得到不等号（同 \cmd{ne}）。
@@ -104,6 +102,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{二元运算符。}\label{tbl:math-op}
 \begin{symbols}{*3{cl}}
 \hline
@@ -125,6 +124,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{巨算符。}\label{tbl:math-bigop}
 \def\arraystretch{1.8}
 \begin{symbols}{*3{ccl}}
@@ -141,6 +141,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{数学重音符号。}\label{tbl:math-accents}
 \begin{quote}\footnotesize%
 最后一个 \cmd{wideparen} 依赖 \pkg{yhmath} 宏包。
@@ -158,6 +159,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{箭头。} \label{tbl:math-arrows}
 \begin{symbols}{*2{cl}}
 \hline
@@ -183,6 +185,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{作为重音的箭头符号。}  \label{tbl:math-arrow-accents}
 \begin{symbols}{*2{cl}}
 \hline
@@ -194,6 +197,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{定界符。}\label{tbl:math-delims}
 \begin{symbols}{*3{cl}}
 \hline
@@ -210,6 +214,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{用于行间公式的大定界符。}\label{tbl:math-large-delims}
 \def\arraystretch{1.8}
 \begin{symbols}{*3{cl}}
@@ -222,6 +227,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{其他符号。}\label{tbl:math-misc}
 \begin{symbols}{*4{cl}}
 \hline
@@ -244,6 +250,7 @@
 本小节所有符号依赖 \pkg{amssymb} 宏包。
 
 \begin{table}[htp]
+\centering
 \caption{\AmS\ 希腊字母和希伯来字母。} \label{tbl:ams-greek-hebrew}
 \begin{symbols}{*5{cl}}
 \hline
@@ -253,6 +260,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{\AmS\ 二元关系符。} \label{tbl:ams-rel}
 \begin{symbols}{*3{cl}}
 \hline
@@ -283,6 +291,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{\AmS\ 二元运算符。} \label{tbl:ams-op}
 \begin{symbols}{*3{cl}}
 \hline
@@ -299,6 +308,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{\AmS\ 箭头。}\label{tbl:ams-arrows}
 \begin{symbols}{*2{cl}}
 \hline
@@ -322,6 +332,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{\AmS\ 反义二元关系符和箭头。}\label{tbl:ams-negative}
 \begin{symbols}{*3{cl}}
 \hline
@@ -350,6 +361,7 @@
 \end{table}
 
 \begin{table}[htp]
+\centering
 \caption{\AmS\ 定界符}\label{tbl:ams-delims}
 \begin{symbols}{*4{cl}}
 \hline
@@ -360,6 +372,7 @@
 \end{table}
 
 \begin{table}[htp] 
+\centering
 \caption{\AmS\ 其它符号。}\label{tbl:ams-misc}
 \begin{symbols}{*3{cl}}
 \hline

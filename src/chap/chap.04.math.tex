@@ -114,12 +114,12 @@ In display:
 \begin{enumerate}
   \item 数学模式中输入的空格全部被忽略。数学符号的间隙默认完全由符号的性质（关系符号、运算符等）决定。
   需要人为引入空隙时，使用 \cmd{quad} 和 \cmd{qquad} 等命令。详见 \ref{sec:math-space} 节。
-  \item \textbf{不允许有空行（分段）。}每个公式（每组多行公式）自成一个段落。
+  \item \textbf{不允许有空行（分段）}，公式也无法自动换行或者用 \crcmd\ 换行。排版多行公式需要用到 \ref{sec:multi-eqns} 节介绍的各种环境。
   \item 所有的字母被当作数学公式中的变量处理，字母间距与文本模式不一致，也无法生成单词之间的空格。
   如果想在数学公式中输入正体的文本，简单情况下可用 \ref{subsec:math-alpha} 小节中提供的 \cmd{mathrm} 命令。
-  \pkg{amsmath} 提供了更加方便的 \amscmd{text} 命令%
+  或者用 \pkg{amsmath} 提供的 \amscmd{text} 命令%
   \footnote{\amscmd{text} 命令仅适合在公式中穿插少量文字。如果你的情况正好相反，需要在许多文字中穿插使用公式，
-  则应该像正常的行内公式那样，而不是滥用 \amscmd{text} 命令。}。
+  则应该像正常的行内公式那样用，而不是滥用 \amscmd{text} 命令。}。
 \end{enumerate}
 \begin{example}
 $x^{2} \geq 0 \qquad
@@ -133,7 +133,8 @@ x\in\mathbb{R}$
 
 \pkgindex{amssymb}
 本节我们将接触到形形色色的数学符号，它们是 \LaTeX\ 卓越的数学公式排版能力的基础。\LaTeX\ 默认提供了常用的数学符号，
-\pkg{amssymb} 宏包提供了一些次常用的符号。大多数常用的数学符号都能在本章末尾的 \ref{sec:math-tables} 节列出的表格里查到。
+\pkg{amssymb} 宏包提供了一些次常用的符号。大多数常用的数学符号都能在本章末尾的 \ref{sec:math-tables} 节列出的各个表格里查到。
+更多符号可查阅参考文献\cite{symbols}。
 
 \subsection{一般符号}
 
@@ -141,7 +142,7 @@ x\in\mathbb{R}$
 \msymindex{infty}
 希腊字母符号的名称就是其英文名称，如 \msym{alpha}、\msym{beta} 等等。
 大写的希腊字母为首字母大写的命令，如 \msym{Gamma}、\msym{Delta} 等等。
-无穷大符号为 \msym{infty} 。详情请参考本章末尾的表 \ref{tbl:math-greek} 和 \ref{tbl:math-misc} 等。
+无穷大符号为 \msym{infty} 。更多符号命令可参考表 \ref{tbl:math-greek} 和 \ref{tbl:math-misc} 等。
 
 \msymindex{dots,ldots,cdots}
 省略号有 \msym{dots} 和 \msym{cdots} 两种形式。它们有各自合适的用途：
@@ -151,7 +152,7 @@ $a_1 + a_2 + \cdots + a_n$
 \end{example}
 
 \cmd{ldots} 和 \cmd{dots} 是完全等效的，它们既能用在公式中，也用来在文本里作为省略号（详见 \ref{subsec:punct} 小节）。
-除此之外，在矩阵中会用到竖排的 \msym{vdots} 和斜排的 \msym{ddots}。
+除此之外，在矩阵中可能会用到竖排的 \msym{vdots} 和斜排的 \msym{ddots}。
 
 \subsection{指数、上下标和导数}\label{subsec:math-scripts}
 
@@ -527,14 +528,13 @@ l + m &= n
 为了排版二维数组，\LaTeX\ 提供了 \env{array} 环境，用法与 \env{tabular} 环境极为类似，也需要定义列格式，并用 \crcmd\ 换行。
 数组可作为一个子公式，在外套用 \cmd{left}、\cmd{right} 等定界符：
 \begin{example}
-\[
-\mathbf{X} = \left(
-\begin{array}{ccc}
-x_1 & x_2 & \ldots \\
-x_3 & x_4 & \ldots \\
-\vdots & \vdots & \ddots
-\end{array} \right)
-\]
+\[ \mathbf{X} = \left(
+\begin{array}{cccc}
+x_{11} & x_{12} & \ldots & x_{1n}\\
+x_{21} & x_{22} & \ldots & x_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{n1} & x_{n2} & \ldots & x_{nn}\\
+\end{array} \right) \]
 \end{example}
 
 值得注意的是，上一节末尾介绍的 \amsenv{aligned} 等环境也可以用定界符包裹。
@@ -543,45 +543,57 @@ x_3 & x_4 & \ldots \\
 \mathindex{right}
 我们还可以利用空的定界符排版出这样的效果：
 \begin{example}
-\[
-|x| = \left\{
+\[ |x| = \left\{
 \begin{array}{rl}
 -x & \text{if } x < 0,\\
 0 & \text{if } x = 0,\\
 x & \text{if } x > 0.
-\end{array} \right.
-\]
+\end{array} \right. \]
 \end{example}
 
 \envindex[amsmath]{cases}
 不过上述例子可以用 \pkg{amsmath} 提供的 \amsenv{cases} 环境更轻松地完成：
 \begin{example}
-\[
-|x| =
+\[ |x| =
 \begin{cases}
 -x & \text{if } x < 0,\\
 0 & \text{if } x = 0,\\
 x & \text{if } x > 0.
-\end{cases}
-\]
+\end{cases} \]
 \end{example}
 
 \envindex[amsmath]{matrix,pmatrix,bmatrix,Bmatrix,vmatrix,Vmatrix}
 我们当然也可以用 \env{array} 环境排版各种矩阵。\pkg{amsmath} 宏包还直接提供了多种排版矩阵的环境，包括不带定界符的 \amsenv{matrix}，
 以及带各种定界符的矩阵 \amsenv{pmatrix}（$\bigl($）、\amsenv{bmatrix}（$\bigl[$）、\amsenv{Bmatrix}（$\bigl\{$）、
-\amsenv{vmatrix}（$\bigl\vert$）、\amsenv{Vmatrix}（$\bigl\Vert$）。
-使用这些环境时，无需给定列格式：
+\amsenv{vmatrix}（$\bigl\vert$）、\amsenv{Vmatrix}（$\bigl\Vert$）。使用这些环境时，无需给定列格式%
+\footnote{事实上这些矩阵内部也是用 \env{array} 环境生成的，列格式默认为 \texttt{*\{\Arg{n}\}\{c\}}，\Arg{n} 默认为 10；
+\amsenv{cases} 内部是一个列格式为 \texttt{@\{\}l@\{\cmd{quad}\}l@\{\}} 的 \env{array} 环境。}：
 \begin{example}
 \[
 \begin{matrix}
-1 & 2 \\
-3 & 4
+1 & 2 \\ 3 & 4
 \end{matrix} \qquad
 \begin{bmatrix}
-p_{11} & p_{12} & \ldots & p_{1n} \\
-p_{21} & p_{22} & \ldots & p_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-p_{m1} & p_{m2} & \ldots & p_{mn}
+x_{11} & x_{12} & \ldots & x_{1n}\\
+x_{21} & x_{22} & \ldots & x_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{n1} & x_{n2} & \ldots & x_{nn}\\
+\end{bmatrix}
+\]
+\end{example}
+
+在矩阵中的元素里排版分式时，一来要用到 \amscmd{dfrac} 等命令，二来行与行之间有可能紧贴着，这时要用到
+\ref{subsec:tabular-colht} 小节的方法来调节间距：
+\begin{example}
+\[
+\mathbf{H}=
+\begin{bmatrix}
+\dfrac{\partial^2 f}{\partial x^2} &
+\dfrac{\partial^2 f}
+      {\partial x \partial y} \\[8pt]
+\dfrac{\partial^2 f}
+      {\partial x \partial y} &
+\dfrac{\partial^2 f}{\partial y^2}
 \end{bmatrix}
 \]
 \end{example}

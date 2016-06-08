@@ -262,4 +262,34 @@ My humble subjects \ldots
   tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth，那么章节将不会自动写入目录项。默认值同 secnumdepth。
 \end{itemize}
 
+\section{\LaTeX\ 可定制的一些命令和参数}\label{sec:latex-settings}
+
+\begin{table}[htbp]
+\centering
+\caption{\LaTeX\ 可简单定制的一些命令。}\label{tbl:latex-settings-cmds}
+\small
+\begin{tabularx}{\textwidth}{llX}
+\hline
+\textsf{命令} & \textsf{默认值} & \textsf{含义} \\
+\hline
+\cmd{partname}       & Part            & \cmd{part} 命令生成的标题前缀 \\
+\cmd{chaptername}    & Chapter         & \cmd{chapter} 命令生成的标题前缀 \\
+\cmd{appendixname}   & Appendix        & 使用 \cmd{appendix} 命令生成的附录部分的章标题前缀 \\
+\cmd{abstractname}   & Abstract        & 摘要环境 \env{abstract} 的标题名称 \\[1ex]
+\cmd{contentsname}   & Contents        & \cmd{tableofcontents} 命令生成的目录标题 \\
+\cmd{listfigurename} & List of Figures & \cmd{listoffigures} 命令生成的插图目录标题 \\
+\cmd{listtablename}  & List of Table   & \cmd{listoftables} 命令生成的表格目录标题 \\[1ex]
+\cmd{refname}        & Reference       & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+                                          命令生成的参考文献标题（\cls{article} 文档类） \\
+\cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+                                          命令生成的参考文献标题（\cls{book / report} 文档类）\\
+\cmd{indexname}      & Index           & \env{printindex} 命令生成的索引标题 \\
+\hline
+\end{tabularx}
+\begin{quotation}\footnotesize%
+注：形如“第 X 章”和“第 X 部分”的中文章节标题不能直接由修改命令得到，需要使用 \pkg{titlesec} 等宏包定制。
+如果使用 \pkg{ctex} 宏包或文档类，那么标题默认被修改成中文的形式，并且支持简单的定制。
+\end{quotation}
+\end{table}
+
 \endinput

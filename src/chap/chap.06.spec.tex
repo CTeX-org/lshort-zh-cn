@@ -35,6 +35,9 @@
 如 99 意味着不超过两位数字。通常设定为与参考文献的数目一致。
 \env{the\-biblio\-graphy} 环境自动生成不带编号的一章（\cls{report} / \cls{book} 文档类）或一节（\cls{article} 文档类）。
 
+\env{thebibliography} 生成单独的一个章节，在 \cls{article} 文档类的节标题默认为 ``Reference'' ，而在 \cls{report / book} 文档类
+的章标题默认为 ``Bibliography'' 。用户可通过 \ref{sec:latex-settings} 节给出的方法定制参考文献的标题。
+
 以下为一个使用 \env{the\-biblio\-graphy} 排版参考文献的例子：
 
 \begin{verbatim}
@@ -68,13 +71,15 @@ Partl~\cite{pa} has proposed that \ldots
 其中 \Arg{type} 为参考文献的类型，如 \texttt{article} 为学术论文，\texttt{book} 为书籍，\texttt{in\-collection} 为论文集中的某一篇，等等。
 \Arg{citation} 为 \cmd{cite} 命令所用的参考文献的标签。在 \Arg{citation} 之后为条目里的各个数据项，以 \Arg{key} = \marg{value} 的形式组织。
 
-我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目格式。所有条目格式参考 \CTAN|biblio/bibtex/base/btxdoc.pdf|。
+我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目格式：
 \begin{description}
   \item[\texttt{article}] 学术论文，必需数据项有 author, title, journal, year; 可选数据项包括 volumn, issue, number, pages, doi 等；
   \item[\texttt{book}] 书籍，必需数据项有 author/editor, title, publisher, year; 可选数据项包括 volumn/number, series, address 等；
   \item[\texttt{incollection}] 论文集中的一篇，必需数据项有 author, title, booktitle, publisher, year; 可选数据项包括 editor, volumn/number, chapter, pages, address 等；
   \item[\texttt{inbook}] 书中的一章，必需数据项有 author/editor, title, chapter/pages, publisher, year; 可选数据项包括 volumn/number, series, address 等。
 \end{description}
+
+源代码 \ref{code:bibtex-db} 示例了两条 \texttt{book} 类型的文献条目的写法。上述列表之外的文献条目格式请参考 \CTAN|biblio/bibtex/base/btxdoc.pdf|。
 
 多数时候，我们无需自己手写 \hologo{BibTeX} 文献条目。从 Google Scholar 或者期刊/数据库的网站上都能够导出 \hologo{BibTeX} 文献条目，
 老牌的文献管理软件 EndNote 也支持生成 \hologo{BibTeX} 格式的数据库。开源软件 JabRef 甚至支持 \hologo{BibTeX} 文献条目的导入、导出和管理。
@@ -84,7 +89,8 @@ Partl~\cite{pa} has proposed that \ldots
 \index{bibtex@\protect\hologo{BibTeX} 工具}
 现在我们来看如何利用 \hologo{BibTeX} 数据库生成参考文献和引用。
 
-第一步：我们当然需要一份 \hologo{BibTeX} 数据库，假设起名为 \texttt{books.bib} ，和我们的 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
+第一步：我们当然需要一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib} （见源代码 \ref{code:bibtex-db}），
+和我们的 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
@@ -106,11 +112,11 @@ Partl~\cite{pa} has proposed that \ldots
   edition = {2nd}
 }
 \end{Verbatim}
-\caption{\hologo{BibTeX} 数据库示例 \texttt{books.bib}。}
+\caption{\hologo{BibTeX} 数据库示例 \texttt{books.bib}。}\label{code:bibtex-db}
 \end{sourcecode}
 
 \cmdindex{bibliographystyle}
-第二步：在源代码中添加必要的命令。假设源代码的名称为 \texttt{demo.tex}。首先需要的是在\textbf{导言区}设定参考文献的格式：
+第二步：在源代码中添加必要的命令。假设源代码的名称为 \texttt{demo.tex}（见 \ref{code:bibtex-demo}）。首先需要的是在\textbf{导言区}设定参考文献的格式：
 \begin{command}
 \cmd{bibliographystyle}\marg{bst-name}
 \end{command}
@@ -142,7 +148,7 @@ and \cite{Mittelbach2004} \ldots
 \bibliography{books}
 \end{document}
 \end{Verbatim}
-\caption{利用 \texttt{books.bib} 生成参考文献的源代码 \texttt{demo.tex}。}
+\caption{利用 \texttt{books.bib} 生成参考文献的源代码 \texttt{demo.tex}。}\label{code:bibtex-demo}
 \end{sourcecode}
 
 注意：\cmd{bibliographystyle} 和 \cmd{bibliography} 命令缺一不可，没有这两个命令，使用 \hologo{BibTeX} 生成参考文献列表的时候会报错。
@@ -419,6 +425,44 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \cmd{usepackage}\oarg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots}\marg*{hyperref}
 \end{command}
 
+\begin{table}[htp]
+\centering
+\caption{\pkg{hyperref} 宏包提供的设置。}\label{tbl:hyperref-settings}
+\begin{tabular}{lcp{19.5em}}
+ \hline
+ 选项                         &  默认值         & \multicolumn{1}{c}{含义} \\
+ \hline
+ \texttt{colorlinks=}\Arg{true\textnormal|false} 
+                              & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
+ \texttt{hidelinks}           &                 & 取消链接的颜色和边框 \\
+ \texttt{pdfborder=}\marg*{\Arg{n} \Arg{n} \Arg{n}}   
+                              &  0 0 1          & 超链接边框设置，设为 0 0 0 可取消边框 \\
+ \hline
+ \texttt{bookmarks=}\Arg{true\textnormal|false} 
+                              & \textit{true}   & 是否生成书签 \\
+ \texttt{bookmarksopen=}\Arg{true\textnormal|false} 
+                              & \textit{false}  & 是否展开书签 \\
+ \texttt{bookmarksnumbered=}\Arg{true\textnormal|false} 
+                              & \textit{false}  & 书签是否带章节编号 \\
+ \texttt{CJKbookmarks=}\Arg{true\textnormal|false} 
+                              & \textit{false}   & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须指定的选项，
+                                                 在第一次编译后需要将生成的 \texttt{.out} 文件用工具处理编码 \\
+ \texttt{unicode}             &                  & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须指定的选项 \\
+ \hline
+ \texttt{pdftitle=}\Arg{string} 
+                              & 空               & 标题 \\
+ \texttt{pdfauthor=}\Arg{string} 
+                              & 空               & 作者 \\
+ \texttt{pdfsubject=}\Arg{string} 
+                              & 空               & 主题 \\
+ \texttt{pdfkeywords=}\Arg{string} 
+                              & 空               & 关键词 \\
+ \texttt{pdfstartview=}\Arg{Fit\textnormal|FitH\textnormal|FitV}
+                              & \textit{Fit}     & 设置 PDF 页面以适合页面/适合宽度/适合高度等方式显示，默认为适合页面 \\
+ \hline
+\end{tabular}
+\end{table}
+
 \subsection{超链接}\label{subsec:url-href}
 
 \cmdindex[hyperref]{url,nolinkurl}
@@ -493,42 +537,5 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 
 \pkg{hyperref} 宏包还提供了一些选项用于改变 PDF 文档的属性，部分见表 \ref{tbl:hyperref-settings}。
 
-\begin{table}[htp]
-\centering
-\caption{\pkg{hyperref} 宏包提供的设置。}\label{tbl:hyperref-settings}
-\begin{tabular}{lcp{19.5em}}
- \hline
- 选项                         &  默认值         & \multicolumn{1}{c}{含义} \\
- \hline
- \texttt{colorlinks=}\Arg{true\textnormal|false} 
-                              & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
- \texttt{hidelinks}           &                 & 取消链接的颜色和边框 \\
- \texttt{pdfborder=}\marg*{\Arg{n} \Arg{n} \Arg{n}}   
-                              &  0 0 1          & 超链接边框设置，设为 0 0 0 可取消边框 \\
- \hline
- \texttt{bookmarks=}\Arg{true\textnormal|false} 
-                              & \textit{true}   & 是否生成书签 \\
- \texttt{bookmarksopen=}\Arg{true\textnormal|false} 
-                              & \textit{false}  & 是否展开书签 \\
- \texttt{bookmarksnumbered=}\Arg{true\textnormal|false} 
-                              & \textit{false}  & 书签是否带章节编号 \\
- \texttt{CJKbookmarks=}\Arg{true\textnormal|false} 
-                              & \textit{false}   & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须指定的选项，
-                                                 在第一次编译后需要将生成的 \texttt{.out} 文件用工具处理编码 \\
- \texttt{unicode}             &                  & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须指定的选项 \\
- \hline
- \texttt{pdftitle=}\Arg{string} 
-                              & 空               & 标题 \\
- \texttt{pdfauthor=}\Arg{string} 
-                              & 空               & 作者 \\
- \texttt{pdfsubject=}\Arg{string} 
-                              & 空               & 主题 \\
- \texttt{pdfkeywords=}\Arg{string} 
-                              & 空               & 关键词 \\
- \texttt{pdfstartview=}\Arg{Fit\textnormal|FitH\textnormal|FitV}
-                              & \textit{Fit}     & 设置 PDF 页面以适合页面/适合宽度/适合高度等方式显示，默认为适合页面 \\
- \hline
-\end{tabular}
-\end{table}
 
 \endinput
