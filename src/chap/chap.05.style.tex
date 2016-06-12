@@ -538,6 +538,10 @@ between lines in a paragraph.
 切换单/双栏排版时总是会另起一页（\cmd{clearpage}）。
 在双栏模式下使用 \cmd{newpage} 会换栏而不是换页；\cmd{clearpage} 则能够换页。
 
+\cmdindex{columnwidth,columnsep,columnseprule}
+双栏排版时每一栏的宽度为 \cmd{columnwidth}，它由 \cmd{textwidth} 减去 \cmd{columnsep} 的差除以 2 得到。
+两栏之间还有一道竖线，宽度为 \cmd{columnseprule}，默认为零，也就是看不到竖线。
+
 \pkgindex{multicol}
 \envindex[multicol]{multicols}
 一个比较好用的分栏解决方案是 \pkg{multicol}，它提供了简单的 \env{multicols} 环境

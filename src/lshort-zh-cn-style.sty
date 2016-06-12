@@ -143,8 +143,10 @@
 %
 % PDF 书签中对符号的特殊处理
 % 
-\pdfstringdefDisableCommands{\def\AmS{AMS}}%
-\pdfstringdefDisableCommands{\def\TikZ{TikZ}}%
+\pdfstringdefDisableCommands{%
+  \def\AmS{AMS}%
+  \def\TikZ{TikZ}%
+}
 
 %
 % 示意长度

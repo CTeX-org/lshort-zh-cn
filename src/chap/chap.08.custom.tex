@@ -242,7 +242,7 @@ My humble subjects \ldots
 \begin{itemize}
   \item secnumdepth \index{secnumdepth@secnumdepth (\textit{计数器})}
 
-  \LaTeX\ 内部对章节规定了层级：
+  \LaTeX\ 标准文档类对章节划分了层级：
   \begin{itemize}
     \item 在 \cls{article} 文档类里 part 为 0，section 为 1，依此类推；
     \item 在 \cls{report}/\cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
@@ -264,31 +264,69 @@ My humble subjects \ldots
 
 \section{\LaTeX\ 可定制的一些命令和参数}\label{sec:latex-settings}
 
+\LaTeX\ 事实上有相当一些可以定制的命令和参数，不过对于修改样式或者开发宏包来说，这些定制项还远远不够。
+
+对于用户来讲，容易定制的是这一些项目：
+
+\begin{itemize}
+  \item 标题名称/前后缀等。表 \ref{tbl:latex-settings-names} 列出了标准文档类里可定制的项目，
+  表中所有的 \LaTeX\ 命令都可以用 \cmd{re\-new\-comm\-and} 来修改。
+  \item 长度。前文在叙述各种排版元素时已经涉及到一些，现归纳于表 \ref{tbl:latex-settings-lengths}。
+  表中所有的长度命令可用 \cmd{setlength} 来修改。
+  大多数控制页面尺寸的参数在图 \ref{fig:layouts} 给出，此处不再赘述。
+\end{itemize}
+
 \begin{table}[htbp]
 \centering
-\caption{\LaTeX\ 可简单定制的一些命令。}\label{tbl:latex-settings-cmds}
+\caption{\LaTeX\ 可定制的标题名称/前后缀。}\label{tbl:latex-settings-names}
 \small
 \begin{tabularx}{\textwidth}{llX}
-\hline
-\textsf{命令} & \textsf{默认值} & \textsf{含义} \\
-\hline
-\cmd{partname}       & Part            & \cmd{part} 命令生成的标题前缀 \\
-\cmd{chaptername}    & Chapter         & \cmd{chapter} 命令生成的标题前缀 \\
-\cmd{appendixname}   & Appendix        & 使用 \cmd{appendix} 命令生成的附录部分的章标题前缀 \\
-\cmd{abstractname}   & Abstract        & 摘要环境 \env{abstract} 的标题名称 \\[1ex]
-\cmd{contentsname}   & Contents        & \cmd{tableofcontents} 命令生成的目录标题 \\
-\cmd{listfigurename} & List of Figures & \cmd{listoffigures} 命令生成的插图目录标题 \\
-\cmd{listtablename}  & List of Table   & \cmd{listoftables} 命令生成的表格目录标题 \\[1ex]
-\cmd{refname}        & Reference       & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+ \hline
+ \textsf{命令} & \textsf{默认值} & \textsf{含义} \\
+ \hline
+ \cmd{partname}       & Part            & \cmd{part} 命令生成的标题前缀 \\
+ \cmd{chaptername}    & Chapter         & \cmd{chapter} 命令生成的标题前缀 \\
+ \cmd{appendixname}   & Appendix        & 使用 \cmd{appendix} 命令生成的附录部分的章标题前缀 \\
+ \cmd{abstractname}   & Abstract        & 摘要环境 \env{abstract} 的标题名称 \\[1ex]
+ \cmd{contentsname}   & Contents        & \cmd{tableofcontents} 命令生成的目录标题 \\
+ \cmd{listfigurename} & List of Figures & \cmd{listoffigures} 命令生成的插图目录标题 \\
+ \cmd{listtablename}  & List of Table   & \cmd{listoftables} 命令生成的表格目录标题 \\[1ex]
+ \cmd{refname}        & Reference       & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
                                           命令生成的参考文献标题（\cls{article} 文档类） \\
-\cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+ \cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
                                           命令生成的参考文献标题（\cls{book / report} 文档类）\\
-\cmd{indexname}      & Index           & \env{printindex} 命令生成的索引标题 \\
-\hline
+ \cmd{indexname}      & Index           & \env{printindex} 命令生成的索引标题 \\
+ \hline
 \end{tabularx}
 \begin{quotation}\footnotesize%
-注：形如“第 X 章”和“第 X 部分”的中文章节标题不能直接由修改命令得到，需要使用 \pkg{titlesec} 等宏包定制。
+注：形如“第 X 章”和“第 X 部分”的中文章节标题不能直接由修改本表的命令得到，需要使用 \pkg{titlesec} 等宏包定制。
 如果使用 \pkg{ctex} 宏包或文档类，那么标题默认被修改成中文的形式，并且支持简单的定制。
+\end{quotation}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{\LaTeX\ 可定制的距离。}\label{tbl:latex-settings-lengths}
+\small
+\begin{tabularx}{\textwidth}{ll@{pt\hskip2\tabcolsep}X}
+ \hline
+ \textsf{命令} & \multicolumn{1}{l}{\textsf{默认值}} & \textsf{含义} \\
+ \hline
+ \cmd{fboxrule}     & 0.4 & 带框盒子的线宽 \\
+ \cmd{fboxsep}      & 3   & 带框盒子的内边距 \\[1ex]
+ \cmd{arraycolsep}  & 5   & \env{array} 环境的表格项前后的间距 \\
+ \cmd{tabcolsep}    & 6   & \env{tabular} 环境的表格项前后的间距 \\
+ \cmd{arrayrulewidth}     &  0.4  & 表格线宽 \\
+ \cmd{doublerulesep}      &  2    & 连续两根表格线之间的间距 \\[1ex]
+ \cmd{abovecaptionskip}   &  10   & \cmd{caption} 命令位于图表下方时，与上方图表的间距 \\
+ \cmd{belowcaptionskip}   &  0    & \cmd{caption} 命令位于图表上方时，与下方图表的间距 \\[1ex]
+ \cmd{columnsep}          &  10   & 双栏排版下两栏的间距 \\
+ \cmd{columnseprule}      &  0    & 双栏排版下两栏之间竖线的宽度 \\
+ \hline
+\end{tabularx}
+\begin{quotation}\footnotesize%
+注：\cmd{arraycolsep} 和 \cmd{tabcolsep} 是每个表格项本身前后的间距（表格线前后无边距；\texttt{@} 列格式会消除与前后表格项的间距）。
+两个表格项之间的间距相当于 2\cmd{arraycolsep} 或 2\cmd{tabcolsep}。
 \end{quotation}
 \end{table}
 
