@@ -132,7 +132,7 @@ My humble subjects \ldots
 \cmd{ProvidesPackage}\marg{package name}
 \end{command}
 这个命令应该放在你的宏包的最前面，并且一定要注意：\textbf{\Arg{package name} 需要和宏包的文件名一致。}
-\cmd{Provides\-Package} 让 \LaTeX\ 记录宏包的名称，从而在你尝试再次调用同一个宏包的时候忽略后面的引入%
+\cmd{Provides\-Package} 让 \LaTeX\ 记录宏包的名称，从而在你尝试再次调用同一个宏包的时候忽略后面的调用%
 \footnote{但如果你以\emph{不同的选项}多次引入宏包，则有可能会引起错误，见附录 \ref{sec:errors}。}。
 源代码 \ref{code:package} 给出了一个小的宏包示例，其中包含了我们之前定义的一些命令。
 
@@ -178,7 +178,7 @@ My humble subjects \ldots
 \cmd{newcounter}\marg{counter name}\oarg{parent counter name}
 \end{command}
 
-\Arg{counter name} 为计数器的名称，可选参数 \Arg{parent counter name} 定义为 \Arg{counter name} 的上级计数器。
+\Arg{counter name} 为计数器的名称。计数器可以有上下级的关系，可选参数 \Arg{parent counter name} 定义为 \Arg{counter name} 的上级计数器。
 
 \cmdindex{setcounter,addtocounter,stepcounter}
 以下命令修改计数器的数值，\cmd{set\-counter} 将数值设为 \Arg{number}；\cmd{add\-to\-counter} 将数值加上 \Arg{number}；
@@ -201,14 +201,16 @@ My humble subjects \ldots
 命令 \cmd{Alph} 控制计数器 \Arg{counter} 的值以大写字母形式显示。下表列出所有可用于修改计数器格式的命令。
 注意：这些命令\textbf{只能用于计数器，不能直接用于数字}，如 \cmd{roman}\marg*{1} 这样的命令会出错。
 \begin{center}
-\begin{tabular}{cl}
+\begin{tabular}{lp{12em}l}
  \hline
- \cmd{arabic} & 阿拉伯数字（默认） \\
- \cmd{alph}  & 小写字母 \\
- \cmd{Alph}  & 大写字母 \\
- \cmd{roman} & 小写罗马数字 \\
- \cmd{Roman} & 大写字母 \\
- \cmd{fnsymbol} & 一系列符号，用于标题页生成的脚注中 \\
+ \textbf{命令} & \textbf{样式} & \textbf{备注} \\
+ \hline
+ \cmd{arabic} & 阿拉伯数字（默认） & \\
+ \cmd{alph}  & 小写字母 & 限 0-26 \\
+ \cmd{Alph}  & 大写字母 & 限 0-26 \\
+ \cmd{roman} & 小写罗马数字 & 限正数 \\
+ \cmd{Roman} & 大写罗马数字 & 限正数 \\
+ \cmd{fnsymbol} & 一系列符号，用于 \cmd{thanks} 命令生成的脚注 & 限 0-9 \\
  \hline
 \end{tabular}
 \end{center}
@@ -229,13 +231,19 @@ My humble subjects \ldots
   \item 页码、脚注的计数器分别是 page 和 footnote。
 \end{itemize}
 
+我们可以利用前面介绍过的命令，修改计数器的样式以达到想要的效果，比如把页码修改成大写罗马字母，或是给脚注加上方括号：
+\begin{verbatim}
+\renewcommand\thepage{\Roman{page}}
+\renewcommand\thefootnote{[\arabic{footnote}]}
+\end{verbatim}
+
 \cmdindex{pagenumbering}
-我们可以利用前面介绍过的命令，修改计数器的样式以达到想要的效果，比如把页码修改成大写罗马字母，或是给脚注加上方括号。
 修改页码的样式有个更方便的命令 \cmd{page\-number\-ing}：
 \begin{verbatim}
 \pagenumbering{Roman}
-\renewcommand\thefootnote{[\arabic{footnote}]}
 \end{verbatim}
+不过它在修改 page 计数器样式的同时，还将计数器的值改为 1，令修改后的页码总是从 1 开始。\cls{book} 文档类的
+\cmd{frontmatter} 和 \cmd{mainmatter} 等都用了 \cmd{pagenumbering} 命令。
 
 最后介绍两个有用的计数器：
 
@@ -291,7 +299,7 @@ My humble subjects \ldots
  \cmd{contentsname}   & Contents        & \cmd{tableofcontents} 命令生成的目录标题 \\
  \cmd{listfigurename} & List of Figures & \cmd{listoffigures} 命令生成的插图目录标题 \\
  \cmd{listtablename}  & List of Table   & \cmd{listoftables} 命令生成的表格目录标题 \\[1ex]
- \cmd{refname}        & Reference       & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+ \cmd{refname}        & References      & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
                                           命令生成的参考文献标题（\cls{article} 文档类） \\
  \cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
                                           命令生成的参考文献标题（\cls{book / report} 文档类）\\
@@ -300,7 +308,7 @@ My humble subjects \ldots
 \end{tabularx}
 \begin{quotation}\footnotesize%
 注：形如“第 X 章”和“第 X 部分”的中文章节标题不能直接由修改本表的命令得到，需要使用 \pkg{titlesec} 等宏包定制。
-如果使用 \pkg{ctex} 宏包或文档类，那么标题默认被修改成中文的形式，并且支持简单的定制。
+如果使用 \pkg{ctex} 宏包或文档类，那么标题默认被修改成“第 X 章”和“第 X 部分”的形式，并且支持简单的定制。详见 \pkg{ctex} 宏包的帮助手册。
 \end{quotation}
 \end{table}
 
@@ -310,10 +318,10 @@ My humble subjects \ldots
 \small
 \begin{tabularx}{\textwidth}{ll@{pt\hskip2\tabcolsep}X}
  \hline
- \textsf{命令} & \multicolumn{1}{l}{\textsf{默认值}} & \textsf{含义} \\
+ \textsf{命令} & \multicolumn{1}{l@{\hskip2\tabcolsep}}{\textsf{默认值}} & \textsf{含义} \\
  \hline
- \cmd{fboxrule}     & 0.4 & 带框盒子的线宽 \\
- \cmd{fboxsep}      & 3   & 带框盒子的内边距 \\[1ex]
+ \cmd{fboxrule}     & 0.4 & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的线宽 \\
+ \cmd{fboxsep}      & 3   & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的内边距 \\[1ex]
  \cmd{arraycolsep}  & 5   & \env{array} 环境的表格项前后的间距 \\
  \cmd{tabcolsep}    & 6   & \env{tabular} 环境的表格项前后的间距 \\
  \cmd{arrayrulewidth}     &  0.4  & 表格线宽 \\
@@ -325,7 +333,7 @@ My humble subjects \ldots
  \hline
 \end{tabularx}
 \begin{quotation}\footnotesize%
-注：\cmd{arraycolsep} 和 \cmd{tabcolsep} 是每个表格项本身前后的间距（表格线前后无边距；\texttt{@} 列格式会消除与前后表格项的间距）。
+注：\cmd{arraycolsep} 和 \cmd{tabcolsep} 是每个表格项本身前后的间距（表格线前后无间距；\texttt{@} 列格式会消除与前后表格项的间距）。
 两个表格项之间的间距相当于 2\cmd{arraycolsep} 或 2\cmd{tabcolsep}。
 \end{quotation}
 \end{table}

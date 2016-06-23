@@ -22,7 +22,7 @@
 数学公式有两种排版方式：其一是与文字混排，称为\textbf{行内公式}；其二是单独列为一行排版，称为\textbf{行间公式}。
 
 \pinyinindex{hangneigongshi}{行内公式}
-\index{$@\texttt\$ (\textit{数学模式})}
+\index{^^d@\texttt\$ (\textit{数学模式})}
 行内公式由一对 \texttt\$ 符号包裹：
 \begin{example}
 Add $a$ squared and $b$ squared
@@ -409,21 +409,21 @@ ${a,b,c} \neq \{a,b,c\}$
 （\cmd{bigl} 和 \cmd{bigr} 不必成对出现）。
 \begin{example}
 $\Bigl((x+1)(x-1)\Bigr)^{2}$\\
-$\bigl( \Bigl( \biggl( \Biggl( 
-\quad
-\bigr\} \Bigr\} \biggr\} \Biggr\} 
-\quad
-\big\| \Big\| \bigg\| \Bigg\| 
-\quad
+$\bigl( \Bigl( \biggl( \Biggl( \quad
+\bigr\} \Bigr\} \biggr\} \Biggr\} quad
+\big\| \Big\| \bigg\| \Bigg\| \quad
 \big\Downarrow \Big\Downarrow
 \bigg\Downarrow \Bigg\Downarrow$
 \end{example}
+
+使用 \cmd{big} 和 \cmd{bigg} 等命令的另外一个好处是：用 \cmd{left} 和 \cmd{right} 分界符包裹的公式块是不允许断行的
+（下文提到的 \env{array} 或者 \amsenv{aligned} 等环境视为一个公式块），而 \cmd{big} 和 \cmd{bigg} 不受限制。
 
 \section{多行公式}\label{sec:multi-eqns}
 
 \subsection{长公式折行}\label{sec:multline}
 
-通常来讲应当避免写出需要折行的长公式。如果一定要折行的话，优先在等号之前折行，其次在加号、减号之前，再次在乘号、除号之前。
+通常来讲应当避免写出超过一行而需要折行的长公式。如果一定要折行的话，优先在等号之前折行，其次在加号、减号之前，再次在乘号、除号之前。
 其它位置应当避免折行。
 
 \envindex[amsmath]{multline}
@@ -526,7 +526,7 @@ l + m &= n
 \envindex{array}
 \index{&@\texttt\& (\textit{单元格/对齐})}
 为了排版二维数组，\LaTeX\ 提供了 \env{array} 环境，用法与 \env{tabular} 环境极为类似，也需要定义列格式，并用 \crcmd\ 换行。
-数组可作为一个子公式，在外套用 \cmd{left}、\cmd{right} 等定界符：
+数组可作为一个公式块，在外套用 \cmd{left}、\cmd{right} 等定界符：
 \begin{example}
 \[ \mathbf{X} = \left(
 \begin{array}{cccc}
@@ -607,8 +607,9 @@ x_{n1} & x_{n2} & \ldots & x_{nn}\\
 我们已经认识了两个生成间距的命令 \cmd{quad} 和 \cmd{qquad}。在公式中我们还可能用到的间距包括 \cmd{,}、\cmd{:}、\cmd{;}
 以及负间距 \cmd{!}，其中 \cmd{quad} 、 \cmd{qquad} 和 \cmd{,} 在文本和数学环境中可用，后三个命令只用于数学环境。
 文本中的 \cmd{\textvisiblespace} 也能使用在数学公式中。
-\begin{center}
+
 \newdimen\testdimen \testdimen=\fontdimen6\textfont2 \divide\testdimen18\relax
+\begin{center}
 \begin{tabularx}{0.9\textwidth}{*{3}{>{\raggedright\arraybackslash}X}|*{3}{>{\raggedright\arraybackslash}X}}
  \hline
  无额外间距  &                          & $a a$        &

@@ -180,7 +180,7 @@
   \item \texttt{help lines} \par
   指定线条为辅助线，相当于 \texttt{line width=0.2pt,gray}。
   \item \texttt{solid / dashed / dotted / dash dot / dash dot dot / \dots} \par
-  指定线条类型（实现、虚线等）。
+  指定线条类型（实线、虚线等）。
   \item \texttt{rounded corners} \par
   将路径转向处绘制成圆角。可写成 \texttt{rounded corners=\Arg{radius}} 使用给定的半径。
 \end{itemize}
@@ -228,7 +228,8 @@
 \begin{itemize}
   \item \texttt{anchor=\Arg{position}} \par
   指定结点的某个角落 \Arg{position} 位于给定的位置 \Arg{coordinate}。
-  \item \texttt{center/ above / below / left / right / above left / \ldots} \par
+  参数 \Arg{position} 用 \texttt{center}、\text{north}、text{north west} 等形式表示。
+  \item \texttt{centered / above / below / left / right / above left / \ldots} \par
   指定结点相对于 \Arg{coordinate} 的位置，\texttt{anchor=\Arg{position}} 的等效写法。\texttt{above} 相当于 \texttt{anchor=south}，以此类推。
   带参数的形式 \texttt{above=\Arg{length}} 指定节点相对于 \Arg{coordinate} 的距离。
   \item \texttt{shape=\Arg{shape}} \par

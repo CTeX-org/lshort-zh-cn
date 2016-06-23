@@ -128,13 +128,15 @@
 \cmd{author}\marg{author} \quad
 \cmd{date}\marg{date}
 \end{command}
-其中前两个命令是必须的，\cmd{date} 命令可选。\LaTeX\ 还提供了一个 \cmd{today} 命令自动生成当前日期，
-可用在 \cmd{date} 的参数里，或者别的地方。
+其中前两个命令是必须的（不用 \cmd{title} 会报错；不用 \cmd{author} 会警告），\cmd{date} 命令可选。
+\LaTeX\ 还提供了一个 \cmd{today} 命令自动生成当前日期，\cmd{date} 默认使用 \cmd{today} 。
 
-\cmdindex{thanks}
-在 \cmd{title}、\cmd{author} 等命令内可以使用 \cmd{thanks} 命令生成标题页的脚注，如：
+\cmdindex{thanks,and}
+在 \cmd{title}、\cmd{author} 等命令内可以使用 \cmd{thanks} 命令生成标题页的脚注，用 \cmd{and} 隔开多个人名，如：
 \begin{verbatim}
-\author{Mary\thanks{E-mail:*****@***.com}}
+\author{Mary\thanks{E-mail:*****@***.com}
+   \and Ted\thanks{Corresponding author}
+   \and Louis}
 \end{verbatim}
 
 \cmdindex{maketitle}
@@ -145,6 +147,10 @@
 \end{command}
 生成一个简单的标题页了。\cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
 可在 \cmd{document\-class} 命令中指定 \texttt{titlepage / notitlepage} 选项修改。
+
+以上是 \LaTeX\ 标准文档类的标题页实现。在各种文档模板中，标题页的实现方式会根据自身的需要进行修改，
+有可能需要除了 \cmd{title} 和 \cmd{author} 以外的命令给定信息，用法也可能与标准文档类的不一致。
+使用文档模板前\textbf{一定要仔细阅读文档模板的帮助手册}。
 
 \section{交叉引用}\label{sec:crossref}
 
@@ -283,9 +289,9 @@ page~\pageref{sec:this}.''
 \envindex{center,flushleft,flushright}
 \env{center}、\env{flush\-left} 和 \env{flush\-right} 环境分别用于生成居中、左对齐和右对齐的文本环境。
 \begin{command}
-\cmd{begin}\marg*{center}
-\ldots
-\cmd{end}\marg*{center}
+\cmd{begin}\marg*{center} \ldots\ \cmd{end}\marg*{center} \\
+\cmd{begin}\marg*{flushleft} \ldots\ \cmd{end}\marg*{flushleft} \\
+\cmd{begin}\marg*{flushright} \ldots\ \cmd{end}\marg*{flushright}
 \end{command}
 
 \begin{example}
@@ -364,9 +370,9 @@ a perfect mirror.
 \subsection{摘要环境}\label{subsec:abstract}
 
 \envindex{abstract}
-摘要环境 \env{abstract} 只在 \cls{article} 和 \cls{report} 文档类可用，一般用于紧跟 \cmd{maketitle} 命令之后介绍文档的摘要。
-如果文档类给定了 \texttt{titlepage} 选项，则单独成页；反之相当于一个小标题加一个 \env{quotation} 环境%
-（双栏下相当于 \cmd{section*} 定义的一节）。
+摘要环境 \env{abstract} 默认只在标准文档类中的 \cls{article} 和 \cls{report} 文档类可用，
+一般用于紧跟 \cmd{maketitle} 命令之后介绍文档的摘要。如果文档类指定了 \texttt{titlepage} 选项，则单独成页；
+反之，单栏排版时相当于一个居中的小标题加一个 \env{quotation} 环境，双栏排版时相当于 \cmd{section*} 定义的一节。
 
 \subsection{代码环境}\label{subsec:verbatim}
 
