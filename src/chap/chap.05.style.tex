@@ -372,10 +372,11 @@ of 1.5 cm.
 得到不会因断行而消失的水平间距。
 
 \cmdindex{stretch,fill}
-命令 \cmd{stretch}\marg{n} 生成一个特殊弹性长度，参数 \Arg{n} 为权重。它的基础长度为零，但可以无限延伸，直到占满可用的空间。
+命令 \cmd{stretch}\marg{n} 生成一个特殊弹性长度，参数 \Arg{n} 为权重。它的基础长度为 0pt，但可以无限延伸，直到占满可用的空间。
 如果同一行内出现多个 \cmd{stretch}\marg{n}，这一行的所有可用空间将按每个 \cmd{stretch} 命令给定的权重 \Arg{n} 进行分配。
 
-命令 \cmd{fill} 相当于 \cmd{stretch}\marg*{1}。
+命令 \cmd{fill} 相当于 \cmd{stretch}\marg*{1}%
+\footnote{注意不要用 \texttt{1.5}\cmd{fill} 这样的用法，它生成的长度只有基础长度 0pt 而没有延伸部分。}。
 
 \begin{example}
 x\hspace{\stretch{1}}

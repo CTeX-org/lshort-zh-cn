@@ -631,13 +631,13 @@ for (int i=0; i<4; ++i)
 在以下的例子中，注意要用 \cmd{multi\-column} 命令配合 \texttt{@\{\}} 格式把单元格的额外边距去掉，使得嵌套的表格线能和外层的表格线正确相连：
 
 \begin{example}
-\begin{tabular}{|c|l|c|}
+\begin{tabular}{|c|c|c|}
  \hline
- a & bbb & c \\ \hline
- a & \multicolumn{1}{@{}l@{}|}
+ a & b & c \\ \hline
+ a & \multicolumn{1}{@{}c@{}|}
  {\begin{tabular}{c|c}
-   a & b \\ \hline 
-   aa & bb \\
+   e & f \\ \hline 
+   e & f \\
   \end{tabular}}
        & c \\ \hline
  a & b & c \\ \hline
@@ -645,7 +645,7 @@ for (int i=0; i<4; ++i)
 \end{example}
 
 \pkgindex{makecell}
-如果不要求画横线，并且只需要在垂直方向“拆分单元格”的话，\pkg{makecell} 宏包提供的 \cmd{make\-cell} 命令是一个简单的解决方案：
+如果不需要为“拆分的单元格”画线，并且只在垂直方向“拆分”的话，\pkg{makecell} 宏包提供的 \cmd{make\-cell} 命令是一个简单的解决方案：
 
 \begin{example}
 \begin{tabular}{|c|c|}
