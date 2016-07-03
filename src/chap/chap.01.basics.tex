@@ -150,7 +150,7 @@ or \TeX{} users?
 在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}，除了使用 \cmd{use\-package}
 调用宏包之外，一些对文档的全局设置命令也在这里使用。当然也可以什么都不写，一个宏包都不调用。一切视自己需求。
 
-\section{用命令行操作 \LaTeX}
+\section{用命令行操作 \LaTeX}\label{sec:run}
 
 相信你看到这里已经急不可耐地想要写一个 \LaTeX\ 源代码试一试了。我们这就给一个最小的例子，见源代码 \ref{code:hello-world}。
 
@@ -167,7 +167,7 @@ or \TeX{} users?
 有相当多的编辑器会提供一个按钮完成编译，不过笔者仍然觉得有必要了解一下其背后的工作原理。\LaTeX\ 调用的程序都是基于命令行的，
 所以建议打开 Windows 命令提示符或者 Linux / OS X 的终端，按照本手册的范例尝试一下调用命令行程序编译。
 
-\subsection{引擎、格式和命令}
+\subsection{引擎、格式和命令}\label{subsec:concepts}
 
 \pinyinindex{paibanyinqing}{排版引擎}
 \index{pdfTeX@\hologo{pdfTeX}}
@@ -199,7 +199,7 @@ or \TeX{} users?
 \end{center}
 \footnotetext{现今的发行版中 \texttt{latex} 命令也用 \hologo{pdfTeX} 引擎结合 \LaTeX\ 格式，输出扩展名为 DVI 的文档。}
 
-\subsection{\texttt{latex}命令}
+\subsection{\texttt{latex}命令}\label{subsec:latex-exe}
 
 假使你的计算机上已经安装了 \LaTeX\ 依赖的程序和工具（安装方法在附录 \ref{app:install} 有简单介绍）。
 我们将源代码 \ref{code:hello-world} 拷贝到一个文本文件中，保存为 \texttt{helloworld.tex}。然后在命令行输入：
@@ -226,7 +226,7 @@ dvipdfmx helloworld.dvi
 
 然后就可以用查看 PDF 的软件 （Adobe Reader / Foxit Reader 等）打开生成的 \texttt{hello\-world.pdf} 查看了。
 
-\subsection{\texttt{pdflatex} 和 \texttt{xelatex} 命令}
+\subsection{\texttt{pdflatex} 和 \texttt{xelatex} 命令}\label{subsec:pdflatex-exe}
 
 \index{pdflatex@\texttt{pdflatex} 命令}
 这两个命令相比于 \texttt{latex} 命令更为方便，我们可以直接生成 PDF：

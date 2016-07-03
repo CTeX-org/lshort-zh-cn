@@ -1,4 +1,4 @@
-\chapter{排版数学公式}
+\chapter{排版数学公式}\label{chap:math}
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
@@ -136,7 +136,7 @@ x\in\mathbb{R}$
 \pkg{amssymb} 宏包提供了一些次常用的符号。大多数常用的数学符号都能在本章末尾的 \ref{sec:math-tables} 节列出的各个表格里查到。
 更多符号可查阅参考文献\cite{symbols}。
 
-\subsection{一般符号}
+\subsection{一般符号}\label{subsec:math-general}
 
 \pinyinindex{xilazimu}{希腊字母 (数学符号)}
 \msymindex{infty}
@@ -290,7 +290,7 @@ $a\bmod b \\
 \[\argh 3 = \nut_{x=1} 4x\]
 \end{example}
 
-\subsection{巨算符}
+\subsection{巨算符}\label{subsec:math-bigop}
 
 \msymindex{int,oint,sum,prod}
 积分号 \msym{int}、求和号 \msym{sum} 等符号称为\textbf{巨算符}。巨算符在行内公式和行间公式的大小和形状有区别。
@@ -340,7 +340,7 @@ P(i,j) = Q(n)
 \]
 \end{example}
 
-\subsection{数学重音和上下括号}
+\subsection{数学重音和上下括号}\label{subsec:math-accents}
 
 \maccindex{dot,ddot,vec,hat}
 数学符号可以像文字一样加重音，比如对时间求导的符号 $\dot{r}$ (\cmd{dot}\marg*{r})、 $\ddot{r}$ (\cmd{ddot}\marg*{r})
@@ -373,7 +373,7 @@ $\underbrace{\overbrace{a+b+c}^6
 _\text{meaning of life} = 42$
 \end{example}
 
-\subsection{箭头}
+\subsection{箭头}\label{subsec:math-arrows}
 
 \cmdindex[amsmath]{xleftarrow,xrightarrow}
 除了作为上下标之外，箭头还用于表示过程。\pkg{amsmath} 的 \amscmd{xleft\-arrow} 和 \amscmd{xright\-arrow} 命令可以为箭头增加上下标：
@@ -382,7 +382,7 @@ _\text{meaning of life} = 42$
 \[ c\xrightarrow[x<y]{a*b*c}d \]
 \end{example}
 
-\subsection{括号和定界符}
+\subsection{括号和定界符}\label{subsec:math-delims}
 
 \LaTeX\ 提供了多种括号和定界符表示公式块的边界。除小括号\texttt{( )}、中括号\texttt{[ ]}之外，其余都是 \LaTeX\ 命令，
 包括大括号 \cmd{\{} \cmd{\}}。表 \ref{tbl:math-delims} 和 \ref{tbl:math-large-delims} 给出了更多的括号/定界符命令。
@@ -421,7 +421,7 @@ $\bigl( \Bigl( \biggl( \Biggl( \quad
 
 \section{多行公式}\label{sec:multi-eqns}
 
-\subsection{长公式折行}\label{sec:multline}
+\subsection{长公式折行}\label{subsec:multline}
 
 通常来讲应当避免写出超过一行而需要折行的长公式。如果一定要折行的话，优先在等号之前折行，其次在加号、减号之前，再次在乘号、除号之前。
 其它位置应当避免折行。
@@ -647,7 +647,7 @@ f(x)g(y) \diff x \diff y \\
 \end{gather*}
 \end{example}
 
-\section{数学符号的字体控制}
+\section{数学符号的字体控制}\label{sec:math-fonts}
 
 \subsection{数学字母字体}\label{subsec:math-alpha}
 
@@ -688,7 +688,7 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 \end{tabular}
 \end{table}
 
-\subsection{数学符号的尺寸}
+\subsection{数学符号的尺寸}\label{subsec:math-styles}
 
 \mathindex{displaystyle,textstyle,scriptstyle,scriptscriptstyle}
 数学符号按照符号排版的位置规定尺寸，从大到小包括行间公式尺寸、行内公式尺寸、上下标尺寸、次级上下标尺寸。
@@ -718,7 +718,7 @@ P = \frac
 \]
 \end{example}
 
-\subsection{加粗的数学符号}
+\subsection{加粗的数学符号}\label{subsec:math-bold}
 
 在 \LaTeX\ 中为符号切换数学字体并不十分自由，只能通过 \cmd{mathbf} 等有限的命令切换字体。比如想得到粗斜体的符号，就没有现成的命令%
 \footnote{国内可能还有使用粗斜体表示向量符号的习惯，但这并不是正确的习惯。}；再比如 \cmd{mathbf} 只能改变拉丁字母，希腊字母就没有用。
@@ -881,5 +881,18 @@ E=mc^2.\qedhere
 
 在 \amsenv{align} 等环境中使用 \cmd{qedhere} 命令会使 \qedsymbol\ 盖掉公式的编号；使用 \env{equation} 嵌套 \amsenv{aligned} 等环境时，
 \cmd{qedhere} 命令会将 \qedsymbol\ 直接放在公式后。这些位置都不太正常。
+
+证毕符号 \qedsymbol\ 本身被定义在命令 \cmd{qedsymbol} 中，如果有使用实心符号作为证毕符号的需求，需要自行用 \cmd{re\-new\-comm\-and}
+命令修改（用法见 \ref{subsec:newcmd} 小节）。我们可以利用在 \ref{subsec:rules} 小节介绍的标尺盒子来生成一个适当大小的“实心矩形”：
+\begin{example}
+\renewcommand{\qedsymbol}%
+  {\rule{1ex}{1.2ex}}
+\begin{proof}
+For simplicity, we use
+\[
+E=mc^2 \qedhere
+\]
+\end{proof}
+\end{example}
 
 \endinput

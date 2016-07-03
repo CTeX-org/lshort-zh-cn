@@ -1,4 +1,4 @@
-\chapter{自定义 \LaTeX\ 命令和功能}
+\chapter{自定义 \LaTeX\ 命令和功能}\label{chap:custom}
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
@@ -10,7 +10,7 @@
 不过作为入门手册，这些知识仍是不全面的。如果你不满足于此，需要参考更多资料，比如 \cite{companion,clsguide}。
 \end{intro}
 
-\section{自定义命令和环境}\label{sec:newcommands}
+\section{自定义命令和环境}\label{sec:defs}
 
 你也许已经意识到了，在本手册中介绍的所有命令都被包含在一个带颜色的矩形背景框中。
 笔者并没有直接使用基础的 \LaTeX\ 命令来实现这个效果，而是创建了一个\textbf{宏包}，
@@ -28,7 +28,7 @@
 一旦笔者想要修改命令代码的样式，比如更换颜色、加边框等等，可以通过改变 \env{command} 环境的定义来很容易地创建新的外观，
 而不是挨个修改每个命令示例。
 
-\subsection{定义新命令}
+\subsection{定义新命令}\label{subsec:newcmd}
 
 \cmdindex{newcommand}
 使用如下命令可以定义你自己的命令：
@@ -73,7 +73,7 @@ This is ``\tnss'' \ldots{}
 在某些情况之下，你可能会希望使用 \cmd{pro\-vide\-comm\-and} 命令。在命令不存在时，它相当于 \cmd{new\-comm\-and} 
 ；在命令已经存在时，仍沿用存在的定义。
 
-\subsection{定义环境}
+\subsection{定义环境}\label{subsec:newenv}
 
 \cmdindex{newenvironment}
 与 \cmd{new\-comm\-and} 命令类似，有一个命令用于定义新的环境。这个命令是 \cmd{new\-environ\-ment}，它的语法如下所示：
@@ -103,9 +103,9 @@ My humble subjects \ldots
 不会不小心新建重名的环境。如果你确实希望改变一个现有的环境，你可以使用命令
  \cmd{re\-new\-environ\-ment}，它使用和命令 \cmd{new\-environ\-ment} 相同的语法。
 
-\section{编写自己的宏包和文档类}
+\section{编写自己的宏包和文档类}\label{sec:packages}
 
-\subsection{编写简单的宏包}
+\subsection{编写简单的宏包}\label{subsec:provide-pkg}
 
 \cmdindex{usepackage}
 如果你定义了很多新的环境和命令，你的文档的导言区将变得相当长，在这种情况下，好的方式是
@@ -136,7 +136,7 @@ My humble subjects \ldots
 \footnote{但如果你以\emph{不同的选项}多次引入宏包，则有可能会引起错误，见附录 \ref{sec:errors}。}。
 源代码 \ref{code:package} 给出了一个小的宏包示例，其中包含了我们之前定义的一些命令。
 
-\subsection{在宏包中调用其它宏包}
+\subsection{在宏包中调用其它宏包}\label{subsec:require-pkg}
 
 \cmdindex{RequirePackage}
 如果你想进一步把各种宏包的功能汇总到一个文件里，而不是在文档的导言区罗列一大堆宏包的话，
@@ -146,7 +146,7 @@ My humble subjects \ldots
 \cmd{RequirePackage}\oarg{options}\marg{package name}
 \end{command}
 
-\subsection{编写自己的文档类}
+\subsection{编写自己的文档类}\label{subsec:provide-cls}
 
 \cmdindex{ProvidesClass}
 当你更进一步，需要编写自己的文档类，如论文模板等，问题就稍稍麻烦了一些。首先，自己的文档类以 \texttt{.cls} 作扩展名，开头使用
@@ -247,28 +247,28 @@ My humble subjects \ldots
 
 最后介绍两个有用的计数器：
 
+\subsubsection{secnumdepth}
+
+\index{secnumdepth@secnumdepth (\textit{计数器})}
+\LaTeX\ 标准文档类对章节划分了层级：
 \begin{itemize}
-  \item secnumdepth \index{secnumdepth@secnumdepth (\textit{计数器})}
-
-  \LaTeX\ 标准文档类对章节划分了层级：
-  \begin{itemize}
-    \item 在 \cls{article} 文档类里 part 为 0，section 为 1，依此类推；
-    \item 在 \cls{report}/\cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
-  \end{itemize}
-
-  secnumdepth 计数器控制章节编号的深度，如果章节的层级大于 secnumdepth，那么章节的标题、在目录和页眉页脚的标题都不编号
-  （照常生成目录和页眉页脚），章节计数器也不计数。
-
-  可以用 \cmd{setcounter} 命令设置 secnumdepth 为较大的数使得层级比较深的章节也编号，
-  如设置为 4 令 \cmd{paragraph} 也编号；或者设置一个较小的数以取消编号，如设置为 -1 令 \cmd{chapter} 不编号。
-  后者是生成不编号的章节的一个妙招，免去了手动使用 \cmd{add\-contents\-line} 和 \cmd{mark\-both} 的麻烦。
-
-  secnumdepth 计数器在 \cls{article} 文档类里默认为 3 （subsubsection 一级）；在 \cls{report} 和 \cls{book} 文档类里默认为 2 （subsection 一级）。
-
-  \item tocdepth \index{tocdepth@tocdepth (\textit{计数器})}
-
-  tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth，那么章节将不会自动写入目录项。默认值同 secnumdepth。
+  \item 在 \cls{article} 文档类里 part 为 0，section 为 1，依此类推；
+  \item 在 \cls{report}/\cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
 \end{itemize}
+
+secnumdepth 计数器控制章节编号的深度，如果章节的层级大于 secnumdepth，那么章节的标题、在目录和页眉页脚的标题都不编号
+（照常生成目录和页眉页脚），章节计数器也不计数。
+
+可以用 \cmd{setcounter} 命令设置 secnumdepth 为较大的数使得层级比较深的章节也编号，
+如设置为 4 令 \cmd{paragraph} 也编号；或者设置一个较小的数以取消编号，如设置为 -1 令 \cmd{chapter} 不编号。
+后者是生成不编号的章节的一个妙招，免去了手动使用 \cmd{add\-contents\-line} 和 \cmd{mark\-both} 的麻烦。
+
+secnumdepth 计数器在 \cls{article} 文档类里默认为 3 （subsubsection 一级）；在 \cls{report} 和 \cls{book} 文档类里默认为 2 （subsection 一级）。
+
+\subsubsection{tocdepth}
+
+\index{tocdepth@tocdepth (\textit{计数器})}
+tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth，那么章节将不会自动写入目录项。默认值同 secnumdepth。
 
 \section{\LaTeX\ 可定制的一些命令和参数}\label{sec:latex-settings}
 

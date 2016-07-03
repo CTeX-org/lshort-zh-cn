@@ -1,4 +1,4 @@
-\chapter{特色工具和功能}
+\chapter{特色工具和功能}\label{chap:spec}
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
@@ -6,9 +6,9 @@
 之后的使用颜色、超链接等则令我们生成美观易用的电子文档。
 \end{intro}
 
-\section{参考文献和 \hologo{BibTeX} 工具}
+\section{参考文献和 \hologo{BibTeX} 工具}\label{sec:bib}
 
-\subsection{基本的参考文献和引用}
+\subsection{基本的参考文献和引用}\label{subsec:bib-basics}
 
 \pinyinindex{cankaowenxian}{参考文献}
 \LaTeX\ 提供的参考文献和引用方式比较原始，需要用户自行书写参考文献列表。不同学术论文对参考文献列表的格式要求不一样，
@@ -53,7 +53,7 @@ Partl~\cite{pa} has proposed that \ldots
 \end{document}
 \end{verbatim}
 
-\subsection{\hologo{BibTeX} 数据库}
+\subsection{\hologo{BibTeX} 数据库}\label{subsec:bibtex-data}
 
 \index{bibtexdb@\protect\hologo{BibTeX} 数据库}
 \hologo{BibTeX} 是最为流行的参考文献数据组织格式之一。它的出现让我们摆脱手写参考文献条目的麻烦。我们还可以通过参考文献格式的支持，
@@ -172,7 +172,7 @@ pdflatex demo
 使用 \texttt{latex + dvipdfmx} 命令编译时，则 \texttt{dvipdfmx} 命令放在最后，相当于先后使用
 \texttt{latex}, \texttt{bibtex}, \texttt{latex}, \texttt{latex}, \texttt{dvipdfmx}。
 
-\subsection{\pkg{natbib} 宏包}
+\subsection{\pkg{natbib} 宏包}\label{subsec:natbib}
 
 \pkgindex{natbib}
 时下许多学术期刊比较喜欢使用人名——年份的引用方式，形如(\emph{Alice et~al.}, 2005)。
@@ -288,7 +288,7 @@ Test index.
 \pinyinindex{yanse}{颜色}
 \LaTeX\ 原生不支持颜色，它依赖 \pkg{color} 宏包或者 \pkg{xcolor} 宏包，给 PDF 输出生成颜色的特殊指令。
 
-\subsection{颜色的表达方式}
+\subsection{颜色的表达方式}\label{subsec:color-code}
 
 \pkgindex{color}
 \cmdindex[color/xcolor]{color}
@@ -361,7 +361,7 @@ Test index.
 如果调用 \pkg{color} 或 \pkg{xcolor} 宏包时指定 \texttt{dvipsnames} 选项，就有额外的 68 种颜色名称可用。
 \pkg{xcolor} 宏包还支持通过指定其它选项载入更多颜色名称。限于篇幅不展开介绍，详情请参考 \pkg{xcolor} 宏包的手册。
 
-\subsection{带颜色的文本和盒子}
+\subsection{带颜色的文本和盒子}\label{subsec:colorbox}
 
 原始的 \cmd{color} 命令类似于字体命令 \cmd{bfseries}，它使之后排版的内容全部变成指定的颜色，
 所以直接使用时通常要加花括号分组。\pkg{color} / \pkg{xcolor} 宏包都定义了一些方便用户使用的带颜色元素。
