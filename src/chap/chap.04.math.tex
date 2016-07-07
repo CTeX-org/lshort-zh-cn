@@ -410,7 +410,7 @@ ${a,b,c} \neq \{a,b,c\}$
 \begin{example}
 $\Bigl((x+1)(x-1)\Bigr)^{2}$\\
 $\bigl( \Bigl( \biggl( \Biggl( \quad
-\bigr\} \Bigr\} \biggr\} \Biggr\} quad
+\bigr\} \Bigr\} \biggr\} \Biggr\} \quad
 \big\| \Big\| \bigg\| \Bigg\| \quad
 \big\Downarrow \Big\Downarrow
 \bigg\Downarrow \Bigg\Downarrow$
@@ -813,8 +813,8 @@ described in theorem \ref{thm:light}.
 
 以上例子定义的 \env{jury} 环境与 \env{law} 环境共用编号，\env{mar} 环境不编号：
 \begin{example}
-\begin{law} \label{law:box}
-Don’t hide in the witness box
+\begin{law}\label{law:box}
+Don't hide in the witness box.
 \end{law}
 \begin{jury}[The Twelve]
 It could be you! So beware and
@@ -883,10 +883,12 @@ E=mc^2.\qedhere
 \cmd{qedhere} 命令会将 \qedsymbol\ 直接放在公式后。这些位置都不太正常。
 
 证毕符号 \qedsymbol\ 本身被定义在命令 \cmd{qedsymbol} 中，如果有使用实心符号作为证毕符号的需求，需要自行用 \cmd{re\-new\-comm\-and}
-命令修改（用法见 \ref{subsec:newcmd} 小节）。我们可以利用在 \ref{subsec:rules} 小节介绍的标尺盒子来生成一个适当大小的“实心矩形”：
+命令修改（用法见 \ref{subsec:newcmd} 小节）\footnote{注意，这个改法\textbf{只对 \pkg{amsthm} 宏包适用}。
+其它宏包如 \pkg{ntheorem} 等须参考帮助手册里提供的修改方法。}。
+我们可以利用在 \ref{subsec:rules} 小节介绍的标尺盒子来生成一个适当大小的“实心矩形”：
 \begin{example}
 \renewcommand{\qedsymbol}%
-  {\rule{1ex}{1.2ex}}
+  {\rule{1ex}{1.5ex}}
 \begin{proof}
 For simplicity, we use
 \[

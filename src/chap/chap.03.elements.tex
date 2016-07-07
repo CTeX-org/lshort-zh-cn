@@ -510,7 +510,7 @@ for (int i=0; i<4; ++i)
 \end{tabular}
 \end{example}
 
-辅助格式甚至支持插入 \cmd{centering} 等命令改变 \texttt{p} 列格式的对齐方式，一般还要加额外的命令\cmd{array\-back\-slash} 以免出错%
+辅助格式甚至支持插入 \cmd{centering} 等命令改变 \texttt{p} 列格式的对齐方式，一般还要加额外的命令 \cmd{array\-back\-slash} 以免出错%
 \footnote{\cmd{centering} 等对齐命令会破坏表格环境里 \crcmd\ 换行命令的定义，
 \cmd{array\-back\-slash} 用来恢复之。如果不加 \cmd{array\-back\-slash} 命令，
 也可以用 \cmd{tabular\-newline} 命令代替原来的 \crcmd\ 实现表格换行。}：
@@ -526,7 +526,7 @@ for (int i=0; i<4; ++i)
 \subsection{列宽}\label{subsec:colwidth}
 
 在控制列宽方面，\LaTeX\ 表格有着明显的不足：\texttt{l/c/r} 格式的列宽是由文字内容的自然宽度决定的，
-而 \texttt{p} 格式给定了列宽却不好控制对齐（需要 \pkg{array} 宏包辅助），
+而 \texttt{p} 格式给定了列宽却不好控制对齐（可用 \pkg{array} 宏包的辅助格式），
 更何况列与列之间通常还有间距，所以直接生成给定总宽度的表格并不容易。
 
 \envindex{tabular*}
@@ -864,12 +864,12 @@ A \rule[-.4pt]{3em}{.4pt} line.
 
 \section{浮动体}\label{sec:float}
 
-内容丰富的文章或者书籍往往包含丰富的图片和表格等内容。这些内容的尺寸往往太大，导致分页困难。
+内容丰富的文章或者书籍往往包含许多图片和表格等内容。这些内容的尺寸往往太大，导致分页困难。
 \LaTeX\ 为此引入了浮动体的机制，令大块的内容可以脱离上下文，放置在合适的位置。
 
 \envindex{figure,table}
 \LaTeX\ 预定义了两类浮动体环境 \env{figure} 和 \env{table}。习惯上 \env{figure} 里放图片，\env{table} 里放表格，
-但并没有严格限制，可以在任何一个浮动体里放置表格、文字、列表等等任意内容。
+但并没有严格限制，可以在任何一个浮动体里放置文字、公式、表格、图片等等任意内容。
 
 以 \env{table} 环境的用法举例，\env{figure} 同理：
 \begin{command}
@@ -878,8 +878,8 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \cmd{end}\marg*{table}
 \end{command}
 
-\Arg{placement} 参数提供了一些符号用来表示浮动体允许排版的位置，如 \texttt{[hbp]} 允许浮动体排版在当前位置、底部或者单独成页。
-\env{table} 和 \env{figure} 浮动体的默认设置为 \texttt{[tbp]}。
+\Arg{placement} 参数提供了一些符号用来表示浮动体允许排版的位置，如 \texttt{hbp} 允许浮动体排版在当前位置、底部或者单独成页。
+\env{table} 和 \env{figure} 浮动体的默认设置为 \texttt{tbp}。
 \begin{center}
 \begin{tabular}{>{\ttfamily}lp{14em}}
  \hline
@@ -903,14 +903,15 @@ A \rule[-.4pt]{3em}{.4pt} line.
 它们的用法与 \env{table} 和 \env{figure} 一样，不同之处为双栏的 \Arg{placement} 参数只能用 \texttt{tp} 两个位置。
 
 \cmdindex{clearpage}
-浮动体的位置选取受到先后顺序的限制。如果某个浮动体由于参数限制、空间限制等原因在当前页无法放置，就要推迟到后一页，
-并使得之后的同类浮动体一并推迟。\cmd{clearpage} 命令会在另起一页之前，先将所有推迟放置的浮动体排版成页。
+浮动体的位置选取受到先后顺序的限制。如果某个浮动体由于参数限制、空间限制等原因在当前页无法放置，就要推迟到之后处理，
+并使得之后的同类浮动体一并推迟。\cmd{clearpage} 命令会在另起一页之前，先将所有推迟处理的浮动体排版成页，
+此时 \texttt{htbp} 等位置限制被完全忽略。
 
 \pkgindex{float}
 
 \pkg{float} 宏包为浮动体提供了 \texttt{H} 选项，不与 \texttt{htbp} 及 \texttt{!} 混用。使用 \texttt{H} 选项时，
 会取消浮动机制，将浮动体视为一般的盒子插入当前位置。这在一些特殊情况下很有用（如使用 \pkg{multicol} 宏包排版分栏内容的时候），
-但尺寸过大的浮动体可能影响到分页。
+但尺寸过大的浮动体可能使得分页比较困呐。
 
 \subsection{浮动体的标题}\label{subsec:caption}
 

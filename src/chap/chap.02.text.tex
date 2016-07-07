@@ -128,8 +128,8 @@ starts a new line.
 \subsection{注释}\label{subsec:comments}
 
 \index{%@\texttt\% (\textit{注释})}
-\LaTeX\ 用 \texttt\% 字符作为注释。在这个字符之后直到行末，所有的字符都被忽略，连同回车引入的空格。
-我们需要注意以下示例中“回车引入的空格被忽略”的效果：
+\LaTeX\ 用 \texttt\% 字符作为注释。在这个字符之后直到行末，所有的字符都被忽略，
+行末的回车也不引入空格。见如下示例：
 \begin{example}
 This is an % short comment
 % ---
@@ -328,7 +328,7 @@ words}, are shown here.
 没有断开的单词间位置则插入一小段间距，间距是根据行宽和文字自动调整的，文字密一些的地方，单词间距就略窄，反之略宽。
 
 \index{~@\texttt\textasciitilde\ (\textit{不断行空格})}
-我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个空格，并且这个空格不能被断开，通常用在英文人名、图表名称等场景：
+我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个不会断行的空格（Knuth 称之为 tie，“带子”），通常用在英文人名、图表名称等场景：
 \begin{example}
 Fig.~2a \\
 Donale~E. Knuth
@@ -371,7 +371,7 @@ Donale~E. Knuth
 \subsection{断词}\label{subsec:hyphen}
 
 如果 \LaTeX\ 遇到了很长的英文单词，仅在单词之间的位置断行无法生成宽度匀称的行时，就要考虑从单词中间断开。
-对于绝大部分单词，\LaTeX\ 能够找到合适的断词位置，在断开的行尾加上连字符 -。
+对于绝大部分单词，\LaTeX\ 能够找到合适的断词位置，在断开的行尾加上连字符 \char\hyphenchar\font 。
 
 \index{-@\cmd{-} (\textit{断词})}
 如果一些单词没能自动断词，我们可以在单词内手动使用 \cmd{-} 命令指定断词的位置：
