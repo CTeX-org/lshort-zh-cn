@@ -189,7 +189,8 @@ texdoc fancyhdr
   \item[verbatim] 对原始的 \env{verbatim} 环境的改善。提供了命令 \cmd{verbatim\-input} 调用源文件。
   \item[fancyvrb] 提供了代码排版环境 \env{Verbatim} 以及对版式的自定义。
   \item[listings] 提供了排版关键字高亮的代码环境 \env{lst\-listing} 以及对版式的自定义。类似宏包有 \pkg{minted}。
-  \item[algorithm2e] 排版算法。
+  \item[algorithmic] 一个简单的实现算法排版的宏包。如果要生成浮动体的话，需要搭配 \pkg{algorithm} 宏包使用。
+  \item[algorithm2e] 较为复杂的、可定制的算法排版宏包。类似宏包有 \pkg{algorithmidx} 等。
   \item[ntheorem] 定制定理环境。类似宏包包括 \pkg{theorem}、\pkg{thmtools}、\pkg{amsthm} 等。
 \end{pkglist}
 
@@ -211,7 +212,8 @@ texdoc fancyhdr
   \item[epstopdf] \texttt{pdflatex} 命令下支持 EPS 格式的矢量图。
   \item[wrapfig]  支持简单的文字在图片周围的绕排。
   \item[subfig]   提供子图表和子标题的排版。类似宏包有 \pkg{subfigure} 和 \pkg{subcaption} 等。
-  \item[caption]  控制图表标题的格式。
+  \item[caption]  控制浮动体标题的格式。
+  \item[bicaption] 生成双语浮动体标题。
   \item[float]    为浮动体提供不浮动的 H 模式；提供自定义的浮动体结构。
 \end{pkglist}
 
@@ -227,6 +229,7 @@ texdoc fancyhdr
   \item[footmisc] 修改脚注 \cmd{footnote} 的格式。
   \item[indentfirst] 令章节标题后的第一段首行缩进。
   \item[enumitem] 修改列表环境 \env{enumerate} 和 \env{itemize} 等的格式。
+  \item[lettrine] 生成段落首字母大写的效果。
 \end{pkglist}
 
 \endinput

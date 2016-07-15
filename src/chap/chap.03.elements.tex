@@ -962,13 +962,13 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \begin{verbatim}
 \begin{figure}[htbp]
   \centering
-  \begin{minipage}
+  \begin{minipage}{...}
     \centering
     \includegraphics[width=...]{...}
     \caption{...}
   \end{minipage}
   \qquad
-  \begin{minipage}
+  \begin{minipage}{...}
     \centering
     \includegraphics[width=...]{...}
     \caption{...}
@@ -999,14 +999,14 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \begin{figure}[htbp]
   \centering
   \subfloat[...]{\label{sub-fig-1}% 为子图加交叉引用
-   \begin{minipage}
+   \begin{minipage}{...}
     \centering
     \includegraphics[width=...]{...}
    \end{minipage}
   }
   \qquad
   \subfloat[...]{%
-  \begin{minipage}
+  \begin{minipage}{...}
     \centering
     \includegraphics[width=...]{...}
   \end{minipage}
