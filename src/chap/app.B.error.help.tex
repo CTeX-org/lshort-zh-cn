@@ -32,7 +32,7 @@ l.3 Test \LaTEx
 \subsubsection{处理方式}
 
 出现错误时，编译过程将暂停，等待用户输入命令。用户可以直接敲回车跳过当前的错误，继续编译，相当于丢掉了写错的命令，
-将``Test and it's friends.''编译出来。但这个例子过于简单，有些复杂的代码中，有可能会由于一个小问题导致一连串的错误。
+将``Test and it's friends.''排版出来。但这个例子过于简单，有些复杂的代码中，有可能会由于一个小问题导致一连串的错误。
 此时可以选择按 \textbf{S/R/Q} 选择跳过接下来的所有错误，或者按 \textbf{X} 直接退出编译。
 
 \subsubsection{常见的 \LaTeX\ 错误信息}
@@ -54,9 +54,11 @@ l.3 Test \LaTEx
 \item \LaTeXerror{Runaway argument? \\
                   ! Paragraph ended before \ldots\ was complete.}
 
-\item \LaTeXerror{! File ended while scanning use of \ldots}
+\item \LaTeXerror{! File ended while scanning definition/use of \ldots}
 
-两个错误都是主要由于漏写了包裹命令参数的花括号，导致识别参数时出现错误。
+这两个错误主要是由于漏写了包裹命令参数的花括号，导致识别参数时出现错误。许多编辑器的括号配对功能有助于检查和消除这类错误
+
+这类错误还有可能是由于前一次编译中断导致 \texttt{.aux} 等辅助文件不完整，再次编译读入不完整的文件产生错误，办法是删除辅助文件并重新编译。
 
 \item \LaTeXerror{! Extra alignment tab has been changed to \cmd{cr}.}
 
@@ -64,14 +66,14 @@ l.3 Test \LaTEx
 
 两个错误都与表格有关。
 \begin{itemize}
-  \item 前者的字面意义是“一行中使用的列分隔符 \texttt\& 太多”，有的时候可能确实是 \texttt\& 的个数和列格式不匹配，
-  但多数情况是漏了行尾的 \crcmd。
-  \item 后者常出现于漏掉了行尾的 \crcmd\ 而接着使用 \cmd{hline} 画横线的时候。
+  \item 前者的字面意义是“一行中使用的列分隔符 \texttt\& 太多”，有时可能确实是 \texttt\& 的个数和列格式不匹配，
+  但多数情况是漏掉了行尾的 \crcmd\ 命令。
+  \item 后者常出现于漏掉了行尾的 \crcmd\ 命令而接着使用 \cmd{hline} 命令画横线的时候。
 \end{itemize}
 
-\item \LaTeXerror{!  LaTeX Error: Lonely \cmd{item}--perhaps a missing list environment.}
+\item \LaTeXerror{!  LaTeX Error: Lonely \cmd{item}-{}-perhaps a missing list environment.}
 
-\item \LaTeXerror{!  LaTeX Error: Something's wrong--perhaps a missing \cmd{item}.}
+\item \LaTeXerror{!  LaTeX Error: Something's wrong-{}-perhaps a missing \cmd{item}.}
 
 两个错误信息都与列表环境和 \cmd{item} 命令有关。前者意味着在没有使用列表环境的情况下用了 \cmd{item}；
 后者则相反，是在列表环境中漏了 \cmd{item}。
@@ -107,10 +109,10 @@ l.3 Test \LaTEx
 \item \LaTeXerror{!  LaTeX Error: Command \ldots\ already defined, \\
                      or name \cmd{end}\ldots\ illegal \ldots}
 
-使用 \cmd{newcommand} 或 \cmd{newenvironment} 定义已有的命令/环境时产生的错误。如果自己确实使用了前述命令，可考虑改成
-\cmd{re\-new\-command} 或 \cmd{re\-new\-environment}；如果是宏包定义的命令产生了这个错误，则属于隐性的宏包冲突。
+使用 \cmd{newcommand} 或 \cmd{newenvironment} 定义已有的命令/环境时产生的错误。如果自己确实作了定义，可考虑用
+\cmd{re\-new\-command} 或 \cmd{re\-new\-environment} 定义；如果是宏包定义的命令产生了这个错误，则属于隐性的宏包冲突。
 
-相比之前的 ``Option Clash''，隐性宏包冲突是更难以解决的问题，对各种宏包不熟悉的用户，尤其是使用模板的用户而言，往往难以下手。
+相比之前的 ``Option Clash''{}，隐性宏包冲突是更难以解决的问题，对各种宏包不熟悉的用户，尤其是使用模板的用户而言，往往难以下手。
 用户可尝试查找引起冲突的宏包的帮助手册。详尽的手册里通常会告知用户这个宏包应当在某个宏包的前面/后面调用，或者不能与某个宏包一起调用。
 如果是模板调用了大量宏包导致冲突，可联系模板的作者解决。
 
