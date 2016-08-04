@@ -287,15 +287,15 @@ He likes {\LARGE large and
 \cmd{linespread}\marg{factor}
 \end{command}
 
-此处的行距，指的是基本行距（相当于 \cmd{fontsize} 命令的第二个参数）而不是字号大小。所以设置 1.5 倍行距的命令 \cmd{line\-spread}\marg*{1.5}
-意味着最终行距为 1.8 倍的字号大小。
+这里的 \Arg{factor} 是在基础行距上而不是字号上乘以一个因子。大部分时候，默认的基础行距是 1.2 倍字号大小，
+因此设置 1.5 倍行距的命令 \cmd{line\-spread}\marg*{1.5} 意味着最终行距为 1.8 倍的字号大小。
 
 \cmdindex{selectfont}
 如果不是在导言区全局修改，而想要局部地改变某个段落的行距，需要用 \cmd{select\-font} 命令使 \cmd{line\-spread} 命令的改动立即生效：
 \begin{example}
 {\linespread{2.0}\selectfont
-The baseline skip is set to twice
-the normal baseline skip. 
+The baseline skip is set to be
+twice the normal baseline skip. 
 Pay attention to the \verb|\par|
 command at the end. \par}
 
@@ -431,7 +431,7 @@ between lines in a paragraph.
 
 \section{页面和分栏}\label{sec:page-columns}
 
-我们不妨回顾一下第一章介绍的文档类属性。\LaTeX\ 允许你通过文档类选项控制纸张的大小（见表 \ref{tbl:ltx-options}），
+我们不妨回顾一下第一章介绍的文档类属性。\LaTeX\ 允许你通过为文档类指定选项来控制纸张的大小（见表 \ref{tbl:ltx-options}），
 包括 \texttt{a4paper}、\texttt{letterpaper}等等，并配合字号设置了适合的页边距。
 
 \cmdindex{textheight,textwidth}
@@ -558,7 +558,7 @@ between lines in a paragraph.
 \pkgindex{float}
 \pkg{multicol} 宏包能够在一页之中切换单栏/多栏，也能处理跨页的分栏，且各栏的高度分布平衡。但代价是%
 \textbf{在 \env{multicols} 环境中无法正常使用 \env{table} 和 \env{figure} 等浮动体环境}，它会直接让浮动体丢失。
-\env{multicols} 环境中只能用跨栏的 \env{table*} 和 \env{figure*} 环境，或者用 \pkg{float} 宏包提供的 \texttt{H} 选项固定浮动体的位置。
+\env{multicols} 环境中只能用跨栏的 \env{table*} 和 \env{figure*} 环境，或者用 \pkg{float} 宏包提供的 \texttt{H} 参数固定浮动体的位置。
 
 \section{页眉页脚}\label{sec:pagestyle}
 

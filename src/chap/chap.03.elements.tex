@@ -204,10 +204,9 @@ page~\pageref{sec:this}.''
 “天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。”\footnote{出自《千字文》。}
 
 \cmdindex{footnotemark,footnotetext}
-有些情况下（比如在表格环境、盒子内）使用 \cmd{footnote} 并不能正确生成脚注。我们可以分两步进行，
-先使用 \cmd{foot\-note\-mark} 为脚注计数，再在合适的位置用 \cmd{foot\-note\-text} 生成脚注。
+有些情况下（比如在表格环境、各种盒子内）使用 \cmd{footnote} 并不能正确生成脚注。我们可以分两步进行，
+先使用 \cmd{foot\-note\-mark} 为脚注计数，再在合适的位置用 \cmd{foot\-note\-text} 生成脚注。比如：
 
-比如：
 \begin{verbatim}
 \begin{tabular}{l}
 \hline
@@ -694,10 +693,10 @@ for (int i=0; i<4; ++i)
 
 \LaTeX\ 本身不支持插图功能，需要由 \pkg{graphicx} 宏包辅助支持。
 
-使用 \texttt{latex + dvipdfmx} 编译命令时，调用 \pkg{graphicx} 宏包时要给定 \texttt{dvipdfmx} 选项%
+使用 \texttt{latex + dvipdfmx} 编译命令时，调用 \pkg{graphicx} 宏包时要指定 \texttt{dvipdfmx} 选项%
 \footnote{早期常使用 \texttt{latex + dvips} 组合命令，后者将 \texttt{.dvi} 文件转为 \texttt{.ps} 文件（PostScript），
 可进一步通过 \texttt{ps2pdf} 工具生成 PDF。\texttt{dvips} 和 \texttt{dvipdfmx} 在图形、颜色、超链接等功能的实现上有差别，而 \LaTeX\ 无法识别
-用户是用 \texttt{dvips} 还是 \texttt{dvipdfmx}，所以要给定选项（缺省为 \texttt{dvips}）。
+用户是用 \texttt{dvips} 还是 \texttt{dvipdfmx}，所以要指定选项（缺省为 \texttt{dvips}）。
 \ref{sec:hyperlinks} 节中的 \pkg{hyperref} 宏包同理。}；而使用 \texttt{pdflatex} 或 \texttt{xelatex} 命令编译时不需要。
 
 读者可能听说过“\LaTeX\ 只能插入 \texttt{.eps} 格式的图片，需要把 \texttt{.jpg} 转成 \texttt{.eps} 格式”的观点。
@@ -742,11 +741,11 @@ for (int i=0; i<4; ++i)
 \graphicspath{{figures/}{logo/}}
 \end{verbatim}
 
-\cmd{includegraphics} 命令的可选参数 \Arg{options} 支持 \Arg{key}=\Arg{value} 形式赋值，常用的选项如下：
+\cmd{includegraphics} 命令的可选参数 \Arg{options} 支持 \Arg{key}=\Arg{value} 形式赋值，常用的参数如下：
 \begin{center}
 \begin{tabular}{lp{18em}}
  \hline
- 选项 & 含义 \\
+ 参数 & 含义 \\
  \hline
  width=\Arg{width}    &  将图片缩放到宽度为 \Arg{width} \\
  height=\Arg{height}  &  将图片缩放到高度为 \Arg{height} \\
@@ -823,7 +822,7 @@ for (int i=0; i<4; ++i)
 
 其中 \Arg{align} 为盒子和周围文字的对齐情况（类似 \env{tabular} 环境）；
 \Arg{height} 和 \Arg{inner-align} 设置盒子的高度和内容的对齐方式，类似水平盒子 \cmd{makebox} 的设置，
-不过 \Arg{inner-align} 接受的选项是顶部 \texttt{t}、底部 \texttt{b}、居中 \texttt{c} 和分散对齐 \texttt{s}。
+不过 \Arg{inner-align} 接受的参数是顶部 \texttt{t}、底部 \texttt{b}、居中 \texttt{c} 和分散对齐 \texttt{s}。
 
 \begin{example}
 三字经：\parbox[t]{3em}%
@@ -909,9 +908,9 @@ A \rule[-.4pt]{3em}{.4pt} line.
 
 \pkgindex{float}
 
-\pkg{float} 宏包为浮动体提供了 \texttt{H} 选项，不与 \texttt{htbp} 及 \texttt{!} 混用。使用 \texttt{H} 选项时，
+\pkg{float} 宏包为浮动体提供了 \texttt{H} 位置参数，不与 \texttt{htbp} 及 \texttt{!} 混用。使用 \texttt{H} 位置参数时，
 会取消浮动机制，将浮动体视为一般的盒子插入当前位置。这在一些特殊情况下很有用（如使用 \pkg{multicol} 宏包排版分栏内容的时候），
-但尺寸过大的浮动体可能使得分页比较困呐。
+但尺寸过大的浮动体可能使得分页比较困难。
 
 \subsection{浮动体的标题}\label{subsec:caption}
 

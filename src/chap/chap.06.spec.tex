@@ -56,8 +56,8 @@ Partl~\cite{pa} has proposed that \ldots
 \subsection{\hologo{BibTeX} 数据库}\label{subsec:bibtex-data}
 
 \index{bibtexdb@\protect\hologo{BibTeX} 数据库}
-\hologo{BibTeX} 是最为流行的参考文献数据组织格式之一。它的出现让我们摆脱手写参考文献条目的麻烦。我们还可以通过参考文献格式的支持，
-让同一份 \hologo{BibTeX} 数据库生成不同格式的参考文献列表。我们首先简单介绍 \hologo{BibTeX} 数据库，之后介绍如何将数据库利用在 \LaTeX\ 中。
+\hologo{BibTeX} 是最为流行的参考文献数据组织格式之一。它的出现让我们摆脱手写参考文献条目的麻烦。我们还可以通过参考文献样式的支持，
+让同一份 \hologo{BibTeX} 数据库生成不同样式的参考文献列表。我们首先简单介绍 \hologo{BibTeX} 数据库，之后介绍如何将数据库利用在 \LaTeX\ 中。
 
 \hologo{BibTeX} 数据库以 \texttt{.bib} 作为扩展名，其内容是若干个文献条目，每个条目的格式为：
 \begin{command}
@@ -73,68 +73,103 @@ Partl~\cite{pa} has proposed that \ldots
 
 我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目格式：
 \begin{description}
-  \item[\texttt{article}] 学术论文，必需数据项有 author, title, journal, year; 可选数据项包括 volumn, issue, number, pages, doi 等；
+  \item[\texttt{article}] 学术论文，必需数据项有 author, title, journal, year; 可选数据项包括 volumn, number, pages, doi 等；
   \item[\texttt{book}] 书籍，必需数据项有 author/editor, title, publisher, year; 可选数据项包括 volumn/number, series, address 等；
   \item[\texttt{incollection}] 论文集中的一篇，必需数据项有 author, title, booktitle, publisher, year; 可选数据项包括 editor, volumn/number, chapter, pages, address 等；
   \item[\texttt{inbook}] 书中的一章，必需数据项有 author/editor, title, chapter/pages, publisher, year; 可选数据项包括 volumn/number, series, address 等。
 \end{description}
 
-源代码 \ref{code:bibtex-db} 示例了两条 \texttt{book} 类型的文献条目的写法。上述列表之外的文献条目格式请参考 \CTAN|biblio/bibtex/base/btxdoc.pdf|。
+例如 \texttt{article} 类别的参考文献数据条目写法如下：
+\begin{verbatim}
+@article{Alice13,
+  title = {Demostration of bibliography items},
+  author = {A. Alice and B. Bob and C. Charlie and D. Danny},
+  year = {2013},
+  journal = {Journal of \TeX perts},
+  volume = {36},
+  number = {7},
+  pages = {114-120}}
+\end{verbatim}
+所有类型的文献条目格式请参考 \CTAN|biblio/bibtex/base/btxdoc.pdf|。
 
 多数时候，我们无需自己手写 \hologo{BibTeX} 文献条目。从 Google Scholar 或者期刊/数据库的网站上都能够导出 \hologo{BibTeX} 文献条目，
 老牌的文献管理软件 EndNote 也支持生成 \hologo{BibTeX} 格式的数据库。开源软件 JabRef 甚至支持 \hologo{BibTeX} 文献条目的导入、导出和管理。
+
+\subsection{\hologo{BibTeX} 样式}\label{subsec:bibtex-style}
+
+参考文献的写法在不同文献里千差万别，包括作者、标题、年份等各项的顺序和字体样式、文献在列表中的排序规则等。
+\hologo{BibTeX} 用样式（style）来管理参考文献的写法。\hologo{BibTeX} 提供了几个预定义的样式，如 plain, unsrt, alpha 等。
+如果使用期刊模板的话，可能会提供自用的样式。
+样式文件以 \texttt{.bst} 为扩展名。
+
+\cmdindex{bibliographystyle}
+使用样式文件的方法是在源代码内（一般在导言区）使用 \cmd{biblio\-graphy\-style} 命令：
+\begin{command}
+\cmd{bibliographystyle}\marg{bst-name}
+\end{command}
+这里 \Arg{bst-name} 为 \texttt{.bst} 样式文件的名称，\textbf{不要带 \texttt{.bst} 扩展名}。
+
+我们以 \ref{subsec:bibtex-data} 小节给出的数据条目为例，使用 \cmd{biblio\-graphy\-style} 命令选择不同的参考文献样式，
+效果大致如表 \ref{tbl:bibtex-style} 所示。
+
+\begin{table}[htp]
+\caption{\hologo{BibTeX} 样式的排版效果。}\label{tbl:bibtex-style}
+\hrule
+\begin{trivlist}\item\relax
+\textbf{plain}\\{}
+[1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny.
+\newblock Demostration of bibliography items.
+\newblock {\em Journal of \TeX perts}, 36(7):114--120, 2013.
+
+\medskip
+\textbf{alpha}\\{}
+[ABCD13] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny.
+\newblock Demostration of bibliography items.
+\newblock {\em Journal of \TeX perts}, 36(7):114--120, 2013.
+
+\medskip
+\textbf{amsplain}（\AmS\ 文档类 \textsf{amsart} 等配套的样式）\\{}
+[1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny, \emph{Demostration of bibliography
+  items}, Journal of \TeX perts \textbf{36} (2013), no.~7, 114--120.
+
+\medskip
+\textbf{elsarticle-num}（Elsevier 提供的 \textsf{elsarticle} 文档类配套的样式）\\{}
+[1] A.~Alice, B.~Bob, C.~Charlie, D.~Danny, Demostration of bibliography items,
+  Journal of \TeX perts 36~(7) (2013) 114--120.
+
+\medskip
+\textbf{IEEEtran}（\textsf{IEEEtran} 模板配套的样式）\\{}
+[1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny, ``Demostration of bibliography
+  items,'' \emph{Journal of \TeX perts}, vol.~36, no.~7, pp. 114--120, 2013.
+\end{trivlist}
+\hrule
+\end{table}
 
 \subsection{使用 \hologo{BibTeX} 排版参考文献}\label{subsec:bibtex-use}
 
 \index{bibtex@\protect\hologo{BibTeX} 工具}
 现在我们来看如何利用 \hologo{BibTeX} 数据库生成参考文献和引用。
 
-第一步：我们当然需要一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib} （见源代码 \ref{code:bibtex-db}），
+第一步：我们当然需要一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib}，
 和我们的 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
 
-\begin{sourcecode}[htp]
-\begin{Verbatim}
-@book{Lamport1994,
-  title = {{\LaTeX}: A Document Preparation System},
-  author = {Lamport, L.},
-  publisher = {Addison-Wesley},
-  address = {Reading, Massachusetts},
-  year = {1994},
-  edition = {2nd}
-}
-@book{Mittelbach2004,
-  title = {The {\LaTeX} Companion},
-  author = {Mittelbach, F. and Goossens, M. and 
-  Braams, J. and Carlisle, D. and Rowley, C.},
-  publisher = {Addison-Wesley},
-  address = {Reading, Massachusetts},
-  year = {2004},
-  edition = {2nd}
-}
-\end{Verbatim}
-\caption{\hologo{BibTeX} 数据库示例 \texttt{books.bib}。}\label{code:bibtex-db}
-\end{sourcecode}
+第二步：在源代码中添加必要的命令。假设源代码的名称为 \texttt{demo.tex}（见 \ref{code:bibtex-demo}）。
+\begin{enumerate}
+\item \cmdindex{bibliographystyle}
+首先需要使用命令 \cmd{bibliographystyle} 设定参考文献的格式。
 
-\cmdindex{bibliographystyle}
-第二步：在源代码中添加必要的命令。假设源代码的名称为 \texttt{demo.tex}（见 \ref{code:bibtex-demo}）。首先需要的是在\textbf{导言区}设定参考文献的格式：
-\begin{command}
-\cmd{bibliographystyle}\marg{bst-name}
-\end{command}
+\item \cmdindex{cite,nocite}
+其次，在正文中引用参考文献。\hologo{BibTeX} 程序在生成参考文献列表的时候，通常只列出用了 \cmd{cite} 命令引用的那些。
+如果需要列出未被引用的文献，则需要 \cmd{nocite}\marg{citation} 命令；而 \cmd{nocite}\marg*{*} 则让所有未被引用的文献都列出。
 
-其中 \Arg{bst-name} 为格式文件的名称。\hologo{BibTeX} 提供了几个预定义的格式，如 plain, unsrt, alpha 等。
-一些学术论文的模板会提供自有的格式文件，以 \texttt{.bst} 作为扩展名，同样和 \LaTeX\ 源代码\textbf{放在同一个目录下}。
-
-\cmdindex{cite,nocite}
-其次就是在正文中引用参考文献了。\hologo{BibTeX} 程序在生成参考文献列表的时候，通常只列出你用 \cmd{cite} 命令引用的那些。
-如果需要列出没有被引用的文献，则需要 \cmd{nocite}\marg{citation} 命令；而 \cmd{nocite}\marg*{*} 则让所有未引用的参考文献都列出。
-
-\cmdindex{bibliography}
+\item \cmdindex{bibliography}
 再次，在你需要列出参考文献的位置，使用 \cmd{biblio\-graphy} 命令代替 \env{the\-biblio\-graphy} 环境：
 \begin{command}
 \cmd{bibliography}\marg{bib-name}
 \end{command}
 
 其中 \Arg{bib-name} 是 \hologo{BibTeX} 数据库的文件名，\textbf{不要带 \texttt{.bib} 扩展名}。
+\end{enumerate}
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
@@ -142,8 +177,8 @@ Partl~\cite{pa} has proposed that \ldots
 \bibliographystyle{plain}
 \begin{document}
 \section{Some words}
-Some excellent books, for example, \cite{Lamport1994} 
-and \cite{Mittelbach2004} \ldots
+Some excellent books, for example, \cite{citation1} 
+and \cite{citation2} \ldots
 
 \bibliography{books}
 \end{document}
@@ -163,10 +198,10 @@ and \cite{Mittelbach2004} \ldots
 
 整个过程使用的命令如下（可以略去扩展名）：
 \begin{verbatim}
-pdflatex demo
+xelatex demo
 bibtex demo
-pdflatex demo
-pdflatex demo
+xelatex demo
+xelatex demo
 \end{verbatim}
 
 使用 \texttt{latex + dvipdfmx} 命令编译时，则 \texttt{dvipdfmx} 命令放在最后，相当于先后使用
@@ -175,7 +210,7 @@ pdflatex demo
 \subsection{\pkg{natbib} 宏包}\label{subsec:natbib}
 
 \pkgindex{natbib}
-时下许多学术期刊比较喜欢使用人名——年份的引用方式，形如(\emph{Alice et~al.}, 2005)。
+时下许多学术期刊比较喜欢使用人名——年份的引用方式，形如(\emph{Alice et~al.}, 2013)。
 \pkg{natbib} 宏包提供了对这种“自然”引用方式的处理。
 
 \cmdindex[natbib]{citep,citet}
@@ -185,7 +220,7 @@ pdflatex demo
 \cmd{citet}\marg{citation}
 \end{command}
 
-它们分别生成形如(\emph{Alice et~al.}, 2005) 和 \emph{Alice et~al.}(2005) 的人名——年份引用。
+它们分别生成形如(\emph{Alice et~al.}, 2013) 和 \emph{Alice et~al.} (2013) 的人名——年份引用。
 
 \pkg{natbib} 宏包同样也支持数字引用，并且支持将引用的序号压缩，例如：
 \begin{verbatim}
@@ -193,7 +228,7 @@ pdflatex demo
 \end{verbatim}
 调用 \pkg{natbib} 宏包时指定以上选项后，连续引用多篇文献时，会生成形如 (3-7) 的引用而不是 (3, 4, 5, 6, 7)。
 
-\pkg{natbib} 宏包还有更多选项和用法，比如默认的引用是用小括号包裹的，可以为宏包添加 \texttt{square} 选项改为中括号；
+\pkg{natbib} 宏包还有更多选项和用法，比如默认的引用是用小括号包裹的，可指定 \texttt{square} 选项改为中括号；
 再比如 \cmd{citep} 命令也支持可选参数，为引用前后都添加额外内容。这里不再赘述，请参考 \pkg{natbib} 宏包的帮助文档。
 
 \section{索引和 makeindex 工具}\label{sec:index}
@@ -222,7 +257,7 @@ pdflatex demo
 第三步，编译过程：
 
 \begin{enumerate}
-  \item 首先用 \texttt{pdflatex} 等命令编译源代码 \texttt{demo.tex}。编译过程中产生索引记录文件 \texttt{demo.idx}；
+  \item 首先用 \texttt{xelatex} 等命令编译源代码 \texttt{demo.tex}。编译过程中产生索引记录文件 \texttt{demo.idx}；
   \item 用 makeindex 程序处理 \texttt{demo.idx}，生成用于排版的索引列表文件 \texttt{demo.ind}；
   \item 再次编译源代码 \texttt{demo.tex}，正确生成索引列表。
 \end{enumerate}
@@ -272,7 +307,7 @@ pdflatex demo
 \end{tabular}
 \end{table}
 
-读者可以钻研一下下面给出的一个较为复杂的，结合多级索引、索引格式、页码格式等的示例。但在自己使用时，
+读者可以钻研一下以下给出的一个较为复杂的，结合多级索引、索引格式、页码格式等的用法示例。但在自己使用时，
 最好还是遵循“简单的就是最好的”原则，尽量使用表 \ref{tbl:index-entry} 中的写法。
 \begin{verbatim}
 Test index.
@@ -419,7 +454,7 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 而 \texttt{pdflatex} 或 \texttt{xelatex} 命令下不需要。
 
 \cmdindex[hyperref]{hypersetup}
-\pkg{hyperref} 宏包提供了命令 \cmd{hypersetup} 配置各种选项，或者也可以作为宏包选项，在调用宏包时使用：
+\pkg{hyperref} 宏包提供了命令 \cmd{hypersetup} 配置各种参数，或者也可以作为宏包选项，在调用宏包时指定：
 \begin{command}
 \cmd{hypersetup}\marg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots} \\
 \cmd{usepackage}\oarg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots}\marg*{hyperref}
@@ -427,10 +462,10 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 
 \begin{table}[htp]
 \centering
-\caption{\pkg{hyperref} 宏包提供的设置。}\label{tbl:hyperref-settings}
+\caption{\pkg{hyperref} 宏包提供的参数设置。}\label{tbl:hyperref-settings}
 \begin{tabular}{lcp{19.5em}}
  \hline
- 选项                         &  默认值         & \multicolumn{1}{c}{含义} \\
+ 参数                         &  默认值         & \multicolumn{1}{c}{含义} \\
  \hline
  \texttt{colorlinks=}\Arg{true\textnormal|false} 
                               & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
@@ -445,9 +480,9 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
  \texttt{bookmarksnumbered=}\Arg{true\textnormal|false} 
                               & \textit{false}  & 书签是否带章节编号 \\
  \texttt{CJKbookmarks=}\Arg{true\textnormal|false} 
-                              & \textit{false}   & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须指定的选项，
+                              & \textit{false}   & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须设定的参数，
                                                  在第一次编译后需要将生成的 \texttt{.out} 文件用工具处理编码 \\
- \texttt{unicode}             &                  & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须指定的选项 \\
+ \texttt{unicode}             &                  & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须设定的参数 \\
  \hline
  \texttt{pdftitle=}\Arg{string} 
                               & 空               & 标题 \\
@@ -495,8 +530,8 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \cmd{hyperref}\oarg{label}\marg{text}
 \end{command}
 
-默认的超链接在文字外边加上一个带颜色的方框（在打印 PDF 时边框不会打印），可指定 \texttt{color\-links} 选项修改为将文字本身加上颜色，
-或指定 \texttt{pdf\-border} 选项的参数；\texttt{hide\-links} 选项则令超链接既不变色也不加框。
+默认的超链接在文字外边加上一个带颜色的边框（在打印 PDF 时边框不会打印），可指定 \texttt{color\-links} 参数修改为将文字本身加上颜色，
+或修改 \texttt{pdf\-border} 参数调整边框宽度以“去掉”边框；\texttt{hide\-links} 参数则令超链接既不变色也不加边框。
 \begin{verbatim}
 \hypersetup{hidelinks}
 % or:
@@ -535,7 +570,7 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 
 \subsection{PDF 文档属性}\label{subsec:pdf-settings}
 
-\pkg{hyperref} 宏包还提供了一些选项用于改变 PDF 文档的属性，部分见表 \ref{tbl:hyperref-settings}。
+\pkg{hyperref} 宏包还提供了一些参数用于改变 PDF 文档的属性，部分见表 \ref{tbl:hyperref-settings}。
 
 
 \endinput

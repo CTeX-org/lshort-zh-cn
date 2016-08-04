@@ -77,12 +77,12 @@ tlmgr update --list          % 列出所有可更新的宏包
 tlmgr repository set http://.../CTAN/systems/texlive/tlnet
                              % 指定更新源（CTAN）地址
 tlmgr info <package-name>    % 查看宏包信息
-                             % 加 --list 选项可列出宏包的所有文件
+                             % 加 --list 参数可列出宏包的所有文件
 \end{verbatim}
 
 \begin{verbatim}
 % MikTeX 命令行工具 mpm 的使用示例
-% 建议始终加 --admin 选项使用
+% 建议始终加 --admin 参数使用
 mpm --admin --install <package-name>   % 安装某个宏包
 mpm --admin --uninstall <package-name> % 卸载某个宏包
 mpm --admin --update                   % 更新所有宏包
