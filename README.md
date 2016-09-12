@@ -20,6 +20,7 @@ In 'src' directory, typeset the source code in the following order:
 xelatex lshort-zh-cn
 makeindex -s lshort-zh-cn.ist lshort-zh-cn
 xelatex lshort-zh-cn
+xelatex lshort-zh-cn
 ```
 
 If typesetting succeeds and the target PDF document is made correctly, then move it to the root directory.

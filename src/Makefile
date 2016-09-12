@@ -16,6 +16,7 @@ $(PDF): $(REQUIRE)
 	$(TEX) $(MODE) $(LSHORT)
 	$(MAKEIDX) -s $(LSHORT).ist $(LSHORT)
 	$(TEX) $(MODE) $(LSHORT)
+	$(TEX) $(MODE) $(LSHORT)
 
 install: all
 	$(INSTALL) $(LSHORT).pdf ..

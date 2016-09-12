@@ -19,6 +19,7 @@
 xelatex lshort-zh-cn
 makeindex -s lshort-zh-cn.ist lshort-zh-cn
 xelatex lshort-zh-cn
+xelatex lshort-zh-cn
 ```
 
 如果编译正确生成 PDF，之后将 PDF 移动到根目录。
