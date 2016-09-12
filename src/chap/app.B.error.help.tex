@@ -62,7 +62,7 @@ l.3 Test \LaTEx
 
 这两个错误主要是由于漏写了包裹命令参数的花括号，导致识别参数时出现错误。许多编辑器的括号配对功能有助于检查和消除这类错误。
 
-这类错误还有可能是由于前一次编译中断导致 \texttt{.aux} 等辅助文件不完整，再次编译读入不完整的文件产生错误，办法是删除辅助文件并重新编译。
+这类错误还有可能是由于前一次编译中断导致 \texttt{.aux} 等辅助文件不完整，再次编译读入不完整的文件产生错误。解决办法是删除辅助文件并重新编译。
 
 \item \LaTeXerror{! Extra alignment tab has been changed to \cmd{cr}.}
 
@@ -199,6 +199,8 @@ texdoc fancyhdr
   \item[algorithmic] 一个简单的实现算法排版的宏包。如果要生成浮动体的话，需要搭配 \pkg{algorithm} 宏包使用。
   \item[algorithm2e] 较为复杂的、可定制的算法排版宏包。类似宏包有 \pkg{algorithmicx} 等。
   \item[ntheorem] 定制定理环境。类似宏包包括 \pkg{theorem}、\pkg{thmtools}、\pkg{amsthm} 等。
+  \item[mdframed] 排版可自动断页的带边框文字段落，提供边框样式的定制功能。
+  \item[tcolorbox] 以 \TikZ\ 为基础提供排版样式丰富的彩色盒子的功能。
 \end{pkglist}
 
 \subsection{图表和浮动体}\label{subsec:pkg-tab-fig}
@@ -207,6 +209,7 @@ texdoc fancyhdr
   \item[booktabs]  排版三线表。
   \item[array]    对表格列格式的扩展。
   \item[tabularx] 提供 \env{tabularx} 环境排版定宽表格，支持自动计算宽度的 X 列格式。
+  \item[arydshln] 支持排版虚线表格线。
   \item[colortbl] 支持修改表格的行、列、单元格的颜色。
   \item[multirow] 支持合并多行单元格。
   \item[makecell] 支持在单元格里排版多行内容（嵌套一个单列的小表格）。
@@ -221,7 +224,7 @@ texdoc fancyhdr
   \item[subfig]   提供子图表和子标题的排版。类似宏包有 \pkg{subfigure} 和 \pkg{subcaption} 等。
   \item[caption]  控制浮动体标题的格式。
   \item[bicaption] 生成双语浮动体标题。
-  \item[float]    为浮动体提供不浮动的 H 模式；提供自定义的浮动体结构。
+  \item[float]    为浮动体提供不浮动的 H 模式；提供自定义浮动体结构的功能。
 \end{pkglist}
 
 \subsection{修改版式}\label{subsec:pkg-layout}
@@ -235,6 +238,7 @@ texdoc fancyhdr
   \item[tocbibind] 支持将目录、参考文献、索引本身写入目录项。
   \item[footmisc] 修改脚注 \cmd{footnote} 的格式。
   \item[indentfirst] 令章节标题后的第一段首行缩进。
+  \item[enumerate] 提供简单的自定义标签格式的 \env{enumerate} 环境。
   \item[enumitem] 修改列表环境 \env{enumerate} 和 \env{itemize} 等的格式。
   \item[lettrine] 生成段落首字母大写的效果。
 \end{pkglist}

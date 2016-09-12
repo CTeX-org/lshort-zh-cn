@@ -32,13 +32,13 @@ ASCII （美国通用信息交换码）使用 0x00-0x7F 对文字编码，也就
 \pkgindex{inputenc}
 现在的 \TeX\ 程序支持 8-bit，能够识别源代码里编码处于 0x80-0xFF 范围的字符。
 西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 0x80-0xFF 这个范围，处理起来较为方便。
-\texttt{latex} 命令及 \texttt{pdflatex} 命令下，这些编码的处理由 \pkg{inputenc} 宏包支持。比如将源代码保存为 Latin-1 编码，并在导言区使用：
+\texttt{latex} 命令及 \texttt{pdflatex} 命令下，这些编码的处理由 \pkg{inputenc} 宏包支持。
+比如将源代码保存为 Latin-1 编码，并在导言区调用宏包：
 \begin{verbatim}
 \usepackage[latin1]{inputenc}
 \end{verbatim}
 
 接下来，M\"obius 就直接可以通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
-其它一些语言也可以使用 \pkg{inputenc} 宏包配合 \pkg{babel} 宏包排版。
 
 \index{bianma@编码!GBK}
 GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，这就需要借助一些宏包进行较为复杂的判断和处理。
@@ -65,14 +65,14 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 
 \subsection{\pkg{xeCJK} 宏包}\label{subsec:xeCJK}
 
-用 \LaTeX\ 排版中文的一大门槛是中文字体。\TeX\ 使用的字体格式仅支持不超过 256 个字符，要想排版中文，比如旧式的 \pkg{CJK} 宏包，
-往往需要复杂的预处理，将中文字体拆分成数百个小字体，非常麻烦%
+用 \LaTeX\ 排版中文的一大难题是中文字体的处理。\TeX\ 使用的字体格式仅支持不超过 256 个字符，
+旧式的中文排版方案如 \pkg{CJK} 宏包往往需要复杂的预处理，将中文字体拆分成数百个小字体，非常麻烦%
 \footnote{现在的 \texttt{pdflatex} 以及 \texttt{latex} + \texttt{dvipdfmx} 命令通过字体映射的方式支持直接使用中文字体，不需要经过预处理，
 但仍然是不方便新手操作的。}。
 
 \index{xelatex@\texttt{xelatex} 命令}
 \pkgindex{xeCJK}
-\texttt{xelatex} 命令支持直接使用系统安装的 TrueType (\texttt{.ttf}) / OpenType(\texttt{.otf}) 等格式的字体，加上对 UTF-8 编码的原生支持，
+\texttt{xelatex} 命令支持直接使用系统安装的 TrueType (\texttt{.ttf}) / OpenType (\texttt{.otf}) 等格式的字体，加上对 UTF-8 编码的原生支持，
 免去了预处理字体的麻烦。在此基础上的 \pkg{xeCJK} 宏包更进一步完善了排版中文的一些细节，比如中英文之间插入空隙、
 中文行尾的回车不引入空格、标点符号不出现在行首，等等。
 
@@ -318,17 +318,18 @@ words}, are shown here.
 
 \section{断行和断页}\label{sec:break}
 
-\LaTeX\ 将一个段落的文档在合适的位置进行断行，尽可能做到每行的宽度一致，并且单词间距匀称。
-文字段落和公式、图表等内容顺序排布，并在合适的位置断页，分割成匀称的页面。
+\LaTeX\ 将文字段落在合适的位置进行断行，尽可能做到每行的宽度一致，并且单词间距匀称。
+文字段落和公式、图表等内容从上到下顺序排布，并在合适的位置断页，分割成匀称的页面。
 在绝大多数时候，我们无需自己操心断行和断页。但偶尔会遇到需要手工调整的地方。
 
 \subsection{单词间距和断行}\label{subsec:interword}
 
 通常情况下，断行的位置尽可能选取在两个单词之间，也就是你输入到源文件中的“空格”。
-没有断开的单词间位置则插入一小段间距，间距是根据行宽和文字自动调整的，文字密一些的地方，单词间距就略窄，反之略宽。
+一般情况下，这个“空格”生成一个间距，它会根据行宽和文字自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
 
 \index{~@\texttt\textasciitilde\ (\textit{不断行空格})}
-我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个不会断行的空格（Knuth 称之为 tie，“带子”），通常用在英文人名、图表名称等场景：
+我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个不会断行的空格（高德纳称之为 tie，“带子”），
+通常用在英文人名、图表名称等场景：
 \begin{example}
 Fig.~2a \\
 Donale~E. Knuth

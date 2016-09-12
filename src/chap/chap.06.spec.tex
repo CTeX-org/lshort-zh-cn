@@ -20,22 +20,24 @@
 \cmd{cite}\marg{citation}
 \end{command}
 
-\cmd{cite} 带一个可选参数，为引用的编号后加上额外的内容，如 \cmd{cite}\oarg*{page 22}\marg{pa} 可能得到形如 [13, page 22] 这样的引用。
+\Arg{citation} 为引用的参考文献的标签，类似 \cmd{ref} 里的参数；\cmd{cite} 带一个可选参数，为引用的编号后加上额外的内容，
+如 \cmd{cite}\oarg*{page 22}\marg{pa} 可能得到形如 [13, page 22] 这样的引用。
 
 \envindex{thebibliography}
+\cmdindex{bibitem}
 参考文献由 \env{thebibliography} 环境包裹。每条参考文献由 \cmd{bibitem} 开头，其后是参考文献本身的内容：
 \begin{command}
 \cmd{bibitem}\oarg{item number}\marg{citation}
 \end{command}
 
-其中 \Arg{citation} 是 \cmd{cite} 用以引用的一个标签，类似交叉引用里的 \cmd{label}。
+其中 \Arg{citation} 是 \cmd{cite} 使用的文献标签，
 \Arg{item number} 自定义参考文献的序号，如果省略，则按自然排序给定序号。
 
-\env{thebibliography} 环境带一个参数，用以设定 \cmd{cite} 命令生成的引用编号的最大宽度，
+\env{thebibliography} 环境带一个参数，用以设定 \cmd{bibitem} 命令生成的参考文献编号的宽度，
 如 99 意味着不超过两位数字。通常设定为与参考文献的数目一致。
-\env{the\-biblio\-graphy} 环境自动生成不带编号的一章（\cls{report} / \cls{book} 文档类）或一节（\cls{article} 文档类）。
 
-\env{thebibliography} 生成单独的一个章节，在 \cls{article} 文档类的节标题默认为 ``Reference'' ，而在 \cls{report / book} 文档类
+\env{thebibliography} 环境自动生成不带编号的一节（\cls{article} 文档类）或一章（\cls{report} / \cls{book} 文档类）。
+在 \cls{article} 文档类的节标题默认为 ``Reference''{}，而在 \cls{report / book} 文档类
 的章标题默认为 ``Bibliography''{}。用户可通过 \ref{sec:latex-settings} 节给出的方法定制参考文献的标题。
 
 以下为一个使用 \env{the\-biblio\-graphy} 排版参考文献的例子：
@@ -57,7 +59,7 @@ Partl~\cite{pa} has proposed that \ldots
 
 \index{bibtexdb@\protect\hologo{BibTeX} 数据库}
 \hologo{BibTeX} 是最为流行的参考文献数据组织格式之一。它的出现让我们摆脱手写参考文献条目的麻烦。我们还可以通过参考文献样式的支持，
-让同一份 \hologo{BibTeX} 数据库生成不同样式的参考文献列表。我们首先简单介绍 \hologo{BibTeX} 数据库，之后介绍如何将数据库利用在 \LaTeX\ 中。
+让同一份 \hologo{BibTeX} 数据库生成不同样式的参考文献列表。
 
 \hologo{BibTeX} 数据库以 \texttt{.bib} 作为扩展名，其内容是若干个文献条目，每个条目的格式为：
 \begin{command}
@@ -68,10 +70,10 @@ Partl~\cite{pa} has proposed that \ldots
 \texttt\}
 \end{command}
 
-其中 \Arg{type} 为参考文献的类型，如 \texttt{article} 为学术论文，\texttt{book} 为书籍，\texttt{in\-collection} 为论文集中的某一篇，等等。
-\Arg{citation} 为 \cmd{cite} 命令所用的参考文献的标签。在 \Arg{citation} 之后为条目里的各个数据项，以 \Arg{key} = \marg{value} 的形式组织。
+其中 \Arg{type} 为文献的类别，如 \texttt{article} 为学术论文，\texttt{book} 为书籍，\texttt{in\-collection} 为论文集中的某一篇，等等。
+\Arg{citation} 为 \cmd{cite} 命令使用的文献标签。在 \Arg{citation} 之后为条目里的各个数据项，以 \Arg{key} = \marg{value} 的形式组织。
 
-我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目格式：
+我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目类别：
 \begin{description}
   \item[\texttt{article}] 学术论文，必需数据项有 author, title, journal, year; 可选数据项包括 volumn, number, pages, doi 等；
   \item[\texttt{book}] 书籍，必需数据项有 author/editor, title, publisher, year; 可选数据项包括 volumn/number, series, address 等；
@@ -90,7 +92,7 @@ Partl~\cite{pa} has proposed that \ldots
   number = {7},
   pages = {114-120}}
 \end{verbatim}
-所有类型的文献条目格式请参考 \CTAN|biblio/bibtex/base/btxdoc.pdf|。
+所有类别的文献条目格式请参考 \CTAN|biblio/bibtex/base/btxdoc.pdf|。
 
 多数时候，我们无需自己手写 \hologo{BibTeX} 文献条目。从 Google Scholar 或者期刊/数据库的网站上都能够导出 \hologo{BibTeX} 文献条目，
 老牌的文献管理软件 EndNote 也支持生成 \hologo{BibTeX} 格式的数据库。开源软件 JabRef 甚至支持 \hologo{BibTeX} 文献条目的导入、导出和管理。
@@ -138,7 +140,7 @@ Partl~\cite{pa} has proposed that \ldots
   Journal of \TeX perts 36~(7) (2013) 114--120.
 
 \medskip
-\textbf{IEEEtran}（\textsf{IEEEtran} 模板配套的样式）\\{}
+\textbf{IEEEtran}（\textsf{IEEEtran} 模板文档类配套的样式）\\{}
 [1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny, ``Demostration of bibliography
   items,'' \emph{Journal of \TeX perts}, vol.~36, no.~7, pp. 114--120, 2013.
 \end{trivlist}
@@ -151,9 +153,9 @@ Partl~\cite{pa} has proposed that \ldots
 现在我们来看如何利用 \hologo{BibTeX} 数据库生成参考文献和引用。
 
 第一步：我们当然需要一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib}，
-和我们的 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
+和 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
 
-第二步：在源代码中添加必要的命令。假设源代码的名称为 \texttt{demo.tex}（见 \ref{code:bibtex-demo}）。
+第二步：在源代码中添加必要的命令。假设源代码名为 \texttt{demo.tex}（见 \ref{code:bibtex-demo}）。
 \begin{enumerate}
 \item \cmdindex{bibliographystyle}
 首先需要使用命令 \cmd{bibliographystyle} 设定参考文献的格式。
@@ -191,7 +193,7 @@ and \cite{citation2} \ldots
 第三步：写好了以上两个文件之后，我们就可以开始编译了。
 \begin{enumerate}
   \item 首先使用 \texttt{pdflatex} 或 \texttt{xelatex} 等命令编译 \LaTeX\ 源代码 \texttt{demo.tex}；
-  \item 接下来用 \texttt{bibtex} 命令处理 \texttt{demo.aux} 文件记录的参考文献格式、引用条目等信息。
+  \item 接下来用 \texttt{bibtex} 命令处理 \texttt{demo.aux} 辅助文件记录的参考文献格式、引用条目等信息。
   \texttt{bibtex} 命令处理完毕后会生成 \texttt{demo.bbl} 文件，内容就是一个 \env{thebibliography} 环境；
   \item 再使用 \texttt{pdflatex} 或 \texttt{xelatex} 等命令把源代码 \texttt{demo.tex} 编译\textbf{两遍}，读入参考文献并正确生成引用。
 \end{enumerate}

@@ -44,7 +44,7 @@
 
   \item 方便而强大的数学公式排版能力，无出其右。
 
-  \item 绝大多数时候，用户只需掌握一些简单易懂的命令来组织文档结构，无需（或很少）操心文档的版面设计。
+  \item 绝大多数时候，用户只需专注于一些组织文档结构的基础命令，无需（或很少）操心文档的版面设计。
 
   \item 很容易生成复杂的专业排版元素，如脚注、交叉引用、参考文献、目录等。
 
@@ -54,7 +54,7 @@
   \item \LaTeX\ 促使用户写出结构良好的文档——而这也是 \LaTeX\ 存在的初衷。
 
   \item \LaTeX\ 依赖的 \TeX\ 排版引擎和其它软件是跨平台、免费、开源的。
-  无论用户使用的是 Windows，OS X，GNU/Linux 还是 FreeBSD 等系统，都能轻松获得并使用这一强大的排版工具。
+  无论用户使用的是 Windows，macOS（OS X），GNU/Linux 还是 FreeBSD 等操作系统，都能轻松获得和使用这一强大的排版工具。
 \end{itemize}
 
 \LaTeX\ 的缺点也是显而易见的：
@@ -107,9 +107,6 @@ or \TeX{} users?
 有些命令带一个或多个可选参数，以方括号 \texttt[ 和 \texttt] 包裹。
 还有些命令在命令名称后可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异。
 
-\pinyinindex{fenzu}{分组}
-\LaTeX\ 的花括号本身也起到\textbf{分组}的作用，可以将字体、格式等的更改限制在大括号范围之内。
-
 \index{LaTeX environment@\LaTeX\ 环境}
 \cmdindex{begin,end}
 \LaTeX\ 还引入了\textbf{环境}的用法，用以令一些效果在局部生效，或是生成特定的文档元素。
@@ -122,6 +119,10 @@ or \TeX{} users?
 
 其中 \Arg{environment name} 为环境名，\cmd{begin} 和 \cmd{end} 中填写的环境名应当一致。
 \cmd{begin} 在 \Arg{environment name} 后可以带一个或多个参数，甚至可选参数。环境允许嵌套使用。
+
+\pinyinindex{fenzu}{分组}
+除了 \LaTeX\ 环境之外，花括号本身也起到\textbf{分组}的作用，起到类似环境的令效果在局部生效的作用，
+例如 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法。
 
 \subsection{\LaTeX\ 源代码结构}\label{subsec:struct}
 
@@ -164,8 +165,8 @@ or \TeX{} users?
 \caption{\LaTeX\ 的一个最简单的源代码示例。}\label{code:hello-world}
 \end{sourcecode}
 
-有相当多的编辑器会提供一个按钮完成编译，不过笔者仍然觉得有必要了解一下其背后的工作原理。\LaTeX\ 调用的程序都是基于命令行的，
-所以建议打开 Windows 命令提示符或者 Linux / OS X 的终端，按照本手册的范例尝试一下调用命令行程序编译。
+有相当多的编辑器会提供“编译”按钮，不过笔者仍然觉得有必要了解一下其背后的工作原理。\LaTeX\ 调用的程序都是基于命令行的，
+所以建议打开 Windows 命令提示符或者 Linux / macOS（OS X）的终端，按照本手册的范例尝试一下调用命令行程序编译。
 
 \subsection{引擎、格式和命令}\label{subsec:concepts}
 
@@ -178,7 +179,7 @@ or \TeX{} users?
   \item[格式] 是定义了一组命令的代码集。\LaTeX\ 就是最广泛应用的一个格式，高德纳本人还编写了一个简单的 plain \TeX\ 格式，
   没有定义诸如 \cmd{document\-class} 和 \cmd{section} 等等命令。
   \item[命令] 是引擎和格式二者的结合体。如下文要用到的 \texttt{pdflatex} 命令是结合 \hologo{pdfTeX} 
-  引擎和 \LaTeX\ 格式的一个命令，用于编译类似源代码 \ref{code:hello-world} 的代码并输出 PDF。
+  引擎和 \LaTeX\ 格式的一个命令，用于编译类似源代码 \ref{code:hello-world} 的代码并生成文档。
 \end{description}
 
 \texttt{latex} 命令和 \LaTeX\ 格式往往容易混淆，在同他人讨论关于 \LaTeX\ 的时候需要明确。
@@ -199,7 +200,7 @@ or \TeX{} users?
 \end{center}
 \footnotetext{现今的发行版中 \texttt{latex} 命令也用 \hologo{pdfTeX} 引擎结合 \LaTeX\ 格式，输出扩展名为 DVI 的文档。}
 
-\subsection{\texttt{latex}命令}\label{subsec:latex-exe}
+\subsection{\texttt{latex} 命令}\label{subsec:latex-exe}
 
 假使你的计算机上已经安装了 \LaTeX\ 依赖的程序和工具（安装方法在附录 \ref{app:install} 有简单介绍）。
 我们将源代码 \ref{code:hello-world} 拷贝到一个文本文件中，保存为 \texttt{helloworld.tex}。然后在命令行输入：
@@ -208,8 +209,8 @@ latex helloworld.tex
 \end{verbatim}
 （也可以输入不带扩展名的 \texttt{latex helloworld}）。
 
-此时命令行界面会闪过许多信息。如果一切正常，再行检查目录，会发现生成了 \texttt{hello\-world.dvi} 以及其它文件。
-这个扩展名为 DVI 的文件就是编译输出的文档。
+此时命令行会闪过许多信息。如果一切正常，在目录中将生成 \texttt{hello\-world.dvi} 以及其它文件。
+这个扩展名为 \texttt{dvi} 的文件就是编译生成的文档。
 
 Linux 系统下，可以在命令行调用 \texttt{xdvi} 程序打开这个文档：
 \begin{verbatim}
@@ -219,7 +220,7 @@ xdvi helloworld.dvi
 Windows 系统下大多预装了 yap 软件（Mik\TeX) 或 dviout 软件（\TeX\ Live），可以双击 \texttt{hello\-world.dvi} 打开它。
 
 \index{dvipdfmx@\texttt{dvipdfmx} 命令}
-要进一步生成现今流行的 PDF 文档格式，我们还需要用额外的命令将 DVI 转为 PDF：
+要进一步生成现今流行的 PDF 文档格式，我们还需要用额外的程序将 \texttt{dvi} 转为 \texttt{pdf}：
 \begin{verbatim}
 dvipdfmx helloworld.dvi
 \end{verbatim}
@@ -283,12 +284,12 @@ xelatex helloworld.tex
 
 \pinyinindex{xuanxiang}{选项（宏包/文档类）}
 可选参数 \Arg{options} 为文档类指定选项，以全局地影响文档布局的参数，如字号、纸张大小、单双面等等。
-\LaTeX\ 的三个标准文档类可指定的选项见表 \ref{tbl:ltx-options}。
-
 比如调用 \cls{article} 文档类排版文章，指定纸张为 A4 大小，基本字号为 11pt，双面排版：
 \begin{verbatim}
 \documentclass[11pt,twoside,a4paper]{article}
 \end{verbatim}
+
+\LaTeX\ 的三个标准文档类可指定的选项见表 \ref{tbl:ltx-options}。
 
 \begin{table}[htp]
 \caption{\LaTeX\ 的三个标准文档类可指定的选项}\label{tbl:ltx-options}

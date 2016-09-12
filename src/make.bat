@@ -12,6 +12,7 @@ set MAKEINDEX=makeindex
 %TEX% %MODE% %LSHORT%
 %MAKEINDEX% -s %LSHORT%.ist %LSHORT%
 %TEX% %MODE% %LSHORT%
+%TEX% %MODE% %LSHORT%
 
 if exist %PDF% (
 move %PDF% ..

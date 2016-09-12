@@ -9,29 +9,27 @@
 
 \subsection{章节标题}\label{subsec:secs}
 
-\cmdindex{section,subsection,subsubsection,paragraph,subparagraph}
+\cmdindex{chapter,section,subsection,subsubsection,paragraph,subparagraph}
+\clsindex{article,book,report}
+
 一篇结构化的、条理清晰文档一定是层次分明的，通过不同的命令分割为章、节、小节。\LaTeX\ 的三个标准文档类 \cls{article}、\cls{report} 和 \cls{book}%
-\footnote{千万注意是\textbf{标准文档类}，其它文档类可能没有定义或只定义了一部分，如 \cls{beamer} 或 \cls{moderncv} 等。}%
+\footnote{千万注意是\textbf{标准文档类}，其它文档类，如果不是从标准文档类衍生而来，
+很可能没有定义或只定义了一部分命令，如 \cls{beamer} 或 \cls{moderncv} 等。}%
 提供了一系列命令，用以划分章节、生成章节标题并自动编号：
 \begin{command}
-\cmd{section}\marg{title} \quad
+\cmd{chapter}\marg{title} \quad
+\cmd{section}\marg{title} \\
 \cmd{subsection}\marg{title} \quad
 \cmd{subsubsection}\marg{title} \\
 \cmd{paragraph}\marg{title} \quad
 \cmd{subparagraph}\marg{title}
 \end{command}
+其中 \cmd{chapter} \textbf{只在 \cls{book} 和 \cls{report} 文档类有定义}。
 
 \cmdindex{part}
-\cmd{part} 命令用以将整个文档分割为大的分块，但不影响 \cmd{section} 等的编号：
+\cmd{part} 命令用以将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号：
 \begin{command}
 \cmd{part}\marg{title}
-\end{command}
-
-\cmdindex{chapter}
-\clsindex{book,report}
-\cls{book} 和 \cls{report} 提供了章一级的结构：
-\begin{command}
-\cmd{chapter}\marg{title}
 \end{command}
 
 上述命令除了生成带编号的标题之外，还向目录中添加条目，并影响页眉页脚的内容（详见 \ref{sec:pagestyle} 节）。每个命令有两种变体：
@@ -42,8 +40,15 @@
   标题不带编号，也不生成目录项和页眉页脚。
 \end{itemize}
 
+较低层次如 \cmd{paragraph} 和 \cmd{subparagraph} 即使不用带星号的变体，生成的标题默认也不带编号，事实上，除 \cmd{part} 外：
+\begin{itemize}
+  \item \cls{article} 文档类带编号的层级为 \cmd{section} / \cmd{subsection} / \cmd{sub\-sub\-section} 三级；
+  \item \cls{report}/\cls{book} 文档类带编号的层级为 \cmd{chapter} / \cmd{section} / \cmd{sub\-section} 三级。
+\end{itemize}
+对此的详细解释和调整方法见 \ref{subsec:latex-counts} 小节。
+
 \pkgindex{titlesec}
-\LaTeX\ 并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助手册。
+\LaTeX\ 及标准文档类并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助手册。
 
 \subsection{目录}\label{sec:toc}
 
@@ -53,23 +58,24 @@
 \cmd{tableofcontents}
 \end{command}
 
-这个命令会生成单独的一个章节，标题默认为 ``Contents'' ，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
+这个命令会生成单独的一个章节，标题默认为 ``Contents''{}，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
 
 正确生成目录项，一般需要编译两次源代码。
 
 \cmdindex{addcontentsline}
-有时我们使用了 \cmd{chapter*} 或 \cmd{section*} 这样不生成目录项的命令，而又想手动生成该章节的目录，可以在标题命令后面使用：
+有时我们使用了 \cmd{chapter*} 或 \cmd{section*} 这样不生成目录项的章节标题命令，
+而又想手动生成该章节的目录项，可以在标题命令后面使用：
 \begin{command}
 \cmd{addcontentsline}\marg*{toc}\marg{level}\marg{title}
 \end{command}
 
-其中 \Arg{level} 为章节层次 \texttt{chapter} 或 \texttt{section} 等，\Arg{title} 为需要生成目录项的章节标题。
+其中 \Arg{level} 为章节层次 \texttt{chapter} 或 \texttt{section} 等，\Arg{title} 为出现于目录项的章节标题。
 
 \subsection{文档结构的划分}\label{sec:matters}
 
 \cmdindex{appendix}
 所有标准文档类都提供了一个 \cmd{appendix} 命令将正文和附录分开%
-\footnote{有的地方可能写作 \cmd{begin} \marg*{appendix} \ldots \cmd{end} \marg*{appendix} 这样，
+\footnote{有的参考文档可能使用 \cmd{begin} \marg*{appendix} \ldots \cmd{end} \marg*{appendix} 这样的写法，
 虽然有效，但并不规范，只要使用 \cmd{appendix} 命令就够了。}，
 使用 \cmd{appendix} 后，最高一级章节改为使用拉丁字母编号，从 A 开始。
 
@@ -146,11 +152,21 @@
 \cmd{maketitle}
 \end{command}
 生成一个简单的标题页了。\cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
-可在 \cmd{document\-class} 命令中指定 \texttt{titlepage / notitlepage} 选项修改。
+可在 \cmd{document\-class} 命令调用文档类时指定 \texttt{titlepage / notitlepage} 选项以修改默认的行为。
 
-以上是 \LaTeX\ 标准文档类的标题页实现。在各种文档模板中，标题页的实现方式会根据自身的需要进行修改，
-有可能需要除了 \cmd{title} 和 \cmd{author} 以外的命令给定信息，用法也可能与标准文档类的不一致。
-使用文档模板前\textbf{一定要仔细阅读文档模板的帮助手册}。
+\envindex{titlepage}
+\LaTeX\ 标准类还提供了一个简单的 \env{titlepage} 环境，生成不带页眉页脚的一页。用户可以在这个环境中使用各种排版元素自由发挥，
+生成自定义的标题页以替代 \cmd{maketitle} 命令。甚至可以利用 \env{titlepage} 环境重新定义 \cmd{maketitle}：
+\begin{verbatim}
+\renewcommand{\maketitle}{\begin{titlepage}
+... % 用户自定义命令
+\end{titlepage}}
+\end{verbatim}
+事实上为标准文档类指定 \texttt{titlepage} 选项时，生成的标题页就是一个 \env{titlepage} 环境。
+
+以上是 \LaTeX\ 标准文档类的标题页相关命令用法。在各种文档模板中经常有自定义的标题页，
+有可能需要除了 \cmd{title} 和 \cmd{author} 以外的命令给定信息，用法也可能与标准文档类的不一致
+（甚至有些模板可能没有定义 \env{titlepage} 等环境）。使用文档模板前\textbf{一定要仔细阅读文档模板的帮助手册}。
 
 \section{交叉引用}\label{sec:crossref}
 
@@ -281,7 +297,8 @@ page~\pageref{sec:this}.''
 \end{description}
 \end{example}
 
-默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，而要用到 \pkg{enumitem} 宏包。有兴趣的读者可参考其帮助手册。
+默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，而要用到 \pkg{enumitem} 宏包定制各种列表间距。
+\pkg{enumitem} 宏包还提供了对列表标签、引用等的定制。有兴趣的读者可参考其帮助手册。
 
 \subsection{对齐环境}\label{subsec:flush}
 
@@ -760,7 +777,7 @@ for (int i=0; i<4; ++i)
 盒子是 \LaTeX\ 排版的基础单元，虽然解释上去有些抽象：每一行是一个盒子，
 里面的文字从左到右依次排列；每一页也是一个盒子，各行文字从上到下依次排布……颇有一些活字印刷术的味道。
 
-不管如何，\LaTeX\ 提供了一些实用的命令让我们生成一些有用的盒子。
+不管如何，\LaTeX\ 提供了一些命令让我们生成一些有特定用途的盒子。
 
 \subsection{水平盒子}\label{subsec:mbox}
 
@@ -771,7 +788,7 @@ for (int i=0; i<4; ++i)
 \cmd{makebox}\oarg{width}\oarg{align}\marg*{\ldots}
 \end{command}
 
-\cmd{mbox} 生成一个基本的水平盒子，内容只有一行（除非嵌套下文的垂直盒子），不允许分段。
+\cmd{mbox} 生成一个基本的水平盒子，内容只有一行（除非嵌套下文介绍的垂直盒子，或者其它内容），不允许分段。
 外表看上去，\cmd{mbox} 的内容与正常的文本无二，不过断行时文字不会从盒子里断开。
 
 \cmd{makebox} 更进一步，可以加上可选参数用于控制盒子的宽度 \Arg{width}，以及内容的对齐方式 \Arg{align}，
@@ -891,7 +908,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \end{tabular}
 \end{center}
 \begin{quote}\footnotesize
-注 1：排版位置的选取与参数里符号的顺序无关，\LaTeX\ 总是以 \texttt{h-t-b-p} 的优先级顺序选取位置。
+注 1：排版位置的选取与参数里符号的顺序无关，\LaTeX\ 总是以 \texttt{h-t-b-p} 的优先级顺序决定浮动体位置。
 也就是说 \texttt{[!htp]} 和 \texttt{[ph!t]} 没有区别。\par
 注 2：限制包括浮动体个数（除单独成页外，默认每页不超过 3 个浮动体，其中顶部不超过 2 个，底部不超过 1 个）
 以及浮动体空间占页面的百分比（默认顶部不超过 70\%，底部不超过 30\%）。
@@ -921,8 +938,12 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \end{command}
 \cmd{caption} 的用法非常类似于 \cmd{section} 等命令，可以用带星号的命令 \cmd{caption*} 生成不带编号的标题，
 也可以使用带可选参数的形式 \cmd{caption}\oarg*{\ldots}\marg*{\ldots}，使得在目录里使用短标题。
+\cmd{caption} 命令之后还可以紧跟 \cmd{label} 命令标记交叉引用。
 
-\cmd{caption} 之后还可以紧跟 \cmd{label} 命令标记交叉引用。
+\pkgindex{caption}
+\cmd{caption} 生成的标题形如 ``Figure 1: \ldots''{}（\env{figure} 环境）或 ``Table 1: \ldots''{}（\env{table} 环境）。
+可通过修改 \cmd{figurename} 和 \cmd{tablename} 的内容来修改标题的前缀（详见第 \ref{sec:latex-settings} 节）。
+标题样式的定制功能由 \pkg{caption} 宏包提供，详见该宏包的帮助手册，在此不作赘述。
 
 \cmdindex{listoftables,listoffigures}
 \env{table} 和 \env{figure} 两种浮动体分别有各自的生成目录的命令：

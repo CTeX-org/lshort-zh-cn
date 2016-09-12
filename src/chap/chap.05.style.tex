@@ -151,6 +151,9 @@ He likes {\LARGE large and
 \usepackage[T1]{fontenc}
 \end{verbatim}
 
+\pkg{fontenc} 宏包是用来配合传统的 \LaTeX\ 字体的，如表 \ref{tbl:font-pkgs} 中的大部分宏包。如果使用下文的 \pkg{fontspec}
+宏包调用 \texttt{ttf} 或 \texttt{otf} 格式字体，就不要再使用 \pkg{fontenc} 宏包。
+
 \begin{table}[!p]
 \centering
 \caption{常见的 \LaTeX\ 字体宏包。}\label{tbl:font-pkgs}
@@ -179,7 +182,7 @@ He likes {\LARGE large and
  \pkg{dejavu}      & DejaVu 开源字体 \\
  \pkg{droid}       & Droid 开源字体 \\
  \pkg{inconsolata} & Inconsolata 开源等宽字体 \\
- \pkg{libertine}   & Linux Libertine 衬线字体 \\
+ \pkg{libertine}   & Linux Libertine / Linux Biolium 开源字体 \\
  \pkg{sourcesanspro} & Source Sans Pro 开源无衬线字体 \\
  \pkg{sourcecodepro} & Source Code Pro 开源等宽字体 \\
  \hline
