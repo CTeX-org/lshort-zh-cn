@@ -162,7 +162,8 @@
 ... % 用户自定义命令
 \end{titlepage}}
 \end{verbatim}
-事实上为标准文档类指定 \texttt{titlepage} 选项时，生成的标题页就是一个 \env{titlepage} 环境。
+
+事实上，为标准文档类指定了 \texttt{titlepage} 选项以后，使用 \cmd{maketitle} 命令生成的标题页就是一个 \env{titlepage} 环境。
 
 以上是 \LaTeX\ 标准文档类的标题页相关命令用法。在各种文档模板中经常有自定义的标题页，
 有可能需要除了 \cmd{title} 和 \cmd{author} 以外的命令给定信息，用法也可能与标准文档类的不一致
@@ -344,7 +345,7 @@ Left-aligned text paragraph.
 Right-aligned text paragraph.
 \end{example}
 
-三个命令和对应的环境经常被误用，有直接用所谓 \cmd{flushleft} 命令或者 \env{raggedright} 环境的，都是不合理的用法（即使它们可能有效）。
+三个命令和对应的环境经常被误用，有直接用所谓 \cmd{flushleft} 命令或者 \env{raggedright} 环境的，都是不甚严格的用法（即使它们可能有效）。
 有一点可以将两者区分开来：\env{center} 等环境会在上下文产生一个额外间距，而 \cmd{centering} 等命令不产生，只是改变对齐方式。
 比如在浮动体环境 \env{table} 或 \env{figure} 内实现居中对齐，用 \cmd{centering} 命令即可，没必要再用 \env{center} 环境。
 
@@ -420,7 +421,7 @@ for (int i=0; i<4; ++i)
 \cmd{verb}\Arg{delim}\Arg{code}\Arg{delim}
 \end{command}
 
-\Arg{delim} 标明代码的分界位置，不能是字母、空格或星号，前后必须一致，可任意选择使得不与代码本身冲突，习惯上使用 \texttt| 符号。
+\Arg{delim} 标明代码的分界位置，前后必须一致，除字母、空格或星号外，可任意选择使得不与代码本身冲突，习惯上使用 \texttt| 符号。
 
 同 \env{verbatim} 环境，\cmd{verb} 后也可以带一个星号，以显示空格：
 \begin{example}
