@@ -83,9 +83,9 @@
 \cmdindex{frontmatter,mainmatter,backmatter}
 \cls{book} 文档类还提供了前言、正文、后记结构的划分命令：
 \begin{description}
-  \item[\cmd{frontmatter}] 前言部分，页码为小写罗马字母格式；其后的章节不编号，但生成页眉页脚和目录项。
-  \item[\cmd{mainmatter}] 正文部分，页码为阿拉伯数字格式，从 1 开始计数；其后的章节编号、页眉页脚和目录项正常。
-  \item[\cmd{backmatter}] 后记部分，页码格式不变，继续正常计数；其后的章节不编号，但生成页眉页脚和目录项。
+  \item[\cmd{frontmatter}] 前言部分，页码为小写罗马字母格式；其后的 \cmd{chapter} 不编号。
+  \item[\cmd{mainmatter}] 正文部分，页码为阿拉伯数字格式，从 1 开始计数；其后的章节编号正常。
+  \item[\cmd{backmatter}] 后记部分，页码格式不变，继续正常计数；其后的 \cmd{chapter} 不编号。
 \end{description}
 
 \cmdindex{include}
