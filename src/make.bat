@@ -1,12 +1,12 @@
 @echo off
 set LSHORT=lshort-zh-cn
 set PDF=%LSHORT%.pdf
-set TEMP=%LSHORT%.aux %LSHORT%.log %LSHORT%.idx %LSHORT%.ind %LSHORT%.ilg %LSHORT%.out %LSHORT%.toc %LSHORT%.los %LSHORT%-example.aux
+set TEMP=%LSHORT%.aux %LSHORT%.log %LSHORT%.idx %LSHORT%.ind %LSHORT%.ilg %LSHORT%.out %LSHORT%.toc %LSHORT%.los %LSHORT%-example.aux %LSHORT%.synctex.gz
 
 if "%1"=="clean" goto clean
 
 set TEX=xelatex
-set MODE=-interaction=nonstopmode
+set MODE=-interaction=nonstopmode -synctex=1
 set MAKEINDEX=makeindex
 
 %TEX% %MODE% %LSHORT%

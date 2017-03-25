@@ -170,19 +170,21 @@ He likes {\LARGE large and
  \pkg{stix}        & Times 风格的字体宏包  \\
  \pkg{newtxtext},\pkg{newtxmath}  & \pkg{txfonts} 的改进版本，分别设置文本和数学字体  \\
  \pkg{newpxtext},\pkg{newpxmath}  & \pkg{pxfonts} 的改进版本，分别设置文本和数学字体  \\
- \pkg{mathptmx}    & \pkg{psnfss} 组件之一，Times 风格，较为陈旧，不推荐使用  \\
- \pkg{mathpazo}    & \pkg{psnfss} 组件之一，Palatino 风格，较为陈旧，不推荐使用  \\
+ \pkg{mathptmx}    & \pkg{psnfss} 字体宏集之一，Times 风格，较为陈旧，不推荐使用  \\
+ \pkg{mathpazo}    & \pkg{psnfss} 字体宏集之一，Palatino 风格，较为陈旧，不推荐使用  \\
  \pkg{fourier}     & fourier 风格数学字体，配合 Utopia 正文字体 \\
  \pkg{fouriernc}   & fourier 风格数学字体，配合 New Century Schoolbook 正文字体 \\
- \pkg{arev}        & Arev 无衬线字体宏包，Bitstream Vera sans 风格 \\
+ \pkg{arev}        & Arev 无衬线字体宏包，Vera Sans 风格 \\
  \pkg{mathdesign}  & 配合 Charter/Garamond/Utopia 正文字体的数学字体宏包（Garamond 字体可能需要单独安装） \\
  \hline
  \multicolumn{2}{c}{文本字体宏包} \\
+ \multicolumn{2}{l}{\small 以下字体包括传统的 \LaTeX\ 字体格式以及 TrueType / OpenType 格式。}
  \hline
  \pkg{dejavu}      & DejaVu 开源字体 \\
  \pkg{droid}       & Droid 开源字体 \\
  \pkg{inconsolata} & Inconsolata 开源等宽字体 \\
  \pkg{libertine}   & Linux Libertine / Linux Biolium 开源字体 \\
+ \pkg{roboto}      & Roboto 开源无衬线字体 \\
  \pkg{sourcesanspro} & Source Sans Pro 开源无衬线字体 \\
  \pkg{sourcecodepro} & Source Code Pro 开源等宽字体 \\
  \hline
@@ -205,7 +207,7 @@ He likes {\LARGE large and
 \pkgindex{fontspec}
 \cmdindex[fontspec]{setmainfont,setsansfont,setmonofont}
 \texttt{xelatex} 命令下支持用户调用字体的宏包是 \pkg{fontspec}。宏包提供了几个设置全局字体的命令，设置 \cmd{rmfamily} 等对应命令的默认字体%
-\footnote{新版本 \pkg{fontspec} 的命令支持把必选参数 \Arg{font name} 放在可选参数 \Arg{font features} 的前面。}：
+\footnote{新版本 \pkg{fontspec} 的命令支持（并且推荐）把必选参数 \Arg{font name} 放在可选参数 \Arg{font features} 的前面。}：
 \begin{command}
 \cmd{setmainfont}\oarg{font features}\marg{font name} \\
 \cmd{setsansfont}\oarg{font features}\marg{font name} \\
@@ -290,7 +292,7 @@ He likes {\LARGE large and
 \cmd{linespread}\marg{factor}
 \end{command}
 
-这里的 \Arg{factor} 是在基础行距上而不是字号上乘以一个因子。大部分时候，默认的基础行距是 1.2 倍字号大小，
+这里的 \Arg{factor} 是在基础行距上而不是字号上乘以一个因子。大部分时候，默认的基础行距是 1.2 倍字号大小（参考 \cmd{fontsize} 命令），
 因此设置 1.5 倍行距的命令 \cmd{line\-spread}\marg*{1.5} 意味着最终行距为 1.8 倍的字号大小。
 
 \cmdindex{selectfont}
@@ -335,22 +337,12 @@ But remember I am a liar.}\par
 
 \cmdindex{indent,noindent}
 \LaTeX\ 默认在段落开始时缩进，长度为你用上述命令设置的 \cmd{parindent}。如果你在某一段不想使用缩进，可使用某一段开头使用
-\begin{command}
-\cmd{noindent}
-\end{command}
-命令。相反地，
-\begin{command}
-\cmd{indent}
-\end{command}
-命令强制开启一段首行缩进的段落。多个 \cmd{indent} 命令可以累加缩进量。
+\cmd{noindent} 命令。相反地，\cmd{indent} 命令强制开启一段首行缩进的段落。多个 \cmd{indent} 命令可以累加缩进量。
 
 \pkgindex{indentfirst}
 \LaTeX\ 还默认\textbf{在 \cmd{chapter}、\cmd{section} 等章节标题命令之后的第一段不缩进}%
 \footnote{\pkg{ctex} 宏包和文档类默认按照中文习惯保持标题后第一段的首行缩进。}。
-如果不习惯这种设定，可以调用 \pkg{indent\-first} 宏包：
-\begin{verbatim}
-\usepackage{indentfirst}
-\end{verbatim}
+如果不习惯这种设定，可以调用 \pkg{indent\-first} 宏包，令第一段的首行缩进照常。
 
 \cmdindex{parskip}
 段落间的垂直间距为 \cmd{parskip}，如设置段落间距在 \texttt{0.8ex} 到 \texttt{1.5ex} 变动：
@@ -587,9 +579,9 @@ between lines in a paragraph.
 \begin{tabularx}{0.8\textwidth}{lX}
  \hline
  \texttt{empty}  & 页眉页脚为空 \\
- \texttt{plain}  & 页眉为空，页脚为页码。（article 和 report 文档类默认；book 文档类的每章第一页也为 plain 格式） \\
+ \texttt{plain}  & 页眉为空，页脚为页码。（\cls{article} 和 \cls{report} 文档类默认；\cls{book} 文档类的每章第一页也为 plain 格式） \\
  \hline
- \texttt{headings}  & 页眉为章节标题和页码，页脚为空。（book 文档类默认） \\
+ \texttt{headings}  & 页眉为章节标题和页码，页脚为空。（\cls{book} 文档类默认） \\
  \texttt{myheadings}  & 页眉为页码及 \cmd{markboth} 和 \cmd{markright} 命令手动指定的内容，页脚为空。\\
  \hline
 \end{tabularx}

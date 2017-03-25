@@ -1,10 +1,10 @@
 LSHORT  = lshort-zh-cn
 PDF     = $(LSHORT).pdf
 REQUIRE = $(LSHORT).tex $(LSHORT)-style.sty $(LSHORT)-layout.tex $(LSHORT).ist
-TEMP    = $(LSHORT).{aux,log,idx,ind,ilg,out,toc,los} $(LSHORT)-example.aux
+TEMP    = $(LSHORT).{aux,log,idx,ind,ilg,out,toc,los,synctex.gz} $(LSHORT)-example.aux
 
 TEX     = xelatex
-MODE    = -interaction=nonstopmode
+MODE    = -interaction=nonstopmode -synctex=1
 MAKEIDX = makeindex
 
 RM      = rm -f

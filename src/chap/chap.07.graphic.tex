@@ -23,7 +23,7 @@
   \item \TikZ\ \& \pkg{pgf} \par
   德国的 Till Tantau 在开发著名的 \LaTeX\ 幻灯片文档类 \cls{beamer} 时一并开发了绘图宏包 \pkg{pgf}，
   目的是令其能够在 \texttt{pdflatex} 或 \texttt{xelatex} 等不同的编译命令下都能使用。
-  \TikZ\ 是在 \pkg{pgf} 基础上封装的一个宏包，提供了方便的绘图命令，绘图能力不输 PSTricks。
+  \TikZ\ 是在 \pkg{pgf} 基础上封装的一个宏包，采用了类似 \hologo{METAPOST} 的语法，提供了方便的绘图命令，绘图能力不输 PSTricks。
 
   \item \hologo{METAPOST} \& Asymptote \par
   \hologo{METAPOST} 脱胎于高德纳为 \TeX\ 配套开发的字体生成程序 \hologo{METAFONT}，
@@ -36,7 +36,7 @@
 其复杂程度已远远超出入门手册的范围（\TikZ\ 的帮助文档有上千页之厚）。
 对此感兴趣的读者需要自行查阅帮助手册，或者到互联网上参考现成的范例。
 
-\section{\TikZ}\label{sec:tikz}
+\section{\TikZ\ 绘图语言}\label{sec:tikz}
 
 \index{TikZ@\TikZ}
 \pkgindex{tikz}
@@ -46,15 +46,16 @@
 \footnote{\texttt{latex + dvipdfmx} 编译方式要在 \pkg{tikz} 宏包之前调用 \pkg{graphicx} 宏包并指定 \texttt{dvipdfmx} 选项。}：
 \begin{command}
 \cmd{tikz}\oarg*{\ldots} \Arg{tikz code}\texttt{;} \\[1ex]
+\cmd{tikz}\oarg*{\ldots} \marg*{\Arg{tikz code 1}\texttt{;} \Arg{tikz code 2}\texttt{;} \ldots} \\[1ex]
 \cmd{begin}\marg*{tikzpicture}\oarg*{\ldots} \\
 \Arg{tikz code 1}\texttt{;} \\
-\Arg{tikz code 2}\texttt{;} \\
+\Arg{tikz code 2}\texttt{;}\ldots \\
 \ldots \\
 \cmd{end}\marg*{tikzpicture}
 \end{command}
 
 前一种用法为 \cmd{tikz} 带单条绘图命令，以分号结束，一般用于在文字之间插入简单的图形；
-后一种用法较为常见，使用多条绘图命令，可以在 \env{figure} 等浮动体中使用。
+后两种用法较为常见，使用多条绘图命令，可以在 \env{figure} 等浮动体中使用。
 
 \subsection{\TikZ\ 坐标和路径}\label{subsec:tikz-path}
 
@@ -77,6 +78,18 @@
 \draw (S) -- (1,1);
 \end{tikzpicture}
 \end{example}
+
+坐标的表示形式还包括“垂足”形式：
+\begin{example}
+\begin{tikzpicture}
+\coordinate (S) at (2,2);
+\draw[gray] (-1,2) -- (S);
+\draw[gray] (2,-1) -- (S);
+\draw[red] (0,0) -- (0,0 -| S);
+\draw[blue] (0,0) -- (0,0 |- S);
+\end{tikzpicture}
+\end{example}
+
 
 \TikZ\ 最基本的路径为两点之间连线，如 \texttt{(\Arg{$x_1$},\Arg{$y_1$}) -{}- (\Arg{$x_2$},\Arg{$y_2$})}，可以连用表示多个连线（折线）。
 连续使用连线时，可以使用 \texttt{cycle} 令路径回到起点，生成闭合的路径。
@@ -101,13 +114,39 @@
 \end{example}
 
 \begin{itemize}
-  \item 直角、圆弧：
+  \item 直角、圆弧、椭圆弧：
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}
 \draw (0,0) |- (1,1);
 \draw (1,0) -| (2,1);
 \draw (4,0) arc (0:135:1);
+\draw (6,0) arc (0:135:1 and 0.5);
+\end{tikzpicture}
+\end{example}
+
+\begin{itemize}
+  \item 正弦、余弦曲线（四分之一个周期）：
+\end{itemize}
+\begin{example}
+\begin{tikzpicture}
+\draw (0,0) sin (1.57,1);
+\draw (0,1) sin (1.57,0);
+\draw (2,1) cos (3.57,0);
+\draw (2,0) cos (3.57,1);
+\end{tikzpicture}
+\end{example}
+
+\begin{itemize}
+  \item 抛物线，用 \texttt{bend} 控制顶点：
+\end{itemize}
+\begin{example}
+\begin{tikzpicture}
+\draw (0,0) parabola (1,2);
+\draw (2,0) parabola 
+      bend (2.25,-0.25) (3,2);
+\draw (4,0) parabola 
+      bend (4.75,2.25) (5,2);
 \end{tikzpicture}
 \end{example}
 
@@ -154,7 +193,18 @@
 绘图参数可作为可选参数用在 \env{tikzpiture} 环境或 \cmd{tikz} 命令时，参数会影响到所有具体的绘图命令；
 用在单个绘图命令 \cmd{draw}、\cmd{filldraw} 等时，只对这个命令起效。
 
-\TikZ 有数不清的绘图参数，这些参数令 \TikZ\ 能够绘制丰富多彩的图像，同时也令 \TikZ\ 易学难精。
+\envindex[tikz]{scope}
+\TikZ\ 还提供了 \env{scope} 环境，令一些绘图参数在局部起效：
+\begin{example}
+\begin{tikzpicture}
+\draw (0,0) rectangle (2.5, 2.5);
+\begin{scope}[fill=gray,scale=0.5]
+\filldraw (0,0) rectangle (2.5, 2.5);
+\end{scope}
+\end{tikzpicture}
+\end{example}
+
+\TikZ\ 有数不清的绘图参数，这些参数令 \TikZ\ 能够绘制丰富多彩的图像，同时也令 \TikZ\ 难以精通。
 本手册仅总结常用的一些绘图参数，见表 \ref{tbl:tikz-options}。
 
 \begin{table}[htp]
@@ -166,7 +216,7 @@
   为线条（\cmd{draw}）或填充（\cmd{fill}）指定颜色，\Arg{color} 使用颜色名或是 \pkg{xcolor} 的混合颜色语法。
   往往可以不写 \texttt{color=} 直接写颜色名称。
   \item \texttt{fill=\Arg{color} / draw=\Arg{color}} \par
-  分别给 \cmd{filldraw} 指定填充和描边的颜色。也可分别给 \cmd{fill} 和 \cmd{draw} 命令使用。
+  分别给 \cmd{filldraw} 指定填充和描边的颜色。也可给 \cmd{fill} 和 \cmd{draw} 命令使用。
   不带参数直接使用 \texttt{fill} 和 \texttt{draw}，相当于用默认颜色。
 \end{itemize}
 \hrule
@@ -210,6 +260,8 @@
 \begin{command}
 \cmd{node}\oarg{options} \texttt{(\Arg{name})} \texttt{at (\Arg{coordinate})} \marg{text}\texttt{;}
 \end{command}
+\texttt{(\Arg{name})} 为结点命名，类似 \cmd{coordinate}；\texttt{at (\Arg{coordinate})} 指定结点的位置。
+这两者和前面的 \Arg{options} 都可以省略，只有 \Arg{text} 是必填的。
 \begin{example}
 \begin{tikzpicture}
 \node (A) at (0,0) {A};
@@ -247,7 +299,7 @@
 \hrule
 \end{table}
 
-\cmd{node} 命令不仅为文字结点的位置命名（类似 \cmd{coordinate} 命令），在 \cmd{draw} 等命令中还可以使用某个结点的相对位置，
+\cmd{node} 命令不仅为文字结点的位置命名，在 \cmd{draw} 等命令中还可以使用某个结点的相对位置，
 以“东南西北”的方式命名：
 
 \begin{example}
@@ -272,8 +324,8 @@
 \end{tikzpicture}
 \end{example}
 
-除了 \cmd{node} 命令之外，\cmd{coordinate} 也可以通过参数为某个位置添加文字。
-我们最后举一个较为复杂的例子，综合前面介绍过的各种路径、形状、文字结点和参数设置。
+除了 \cmd{node} 命令之外，\cmd{coordinate} 也可以通过参数为某个位置添加文字（label）。
+在此举一个较为复杂的例子，综合前面介绍过的各种路径、形状、文字结点和参数设置。
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
@@ -282,8 +334,8 @@
 \draw[-stealth,line width=0.2pt] (0,-0.5) -- (0,2.5);
 \coordinate (a)  at (0.5,1.9);
 \coordinate (b)  at (4,1.2);
-\coordinate[label=below:$a$] (a0) at (0.5,0);
-\coordinate[label=below:$b$] (b0) at (4,0);
+\coordinate[label=below:$a$] (a0) at (a |- 0,0);
+\coordinate[label=below:$b$] (b0) at (b |- 0,0);
 \filldraw[fill=gray!20,draw,thick] 
   (a0) -- (a) .. controls (1,2.8) and (2.7,0.4) .. (b) -- (b0) -- cycle;
 \node[above right,outer sep=0.2cm, rounded corners,
@@ -297,8 +349,8 @@
 \draw[-stealth,line width=0.2pt] (0,-0.5) -- (0,2.5);
 \coordinate (a)  at (0.5,1.9);
 \coordinate (b)  at (4,1.2);
-\coordinate[label=below:$a$] (a0) at (0.5,0);
-\coordinate[label=below:$b$] (b0) at (4,0);
+\coordinate[label=below:$a$] (a0) at (a |- 0,0);
+\coordinate[label=below:$b$] (b0) at (b |- 0,0);
 \filldraw[fill=gray!20,draw,thick] 
   (a0) -- (a) .. controls (1,2.8) and (2.7,0.4) .. (b) -- (b0) -- cycle;
 \node[above right,outer sep=0.2cm, rounded corners,
@@ -308,5 +360,37 @@
 \end{center}
 \caption{\TikZ\ 绘图示例源代码和效果。}\label{code:tikz-example}
 \end{sourcecode}
+
+\subsection{在 \TikZ\ 中使用循环}
+
+\cmdindex[tikz]{foreach}
+\TikZ\ 通过 \pkg{pgffor} 功能宏包实现了简单的循环功能，语法为：
+\begin{command}
+\cmd{foreach} \cmd{a} \texttt{in} \marg{list} \marg{commands}
+\end{command}
+上述语法定义了 \cmd{a} 为变量，在 \marg{commands} 中使用 \cmd{a} 完成循环。
+
+\Arg{list} 可以直接将所有值写出来，如 1,2,3,4；也可以写成省略形式，如 1,2,\ldots,10。
+\begin{example}
+\begin{tikzpicture}
+\draw (0,0)--(5,0);
+\foreach \i in {0.0,0.1,...,5.0}
+  {\draw[very thin] 
+     (\i,0)--(\i,0.15);}
+\foreach \I in {0,1,2,3,4,5}
+  {\draw (\I,0)--(\I,0.25)
+     node[above] {\I};}
+\end{tikzpicture}
+\end{example}
+
+\cmd{foreach} 还可使用变量对参与循环：
+\begin{example}
+\begin{tikzpicture}
+\foreach \n/\t in 
+  {0/\alpha,1/\beta,2/\gamma}
+  {\node[circle,fill=lightgray,draw] 
+    at (\n,0) {$\t$};}
+\end{tikzpicture}
+\end{example}
 
 \endinput
