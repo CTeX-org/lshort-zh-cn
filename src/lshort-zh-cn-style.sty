@@ -181,13 +181,19 @@
 \def\ltxenvindex#1{\@for\@ltxenv:=#1\do{\index{\@ltxenv @\env{\@ltxenv} 环境}}}
 \def\pkgcmdindex[#1]#2{\@for\@pkgcmd:=#2\do{\index{\@pkgcmd @\cmd{\@pkgcmd} (\pkg{#1})}}}
 \def\pkgenvindex[#1]#2{\@for\@pkgenv:=#2\do{\index{\@pkgenv @\env{\@pkgenv} 环境 (\pkg{#1})}}}
+
+%
 % 文本和数学符号索引
+%
 \def\symindex#1{\@for\t@xtsym:=#1\do{\index{\t@xtsym @\cmd{\t@xtsym} (\textit{符号} \expandafter\protect\csname \t@xtsym\endcsname)}}}
 \def\mathindex#1{\@for\m@thcmd:=#1\do{\index{\m@thcmd @\cmd{\m@thcmd} (\textit{数学命令})}}}
 \def\msymindex#1{\@for\m@thsym:=#1\do{\index{\m@thsym @\cmd{\m@thsym} (\textit{数学符号}$\expandafter\protect\csname \m@thsym\endcsname$)}}}
 \def\maccindex#1{\@for\m@thacc:=#1\do{\index{\m@thacc @\cmd{\m@thacc} (\textit{数学重音}$\expandafter\protect\csname \m@thacc\endcsname{a}$)}}}
 \def\waccindex#1{\@for\wideacc:=#1\do{\index{\wideacc @\cmd{\wideacc} (\textit{数学重音}$\expandafter\protect\csname \wideacc\endcsname{AB}$)}}}
+
+%
 % 拼音索引
+%
 \def\pinyinindex#1#2{\index{#1@#2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -208,14 +214,11 @@
   \def\arraystretch{1.2}%
   \hskip\parindent%
   \begin{tabular}{>{\columncolor{blue!5}}l}
-  }%
-  {\\
-  \end{tabular}
-  \endtrivlist}
+  }{\end{tabular}\endtrivlist}
 
 % 
 % 示例环境 example
-% 环境中的代码被 verbatim 环境处理到一个临时文件中
+% 环境中的代码写入临时文件 lshort-zh-cn-example.aux
 % 再从临时文件中读取，分别生成代码盒子和示例盒子
 % 
 \newwrite\example@out

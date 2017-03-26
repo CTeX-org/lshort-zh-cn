@@ -2,7 +2,7 @@
 
 ## 许可证
 
-本文档以**GNU 自由文档许可证（1.3 版）**发布。详见文档中题为“GNU Free Documentation License”的章节，或者源代码文件 `fdl.tex`。
+本文档以 **GNU 自由文档许可证（1.3 版）** 发布。详见文档中题为“GNU Free Documentation License”的章节，或者源代码文件 `fdl.tex`。
 
 ## 编译之前的准备
 
