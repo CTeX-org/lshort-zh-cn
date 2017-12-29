@@ -15,11 +15,18 @@ set MAKEINDEX=makeindex
 %TEX% %MODE% %LSHORT%
 
 if exist %PDF% (
-move %PDF% ..
+copy %PDF% ..
 start "" "..\%PDF%"
 )
 exit
 
 :clean
 del %TEMP%
+del %PDF%
+exit
+
+:distclean
+del %TEMP%
+del %PDF%
+del ..\%PDF%
 exit

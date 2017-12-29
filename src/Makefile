@@ -8,7 +8,7 @@ MODE    = -interaction=nonstopmode -synctex=1
 MAKEIDX = makeindex
 
 RM      = rm -f
-INSTALL = mv
+INSTALL = cp
 
 all: $(PDF)
 
@@ -22,7 +22,7 @@ install: all
 	$(INSTALL) $(LSHORT).pdf ..
 
 clean:
-	$(RM) $(TEMP)
+	$(RM) $(TEMP) $(LSHORT).pdf
 
 distclean: clean
 	$(RM) ../$(LSHORT).pdf
