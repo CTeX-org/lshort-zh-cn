@@ -16,7 +16,6 @@ set MAKEINDEX=makeindex
 
 if exist %PDF% (
 copy %PDF% ..
-start "" "..\%PDF%"
 )
 exit
 
