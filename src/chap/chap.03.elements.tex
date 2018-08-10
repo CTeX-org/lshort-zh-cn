@@ -378,7 +378,7 @@ Knowledge is power.
 \begin{example}
 Rabindranath Tagore's short poem:
 \begin{verse}
-Beauty is truth’s smile 
+Beauty is truth's smile 
 when she beholds her own face in 
 a perfect mirror.
 \end{verse}
@@ -472,11 +472,13 @@ for (int i=0; i<4; ++i)
 
 \subsection{列格式}\label{subsec:tabular-cols}
 
-\LaTeX\ 表格中基本的列格式如下表：
-\begin{center}
-\begin{tabular}{lp{24em}}
+\env{tabular} 环境使用 \Arg{column-spec} 参数指定表格的列数以及每列的格式。基本的列格式见表 \ref{tbl:table-column-spec}。
+\begin{table}[htp]
+\centering
+\caption{\LaTeX\ 表格列格式。}\label{tbl:table-column-spec}
+\begin{tabular}{*{2}{l}}
  \hline
- 列格式 & 说明 \\
+ \textbf{列格式} & \textbf{说明} \\
  \hline
  \ttfamily l/c/r          & 单元格内容左对齐/居中/右对齐，不折行 \\
  \ttfamily p\marg{width}  & 单元格宽度固定为 \Arg{width}，可自动折行 \\
@@ -484,7 +486,7 @@ for (int i=0; i<4; ++i)
  \ttfamily @\marg{string} & 自定义内容 \Arg{string} \\
  \hline
 \end{tabular}
-\end{center}
+\end{table}
 
 \begin{example}
 \begin{tabular}{lcr|p{6em}}
@@ -527,7 +529,8 @@ for (int i=0; i<4; ++i)
 \end{tabular}
 \end{example}
 
-辅助格式甚至支持插入 \cmd{centering} 等命令改变 \texttt{p} 列格式的对齐方式，一般还要加额外的命令 \cmd{array\-back\-slash} 以免出错%
+辅助格式甚至支持插入 \cmd{centering} 等命令改变 \texttt{p} 列格式的对齐方式，
+一般还要加额外的命令 \cmd{array\-back\-slash} 以免出错%
 \footnote{\cmd{centering} 等对齐命令会破坏表格环境里 \crcmd\ 换行命令的定义，
 \cmd{array\-back\-slash} 用来恢复之。如果不加 \cmd{array\-back\-slash} 命令，
 也可以用 \cmd{tabular\-newline} 命令代替原来的 \crcmd\ 实现表格换行。}：
@@ -560,8 +563,9 @@ for (int i=0; i<4; ++i)
 
 \pkgindex{tabularx}
 \envindex[tabularx]{tabularx}
-\pkg{tabularx} 宏包为我们提供了方便的解决方案。它引入了一个 \texttt{X} 格式，类似 \texttt{p} 格式，
-不过会根据表格宽度自动计算列宽，多个 \texttt{X} 格式平均分配列宽。\texttt{X} 格式也可以用 \pkg{array} 里的辅助格式修饰对齐方式：
+\pkg{tabularx} 宏包为我们提供了方便的解决方案。它引入了一个 \texttt{X} 列格式，类似 \texttt{p} 列格式，
+不过会根据表格宽度自动计算列宽，多个 \texttt{X} 列格式平均分配列宽。
+\texttt{X} 列格式也可以用 \pkg{array} 里的辅助格式修饰对齐方式：
 \begin{example}
 \begin{tabularx}{14em}%
 {|*{4}{>{\centering\arraybackslash}X|}}
@@ -725,15 +729,15 @@ for (int i=0; i<4; ++i)
 \begin{table}[htp]
 \centering
 \caption{各种编译方式支持的主流图片格式。}\label{tbl:figure-format}
-\begin{tabular}{l>{\ttfamily}l>{\ttfamily}l}
+\begin{tabular}{*{3}{l}}
  \hline
- 格式  & 矢量图 & 位图 \\
+ \textbf{格式}  & \textbf{矢量图} & \textbf{位图} \\
  \hline
- \texttt{latex + dvipdfmx}           & .eps      & n/a \\
- \quad $\llcorner$（调用 \pkg{bmpsize} 宏包 ）   & .eps .pdf     & .jpg .png .bmp \\[.3\baselineskip]
- \texttt{pdflatex}                   & .pdf      & .jpg .png \\
- \quad $\llcorner$（调用 \pkg{epstopdf} 宏包）   & .pdf .eps & .jpg .png \\[.3\baselineskip]
- \texttt{xelatex}                    & .pdf .eps & .jpg .png .bmp \\
+ \texttt{latex + dvipdfmx}           & \texttt{.eps}      & n/a \\
+ \quad $\llcorner$（调用 \pkg{bmpsize} 宏包 ）   & \texttt{.eps .pdf}     & \texttt{.jpg .png .bmp} \\[.3\baselineskip]
+ \texttt{pdflatex}                   & \texttt{.pdf}      & \texttt{.jpg .png} \\
+ \quad $\llcorner$（调用 \pkg{epstopdf} 宏包）   & \texttt{.pdf .eps} & \texttt{.jpg .png} \\[.3\baselineskip]
+ \texttt{xelatex}                    & \texttt{.pdf .eps} & \texttt{.jpg .png .bmp} \\
  \hline
 \end{tabular}
 \begin{quote}\footnotesize
@@ -760,18 +764,20 @@ for (int i=0; i<4; ++i)
 \end{verbatim}
 
 \cmd{includegraphics} 命令的可选参数 \Arg{options} 支持 \Arg{key}=\Arg{value} 形式赋值，常用的参数如下：
-\begin{center}
+\begin{table}[htp]
+\centering
+\caption{\cmd{includegraphics} 命令的可选参数。}\label{tbl:graphics-options}
 \begin{tabular}{lp{18em}}
  \hline
- 参数 & 含义 \\
+ \textbf{参数} & \textbf{含义} \\
  \hline
- width=\Arg{width}    &  将图片缩放到宽度为 \Arg{width} \\
- height=\Arg{height}  &  将图片缩放到高度为 \Arg{height} \\
- scale=\Arg{scale}    &  将图片相对于原尺寸缩放 \Arg{scale} 倍 \\
- angle=\Arg{angle}    &  令图片逆时针旋转 \Arg{angle} 度 \\
+ \texttt{width=}\Arg{width}    &  将图片缩放到宽度为 \Arg{width} \\
+ \texttt{height=}\Arg{height}  &  将图片缩放到高度为 \Arg{height} \\
+ \texttt{scale=}\Arg{scale}    &  将图片相对于原尺寸缩放 \Arg{scale} 倍 \\
+ \texttt{angle=}\Arg{angle}    &  令图片逆时针旋转 \Arg{angle} 度 \\
  \hline
 \end{tabular}
-\end{center}
+\end{table}
 
 \section{盒子}\label{sec:box}
 
@@ -897,23 +903,27 @@ A \rule[-.4pt]{3em}{.4pt} line.
 
 \Arg{placement} 参数提供了一些符号用来表示浮动体允许排版的位置，如 \texttt{hbp} 允许浮动体排版在当前位置、底部或者单独成页。
 \env{table} 和 \env{figure} 浮动体的默认设置为 \texttt{tbp}。
-\begin{center}
-\begin{tabular}{>{\ttfamily}lp{14em}}
+\begin{table}[htp]
+\centering
+\caption{浮动体的位置参数。}\label{tbl:float-placement}
+\begin{tabular}{*{2}{l}}
  \hline
- h & 当前位置（代码所处的上下文） \\
- t & 顶部 \\
- b & 底部 \\
- p & 单独成页 \\[0.5ex]
- ! & 在决定位置时忽视限制 \\
+ \textbf{参数} & \textbf{含义} \\
+ \hline
+ \texttt{h} & 当前位置（代码所处的上下文） \\
+ \texttt{t} & 顶部 \\
+ \texttt{b} & 底部 \\
+ \texttt{p} & 单独成页 \\
+ \texttt{!} & 在决定位置时忽视限制 \\
  \hline
 \end{tabular}
-\end{center}
 \begin{quote}\footnotesize
 注 1：排版位置的选取与参数里符号的顺序无关，\LaTeX\ 总是以 \texttt{h-t-b-p} 的优先级顺序决定浮动体位置。
 也就是说 \texttt{[!htp]} 和 \texttt{[ph!t]} 没有区别。\par
 注 2：限制包括浮动体个数（除单独成页外，默认每页不超过 3 个浮动体，其中顶部不超过 2 个，底部不超过 1 个）
 以及浮动体空间占页面的百分比（默认顶部不超过 70\%，底部不超过 30\%）。
 \end{quote}
+\end{table}
 
 \envindex{table*,figure*}
 双栏排版环境下，\LaTeX\ 提供了 \env{table*} 和 \env{figure*} 环境用来排版跨栏的浮动体。

@@ -200,10 +200,12 @@ My humble subjects \ldots
 \cmdindex{arabic,alph,Alph,roman,Roman,fnsymbol}
 命令 \cmd{Alph} 控制计数器 \Arg{counter} 的值以大写字母形式显示。下表列出所有可用于修改计数器格式的命令。
 注意：这些命令\textbf{只能用于计数器，不能直接用于数字}，如 \cmd{roman}\marg*{1} 这样的命令会出错。
-\begin{center}
+\begin{table}[htp]
+\centering
+\caption{计数器输出格式相关命令。}\label{tbl:counter-commands}
 \begin{tabular}{lp{12em}l}
  \hline
- \textbf{命令} & \textbf{样式} & \textbf{备注} \\
+ \textbf{命令} & \textbf{样式} & \textbf{范围} \\
  \hline
  \cmd{arabic} & 阿拉伯数字（默认） & \\
  \cmd{alph}  & 小写字母 & 限 0-26 \\
@@ -213,7 +215,7 @@ My humble subjects \ldots
  \cmd{fnsymbol} & 一系列符号，用于 \cmd{thanks} 命令生成的脚注 & 限 0-9 \\
  \hline
 \end{tabular}
-\end{center}
+\end{table}
 
 计数器的输出格式还可以利用其它字符，甚至其它计数器的输出格式与之组合。如标准文档类里对 \cmd{sub\-section} 相关的计数器的输出格式的定义相当于：
 \begin{verbatim}
@@ -288,9 +290,9 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
 \centering
 \caption{\LaTeX\ 可定制的标题名称/前后缀。}\label{tbl:latex-settings-names}
 \small
-\begin{tabularx}{\textwidth}{llX}
+\begin{tabular}{llp{24em}}
  \hline
- \textsf{命令} & \textsf{默认值} & \textsf{含义} \\
+ \textbf{命令} & \textbf{默认值} & \textbf{含义} \\
  \hline
  \cmd{partname}       & Part            & \cmd{part} 命令生成的标题前缀 \\
  \cmd{chaptername}    & Chapter         & \cmd{chapter} 命令生成的标题前缀 \\
@@ -307,7 +309,7 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
                                           命令生成的参考文献标题（\cls{book / report} 文档类）\\
  \cmd{indexname}      & Index           & \cmd{printindex} 命令生成的索引标题 \\
  \hline
-\end{tabularx}
+\end{tabular}
 \begin{quotation}\footnotesize%
 注：形如“第 X 章”和“第 X 部分”的中文章节标题不能直接由修改本表的命令得到，需要使用 \pkg{titlesec} 等宏包定制。
 如果使用 \pkg{ctex} 宏包或文档类，那么标题默认被修改成“第 X 章”和“第 X 部分”的形式，本表中的其它标题也修改为中文标题。详见 \pkg{ctex} 宏包的帮助手册。
@@ -318,22 +320,22 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
 \centering
 \caption{\LaTeX\ 可定制的长度参数。}\label{tbl:latex-settings-lengths}
 \small
-\begin{tabularx}{\textwidth}{ll@{pt\hskip2\tabcolsep}X}
+\begin{tabular}{lll}
  \hline
- \textsf{命令} & \multicolumn{1}{l@{\hskip2\tabcolsep}}{\textsf{默认值}} & \textsf{含义} \\
+ \textbf{命令} & \textbf{默认值} & \textbf{含义} \\
  \hline
- \cmd{fboxrule}     & 0.4 & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的线宽 \\
- \cmd{fboxsep}      & 3   & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的内边距 \\[1ex]
- \cmd{arraycolsep}  & 5   & \env{array} 环境的表格项前后的间距 \\
- \cmd{tabcolsep}    & 6   & \env{tabular} 环境的表格项前后的间距 \\
- \cmd{arrayrulewidth}     &  0.4  & 表格线宽 \\
- \cmd{doublerulesep}      &  2    & 连续两根表格线之间的间距 \\[1ex]
- \cmd{abovecaptionskip}   &  10   & \cmd{caption} 命令位于图表下方时，与上方图表的间距 \\
- \cmd{belowcaptionskip}   &  0    & \cmd{caption} 命令位于图表上方时，与下方图表的间距 \\[1ex]
- \cmd{columnsep}          &  10   & 双栏排版下两栏的间距 \\
- \cmd{columnseprule}      &  0    & 双栏排版下两栏之间竖线的宽度 \\
+ \cmd{fboxrule}     & 0.4pt & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的线宽 \\
+ \cmd{fboxsep}      & 3pt   & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的内边距 \\[1ex]
+ \cmd{arraycolsep}  & 5pt   & \env{array} 环境的表格项前后的间距 \\
+ \cmd{tabcolsep}    & 6pt   & \env{tabular} 环境的表格项前后的间距 \\
+ \cmd{arrayrulewidth}     &  0.4pt  & 表格线宽 \\
+ \cmd{doublerulesep}      &  2pt    & 连续两根表格线之间的间距 \\[1ex]
+ \cmd{abovecaptionskip}   &  10pt   & \cmd{caption} 命令位于图表下方时，与上方图表的间距 \\
+ \cmd{belowcaptionskip}   &  0pt    & \cmd{caption} 命令位于图表上方时，与下方图表的间距 \\[1ex]
+ \cmd{columnsep}          &  10pt   & 双栏排版下两栏的间距 \\
+ \cmd{columnseprule}      &  0pt    & 双栏排版下两栏之间竖线的宽度 \\
  \hline
-\end{tabularx}
+\end{tabular}
 \begin{quotation}\footnotesize%
 注：\cmd{arraycolsep} 和 \cmd{tabcolsep} 是每个表格项本身前后的间距（表格线前后无间距；\texttt{@} 列格式会消除与前后表格项的间距）。
 两个表格项之间的间距相当于 2\cmd{arraycolsep} 或 2\cmd{tabcolsep}。

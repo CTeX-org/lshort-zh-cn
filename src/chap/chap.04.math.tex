@@ -248,7 +248,7 @@ f_n(x) \stackrel{*}{\approx} 1
 \caption{\LaTeX\ 作为算符的函数名称一览。}\label{tbl:math-functions}
 \begin{tabular}{*{5}{p{5em}}}
 \hline
-\multicolumn{5}{c}{不带上下限的算符} \\
+\multicolumn{5}{c}{\textbf{不带上下限的算符}} \\
 \hline
 \cmd{sin} & \cmd{arcsin} & \cmd{sinh} & \cmd{exp} & \cmd{dim} \\
 \cmd{cos} & \cmd{arccos} & \cmd{cosh} & \cmd{log} & \cmd{ker} \\
@@ -256,7 +256,7 @@ f_n(x) \stackrel{*}{\approx} 1
 \cmd{cot} & \cmd{arg}    & \cmd{coth} & \cmd{ln}  & \cmd{deg} \\
 \cmd{sec} & \cmd{csc}    & \\
 \hline
-\multicolumn{5}{c}{带上下限的算符} \\
+\multicolumn{5}{c}{\textbf{带上下限的算符}} \\
 \hline
 \cmd{lim} & \cmd{limsup} & \cmd{liminf} & \cmd{sup} & \cmd{inf} \\
 \cmd{min} & \cmd{max}    & \cmd{det}    & \cmd{Pr}  & \cmd{gcd} \\
@@ -669,9 +669,9 @@ $\mathfrak{so}(3)$ Lie algebra
 \begin{table}[htp]
 \centering
 \caption{数学字母字体。} \label{tbl:math-fonts}
-\begin{tabular}{@{}*3l@{}}
+\begin{tabular}{*{3}{l}}
 \hline
-例子    & 命令 & 依赖的宏包\\
+\textbf{示例}    & \textbf{命令} & \textbf{依赖的宏包}\\
 \hline
 $\mathnormal{ABCDE abcde 1234}$  & \cmd{mathnormal}\marg*{\ldots}&       \\
 $\mathrm{ABCDE abcde 1234}$      & \cmd{mathrm}\marg*{\ldots}    &       \\
@@ -698,6 +698,8 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 \centering
 \caption{数学符号尺寸。}\label{tbl:math-size}
 \begin{tabular}{lll}
+ \hline
+ \textbf{命令} & \textbf{尺寸} & \textbf{示例} \\
  \hline
 \cmd{displaystyle}      & 行间公式尺寸   & $\displaystyle\sum a $\\
 \cmd{textstyle}         & 行内公式尺寸   & $\textstyle\sum a $ \\

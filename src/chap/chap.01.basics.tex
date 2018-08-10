@@ -189,7 +189,7 @@ or \TeX{} users?
 \begin{center}
 \begin{tabular}{ccc}
  \hline
-                     & plain \TeX\ 格式 & \LaTeX\ 格式 \\
+                     & \textbf{plain \TeX\ 格式} & \textbf{\LaTeX\ 格式} \\
  \hline
 \TeX\ 引擎           & \texttt{tex}     & N/A \\
 \hologo{pdfTeX} 引擎 & \texttt{etex}    & \texttt{latex}\footnotemark \\
@@ -262,24 +262,23 @@ xelatex helloworld.tex
 其中 \Arg{class-name} 为文档类的名称，如 \LaTeX\ 提供的 \cls{article}, \cls{book}, \cls{report}，
 在其基础上派生的一些文档类如支持中文排版的 \cls{ctexart} / \cls{ctexbook} / \cls{ctexrep}，
 或者有其它功能的一些文档类，如 \cls{moderncv} / \cls{beamer} 等。
-\LaTeX\ 提供的基础文档类见表 \ref{tbl:ltx-classes}，前三个习惯上称为“标准文档类”。
+\LaTeX\ 提供的基础文档类见表 \ref{tbl:ltx-classes}，其中前三个习惯上称为“标准文档类”。
 
 \begin{table}[htp]
-\caption{\LaTeX\ 提供的基础文档类}\label{tbl:ltx-classes}
-\hrule
-\begin{description}
-  \item [\texttt{article}] 文章格式的文档类，广泛用于科技论文、报告、说明文档等。
-  \item [\texttt{report}] 长篇报告格式的文档类，具有章节结构，用于综述、长篇论文、简单的书籍等。
-  \item [\texttt{book}] 书籍文档类，包含章节结构和前言、正文、后记等结构。
-\end{description}
-\hrule
-\begin{description}
-  \item [\texttt{proc}] 基于 \cls{article} 文档类的一个简单的学术文档模板。
-  \item [\texttt{slides}] 幻灯格式的文档类，使用无衬线字体。
-  \item [\texttt{minimal}] 一个极其精简的文档类，只设定了纸张大小和基本字号，
-  用作代码测试的最小工作示例（Minimal Working Example）。
-\end{description}
-\hrule
+\centering
+\caption{\LaTeX\ 提供的基础文档类。}\label{tbl:ltx-classes}
+\begin{tabular}{lp{30em}}
+ \hline
+ \texttt{article} & 文章格式的文档类，广泛用于科技论文、报告、说明文档等。\\
+ \texttt{report}  & 长篇报告格式的文档类，具有章节结构，用于综述、长篇论文、简单的书籍等。\\
+ \texttt{book}    & 书籍文档类，包含章节结构和前言、正文、后记等结构。\\
+ \hline
+ \texttt{proc}    & 基于 \cls{article} 文档类的一个简单的学术文档模板。\\
+ \texttt{slides}  & 幻灯格式的文档类，使用无衬线字体。\\
+ \texttt{minimal} & 一个极其精简的文档类，只设定了纸张大小和基本字号，
+                    用作代码测试的最小工作示例（Minimal Working Example）。 \\
+ \hline
+\end{tabular}
 \end{table}
 
 \pinyinindex{xuanxiang}{选项（宏包/文档类）}
@@ -292,7 +291,7 @@ xelatex helloworld.tex
 \LaTeX\ 的三个标准文档类可指定的选项见表 \ref{tbl:ltx-options}。
 
 \begin{table}[htp]
-\caption{\LaTeX\ 的三个标准文档类可指定的选项}\label{tbl:ltx-options}
+\caption{\LaTeX\ 的三个标准文档类可指定的选项。}\label{tbl:ltx-options}
 \hrule
 \begin{description}
 \item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。缺省为 \texttt{10pt}。

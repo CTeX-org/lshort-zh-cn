@@ -34,7 +34,7 @@
 \begin{table}[htp]
 \caption{字体命令。} \label{tbl:fonts}
 \centering
-\begin{tabular}{@{}rrcc@{}}
+\begin{tabular}{*{4}{l}}
 \hline
 \cmd{rmfamily}\cmdindex{rmfamily} & \cmd{textrm}\cmdindex{textrm}\marg*{\ldots}   & \textrm{roman}      & 衬线字体（罗马体）\\
 \cmd{sffamily}\cmdindex{sffamily} & \cmd{textsf}\cmdindex{textsf}\marg*{\ldots}   & \textsf{sans serif} & 无衬线字体        \\
@@ -59,7 +59,7 @@
 \begin{table}[htp]
 \centering
 \caption{字号。} \label{tbl:sizes}
-\begin{tabular}{@{}ll}
+\begin{tabular}{ll}
 \hline
 \cmd{tiny}\cmdindex{tiny}         & \tiny        tiny font \\
 \cmd{scriptsize}\cmdindex{scriptsize}   & \scriptsize  very small font\\
@@ -82,9 +82,10 @@
 \begin{table}[htp]
 \centering
 \caption{标准文档类中的字号大小。}\label{tbl:ptsizes}
-\begin{tabular}{lrrr}
+\begin{tabular}{*{4}{l}}
 \hline
-字号 & 10pt 选项（默认）& 11pt 选项 & 12pt 选项 \\
+\textbf{字号} & \textbf{10pt 选项（默认）} & \textbf{11pt 选项} & \textbf{12pt 选项} \\
+\hline
 \cmd{tiny}\cmdindex{tiny}       & 5pt  & 6pt & 6pt\\
 \cmd{scriptsize}\cmdindex{scriptsize} & 7pt  & 8pt & 8pt\\
 \cmd{footnotesize}\cmdindex{footnotesize} & 8pt & 9pt & 10pt \\
@@ -139,7 +140,7 @@ He likes {\LARGE large and
 常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX\ 默认使用对原始 \TeX\ 兼容的 \texttt{OT1} 编码，使用起来有诸多限制：
 高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体（\cmd{rmfamily} 或 \cmd{sffamily}）里，
 这些符号所在的位置被其它符号所占据（事实上用户输入 \texttt< 和 \texttt> 得到的是\ !` 和\ ?` 两个倒立的标点符号，
-正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；\cmd{ttfamily} 字体下基本上是正常的）。
+正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；等宽字体（\cmd{ttfamily}）里是正常的大于号和小于号）。
 
 扩展的 \texttt{T1} 编码则对 ASCII 字符的兼容好得多，不会出现上述的大于号、小于号的问题。
 \texttt{T1} 编码配合一些字体宏包如 \pkg{txfonts}、\pkg{lmodern} 等，还能够令用户使用 \cmd{textasciitilde} 命令
@@ -151,15 +152,16 @@ He likes {\LARGE large and
 \usepackage[T1]{fontenc}
 \end{verbatim}
 
-\pkg{fontenc} 宏包是用来配合传统的 \LaTeX\ 字体的，如表 \ref{tbl:font-pkgs} 中的大部分宏包。如果使用下文的 \pkg{fontspec}
+\pkg{fontenc} 宏包是用来配合传统的 \LaTeX\ 字体的，如表 \ref{tbl:font-pkgs} 中的一些传统宏包。如果使用下文的 \pkg{fontspec}
 宏包调用 \texttt{ttf} 或 \texttt{otf} 格式字体，就不要再使用 \pkg{fontenc} 宏包。
+使用表 \ref{tbl:font-pkgs} 中的字体宏包之前最好查看一下宏包的帮助手册，了解使用方法和注意事项。
 
 \begin{table}[!p]
 \centering
 \caption{常见的 \LaTeX\ 字体宏包。}\label{tbl:font-pkgs}
-\begin{tabularx}{\linewidth}{cX}
+\begin{tabular}{lp{30em}}
  \hline
- \multicolumn{2}{c}{文本/数学字体搭配的宏包} \\
+ \multicolumn{2}{c}{\textbf{文本 / 数学字体搭配的宏包}} \\
  \hline
  \pkg{lmodern}     & Latin Modern 字体，对 Computer Modern 字体的扩展  \\
  \pkg{cmbright}    & 仿 Computer Modern 风格的无衬线字体 \\
@@ -175,10 +177,10 @@ He likes {\LARGE large and
  \pkg{fourier}     & fourier 风格数学字体，配合 Utopia 正文字体 \\
  \pkg{fouriernc}   & fourier 风格数学字体，配合 New Century Schoolbook 正文字体 \\
  \pkg{arev}        & Arev 无衬线字体宏包，Vera Sans 风格 \\
- \pkg{mathdesign}  & 配合 Charter/Garamond/Utopia 正文字体的数学字体宏包（Garamond 字体可能需要单独安装） \\
+ \pkg{mathdesign}  & 配合 Charter / Garamond / Utopia 正文字体的数学字体宏包（Garamond 字体可能需要单独安装） \\
  \hline
- \multicolumn{2}{c}{文本字体宏包} \\
- \multicolumn{2}{l}{\small 以下字体包括传统的 \LaTeX\ 字体格式以及 TrueType / OpenType 格式。} \\
+ \multicolumn{2}{c}{\textbf{文本字体宏包}} \\
+ \multicolumn{2}{l}{\footnotesize 以下字体包括传统的 \LaTeX\ 字体格式以及 TrueType / OpenType 格式。} \\
  \hline
  \pkg{dejavu}      & DejaVu 开源字体 \\
  \pkg{droid}       & Droid 开源字体 \\
@@ -188,14 +190,14 @@ He likes {\LARGE large and
  \pkg{sourcesanspro} & Source Sans Pro 开源无衬线字体 \\
  \pkg{sourcecodepro} & Source Code Pro 开源等宽字体 \\
  \hline
- \multicolumn{2}{c}{符号宏包} \\
+ \multicolumn{2}{c}{\textbf{符号宏包}} \\
  \hline
  \pkg{mathabx}     & 数学符号宏包之一 \\
- \pkg{MnSymbol}    & 数学符号宏包之一 \\
+ \pkg{MnSymbol}    & 数学符号宏包之一，配合 Minion Pro 文本字体  \\
  \pkg{fdsymbol}    & 数学符号宏包之一 \\
- \pkg{pifont}      & Zapf Dingbats 符号字体宏包 \\
+ \pkg{pifont}      & Zapf Dingbats 符号宏包 \\
  \hline
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 \subsection{使用 \pkg{fontspec} 宏包更改字体 (\texttt{xelatex})}\label{subsec:fontspec}
@@ -244,12 +246,14 @@ He likes {\LARGE large and
 
 在前面的一些章节，我们已经见到一些长度和长度变量的用法。本节首先统一介绍长度和长度变量。
 
-长度的数值 \Arg{length} 由数字和单位组成。常用的单位如下：
+长度的数值 \Arg{length} 由数字和单位组成。常用的单位见表 \ref{tbl:length-unit}。
 
 \def\unitindex#1{\index{#1@\texttt{#1} (\textit{长度单位})}}
 
-\begin{center}
-\begin{tabular}{cl}
+\begin{table}[htp]
+\centering
+\caption{\TeX\ / \LaTeX\ 中的长度单位。}\label{tbl:length-unit}
+\begin{tabular}{ll}
  \hline
  \texttt{pt}\unitindex{pt} & 点阵宽度，1/72.27\texttt{in} \\
  \texttt{bp}\unitindex{bp} & 点阵宽度，1/72\texttt{in} \\
@@ -261,7 +265,7 @@ He likes {\LARGE large and
  \texttt{ex}\unitindex{ex} & 当前字号下小写字母 x 的高度，常用于垂直距离的设定 \\
  \hline
 \end{tabular}
-\end{center}
+\end{table}
 
 在一些情况下还会用到可伸缩的“弹性长度”，如 \texttt{12pt plus 2pt minus 3pt} 
 表示基础长度为 \texttt{12pt}，可以伸展到 \texttt{14pt} ，也可以收缩到 \texttt{9pt}。
@@ -575,8 +579,8 @@ between lines in a paragraph.
 
 \begin{table}[htp]
 \centering
-\caption{\LaTeX\ 预定义的页眉页脚样式}\label{tbl:pagestyle}
-\begin{tabularx}{0.8\textwidth}{lX}
+\caption{\LaTeX\ 预定义的页眉页脚样式。}\label{tbl:pagestyle}
+\begin{tabular}{lp{30em}}
  \hline
  \texttt{empty}  & 页眉页脚为空 \\
  \texttt{plain}  & 页眉为空，页脚为页码。（\cls{article} 和 \cls{report} 文档类默认；\cls{book} 文档类的每章第一页也为 plain 格式） \\
@@ -584,7 +588,7 @@ between lines in a paragraph.
  \texttt{headings}  & 页眉为章节标题和页码，页脚为空。（\cls{book} 文档类默认） \\
  \texttt{myheadings}  & 页眉为页码及 \cmd{markboth} 和 \cmd{markright} 命令手动指定的内容，页脚为空。\\
  \hline
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 \clsindex{article,report,book}

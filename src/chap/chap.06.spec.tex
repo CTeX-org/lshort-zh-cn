@@ -278,30 +278,30 @@ xelatex demo
 \begin{table}[tp]
 \centering
 \caption{索引项的写法列表。}\label{tbl:index-entry}
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{lll}
   \hline
   \textbf{举例} &\textbf{索引项} &\textbf{备注}\\
   \hline
-  \multicolumn{3}{@{}l@{}}{普通索引} \\
+  \multicolumn{3}{l}{普通索引} \\[.8ex]
   \verb+hello+              & hello, 1             & 普通索引 \\ 
   \hline
-  \multicolumn{3}{@{}l@{}}{分级索引，以 \texttt! 分隔，最多支持三级} \\
+  \multicolumn{3}{l}{分级索引，以 \texttt! 分隔，最多支持三级} \\[.8ex]
   \verb+hello+              & hello, 1             & 一级索引 \\ 
   \verb+hello!Peter+        &\quad Peter, 3 & 二级索引 \\ 
   \verb+hello!Peter!Jack+   &\qquad Jack,  3 & 三级索引 \\ 
   \hline
-  \multicolumn{3}{@{}l@{}}{格式化索引，形式为 \Arg{alpha}\texttt @\Arg{format}} \\
-  \multicolumn{3}{@{}l@{}}{\Arg{alpha}为纯字母，用来排序} \\
-  \multicolumn{3}{@{}l@{}}{\Arg{format}为索引的格式，可以包括 \LaTeX 代码和简单的公式} \\
+  \multicolumn{3}{l}{格式化索引，形式为 \Arg{alpha}\texttt @\Arg{format}} \\
+  \multicolumn{3}{l}{\Arg{alpha}为纯字母，用来排序} \\
+  \multicolumn{3}{l}{\Arg{format}为索引的格式，可以包括 \LaTeX 代码和简单的公式} \\[.8ex]
   \verb+Mobius@M\""obius+   & M\"obius, 2          & 输出重音 \\
   \verb+alpha@$\alpha$+     & $\alpha$, 7          & 输出公式 \\
   \verb+bold@\textbf{bold}+ & \textbf{bold}, 12    & 输出粗体 \\
   \hline
-  \multicolumn{3}{@{}l@{}}{页码范围} \\
+  \multicolumn{3}{l}{页码范围} \\[.8ex]
   \verb+morning|(+          & morning, 6-7         & 范围索引的开头 \\
   \verb+morning|)+          &                      & 范围索引的结尾 \\
   \hline
-  \multicolumn{3}{@{}l@{}}{格式化索引页码} \\
+  \multicolumn{3}{l}{格式化索引页码} \\[.8ex]
   \verb+Jenny|textbf+       & Jenny, \textbf{3}       & 调用 \cmd{textbf} 加粗页码 \\
   \verb+Joe|see{Jenny}+     & Joe, \textit{see} Jenny & 调用 \cmd{see} 生成特殊形式 \\
   \verb+Joe|seealso{Jenny}+ & Joe, \textit{see also} Jenny & 调用 \cmd{seealso} 生成特殊形式 \\
@@ -466,9 +466,9 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \begin{table}[htp]
 \centering
 \caption{\pkg{hyperref} 宏包提供的参数设置。}\label{tbl:hyperref-settings}
-\begin{tabular}{lcp{19.5em}}
+\begin{tabular}{llp{19.5em}}
  \hline
- 参数                         &  默认值         & \multicolumn{1}{c}{含义} \\
+ \textbf{参数}                & textbf{默认值}  & \textbf{含义} \\
  \hline
  \texttt{colorlinks=}\Arg{true\textnormal|false} 
                               & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
@@ -483,9 +483,9 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
  \texttt{bookmarksnumbered=}\Arg{true\textnormal|false} 
                               & \textit{false}  & 书签是否带章节编号 \\
  \texttt{CJKbookmarks=}\Arg{true\textnormal|false} 
-                              & \textit{false}   & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须设定的参数，
-                                                 在第一次编译后需要将生成的 \texttt{.out} 文件用工具处理编码 \\
- \texttt{unicode}             &                  & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须设定的参数 \\
+                              & \textit{false}  & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须设定的参数，
+                                                需要将生成的 \texttt{.out} 文件用工具处理编码，或调用 \pkg{xCJK2uni} 宏包 \\
+ \texttt{unicode}             &                 & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须设定的参数 \\
  \hline
  \texttt{pdftitle=}\Arg{string} 
                               & 空               & 标题 \\
