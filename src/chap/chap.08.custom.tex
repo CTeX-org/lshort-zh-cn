@@ -167,14 +167,13 @@ My humble subjects \ldots
 \section{计数器}\label{sec:counters}
 
 \pinyinindex{jishuqi}{计数器}
-我们早就见识到了 \LaTeX\ 对文档元素自动计数的能力：章节符号、列表、图表……它们都是依靠 \LaTeX\ 提供的“计数器”完成的。
+我们早就见识到了 \LaTeX\ 对文档元素自动计数的能力：章节符号、列表、图表……它们都是依靠 \LaTeX\ 提供的计数器功能完成的。
 
 \subsection{定义和修改计数器}\label{subsec:count-defs}
 
 \cmdindex{newcounter}
 定义一个计数器的方法为：
 \begin{command}
-\cmd{newcounter}\marg{counter name} \\
 \cmd{newcounter}\marg{counter name}\oarg{parent counter name}
 \end{command}
 
@@ -203,18 +202,27 @@ My humble subjects \ldots
 \begin{table}[htp]
 \centering
 \caption{计数器输出格式相关命令。}\label{tbl:counter-commands}
-\begin{tabular}{lp{12em}l}
+\begin{tabular}{lp{22em}l}
  \hline
  \textbf{命令} & \textbf{样式} & \textbf{范围} \\
  \hline
  \cmd{arabic} & 阿拉伯数字（默认） & \\
  \cmd{alph}  & 小写字母 & 限 0-26 \\
  \cmd{Alph}  & 大写字母 & 限 0-26 \\
- \cmd{roman} & 小写罗马数字 & 限正数 \\
- \cmd{Roman} & 大写罗马数字 & 限正数 \\
+ \cmd{roman} & 小写罗马数字 & 限非负整数 \\
+ \cmd{Roman} & 大写罗马数字 & 限非负整数 \\
  \cmd{fnsymbol} & 一系列符号，用于 \cmd{thanks} 命令生成的脚注 & 限 0-9 \\
  \hline
 \end{tabular}
+\begin{quotation}
+\small
+\makeatletter
+注：\cmd{fnsymbol} 使用的符号顺次为：
+\@fnsymbol{1} \@fnsymbol{2} \@fnsymbol{3}
+\@fnsymbol{4} \@fnsymbol{5} \@fnsymbol{6}
+\@fnsymbol{7} \@fnsymbol{8} \@fnsymbol{9}
+\makeatother
+\end{quotation}
 \end{table}
 
 计数器的输出格式还可以利用其它字符，甚至其它计数器的输出格式与之组合。如标准文档类里对 \cmd{sub\-section} 相关的计数器的输出格式的定义相当于：
@@ -225,9 +233,9 @@ My humble subjects \ldots
 \subsection{\LaTeX\ 中的计数器}\label{subsec:latex-counts}
 
 \begin{itemize}
-  \item 我们当然早就意识到了，所有章节命令 \cmd{chapter}、\cmd{section} 等分别对应计数器 chapter、section 等等，而且有上下级的关系。
+  \item 所有章节命令 \cmd{chapter}、\cmd{section} 等分别对应计数器 chapter、section 等等，而且有上下级的关系。
         而计数器 part 是独立的。
-  \item 有序列表 \env{enumerate} 的各级计数器为 enumi, enumii, enumiii, enumiv，也是有上下级的关系。
+  \item 有序列表 \env{enumerate} 的各级计数器为 enumi, enumii, enumiii, enumiv，也有上下级的关系。
   \item 图表浮动体的计数器就是 table 和 figure；公式的计数器为 equation。
         这些计数器在 \cls{article} 文档类中是独立的，而在 \cls{book} 和 \cls{report} 中以 chapter 为上级计数器。
   \item 页码、脚注的计数器分别是 page 和 footnote。

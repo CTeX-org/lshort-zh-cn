@@ -27,7 +27,7 @@
 \index{LaTeX2e@\LaTeXe}
 \LaTeX\ 为 \TeX\ 基础上的一套格式，令作者能够使用预定义的专业格式以较高质量排版和印刷他们的作品。
 \LaTeX\ 的最初开发者为 Leslie Lamport 博士\cite{manual}。\LaTeX\ 使用 \TeX\ 程序作为自己的排版引擎。
-当下 \LaTeX\ 主要的维护者为 Frank Mittelbach。
+当前 \LaTeX\ 由 \LaTeX 3 工作组\footnote{\url{https://www.latex-project.org}}维护。
 
 \LaTeX\ 读作 ``Lah-tech'' 或者 ``Lay-tech'' ，近似于汉字“拉泰赫”或“雷泰赫”。\LaTeX\ 在 ASCII 字符环境写作 \texttt{LaTeX}。
 当前的 \LaTeX\ 版本为 \LaTeXe ，意思是超出了第二版，接近但没达到第三版，在 ASCII 字符环境写作 \texttt{LaTeX2e}。
@@ -76,7 +76,9 @@
 
 \LaTeX\ 的源代码本质上是文本文件。哪怕用 Windows 的记事本或者 Linux 的 gedit 等简单的编辑器，
 也可以编写一份 \LaTeX\ 源代码并编译出文档来。专用于编辑 \LaTeX\ 源代码的编辑器如
-TeXworks / TeXstudio / WinEdt 等提供了一些语法高亮、命令补全等功能，以及调用排版引擎的一些按钮。
+TeXworks、TeXstudio、WinEdt 等提供了一些语法高亮、命令补全等功能，以及调用排版引擎完成编译的一些按钮。
+一些流行的编辑器，或集成开发环境（IDE），如 vim、Emacs、Sublime Text、Eclipse 等，
+也都提供了用于编写和编译 \LaTeX\ 源代码的插件和工具。
 
 除了文字本身，\LaTeX\ 源代码之中还包括大量的命令，用在排版公式、划分文档结构、控制样式等等不同的地方。
 
@@ -85,8 +87,8 @@ TeXworks / TeXstudio / WinEdt 等提供了一些语法高亮、命令补全等�
 \index{LaTeX macro@\LaTeX\ 命令}
 \LaTeX\ 命令以反斜线 \texttt{\textbackslash} 开头，为以下两种形式之一：
 \begin{itemize}
-  \item 反斜线和后面的一串字母，如 \cmd{LaTeX}。它们以任意非字母符号（空格、数字、标点等）作为分隔符。
-  \item 反斜线和后面的一个非字母符号，如 \cmd{\$}。它们无需分隔符。
+  \item 反斜线和后面的一串字母，如 \cmd{LaTeX}。它们以任意非字母符号（空格、数字、标点等）为界限。
+  \item 反斜线和后面的单个非字母符号，如 \cmd{\$}。
 \end{itemize}
 
 要注意 \LaTeX\ 命令是\textbf{对大小写敏感}的，比如输入 \cmd{LaTeX} 命令可以生成错落有致的 \LaTeX\ 字母组合，
@@ -103,9 +105,10 @@ or \TeX{} users?
 \end{example}
 
 \pinyinindex{canshu}{参数}
-大多数的 \LaTeX\ 命令是带一个或多个参数，每个参数用花括号 \texttt\{ 和 \texttt\} 包裹。
-有些命令带一个或多个可选参数，以方括号 \texttt[ 和 \texttt] 包裹。
-还有些命令在命令名称后可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异。
+许多 \LaTeX\ 命令需要一个或多个参数，每个参数用花括号 \texttt\{ 和 \texttt\} 包裹。
+有些命令可以带一个或多个可选参数，以方括号 \texttt[ 和 \texttt] 包裹。
+还有些命令在命令名称后可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异，
+某种意义上可以把星号看作一种特殊的可选参数。
 
 \index{LaTeX environment@\LaTeX\ 环境}
 \cmdindex{begin,end}
@@ -225,12 +228,12 @@ Windows 系统下大多预装了 yap 软件（Mik\TeX) 或 dviout 软件（\TeX\
 dvipdfmx helloworld.dvi
 \end{verbatim}
 
-然后就可以用查看 PDF 的软件 （Adobe Reader / Foxit Reader 等）打开生成的 \texttt{hello\-world.pdf} 查看了。
+然后就可以用查看 PDF 的软件 （Adobe Reader / SumatraPDF 等）打开生成的 \texttt{hello\-world.pdf} 查看了。
 
 \subsection{\texttt{pdflatex} 和 \texttt{xelatex} 命令}\label{subsec:pdflatex-exe}
 
 \index{pdflatex@\texttt{pdflatex} 命令}
-这两个命令相比于 \texttt{latex} 命令更为方便，我们可以直接生成 PDF：
+这两个命令相比于 \texttt{latex} 命令更为方便，我们可以直接输入以下命令编译源代码 \ref{code:hello-world}，生成 PDF：
 \begin{verbatim}
 pdflatex helloworld.tex
 \end{verbatim}
@@ -269,13 +272,13 @@ xelatex helloworld.tex
 \caption{\LaTeX\ 提供的基础文档类。}\label{tbl:ltx-classes}
 \begin{tabular}{lp{30em}}
  \hline
- \texttt{article} & 文章格式的文档类，广泛用于科技论文、报告、说明文档等。\\
- \texttt{report}  & 长篇报告格式的文档类，具有章节结构，用于综述、长篇论文、简单的书籍等。\\
- \texttt{book}    & 书籍文档类，包含章节结构和前言、正文、后记等结构。\\
+ \cls{article} & 文章格式的文档类，广泛用于科技论文、报告、说明文档等。\\
+ \cls{report}  & 长篇报告格式的文档类，具有章节结构，用于综述、长篇论文、简单的书籍等。\\
+ \cls{book}    & 书籍文档类，包含章节结构和前言、正文、后记等结构。\\
  \hline
- \texttt{proc}    & 基于 \cls{article} 文档类的一个简单的学术文档模板。\\
- \texttt{slides}  & 幻灯格式的文档类，使用无衬线字体。\\
- \texttt{minimal} & 一个极其精简的文档类，只设定了纸张大小和基本字号，
+ \cls{proc}    & 基于 \cls{article} 文档类的一个简单的学术文档模板。\\
+ \cls{slides}  & 幻灯格式的文档类，使用无衬线字体。\\
+ \cls{minimal} & 一个极其精简的文档类，只设定了纸张大小和基本字号，
                     用作代码测试的最小工作示例（Minimal Working Example）。 \\
  \hline
 \end{tabular}
@@ -296,25 +299,28 @@ xelatex helloworld.tex
 \begin{description}
 \item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。缺省为 \texttt{10pt}。
 
-\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，默认为美式纸张 \texttt{letterpaper}。
+\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，缺省为美式信纸 \texttt{letterpaper} （$8.5\times11$英寸）。
 可指定选项还包括 \texttt{a5paper}，\texttt{b5paper}，\texttt{executivepaper} 和 \texttt{legalpaper}。
+
+\item[\texttt{twoside, oneside}] \quad 指定单面/双面排版。双面排版时，奇偶页的页眉页脚、页边距不同。
+\cls{article} 和 \cls{report} 缺省为 \texttt{oneside}，\cls{book} 缺省为 \texttt{twoside}。
+
+\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。缺省为 \texttt{onecolumn}。
+
+\item[\texttt{openright, openany}] \quad 指定新的一章 \cmd{chapter} 是在奇数页（右侧）开始，还是直接紧跟着上一页开始。
+\cls{report} 缺省为 \texttt{openany}，\cls{book} 缺省为 \texttt{openright}。对 \cls{article} 无效。
+
+\item[\texttt{landscape}] \quad 指定横向排版。缺省为纵向。
+
+\item[\texttt{titlepage, notitlepage}] 指定标题命令 \cmd{maketitle} 是否生成单独的标题页。
+\cls{article} 缺省为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 缺省为 \texttt{titlepage}。
 
 \item[\texttt{fleqn}] \quad 令行间公式左对齐（缺省为居中）。
 
 \item[\texttt{leqno}] \quad 将公式编号放在左边（缺省为右边）。
 
-\item[\texttt{titlepage, notitlepage}] 指定标题命令 \cmd{maketitle} 是否生成单独的标题页。
-\cls{article} 缺省为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 缺省为 \texttt{titlepage}。
-
-\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。
-
-\item[\texttt{twoside, oneside}] \quad 指定单面/双面排版。双面排版时，奇偶页的页眉页脚、页边距不同。
-\cls{article} 和 \cls{report} 缺省为单面排版，\cls{book} 缺省为双面。
-
-\item[\texttt{landscape}] \quad 指定横向排版。缺省为纵向。
-
-\item[\texttt{openright, openany}] \quad 指定新的一章 \cmd{chapter} 是在奇数页（右侧）开头，还是直接紧跟着上一页开头。
-\cls{report} 缺省为 \texttt{openany}，\cls{book} 缺省为 \texttt{openright}。【对 \cls{article} 无效】
+\item[\texttt{draft, final}] \quad 指定草稿/终稿模式。
+草稿模式下，断行不良的地方会在行尾添加一个黑色方块。缺省为 \texttt{final}。
 \end{description}
 \hrule
 \end{table}
@@ -331,7 +337,7 @@ xelatex helloworld.tex
 \end{command}
 
 \cmd{usepackage}的参数里可以使用不止一个宏包，多个宏包用逗号隔开。这种用法一般不要指定选项%
-\footnote{使用多个宏包时指定选项，相当于给每个宏包指定同样的选项。如果有某个宏包不能识别某个选项，则会出错。}：
+\footnote{使用多个宏包时指定选项，相当于给每个宏包指定同样的选项。如果有某个宏包不能识别指定的选项，则会出错。}：
 \begin{verbatim}
 % 一次性载入三个排版表格常用的宏包
 \usepackage{tabularx,makecell,multirow}
@@ -352,17 +358,19 @@ xelatex helloworld.tex
 
 \section{\LaTeX\ 用到的文件一览}\label{sec:latex-files}
 
-除了我们需要编写的源代码 \texttt{.tex} 文件，我们还可能接触到形形色色的文件。本节简单介绍一下这些文件。
+除了我们需要编写的源代码 \texttt{.tex} 文件，我们还可能接触到形形色色的文件。
+本节简单介绍一下在使用 \LaTeX\ 时能够经常见到的文件。
 
 每个宏包和文档类都是带特定扩展名的文件，除此之外也有一些文件出现于 \LaTeX\ 模板中：
 \begin{description}
-  \item[\texttt{.sty}] 宏包文件。宏包的名称就是去掉扩展名的文件名。
-  \item[\texttt{.cls}] 文档类文件。同样地，文档类名称就是文件名。
+  \item[\texttt{.sty}] 宏包文件。宏包的名称与文件名一致。
+  \item[\texttt{.cls}] 文档类文件。文档类名称与文件名一致。
   \item[\texttt{.bib}] \hologo{BibTeX} 参考文献数据库文件。
   \item[\texttt{.bst}] \hologo{BibTeX} 用到的参考文献格式模板。详见 \ref{subsec:bibtex-use} 小节。
 \end{description}
 
-\LaTeX\ 在编译过程中生成相当多的辅助文件和日志。一些功能如交叉引用、参考文献、目录、索引等，需要先编译生成辅助文件，
+\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外，还生成相当多的辅助文件和日志。
+一些功能如交叉引用、参考文献、目录、索引等，需要先通过编译生成辅助文件，
 然后再次编译时读入辅助文件得到正确的结果，所以复杂的 \LaTeX\ 源代码可能要编译多次：
 \begin{description}
   \item[\texttt{.log}] 排版引擎生成的日志文件，供排查错误使用。
@@ -373,7 +381,7 @@ xelatex helloworld.tex
   \item[\texttt{.bbl}] \hologo{BibTeX} 生成的参考文献记录文件。
   \item[\texttt{.blg}] \hologo{BibTeX} 生成的日志文件。
   \item[\texttt{.idx}] \LaTeX\ 生成的供 makeindex 处理的索引记录文件。
-  \item[\texttt{.ind}] makeindex 处理 \texttt{.idx} 生成的格式化索引记录文件。
+  \item[\texttt{.ind}] makeindex 处理 \texttt{.idx} 生成的用于排版的格式化索引文件。
   \item[\texttt{.ilg}] makeindex 生成的日志文件。
   \item[\texttt{.out}] \pkg{hyperref} 宏包生成的 PDF 书签记录文件。
 \end{description}
@@ -391,11 +399,11 @@ xelatex helloworld.tex
 \Arg{filename} 为文件名，如果和要编译的主文件不在一个目录中，则要加上相对或绝对路径，例如：
 \begin{verbatim}
 \include{chapters/a.tex} % 相对路径
-\include{/home/Bob/file.tex} % Linux 绝对路径
-\include{D:/file.tex} % Windows 绝对路径
+\include{/home/Bob/file.tex} % Linux/macOS 绝对路径
+\include{D:/file.tex} % Windows 绝对路径，用正斜线
 \end{verbatim}
 
-\Arg{filename} 可以不带扩展名，此时默认为 \texttt{.tex}；其它文件必须带扩展名。
+\Arg{filename} 可以不带扩展名，此时默认扩展名为 \texttt{.tex}。
 
 \cmdindex{input}
 值得注意的是 \cmd{include} 在读入 \Arg{filename} 之前会另起一页。有的时候我们并不需要这样，而是用 \cmd{input} 命令，它纯粹是把文件里的内容插入：
