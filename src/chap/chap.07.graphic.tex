@@ -6,7 +6,7 @@
 本章将带你了解一些基本的绘图功能。
 
 一些特殊的绘图，如交换图、树状图甚至分子式和电路图也能够通过代码绘制，
-不过其复杂程度已经超出本手册范围，有兴趣的读者可以查阅一些帮助手册，或者在互联网寻求帮助。
+不过其复杂程度已经超出本手册范围，有兴趣的读者可以查阅一些帮助文档，或者在互联网寻求帮助。
 \end{intro}
 
 \section{绘图语言简介}\label{sec:pict-lang}
@@ -34,7 +34,7 @@
 
 本手册将介绍 \TikZ\ 绘图语言里最基本的部分。\TikZ\ 还支持各种自定义的扩展，基于 \TikZ\ 的专门用途的绘图宏包也不胜枚举，
 其复杂程度已远远超出入门手册的范围（\TikZ\ 的帮助文档有上千页之厚）。
-对此感兴趣的读者需要自行查阅帮助手册，或者到互联网上参考现成的范例。
+对此感兴趣的读者需要自行查阅帮助文档，或者到互联网上参考现成的范例。
 
 \section{\TikZ\ 绘图语言}\label{sec:tikz}
 
@@ -225,8 +225,8 @@
   指定线条粗细为 \Arg{width}。默认为普通线宽 0.4pt。
   \item \texttt{thin / semithick / thick / \ldots} \par
   指定线条粗细为预定义的某个类型，默认为 \texttt{thin}。总共有七种预定义的类型：
-  \texttt{ultra thin}，\texttt{very thin}，\texttt{thin}，\texttt{semithick}，\texttt{thick}，
-  \texttt{very thick}，\texttt{ultra thick}。
+  \texttt{ultra thin}（0.1pt），\texttt{very thin}（0.2pt），\texttt{thin}（0.4pt），\texttt{semithick}（0.6pt），
+  \texttt{thick}（0.8pt），\texttt{very thick}（1.2pt），\texttt{ultra thick}（1.6pt）。
   \item \texttt{help lines} \par
   指定线条为辅助线，相当于 \texttt{line width=0.2pt,gray}。
   \item \texttt{solid / dashed / dotted / dash dot / dash dot dot / \dots} \par

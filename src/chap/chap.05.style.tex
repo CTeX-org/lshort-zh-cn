@@ -18,8 +18,8 @@
 {\itshape Italy}.}
 \end{example}
 
-\LaTeXe\ （相比于早期的 \LaTeX\ 2.09 版本）的一个重要特征是：字体的各种属性是相互独立的，
-这意味着用户可以改变字体的大小，而仍然保留字体原有的粗体或者斜体的特性。
+\LaTeXe\ 相比于早期的 \LaTeX\ 2.09 版本在字体样式和字号的设定上有很大改进，令字体的各种属性相互独立（“正交”），
+用户可以改变字体的大小，而仍然保留字体原有的粗体或者斜体的特性。
 
 \subsection{字体样式}\label{subsec:fontshape}
 
@@ -154,7 +154,7 @@ He likes {\LARGE large and
 
 \pkg{fontenc} 宏包是用来配合传统的 \LaTeX\ 字体的，如表 \ref{tbl:font-pkgs} 中的一些传统宏包。如果使用下文的 \pkg{fontspec}
 宏包调用 \texttt{ttf} 或 \texttt{otf} 格式字体，就不要再使用 \pkg{fontenc} 宏包。
-使用表 \ref{tbl:font-pkgs} 中的字体宏包之前最好查看一下宏包的帮助手册，了解使用方法和注意事项。
+使用表 \ref{tbl:font-pkgs} 中的字体宏包之前最好查看一下宏包的帮助文档，了解使用方法和注意事项。
 
 \begin{table}[!p]
 \centering
@@ -238,7 +238,7 @@ He likes {\LARGE large and
 \end{command}
 
 由于中文字体少有对应的粗体或斜体，\Arg{font features} 里多用其他字体来配置，
-比如习惯上将宋体的 \texttt{BoldFont} 配置为黑体，而 \texttt{ItalicFont} 配置为楷体。
+比如将宋体对应的 \texttt{BoldFont} 配置为黑体，而 \texttt{ItalicFont} 配置为楷体。
 
 \section{段落格式和间距}\label{sec:par-lengths}
 
@@ -332,15 +332,20 @@ But remember I am a liar.}\par
 
 以下长度分别为段落的左缩进、右缩进和首行缩进：
 \begin{command}
-\cmd{setlength}\marg*{\cmd{leftskip}}\marg*{20pt}  \\
-\cmd{setlength}\marg*{\cmd{rightskip}}\marg*{20pt} \\
-\cmd{setlength}\marg*{\cmd{parindent}}\marg*{2em}
+\cmd{setlength}\marg*{\cmd{leftskip}}\marg{length}  \\
+\cmd{setlength}\marg*{\cmd{rightskip}}\marg{length} \\
+\cmd{setlength}\marg*{\cmd{parindent}}\marg{length}
 \end{command}
 
 它们和设置行距的命令一样，在分段时生效。
 
 \cmdindex{indent,noindent}
-\LaTeX\ 默认在段落开始时缩进，长度为你用上述命令设置的 \cmd{parindent}。如果你在某一段不想使用缩进，可使用某一段开头使用
+\begin{command}
+\cmd{indent} \\
+\cmd{noindent}
+\end{command}
+
+\LaTeX\ 默认在段落开始时缩进，长度为用上述命令设置的 \cmd{parindent}。如果你在某一段不想使用缩进，可使用某一段开头使用
 \cmd{noindent} 命令。相反地，\cmd{indent} 命令强制开启一段首行缩进的段落。多个 \cmd{indent} 命令可以累加缩进量。
 
 \pkgindex{indentfirst}
@@ -350,9 +355,9 @@ But remember I am a liar.}\par
 
 \cmdindex{parskip}
 段落间的垂直间距为 \cmd{parskip}，如设置段落间距在 \texttt{0.8ex} 到 \texttt{1.5ex} 变动：
-\begin{command}
-\cmd{setlength}\marg*{\cmd{parskip}}\marg*{1ex plus 0.5ex minus 0.2ex}
-\end{command}
+\begin{verbatim}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\end{verbatim}
 
 \subsection{水平间距}\label{subsec:hspace}
 
@@ -412,11 +417,15 @@ nor\qquad mal\\
 
 \index{\@\crcmd\ (\textit{换行})}
 在段落内的两行之间增加垂直间距，一般通过给断行命令 \crcmd\ 加可选参数，如 \crcmd\texttt{[6pt]} 或 \crcmd\texttt{*[6pt]}。
-\cmd{vspace} 也可以在段落内使用：
+\cmd{vspace} 也可以在段落内使用，区别在于 \cmd{vspace} 只引入垂直间距而不断行：
 \begin{example}
-Use command \verb|\vspace| to
-add \vspace{12pt} some spaces
+Use command \verb|\vspace{12pt}| 
+to add \vspace{12pt} some spaces
 between lines in a paragraph.
+
+Or you can use \verb|\\[12pt]|
+to \\[12pt] add vertical space, 
+but it also breaks the paragraph.
 \end{example}
 
 \cmdindex{bigskip,medskip,smallskip}
@@ -633,32 +642,50 @@ between lines in a paragraph.
 \pkgindex{fancyhdr}
 \pkg{fancyhdr} 宏包改善了页眉页脚样式的定义方式，允许我们将内容自由安置在页眉和页脚的左、中、右三个位置，还为页眉和页脚各加了一条横线。
 
+\cmdindex[fancyhdr]{fancyhead,fancyfoot,fancyhf}
 \pkg{fancyhdr} 自定义了样式名称 fancy。使用 \pkg{fancyhdr} 宏包定义页眉页脚之前，通常先用 \cmd{page\-style}\marg*{fancy} 调用这个样式。
 在 \pkg{fancyhdr} 中定义页眉页脚的命令为：
 \begin{command}
+\cmd{fancyhf}\oarg{position}\marg*{\ldots}\\
 \cmd{fancyhead}\oarg{position}\marg*{\ldots}\\
 \cmd{fancyfoot}\oarg{position}\marg*{\ldots}
 \end{command}
-其中 \Arg{position} 为 L（左）/C（中）/R（右） 以及与 O（奇数页）/E（偶数页）字母的组合。
+其中 \Arg{position} 为 L（左）/C（中）/R（右） 以及与 O（奇数页）/E（偶数页）字母的组合。\cmd{fancyhf} 用于同时定义页眉和页脚，
+习惯上使用 \cmd{fancyhf}\marg*{} 来清空页眉页脚的设置。
 
-我们用一个示例说明 \pkg{fancyhdr} 的用法，这段代码可以用于导言区，它的效果为将章节标题放在和 headings 一致的位置，但使用加粗格式；
-页码都放在页脚正中；修改横线宽度，“去掉”页脚的横线。更多用法请参考 \pkg{fancyhdr} 宏包的帮助文档。
+源代码 \ref{code:fancyhdr} 给出了 \pkg{fancyhdr} 基础用法的一个示例，效果为将章节标题放在和 headings 一致的位置，但使用加粗格式；
+页码都放在页脚正中；修改横线宽度，“去掉”页脚的横线。
 
-\begin{sourcecode}[hbp]
-\begin{Verbatim}
-% 导言区部分
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhf{} % 清空当前的页眉页脚
-\fancyfoot[C]{\bfseries\thepage}
-\fancyhead[LO]{\bfseries\rightmark}
-\fancyhead[RE]{\bfseries\leftmark}
-\renewcommand{\headrulewidth}{0.4pt} % 注意不用 \setlength
-\renewcommand{\footrulewidth}{0pt}
-\end{Verbatim}
-\caption{\pkg{fancyhdr} 宏包的使用方法示例。}\label{code:fancyhdr}
+\begin{sourcecode}[htp]
+  \begin{Verbatim}
+  % 在导言区使用此代码
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+  \fancyhf{}
+  \fancyfoot[C]{\bfseries\thepage}
+  \fancyhead[LO]{\bfseries\rightmark}
+  \fancyhead[RE]{\bfseries\leftmark}
+  \renewcommand{\headrulewidth}{0.4pt} % 注意不用 \setlength
+  \renewcommand{\footrulewidth}{0pt}
+  \end{Verbatim}
+  \caption{\pkg{fancyhdr} 宏包的使用方法示例。}\label{code:fancyhdr}
 \end{sourcecode}
+  
+\cmdindex[fancyhdr]{fancypagestyle}
+\pkg{fancyhdr} 还支持用 \cmd{fancy\-page\-style} 为自定义的页眉页脚样式命名，或者重新定义已有的样式如 \texttt{plain} 等：
+\begin{verbatim}
+% 自定义 myfancy 样式
+\fancypagestyle{myfancy}{%
+  \fancyhead{...}
+  \fancyfoot{...}
+}
+% 使用样式
+\pagestyle{myfancy}
+\end{verbatim}
+
+更多用法请参考 \pkg{fancyhdr} 宏包的帮助文档。
+
 
 \endinput

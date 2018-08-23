@@ -117,7 +117,7 @@ l.3 Test \LaTEx
 \cmd{re\-new\-command} 或 \cmd{re\-new\-environment} 定义；如果是宏包定义的命令产生了这个错误，则属于隐性的宏包冲突。
 
 相比之前的 ``Option Clash''{}，隐性宏包冲突是更难以解决的问题，对各种宏包不熟悉的用户，尤其是使用模板的用户而言，往往难以下手。
-用户可尝试查找引起冲突的宏包的帮助手册。详尽的手册里通常会告知用户这个宏包应当在某个宏包的前面/后面调用，或者不能与某个宏包一起调用。
+用户可尝试查找引起冲突的宏包的帮助文档。详尽的手册里通常会告知用户这个宏包应当在某个宏包的前面/后面调用，或者不能与某个宏包一起调用。
 如果是模板调用了大量宏包导致冲突，可联系模板的作者解决。
 
 \item \LaTeXerror{!  LaTeX Error: Unknown option `\ldots' for package `\ldots'.}
@@ -135,12 +135,12 @@ l.3 Test \LaTEx
 \index{texdoc@\texttt{texdoc} 工具}
 无论是 \TeX\ Live 还是 Mik\TeX\ ，提供了一个命令行模式的程序 \texttt{texdoc}。
 比如对 \ref{subsec:fancyhdr} 小节的 \pkg{fancyhdr} 宏包感兴趣，这时在 Windows 命令提示符或者 Linux 终端输入以下命令，
-则会弹出宏包的帮助手册 \texttt{fancyhdr.pdf}：
+则会弹出宏包的帮助文档 \texttt{fancyhdr.pdf}：
 \begin{verbatim}
 texdoc fancyhdr
 \end{verbatim}
 
-除了宏包的帮助手册外，\TeX\ 发行版还包括了各类有用的文档，有一部分在参考文献中给出。
+除了宏包的帮助文档外，\TeX\ 发行版还包括了各类有用的文档，有一部分在参考文献中给出。
 
 如果不熟悉命令行工具的话，\TeX\ Live 提供了一个图形界面的程序 TeXdoc GUI。打开后，可以看到程序里的许多按钮，分别代表某一类的帮助文档。
 除此之外，点击 File Search 弹出搜索框，输入想要搜索的宏包和文件并按回车键，TeXdoc GUI 会弹出它搜索到的所有结果，可点击任意一项来打开文档。

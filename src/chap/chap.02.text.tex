@@ -235,7 +235,7 @@ Stra\ss e
 \def\TACC #1#2{#1{#2} & \texttt{\string#1#2}}       % accents using a control character
 \def\TTACC #1#2{#1{#2} & \texttt{\string#1 #2}}     % accents using a control word
 \def\WTACC #1#2{#1{#2} & \texttt{\string#1\{#2\}}}  % multi-letter accents
-\begin{table}[htbp]
+\begin{table}[htp]
 \centering
 \caption{\LaTeX\ 文本中的重音和特殊字符。} \label{tbl:accents}
 \begin{tabular}{*4{cl}}
@@ -342,10 +342,12 @@ Donale~E. Knuth
 \index{\@\crcmd\ (\textit{换行})} \cmdindex{newline}
 如果我们确实需要手动断行，可使用如下命令：
 \begin{command}
-\crcmd \quad or \quad \cmd{newline}
+\crcmd \oarg{length} \\
+\cmd{newline}
 \end{command}
 
-\crcmd\ 也在表格、公式等地方用于分行，而 \cmd{newline} 只用于文本段落中。
+它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在换行的地方增加垂直间距（见 \ref{subsec:vspace} 小节），
+而 \cmd{newline} 不带可选参数；二是 \crcmd\ 也在表格、公式等地方用于分行，而 \cmd{newline} 只用于文本段落中。
 
 \cmdindex{newpage,clearpage}
 断页的命令有两个：

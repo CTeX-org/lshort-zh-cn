@@ -48,7 +48,7 @@
 对此的详细解释和调整方法见 \ref{subsec:latex-counts} 小节。
 
 \pkgindex{titlesec}
-\LaTeX\ 及标准文档类并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助手册。
+\LaTeX\ 及标准文档类并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助文档。
 
 \subsection{目录}\label{sec:toc}
 
@@ -92,7 +92,7 @@
 以上三个命令还可和 \cmd{appendix} 命令结合，生成有前言、正文、附录、后记四部分的文档。
 源代码 \ref{code:book-struct} 结合 \ref{sec:latex-multi-files} 节的 \cmd{include} 命令和其它一些命令示意了一份完整的文档结构。
 
-\begin{sourcecode}[hbp]
+\begin{sourcecode}[htp]
 \begin{Verbatim}
 \documentclass[...]{book}
 % 导言区，加载宏包和各项设置
@@ -167,7 +167,7 @@
 
 以上是 \LaTeX\ 标准文档类的标题页相关命令用法。在各种文档模板中经常有自定义的标题页，
 有可能需要除了 \cmd{title} 和 \cmd{author} 以外的命令给定信息，用法也可能与标准文档类的不一致
-（甚至有些模板可能没有定义 \env{titlepage} 等环境）。使用文档模板前\textbf{一定要仔细阅读文档模板的帮助手册}。
+（甚至有些模板可能没有定义 \env{titlepage} 等环境）。使用文档模板前\textbf{一定要仔细阅读文档模板的帮助文档}。
 
 \section{交叉引用}\label{sec:crossref}
 
@@ -299,7 +299,7 @@ page~\pageref{sec:this}.''
 \end{example}
 
 默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，而要用到 \pkg{enumitem} 宏包定制各种列表间距。
-\pkg{enumitem} 宏包还提供了对列表标签、引用等的定制。有兴趣的读者可参考其帮助手册。
+\pkg{enumitem} 宏包还提供了对列表标签、引用等的定制。有兴趣的读者可参考其帮助文档。
 
 \subsection{对齐环境}\label{subsec:flush}
 
@@ -433,7 +433,7 @@ for (int i=0; i<4; ++i)
 
 \pkg{verbatim} 宏包优化了 \env{verbatim} 环境的内部命令，并提供了 \cmd{verbatiminput} 命令用来直接读入文件生成代码环境。
 \pkg{fancyvrb} 宏包提供了可定制格式的 \env{Verbatim} 环境；\pkg{listings} 宏包更进一步，可生成关键字高亮的代码环境，
-支持各种程序设计语言的语法和关键字。详情请参考各自的帮助手册。
+支持各种程序设计语言的语法和关键字。详情请参考各自的帮助文档。
 
 \section{表格}\label{sec:tabular}
 
@@ -954,7 +954,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \pkgindex{caption}
 \cmd{caption} 生成的标题形如 ``Figure 1: \ldots''{}（\env{figure} 环境）或 ``Table 1: \ldots''{}（\env{table} 环境）。
 可通过修改 \cmd{figurename} 和 \cmd{tablename} 的内容来修改标题的前缀（详见第 \ref{sec:latex-settings} 节）。
-标题样式的定制功能由 \pkg{caption} 宏包提供，详见该宏包的帮助手册，在此不作赘述。
+标题样式的定制功能由 \pkg{caption} 宏包提供，详见该宏包的帮助文档，在此不作赘述。
 
 \cmdindex{listoftables,listoffigures}
 \env{table} 和 \env{figure} 两种浮动体分别有各自的生成目录的命令：
@@ -978,7 +978,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \end{figure}
 \end{verbatim}
 
-\begin{figure}[htb]
+\begin{figure}[htp]
   \centering
   \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 10ex\hfil}}
   \qquad
@@ -1007,7 +1007,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \end{figure}
 \end{verbatim}
 
-\begin{figure}[htb]
+\begin{figure}[htp]
   \centering
   \begin{minipage}{12em}
     \centering
@@ -1046,7 +1046,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \end{figure}
 \end{verbatim}
 
-\begin{figure}[htb]
+\begin{figure}[htp]
   \centering
   \subfloat[并排子图1]{%
   \begin{minipage}{12em}

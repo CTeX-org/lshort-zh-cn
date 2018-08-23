@@ -11,8 +11,8 @@
 \subsection{基本的参考文献和引用}\label{subsec:bib-basics}
 
 \pinyinindex{cankaowenxian}{参考文献}
-\LaTeX\ 提供的参考文献和引用方式比较原始，需要用户自行书写参考文献列表。不同学术论文对参考文献列表的格式要求不一样，
-自行书写是一件极其头疼的事情。相关的命令我们只作最简单的介绍。
+\LaTeX\ 提供的参考文献和引用方式比较原始，需要用户自行书写参考文献列表（包括格式），
+因此较难直接使用。相关的命令我们只作最简单的介绍。
 
 \cmdindex{cite}
 \LaTeX\ 提供了最基本的 \cmd{cite} 命令用于在正文中引用参考文献：
@@ -85,8 +85,9 @@ Partl~\cite{pa} has proposed that \ldots
 \begin{verbatim}
 @article{Alice13,
   title = {Demostration of bibliography items},
-  author = {A. Alice and B. Bob and C. Charlie and D. Danny},
+  author = {Alice Axford and Bob Birkin and Charlie Copper and Danny Dannford},
   year = {2013},
+  month = {March},
   journal = {Journal of \TeX perts},
   volume = {36},
   number = {7},
@@ -119,30 +120,37 @@ Partl~\cite{pa} has proposed that \ldots
 \hrule
 \begin{trivlist}\item\relax
 \textbf{plain}\\{}
-[1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny.
+[1] Alice Axford, Bob Birkin, Charlie Copper, and Danny Dannford.
 \newblock Demostration of bibliography items.
-\newblock {\em Journal of \TeX perts}, 36(7):114--120, 2013.
+\newblock {\em Journal of \TeX perts}, 36(7):114--120, March 2013.
 
 \medskip
 \textbf{alpha}\\{}
-[ABCD13] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny.
+[ABCD13] Alice Axford, Bob Birkin, Charlie Copper, and Danny Dannford.
 \newblock Demostration of bibliography items.
-\newblock {\em Journal of \TeX perts}, 36(7):114--120, 2013.
+\newblock {\em Journal of \TeX perts}, 36(7):114--120, March 2013.
+
+\medskip
+\textbf{abbrv}\\{}
+[1] A.~Axford, B.~Birkin, C.~Copper, and D.~Dannford.
+\newblock Demostration of bibliography items.
+\newblock {\em Journal of \TeX perts}, 36(7):114--120, March 2013.
 
 \medskip
 \textbf{amsplain}（\AmS\ 文档类 \textsf{amsart} 等配套的样式）\\{}
-[1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny, \emph{Demostration of bibliography
+[1] Alice Axford, Bob Birkin, Charlie Copper, and Danny Dannford, \emph{Demostration of bibliography
   items}, Journal of \TeX perts \textbf{36} (2013), no.~7, 114--120.
 
 \medskip
 \textbf{elsarticle-num}（Elsevier 提供的 \textsf{elsarticle} 文档类配套的样式）\\{}
-[1] A.~Alice, B.~Bob, C.~Charlie, D.~Danny, Demostration of bibliography items,
+[1] A.~Axford, B.~Birkin, C.~Copper, D.~Dannford, Demostration of bibliography items,
   Journal of \TeX perts 36~(7) (2013) 114--120.
 
 \medskip
 \textbf{IEEEtran}（\textsf{IEEEtran} 模板文档类配套的样式）\\{}
-[1] A.~Alice, B.~Bob, C.~Charlie, and D.~Danny, ``Demostration of bibliography
-  items,'' \emph{Journal of \TeX perts}, vol.~36, no.~7, pp. 114--120, 2013.
+[1] A.~Axford, B.~Birkin, C.~Copper, and D.~Dannford, ``Demostration of
+  bibliography items,'' \emph{Journal of \TeX perts}, vol.~36, no.~7, pp.
+  114--120, March 2013.
 \end{trivlist}
 \hrule
 \end{table}
@@ -212,7 +220,7 @@ xelatex demo
 \subsection{\pkg{natbib} 宏包}\label{subsec:natbib}
 
 \pkgindex{natbib}
-时下许多学术期刊比较喜欢使用人名——年份的引用方式，形如(\emph{Alice et~al.}, 2013)。
+时下许多学术期刊比较喜欢使用人名——年份的引用方式，形如(\emph{Axford et~al.}, 2013)。
 \pkg{natbib} 宏包提供了对这种“自然”引用方式的处理。
 
 \cmdindex[natbib]{citep,citet}
@@ -222,7 +230,9 @@ xelatex demo
 \cmd{citet}\marg{citation}
 \end{command}
 
-它们分别生成形如(\emph{Alice et~al.}, 2013) 和 \emph{Alice et~al.} (2013) 的人名——年份引用。
+它们分别生成形如(\emph{Axford et~al.}, 2013) 和 \emph{Axford et~al.} (2013) 的人名——年份引用。
+正确排版人名——年份引用还依赖于特定的 \hologo{BibTeX} 样式。\pkg{natbib} 提供了与 \LaTeX\ 预定义样式相对应的几个样式，
+包括 \texttt{plainnat}、\texttt{abbrvnat} 和 \texttt{unsrtnat}。学术论文模板是否支持 \pkg{natbib}，需要参考其帮助文档。
 
 \pkg{natbib} 宏包同样也支持数字引用，并且支持将引用的序号压缩，例如：
 \begin{verbatim}
@@ -275,7 +285,7 @@ xelatex demo
 其中 \Arg{index entry} 为索引项，写法由表 \ref{tbl:index-entry} 汇总。其中 \texttt!、\texttt @ 和 \texttt| 
 为特殊符号，如果要向索引项直接输出这些符号，需要加前缀 \texttt"；而 \texttt" 需要输入两个引号 \texttt{""} 才能输出到索引项。
 
-\begin{table}[tp]
+\begin{table}[htp]
 \centering
 \caption{索引项的写法列表。}\label{tbl:index-entry}
 \begin{tabular}{lll}
