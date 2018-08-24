@@ -19,16 +19,16 @@
 
 \section{公式排版基础}\label{sec:math-basics}
 
+\subsection{行内和行间公式}\label{subsec:math-inline-display}
+
 数学公式有两种排版方式：其一是与文字混排，称为\textbf{行内公式}；其二是单独列为一行排版，称为\textbf{行间公式}。
 
 \pinyinindex{hangneigongshi}{行内公式}
 \index{^^d@\texttt\$ (\textit{数学模式})}
 行内公式由一对 \texttt\$ 符号包裹：
 \begin{example}
-Add $a$ squared and $b$ squared
-to get $c$ squared. Or, using
-a more mathematical approach:
-$a^2 + b^2 = c^2$
+The Pythagorean theorem is
+$a^2 + b^2 = c^2$.
 \end{example}
 
 \envindex{equation}
@@ -40,17 +40,12 @@ $a^2 + b^2 = c^2$
 或者用 \amscmd{notag} 命令取消为公式编号（与之基本等效的命令是 \cmd{nonumber}）。
 
 \begin{example}
-Add $a$ squared and $b$ squared
-to get $c$ squared
+The Pythagorean theorem is:
 \begin{equation}
-a^2 + b^2 = c^2
+a^2 + b^2 = c^2 \label{pythagorean}
 \end{equation}
-Einstein says
-\begin{equation}
-E = mc^2 \label{clever}
-\end{equation}
-This is a reference to
-\eqref{clever}.
+Equation \eqref{pythagorean} is
+called `Gougu theorem' in Chinese.
 \end{example}
 
 \begin{example}
@@ -73,14 +68,12 @@ or
 与之等效的是 \env{displaymath} 环境。有的人更喜欢 \amsenv{equation*} 环境，体现了带星号和不带星号的环境之间的区别。
 
 \begin{example}
-Again\ldots
 \begin{equation*}
 a^2 + b^2 = c^2
 \end{equation*}
-or you can type less for the
-same effect:
+For short:
 \[ a^2 + b^2 = c^2 \]
-or if you like the long one:
+Or if you like the long one:
 \begin{displaymath}
 a^2 + b^2 = c^2
 \end{displaymath}
@@ -105,16 +98,16 @@ In display:
 行间公式的对齐、编号位置等性质由文档类选项控制，文档类的 \texttt{fleqn} 选项令行间公式左对齐；
 \texttt{leqno} 选项令编号放在公式左边。
 
-\subsection{数学模式和文本}\label{subsec:math-mode}
+\subsection{数学模式}\label{subsec:math-mode}
 
 \pinyinindex{shuxuemoshi}{数学模式}
 \cmdindex[amsmath]{text}
 当你使用 \texttt\$ 开启行内公式输入，或是使用 \cmd{[} 命令、\env{equation} 环境时，你就进入了所谓的\textbf{数学模式}。
 数学模式相比于文本模式有以下特点：
 \begin{enumerate}
-  \item 数学模式中输入的空格全部被忽略。数学符号的间隙默认完全由符号的性质（关系符号、运算符等）决定。
-  需要人为引入空隙时，使用 \cmd{quad} 和 \cmd{qquad} 等命令。详见 \ref{sec:math-space} 节。
-  \item \textbf{不允许有空行（分段）}，公式也无法自动换行或者用 \crcmd\ 换行。排版多行公式需要用到 \ref{sec:multi-eqns} 节介绍的各种环境。
+  \item 数学模式中输入的空格被忽略。数学符号的间距默认由符号的性质（关系符号、运算符等）决定。
+  需要人为引入间距时，使用 \cmd{quad} 和 \cmd{qquad} 等命令。详见 \ref{sec:math-space} 节。
+  \item \textbf{不允许有空行（分段）}，公式也无法手动用 \crcmd\ 换行。排版多行公式需要用到 \ref{sec:multi-eqns} 节介绍的各种环境。
   \item 所有的字母被当作数学公式中的变量处理，字母间距与文本模式不一致，也无法生成单词之间的空格。
   如果想在数学公式中输入正体的文本，简单情况下可用 \ref{subsec:math-alpha} 小节中提供的 \cmd{mathrm} 命令。
   或者用 \pkg{amsmath} 提供的 \amscmd{text} 命令%
@@ -783,7 +776,7 @@ $\mu, M \qquad
 The light speed in vaccum
 is $299,792,458\,\mathrm{m/s}$.
 \end{mythm}
-\begin{mythm}[Energy]
+\begin{mythm}[Energy–momentum relation]
 The relationship of energy, 
 momentum and mass is 
 \[E^2 = m_0^2 c^4 + p^2 c^2\]

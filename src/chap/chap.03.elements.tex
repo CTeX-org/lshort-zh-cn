@@ -12,19 +12,19 @@
 \cmdindex{chapter,section,subsection,subsubsection,paragraph,subparagraph}
 \clsindex{article,book,report}
 
-一篇结构化的、条理清晰文档一定是层次分明的，通过不同的命令分割为章、节、小节。\LaTeX\ 的三个标准文档类 \cls{article}、\cls{report} 和 \cls{book}%
+一篇结构化的、条理清晰文档一定是层次分明的，通过不同的命令分割为章、节、小节。三个标准文档类 \cls{article}、\cls{report} 和 \cls{book}%
 \footnote{千万注意是\textbf{标准文档类}，其它文档类，如果不是从标准文档类衍生而来，
 很可能没有定义或只定义了一部分命令，如 \cls{beamer} 或 \cls{moderncv} 等。}%
-提供了一系列命令，用以划分章节、生成章节标题并自动编号：
+提供了划分章节的命令：
 \begin{command}
 \cmd{chapter}\marg{title} \quad
-\cmd{section}\marg{title} \\
-\cmd{subsection}\marg{title} \quad
-\cmd{subsubsection}\marg{title} \\
+\cmd{section}\marg{title} \quad
+\cmd{subsection}\marg{title} \\
+\cmd{subsubsection}\marg{title} \quad
 \cmd{paragraph}\marg{title} \quad
 \cmd{subparagraph}\marg{title}
 \end{command}
-其中 \cmd{chapter} \textbf{只在 \cls{book} 和 \cls{report} 文档类有定义}。
+其中 \cmd{chapter} \textbf{只在 \cls{book} 和 \cls{report} 文档类有定义}。这些命令生成章节标题，并能够自动编号。
 
 \cmdindex{part}
 \cmd{part} 命令用以将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号：
@@ -95,9 +95,8 @@
 \begin{sourcecode}[htp]
 \begin{Verbatim}
 \documentclass[...]{book}
-% 导言区，加载宏包和各项设置
+% 导言区，加载宏包和各项设置，包括参考文献、索引等
 \usepackage{...}
-% 此处示意对参考文献和索引的设置
 \usepackage{makeidx}
 \makeindex
 \bibliographystyle{...}
@@ -107,7 +106,6 @@
 \maketitle % 标题页
 \include{preface} % 前言章节 preface.tex 
 \tableofcontents
-
 \mainmatter
 \include{chapter1} % 第一章 chapter1.tex
 \include{chapter2} % 第二章 chapter2.tex
@@ -115,7 +113,6 @@
 \appendix
 \include{appendixA} % 附录 A appendixA.tex
 ...
-
 \backmatter
 \include{prologue} % 后记 prologue.tex
 \bibliography{...} % 利用 BibTeX 工具生成参考文献
@@ -128,6 +125,7 @@
 \section{标题页}\label{sec:titlepage}
 
 \cmdindex{title,author,date,today}
+\cmdindex{thanks,and}
 \LaTeX\ 支持生成简单的标题页。首先需要给定标题和作者等信息：
 \begin{command}
 \cmd{title}\marg{title} \quad
@@ -136,23 +134,52 @@
 \end{command}
 其中前两个命令是必须的（不用 \cmd{title} 会报错；不用 \cmd{author} 会警告），\cmd{date} 命令可选。
 \LaTeX\ 还提供了一个 \cmd{today} 命令自动生成当前日期，\cmd{date} 默认使用 \cmd{today}。
-
-\cmdindex{thanks,and}
-在 \cmd{title}、\cmd{author} 等命令内可以使用 \cmd{thanks} 命令生成标题页的脚注，用 \cmd{and} 隔开多个人名，如：
-\begin{verbatim}
-\author{Mary\thanks{E-mail:*****@***.com}
-   \and Ted\thanks{Corresponding author}
-   \and Louis}
-\end{verbatim}
+在 \cmd{title}、\cmd{author} 等命令内可以使用 \cmd{thanks} 命令生成标题页的脚注，用 \cmd{and} 隔开多个人名。
 
 \cmdindex{maketitle}
 \pinyinindex{biaotiye}{标题页}
-在信息给定后，就可以使用
+在信息给定后，就可以使用 \cmd{maketitle} 命令生成一个简单的标题页了：
 \begin{command}
 \cmd{maketitle}
 \end{command}
-生成一个简单的标题页了。\cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
+源代码 \ref{code:titlepage} 给出了一个标题页的示例和大致效果。
+\cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
 可在 \cmd{document\-class} 命令调用文档类时指定 \texttt{titlepage / notitlepage} 选项以修改默认的行为。
+
+\begin{sourcecode}[htp]
+\begin{Verbatim}
+\title{Test title}
+\author{ Mary\thanks{E-mail:*****@***.com}
+  \and Ted\thanks{Corresponding author}
+  \and Louis}
+\date{\today}  
+\end{Verbatim}
+\bigskip
+\makeatletter
+\begin{minipage}{\textwidth}
+    \centering
+    \renewcommand\thempfootnote{\@fnsymbol\c@mpfootnote}%
+    {\LARGE Test title \par}%
+    \vskip 1.5em%
+    {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+            Mary\footnote{E-mail:*****@***.com}
+        \end{tabular}
+        \hskip 1em \@plus.17fil%
+        \begin{tabular}[t]{c}%
+            Ted\footnote{Corresponding author}
+        \end{tabular}
+        \hskip 1em \@plus.17fil%
+        \begin{tabular}[t]{c}%
+            Louis
+        \end{tabular}\par}%
+    \vskip 1em%
+    {\large September 10, 2015}%
+\end{minipage}
+\makeatother
+\caption{\LaTeX\ 默认的标题页示例和效果。}\label{code:titlepage}
+\end{sourcecode}
 
 \envindex{titlepage}
 \LaTeX\ 标准类还提供了一个简单的 \env{titlepage} 环境，生成不带页眉页脚的一页。用户可以在这个环境中使用各种排版元素自由发挥，
@@ -204,7 +231,7 @@ page~\pageref{sec:this}.''
 在使用不记编号的命令形式（\cmd{section*}、\cmd{caption*}、带可选参数的 \cmd{item} 命令等）时不要使用 \cmd{label} 命令，
 否则生成的引用编号不正确。
 
-\section{脚注}\label{sec:footnote}
+\section{脚注和边注}\label{sec:footnote-marginpar}
 
 \cmdindex{footnote}
 使用 \cmd{footnote} 命令可以在页面底部生成一个脚注：
@@ -242,6 +269,20 @@ page~\pageref{sec:this}.''
 \end{tabular}
 \footnotetext{表格里的名句出自《千字文》。}
 
+\cmdindex{marginpar}
+使用 \cmd{marginpar} 命令可在边栏位置生成边注：
+\begin{command}
+\cmd{marginpar}\oarg{left-margin}\marg{right-margin}
+\end{command}
+如果只给定了 \Arg{right-margin}，那么边注在奇偶数页文字相同；如果同时给定了 \Arg{left-margin}，
+则偶数页使用 \Arg{left-margin} 的文字。
+
+例如以下代码：
+\begin{verbatim}
+\marginpar{\footnotesize 边注较窄，不要写过多文字，最好设置较小的字号。}
+\end{verbatim}
+其效果见边栏。\marginpar{\footnotesize 边注较窄，不要写过多文字。最好设置较小的字号。}
+
 \section{特殊环境}\label{sec:envs}
 
 \subsection{列表}\label{subsec:lists}
@@ -262,11 +303,9 @@ page~\pageref{sec:this}.''
 \begin{enumerate}
   \item An item. 
   \begin{enumerate}
-    \item A nested item.
+    \item A nested item.\label{itref}
     \item[*] A starred item.
-    \item Another item. \label{itref}
   \end{enumerate}
-  \item Go back to upper level.
   \item Reference(\ref{itref}).
 \end{enumerate}
 \end{example}
@@ -298,7 +337,32 @@ page~\pageref{sec:this}.''
 \end{description}
 \end{example}
 
-默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，而要用到 \pkg{enumitem} 宏包定制各种列表间距。
+各级无序列表的符号由命令 \cmd{labelitemi} 到 \cmd{labelitemiv} 定义，可以简单地重新定义它们：
+\begin{example}
+\renewcommand{\labelitemi}{\ddag}
+\renewcommand{\labelitemii}{\dag}
+\begin{itemize}
+  \item First item
+  \begin{itemize}
+    \item Subitem
+    \item Subitem
+  \end{itemize}
+  \item Second item
+\end{itemize}
+\end{example}
+
+有序列表的符号由命令 \cmd{labelenumi} 到 \cmd{labelenumiv} 定义，
+重新定义这些命令需要用到 \ref{sec:counters} 节的计数器相关命令：
+\begin{example}
+\renewcommand{\labelenumi}%
+  {\Alph{enumi}>}
+\begin{enumerate}
+  \item First item
+  \item Second item
+\end{enumerate}
+\end{example}
+
+默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，可用 \pkg{enumitem} 宏包定制各种列表间距。
 \pkg{enumitem} 宏包还提供了对列表标签、引用等的定制。有兴趣的读者可参考其帮助文档。
 
 \subsection{对齐环境}\label{subsec:flush}
@@ -542,6 +606,9 @@ for (int i=0; i<4; ++i)
   \hline
 \end{tabular}
 \end{example}
+
+\pkg{array} 宏包还提供了类似 \texttt{p} 格式的 \texttt{m} 格式和 \texttt{b} 格式，
+三者分别在垂直方向上靠顶端对齐、居中以及底端对齐。
 
 \subsection{列宽}\label{subsec:colwidth}
 
@@ -795,7 +862,7 @@ for (int i=0; i<4; ++i)
 \cmd{makebox}\oarg{width}\oarg{align}\marg*{\ldots}
 \end{command}
 
-\cmd{mbox} 生成一个基本的水平盒子，内容只有一行（除非嵌套下文介绍的垂直盒子，或者其它内容），不允许分段。
+\cmd{mbox} 生成一个基本的水平盒子，内容只有一行，不允许分段（除非嵌套其它盒子，比如后文的垂直盒子）。
 外表看上去，\cmd{mbox} 的内容与正常的文本无二，不过断行时文字不会从盒子里断开。
 
 \cmd{makebox} 更进一步，可以加上可选参数用于控制盒子的宽度 \Arg{width}，以及内容的对齐方式 \Arg{align}，
