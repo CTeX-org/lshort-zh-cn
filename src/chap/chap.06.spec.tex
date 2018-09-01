@@ -21,35 +21,33 @@
 \end{command}
 
 \Arg{citation} 为引用的参考文献的标签，类似 \cmd{ref} 里的参数；\cmd{cite} 带一个可选参数，为引用的编号后加上额外的内容，
-如 \cmd{cite}\oarg*{page 22}\marg{pa} 可能得到形如 [13, page 22] 这样的引用。
+如 \cmd{cite}\oarg*{page 22}\marg*{Paper2013} 可能得到形如 [13, page 22] 这样的引用。
 
 \envindex{thebibliography}
 \cmdindex{bibitem}
 参考文献由 \env{thebibliography} 环境包裹。每条参考文献由 \cmd{bibitem} 开头，其后是参考文献本身的内容：
 \begin{command}
-\cmd{bibitem}\oarg{item number}\marg{citation}
+\cmd{begin}\marg*{thebibliography}\marg{widest label} \\
+\quad \cmd{bibitem}\oarg{item number}\marg{citation} ...\\
+\cmd{end}\marg*{thebibliography}
 \end{command}
-
 其中 \Arg{citation} 是 \cmd{cite} 使用的文献标签，
 \Arg{item number} 自定义参考文献的序号，如果省略，则按自然排序给定序号。
-
-\env{thebibliography} 环境带一个参数，用以设定 \cmd{bibitem} 命令生成的参考文献编号的宽度，
-如 99 意味着不超过两位数字。通常设定为与参考文献的数目一致。
+\Arg{widest label} 用以限制参考文献序号的宽度，如 99 意味着不超过两位数字。通常设定为与参考文献的数目一致。
 
 \env{thebibliography} 环境自动生成不带编号的一节（\cls{article} 文档类）或一章（\cls{report} / \cls{book} 文档类）。
 在 \cls{article} 文档类的节标题默认为 ``Reference''{}，而在 \cls{report / book} 文档类
 的章标题默认为 ``Bibliography''{}。用户可通过 \ref{sec:latex-settings} 节给出的方法定制参考文献的标题。
 
 以下为一个使用 \env{the\-biblio\-graphy} 排版参考文献的例子：
-
 \begin{verbatim}
 \documentclass{article}
 \begin{document}
 \section{Introduction}
-Partl~\cite{pa} has proposed that \ldots
+Partl~\cite{germenTeX} has proposed that \ldots
 
 \begin{thebibliography}{99}
-\bibitem{pa} H.~Partl: \emph{German \TeX}, 
+\bibitem{germenTeX} H.~Partl: \emph{German \TeX}, 
   TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
 \end{document}
@@ -160,10 +158,10 @@ Partl~\cite{pa} has proposed that \ldots
 \index{bibtex@\protect\hologo{BibTeX} 工具}
 现在我们来看如何利用 \hologo{BibTeX} 数据库生成参考文献和引用。
 
-第一步：我们当然需要一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib}，
+第一步：准备一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib}，
 和 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
 
-第二步：在源代码中添加必要的命令。假设源代码名为 \texttt{demo.tex}（见 \ref{code:bibtex-demo}）。
+第二步：在源代码中添加必要的命令。假设源代码名为 \texttt{demo.tex}（见源代码 \ref{code:bibtex-demo}）。
 \begin{enumerate}
 \item \cmdindex{bibliographystyle}
 首先需要使用命令 \cmd{bibliographystyle} 设定参考文献的格式。
@@ -173,7 +171,7 @@ Partl~\cite{pa} has proposed that \ldots
 如果需要列出未被引用的文献，则需要 \cmd{nocite}\marg{citation} 命令；而 \cmd{nocite}\marg*{*} 则让所有未被引用的文献都列出。
 
 \item \cmdindex{bibliography}
-再次，在你需要列出参考文献的位置，使用 \cmd{biblio\-graphy} 命令代替 \env{the\-biblio\-graphy} 环境：
+再次，在需要列出参考文献的位置，使用 \cmd{biblio\-graphy} 命令代替 \env{the\-biblio\-graphy} 环境：
 \begin{command}
 \cmd{bibliography}\marg{bib-name}
 \end{command}
@@ -333,7 +331,7 @@ Test index.
 \section{使用颜色}\label{sec:color}
 
 \pinyinindex{yanse}{颜色}
-\LaTeX\ 原生不支持颜色，它依赖 \pkg{color} 宏包或者 \pkg{xcolor} 宏包，给 PDF 输出生成颜色的特殊指令。
+原始的 \LaTeX\ 不支持使用各种颜色。\pkg{color} 宏包或者 \pkg{xcolor} 宏包提供了对颜色的支持，给 PDF 输出生成颜色的特殊指令。
 
 \subsection{颜色的表达方式}\label{subsec:color-code}
 

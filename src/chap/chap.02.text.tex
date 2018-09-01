@@ -5,8 +5,8 @@
 文字是排版的基础。在介绍 \LaTeX\ 支持的各种文档元素之前，首先应当了解一下如何在 \LaTeX\ 源代码中输入并排版文字，
 尤其是（西文中的）标点符号、连字符、重音等一些细节。
 
-本文的开头首先介绍了中文的支持方式。随着 \LaTeX\ 和底层 \TeX\ 引擎的发展，旧方式（CCT、CJK 宏包等）日渐退出舞台，
-xelatex 编译命令配合 \cls{xeCJK} 宏包的方式成为主流。
+本文的开头首先介绍了中文的支持方式。随着 \LaTeX\ 和底层 \TeX\ 引擎的发展，旧方式（CCT、CJK 等）日渐退出舞台，
+xelatex 编译命令配合 \cls{xeCJK} 或 \cls{ctex} 宏包的方式成为主流。
 \end{intro}
 
 \section{语言文字和编码}\label{sec:encoding}
@@ -30,20 +30,18 @@ ASCII （美国通用信息交换码）使用 0x00-0x7F 对文字编码，也就
 
 \index{bianma@编码!Latin-1}
 \pkgindex{inputenc}
-现在的 \TeX\ 程序支持 8-bit，能够识别源代码里编码处于 0x80-0xFF 范围的字符。
+\TeX\ 从 3.0 版开始支持 8-bit，能够处理源代码里编码处于 0x80-0xFF 范围的字符。
 西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 0x80-0xFF 这个范围，处理起来较为方便。
 \texttt{latex} 命令及 \texttt{pdflatex} 命令下，这些编码的处理由 \pkg{inputenc} 宏包支持。
 比如将源代码保存为 Latin-1 编码，并在导言区调用宏包：
 \begin{verbatim}
 \usepackage[latin1]{inputenc}
 \end{verbatim}
-
 接下来，M\"obius 就直接可以通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
 
 \index{bianma@编码!GBK}
 GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，这就需要借助一些宏包进行较为复杂的判断和处理。
 \pkg{CJK} 宏包就是用于处理中、日、韩等多字节编码的语言文字的宏包。但 \pkg{CJK} 宏包的使用非常不方便，笔者不再推荐直接使用。
-后一节将简单介绍现在推荐的中文支持方案。
 
 \subsection{UTF-8 编码}\label{subsec:utf8}
 
@@ -52,12 +50,12 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 一个字符可以由一个到四个字节编码，其中单字节字符兼容 ASCII 编码。
 
 \pkgindex{inputenc}
-\texttt{latex} 命令及 \texttt{pdflatex} 命令下可以使用 \pkg{inputenc} 宏包支持 UTF-8：
+\texttt{latex} 命令及 \texttt{pdflatex} 命令下可以使用 \pkg{inputenc} 宏包支持 UTF-8 编码：
 \begin{verbatim}
 \usepackage[utf8]{inputenc}
 \end{verbatim}
 
-\texttt{xelatex} 命令原生支持 UTF-8 编码，而且也\textbf{不适用 \pkg{inputenc} 宏包}。将 \texttt{.tex} 源代码保存为 UTF-8 编码，
+\texttt{xelatex} 和 \texttt{lualatex} 命令原生支持 UTF-8 编码，而且也\textbf{不适用 \pkg{inputenc} 宏包}。将 \texttt{.tex} 源代码保存为 UTF-8 编码，
 并借助 \pkg{fontspec} 宏包（见 \ref{subsec:fontspec} 小节）调用适当的字体，就可以在源代码中输入任意语言的文字。
 但各个语言（印地语、阿拉伯语等）的特殊排版要求需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等。
 
@@ -101,8 +99,7 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 \end{document}
 \end{verbatim}
 
-\pkg{ctex} 宏包/文档类支持源代码保存为 UTF-8 和 GBK 编码\footnote{使用 GBK 编码时，要为文档类指定 GBK 选项。详见 \pkg{ctex} 宏包手册。}，
-用 \texttt{latex} + \texttt{dvipdfmx} 命令、\texttt{pdflatex} 或 \texttt{xelatex} 命令（只支持 UTF-8 编码）都能够编译。
+虽然 \pkg{ctex} 宏包和文档类保留了对 GBK 编码以及 \texttt{latex} + \texttt{dvipdfmx}、\texttt{pdflatex} 等旧的编译命令的支持，
 笔者建议在使用 \pkg{ctex} 宏包和文档类时总是将源代码保存为 UTF-8 编码，用 \texttt{xelatex} 命令编译。
 
 \section{\LaTeX\ 中的字符}\label{sec:text-symbols}
@@ -114,7 +111,7 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 
 \cmdindex{par}
 行末的回车视为一个空格；但连续两个回车，也就是空行，会将文字分段。多个空行被视为一个空行。
-也可以在行末使用 \cmd{par} 命令分段：
+也可以在行末使用 \cmd{par} 命令分段。
 \begin{example}
 Several spaces     equal one.
   Front spaces are ignored.
@@ -127,9 +124,9 @@ starts a new line.
 
 \subsection{注释}\label{subsec:comments}
 
-\index{%@\texttt\% (\textit{注释})}
+\index{^^e@\texttt\% (\textit{注释})}
 \LaTeX\ 用 \texttt\% 字符作为注释。在这个字符之后直到行末，所有的字符都被忽略，
-行末的回车也不引入空格。见如下示例：
+行末的回车也不引入空格。
 \begin{example}
 This is an % short comment
 % ---
@@ -151,8 +148,7 @@ ak a word.
 如果想要输入以上符号，需要使用以下带反斜线的形式输入：
 \begin{example}
 \# \$ \% \& \{ \} \_ 
-\^{} \~{}
-\textbackslash
+\^{} \~{} \textbackslash
 \end{example}
 
 事实上这些带反斜线的形式就是 \LaTeX\ 命令。\cmd{\textasciicircum} 和 \cmd{\textasciitilde} 
@@ -210,7 +206,7 @@ one, two, three, \ldots one hundred.
 \subsubsection{波浪号}
 
 我们在 \ref{subsec:special-chars} 小节中了解了 \cmd{\textasciitilde} 命令，它可以用来输入波浪号，
-但位置靠顶端，可能不甚理想（位于顶端的原因是波浪号主要用作重音，参考下一小节）。有的人可能喜欢用数学公式里的 \cmd{sim} 符号来代替：
+但位置靠顶端，可能不甚理想（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。有的人可能喜欢用数学公式里的 \cmd{sim} 符号来代替：
 \begin{example}
 1\~{}3 \qquad 1$\sim$2
 \end{example}
@@ -229,7 +225,7 @@ Sch\"onbrunner Schlo\ss{}
 Stra\ss e
 \end{example}
 
-更多可用的符号和重音见表 \ref{tbl:accents}。注意这些重音符号不可和与之相似的数学重音混用。
+更多可用的符号和重音见表 \ref{tbl:accents}。注意与 \ref{subsec:math-accents} 小节的数学重音区分开来。
 
 \def\TSYM #1{#1       & \texttt{\string#1}}
 \def\TACC #1#2{#1{#2} & \texttt{\string#1#2}}       % accents using a control character
@@ -251,7 +247,7 @@ Stra\ss e
  \hline
 \end{tabular}
 \begin{quote}\footnotesize%
-前四行实际上都是命令带一个参数的写法，实际上 \cmd{\textasciicircum}\texttt{o} 也可以写作
+前四行实际上都是带一个参数的命令。\cmd{\textasciicircum}\texttt{o} 也可以写作
 \cmd{\textasciicircum}\marg*{o}，以此类推。
 \end{quote}
 \end{table}
@@ -290,7 +286,7 @@ Stra\ss e
 
 \section{文字强调}\label{sec:emph}
 
-强调文字的方法，要么是添加一些下划线或者装饰物，要么是改变文字的字体。
+强调文字的方法，要么是添加下划线等装饰物，要么是改变文字的字体。
 
 \cmdindex{underline}
 \LaTeX\ 定义了 \cmd{underline} 命令用来为文字添加下划线：

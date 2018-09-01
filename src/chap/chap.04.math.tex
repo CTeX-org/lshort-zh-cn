@@ -62,7 +62,7 @@ or
 \cmdindex{[,]}
 \envindex{displaymath}
 \envindex[amsmath]{equation*}
-当然你不会愿意为每个公式都手动取消编号。\LaTeX\ 提供了一对命令 \cmd{[} 和 \cmd{]} 用于生成不带编号的行间公式%
+如果需要直接使用不带编号的行间公式，则将公式用命令 \cmd{[} 和 \cmd{]} 包裹%
 \footnote{\TeX\ 原生排版行间公式的方法是用一对 \texttt{\$\$} 符号包裹，不过无法通过指定 \texttt{fleqn} 选项控制左对齐，
 与上下文之间的间距也不好调整，故不太推荐使用。}，
 与之等效的是 \env{displaymath} 环境。有的人更喜欢 \amsenv{equation*} 环境，体现了带星号和不带星号的环境之间的区别。
@@ -102,12 +102,12 @@ In display:
 
 \pinyinindex{shuxuemoshi}{数学模式}
 \cmdindex[amsmath]{text}
-当你使用 \texttt\$ 开启行内公式输入，或是使用 \cmd{[} 命令、\env{equation} 环境时，你就进入了所谓的\textbf{数学模式}。
+当你使用 \texttt\$ 开启行内公式输入，或是使用 \cmd{[} 命令、\env{equation} 环境时，\LaTeX\ 就进入了\textbf{数学模式}。
 数学模式相比于文本模式有以下特点：
 \begin{enumerate}
   \item 数学模式中输入的空格被忽略。数学符号的间距默认由符号的性质（关系符号、运算符等）决定。
   需要人为引入间距时，使用 \cmd{quad} 和 \cmd{qquad} 等命令。详见 \ref{sec:math-space} 节。
-  \item \textbf{不允许有空行（分段）}，公式也无法手动用 \crcmd\ 换行。排版多行公式需要用到 \ref{sec:multi-eqns} 节介绍的各种环境。
+  \item \textbf{不允许有空行（分段）}。行间公式中也无法用 \crcmd\ 命令手动换行。排版多行公式需要用到 \ref{sec:multi-eqns} 节介绍的各种环境。
   \item 所有的字母被当作数学公式中的变量处理，字母间距与文本模式不一致，也无法生成单词之间的空格。
   如果想在数学公式中输入正体的文本，简单情况下可用 \ref{subsec:math-alpha} 小节中提供的 \cmd{mathrm} 命令。
   或者用 \pkg{amsmath} 提供的 \amscmd{text} 命令%
@@ -173,15 +173,13 @@ $f(x) = x^2 \quad f'(x)
 \mathindex{frac}
 \cmdindex[amsmath]{dfrac,tfrac}
 分式使用 \cmd{frac}\marg*{分子}\marg*{分母} 来书写。分式的大小在行间公式中是正常大小，而在行内被极度压缩。
-\pkg{amsmath} 提供了方便的命令 \amscmd{dfrac} 和 \amscmd{tfrac}，令用户能够在行内使用正常大小的行间公式，或是反过来。
+\pkg{amsmath} 提供了方便的命令 \amscmd{dfrac} 和 \amscmd{tfrac}，令用户能够在行内使用正常大小的分式，或是反过来。
 \begin{example}
 In display style:
 \[
 3/8 \qquad \frac{3}{8}
 \qquad \tfrac{3}{8}
 \]
-\end{example}
-\begin{example}
 In text style:
 $1\frac{1}{2}$~hours \qquad
 $1\dfrac{1}{2}$~hours
@@ -301,8 +299,8 @@ In display:
 \end{example}
 
 \mathindex{limits,nolimits}
-巨算符的上下标用作其上下限。行间公式中，积分号默认将上下限放在右上角和右下角，求和号默认在上下方；行内公式一律默认在右上角和右下角。
-可以在巨算符后使用 \cmd{limits} 手动令上下限显示在上下方，\cmd{nolimits} 则相反。
+巨算符的上下标位置可由 \cmd{limits} 和 \cmd{nolimits} 控制，前者令巨算符类似 $\lim$ 或求和算符 $\sum$，上下标位于上下方；
+后者令巨算符类似积分号，上下标位于右上方和右下方。
 \begin{example}
 In text: 
 $\sum\limits_{i=1}^n \quad
@@ -336,8 +334,8 @@ P(i,j) = Q(n)
 \subsection{数学重音和上下括号}\label{subsec:math-accents}
 
 \maccindex{dot,ddot,vec,hat}
-数学符号可以像文字一样加重音，比如对时间求导的符号 $\dot{r}$ (\cmd{dot}\marg*{r})、 $\ddot{r}$ (\cmd{ddot}\marg*{r})
-、表示向量的箭头 $\vec{r}$ (\cmd{vec}\marg*{r}) 、表示欧式空间单位向量的 $\hat{\mathbf{e}}$ (\cmd{hat}\marg*{\cmd{mathbf}\marg*{e}}) 等，
+数学符号可以像文字一样加重音，比如求导符号 $\dot{r}$ (\cmd{dot}\marg*{r})、 $\ddot{r}$ (\cmd{ddot}\marg*{r})、
+表示向量的箭头 $\vec{r}$ (\cmd{vec}\marg*{r}) 、表示单位向量的符号 $\hat{\mathbf{e}}$ (\cmd{hat}\marg*{\cmd{mathbf}\marg*{e}}) 等，
 详见表 \ref{tbl:math-accents}。使用时要注意重音符号的作用区域，一般应当对某个符号而不是“符号加下标”使用重音：
 \begin{example}
 $\bar{x_0} \quad \bar{x}_0$\\[5pt]
@@ -368,8 +366,12 @@ _\text{meaning of life} = 42$
 
 \subsection{箭头}\label{subsec:math-arrows}
 
+\msymindex{to,rightarrow,leftarrow,uparrow,downarrow}
+常用的箭头包括 \cmd{rightarrow} ($\rightarrow$，或 \cmd{to})、\cmd{leftarrow}（$\leftarrow$，或 \cmd{gets}）等。
+更多箭头详见表 \ref{tbl:math-arrows}。
+
 \cmdindex[amsmath]{xleftarrow,xrightarrow}
-除了作为上下标之外，箭头还用于表示过程。\pkg{amsmath} 的 \amscmd{xleft\-arrow} 和 \amscmd{xright\-arrow} 命令可以为箭头增加上下标：
+\pkg{amsmath} 的 \amscmd{xleft\-arrow} 和 \amscmd{xright\-arrow} 命令提供了长度可以伸展的箭头，并且可以为箭头增加上下标：
 \begin{example}
 \[ a\xleftarrow{x+y+z} b \]
 \[ c\xrightarrow[x<y]{a*b*c}d \]
@@ -377,8 +379,9 @@ _\text{meaning of life} = 42$
 
 \subsection{括号和定界符}\label{subsec:math-delims}
 
-\LaTeX\ 提供了多种括号和定界符表示公式块的边界。除小括号\texttt{( )}、中括号\texttt{[ ]}之外，其余都是 \LaTeX\ 命令，
-包括大括号 \cmd{\{} \cmd{\}}。表 \ref{tbl:math-delims} 和 \ref{tbl:math-large-delims} 给出了更多的括号/定界符命令。
+\LaTeX\ 提供了多种括号和定界符表示公式块的边界，如小括号 $()$、中括号 $[]$、
+大括号 $\{\}$（\cmd{\{} \cmd{\}}）、尖括号 $\langle \rangle$ （\cmd{langle} \cmd{rangle}）等。
+更多的括号/定界符命令见表 表 \ref{tbl:math-delims} 和 \ref{tbl:math-large-delims}。
 \begin{example}
 ${a,b,c} \neq \{a,b,c\}$
 \end{example}
@@ -417,7 +420,7 @@ $\bigl( \Bigl( \biggl( \Biggl( \quad
 
 \subsection{长公式折行}\label{subsec:multline}
 
-通常来讲应当避免写出超过一行而需要折行的长公式。如果一定要折行的话，优先在等号之前折行，其次在加号、减号之前，再次在乘号、除号之前。
+通常来讲应当避免写出超过一行而需要折行的长公式。如果一定要折行的话，习惯上优先在等号之前折行，其次在加号、减号之前，再次在乘号、除号之前。
 其它位置应当避免折行。
 
 \envindex[amsmath]{multline}
@@ -743,33 +746,28 @@ $\mu, M \qquad
 
 \section{定理环境}\label{sec:theorems}
 
+\subsection{\LaTeX\ 原始的定理环境}\label{subsec:latex-theorems}
+
 \cmdindex{newtheorem}
 使用 \LaTeX\ 排版数学和其他科技文档时，会接触到大量的定理、证明等内容。
 \LaTeX\ 提供了一个基本的命令 \cmd{newtheorem} 提供定理环境的定义：
 \begin{command}
-\cmd{newtheorem}\marg{type}\marg{title}\oarg{section-name} \\
-\cmd{newtheorem}\marg{type}\oarg{counter}\marg{title}
+\cmd{newtheorem}\marg{theorem environment}\marg{title}\oarg{section-level} \\
+\cmd{newtheorem}\marg{theorem environment}\oarg{counter}\marg{title}
 \end{command}
 
-\Arg{type} 为定理类型的名称，作为一个环境来使用。定理环境都需要定义，\LaTeX\ 里\textbf{没有现成的 \env{theorem} 环境}，
-直接使用很可能会出错。\Arg{title} 是定理类型的标签（“定理”，“公理”等），排版在序号之前。
+\Arg{theorem environment} 为定理环境的名称。原始的\LaTeX\ 里\textbf{没有现成的定理环境}，
+不加定义而直接使用很可能会出错。\Arg{title} 是定理环境的标题（“定理”，“公理”等）。
 
 定理的序号由两个可选参数之一决定，它们\textbf{不能同时使用}：
 \begin{itemize}
-  \item \Arg{section name} 为章节名称，这使定理序号成为章节的下一级序号；
+  \item \Arg{section level} 为章节级别，如 \texttt{chapter}、\texttt{section} 等，定理序号成为章节的下一级序号；
   \item \Arg{counter} 为用 \cmd{newcounter} 自定义的计数器名称（详见 \ref{sec:counters} 节），定理序号由这个计数器管理。
 \end{itemize}
+如果两个可选参数都不用的话，则使用默认的与定理环境同名的计数器。
 
-如果两个可选参数都不用的话，则使用一个默认的计数器。
-
-例如，我们用以下代码定义了一个 \env{mythm} 环境：
-\begin{verbatim}
-\newtheorem{mythm}{My Theorem}[section]
-\end{verbatim}
-
-\cmdindex{label}
-于是我们可以使用 \env{mythm} 环境排版定理。定理带一个可选参数，用于注明定理的名称，如“法拉第定律”等。
-在环境内还可以用 \cmd{label} 声明引用：
+在以下示例代码中，我们定义了一个 \env{mythm} 环境，其序号设为 \texttt{section} 的下一级序号。
+注意 \env{mythm} 环境的可选参数以及 \cmd{label} 的用法：
 \begin{example}
 \newtheorem{mythm}{My Theorem}[section]
 \begin{mythm}\label{thm:light}
@@ -787,7 +785,7 @@ described in theorem \ref{thm:light}.
 
 \subsection{\pkg{amsthm} 宏包}\label{subsec:amsthm}
 
-\LaTeX\ 只给了原始的证明环境格式（粗体标签、斜体正文、定理名用小括号包裹）。如果需要修改格式，
+\LaTeX\ 默认的定理环境格式为粗体标签、斜体正文、定理名用小括号包裹。如果需要修改格式，
 则要依赖其它的宏包，如 \pkg{amsthm}、\pkg{ntheorem} 等等。本小节简单介绍一下 \pkg{amsthm} 的用法。
 
 \pkgindex{amsthm}
@@ -864,7 +862,7 @@ p &= \gamma m_0v \qedhere
 \end{proof}
 \end{example}
 
-在使用带编号的公式时，建议最好\textbf{不要使用} \cmd{qedhere} 命令，而是让 \env{proof} 环境自动生成。
+在使用带编号的公式时，建议最好\textbf{不要在公式末尾使用} \cmd{qedhere} 命令。
 对带编号的公式使用 \cmd{qedhere} 命令会使 \qedsymbol\ 符号放在一个难看的位置，紧贴着公式：
 \begin{example}
 \begin{proof}

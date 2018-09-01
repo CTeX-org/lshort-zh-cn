@@ -132,7 +132,7 @@ My humble subjects \ldots
 \cmd{ProvidesPackage}\marg{package name}
 \end{command}
 这个命令应该放在你的宏包的最前面，并且一定要注意：\textbf{\Arg{package name} 需要和宏包的文件名一致。}
-\cmd{Provides\-Package} 让 \LaTeX\ 记录宏包的名称，从而在你尝试再次调用同一个宏包的时候忽略后面的调用%
+\cmd{Provides\-Package} 让 \LaTeX\ 记录宏包的名称，从而在 \cmd{usepackage} 命令再次调用同一个宏包的时候忽略之%
 \footnote{但如果你以\emph{不同的选项}多次引入宏包，则有可能会引起错误，见附录 \ref{sec:errors}。}。
 源代码 \ref{code:package} 给出了一个小的宏包示例，其中包含了我们之前定义的一些命令。
 

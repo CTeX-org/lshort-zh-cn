@@ -609,6 +609,15 @@ for (int i=0; i<4; ++i)
 
 \pkg{array} 宏包还提供了类似 \texttt{p} 格式的 \texttt{m} 格式和 \texttt{b} 格式，
 三者分别在垂直方向上靠顶端对齐、居中以及底端对齐。
+\begin{example}
+\newcommand\txt
+  {a b c d e f g h i}
+\begin{tabular}{cp{2em}m{2em}b{2em}}
+  \hline
+  pos & \txt & \txt & \txt \\
+  \hline
+\end{tabular}    
+\end{example}
 
 \subsection{列宽}\label{subsec:colwidth}
 
