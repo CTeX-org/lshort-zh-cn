@@ -450,22 +450,22 @@ Test index.
 \section{使用超链接}\label{sec:hyperlinks}
 
 \pinyinindex{chaolianjie}{超链接}
-PDF 文档格式是现今最流行的电子文档格式，而电子文档最实用的需求之一就是链接功能。
+PDF 文档格式是现今最流行的电子文档格式，而电子文档最实用的需求之一就是超链接功能。
 \LaTeX\ 中实现这一功能的是 \pkg{hyperref} 宏包。
 
 \subsection{\pkg{hyperref} 宏包}\label{subsec:hyperref}
 
 \pkgindex{hyperref}
-\pkg{hyperref} 宏包涉及到的链接遍布 \LaTeX\ 的每一个角落——目录、引用、脚注、索引、参考文献等等都被封装成链接。
-但这也使得它与其它宏包的冲突机会大大增加，虽然宏包已经尽力解决各方面的兼容性，但仍不能面面俱到。
-为减少冲突的可能性，习惯上将 \pkg{hyperref} 宏包\textbf{放在其它宏包之后调用}。
+\pkg{hyperref} 宏包涉及到的链接遍布 \LaTeX\ 的每一个角落——目录、引用、脚注、索引、参考文献等等都被封装成超链接。
+但这也使得它与其它宏包发生冲突的可能性大大增加，虽然宏包已经尽力解决各方面的兼容性，但仍不能面面俱到。
+为减少可能的冲突，习惯上将 \pkg{hyperref} 宏包\textbf{放在其它宏包之后调用}。
 
 \pinyinindex{xuanxiang}{选项（宏包/文档类）}
 与 \pkg{graphicx} 宏包类似，\texttt{latex} + \texttt{dvipdfmx} 命令下调用 \pkg{hyperref} 宏包时，需要指定选项 \texttt{dvipdfmx}；
 而 \texttt{pdflatex} 或 \texttt{xelatex} 命令下不需要。
 
 \cmdindex[hyperref]{hypersetup}
-\pkg{hyperref} 宏包提供了命令 \cmd{hypersetup} 配置各种参数，或者也可以作为宏包选项，在调用宏包时指定：
+\pkg{hyperref} 宏包提供了命令 \cmd{hypersetup} 配置各种参数。参数也可以作为宏包选项，在调用宏包时指定：
 \begin{command}
 \cmd{hypersetup}\marg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots} \\
 \cmd{usepackage}\oarg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots}\marg*{hyperref}
@@ -484,7 +484,7 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
  \texttt{pdfborder=}\marg*{\Arg{n} \Arg{n} \Arg{n}}   
                               &  0 0 1          & 超链接边框设置，设为 0 0 0 可取消边框 \\
  \hline
- \texttt{bookmarks=}\Arg{true\textnormal|false} 
+ \texttt{bookmarks=}\Arg{true\textnormal|false} \textsuperscript{\dag}
                               & \textit{true}   & 是否生成书签 \\
  \texttt{bookmarksopen=}\Arg{true\textnormal|false} 
                               & \textit{false}  & 是否展开书签 \\
@@ -507,6 +507,10 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
                               & \textit{Fit}     & 设置 PDF 页面以适合页面/适合宽度/适合高度等方式显示，默认为适合页面 \\
  \hline
 \end{tabular}
+\begin{quotation}
+\small
+\textsuperscript{\dag} 该选项只能在调用宏包时指定。
+\end{quotation}
 \end{table}
 
 \subsection{超链接}\label{subsec:url-href}
