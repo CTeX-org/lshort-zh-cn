@@ -25,13 +25,13 @@
 \end{itemize}
 
 \TeX\ Live 和 Mik\TeX\ 都集成了一个简单的 \LaTeX\ 源代码编辑器 \TeX works（Mac\TeX\ 则集成了类似的 \TeX shop）。
-用户在安装完毕，可直接使用 \TeX works 编写和编译 \LaTeX\ 源代码。
+用户在安装完毕后，可直接使用 \TeX works 编写和编译 \LaTeX\ 源代码。
 
 \subsection{安装发行版}\label{subsec:install-dists}
 
 \subsubsection{\TeX\ Live}
 
-\TeX\ Live 在 \url{http://www.tug.org/texlive/} 上提供 ISO 光盘镜像%
+\TeX\ Live 的光盘镜像发布于 \url{http://www.tug.org/texlive/}%
 \footnote{Linux 发行版的软件源也提供 \TeX\ Live 的安装，不过不够完整，更新也不是很及时。建议直接从镜像安装。}。
 下载镜像到本地，挂载到虚拟光驱，或者用压缩工具解压后，在其根目录有几个用于安装的脚本：
 \begin{itemize}
@@ -48,8 +48,9 @@
     \item \texttt{install-tl -gui=peritk} 启动图形界面安装程序（定制安装）。
   \end{itemize}
 \end{itemize}
+另外也可以下载在线安装程序 \texttt{install-tl.zip}，包含以上所有安装脚本。安装过程中会从 CTAN 软件源下载所有组件。
 
-Linux 下 \TeX\ Live 安装完毕后，还需要在 root 权限下进行以下操作，使得 \texttt{xelatex} 命令能正确通过 \pkg{fontspec}
+Linux 下 \TeX\ Live 安装完毕后，一般还需要在 root 权限下进行以下操作，使得 \hologo{XeLaTeX} 能正确通过 \pkg{fontspec}
 等宏包使用字体\footnote{\url{http://www.tug.org/texlive/doc/texlive-zh-cn/texlive-zh-cn.pdf}，%
 可用 \texttt{texdoc texlive-zh-cn} 在本地打开。}：
 \begin{enumerate}
@@ -65,34 +66,42 @@ Linux 下 \TeX\ Live 安装完毕后，还需要在 root 权限下进行以下�
 
 \TeX\ Live 提供了图形界面的宏包管理器 \TeX\ Live Manager 用于安装和更新宏包，而 Mik\-\TeX\ 也提供了管理器
 Mik\-\TeX\ Package Manager。用户可直接打开程序，进行宏包的安装和更新
-（Mik\TeX\ Package Manager 有普通权限和管理员权限的版本，建议总是打开管理员权限的程序）。
+（Mik\-\TeX\ Package Manager 有普通权限和管理员权限的版本，建议总是使用管理员权限的版本）。
 
-两者也可以通过各自的命令行工具安装更新宏包：
+两者也可以通过各自的命令行工具安装和更新宏包：
 \begin{verbatim}
 % TeX Live 命令行工具 tlmgr 的使用示例
-tlmgr install <package-name> % 安装某个宏包
-tlmgr remove <package-name>  % 卸载某个宏包
-tlmgr update --all --self    % 更新所有宏包（包括 tlmgr 本身）
-tlmgr update --list          % 列出所有可更新的宏包
-tlmgr repository set http://.../CTAN/systems/texlive/tlnet
-                             % 指定更新源（CTAN）地址
-tlmgr info <package-name>    % 查看宏包信息
-                             % 加 --list 参数可列出宏包的所有文件
+% 安装/卸载宏包
+tlmgr install <package-name>
+tlmgr remove <package-name>
+% 更新所有宏包（包括 tlmgr 本身）
+tlmgr update --all --self
+% 列出所有可更新的宏包
+tlmgr update --list
+% 指定更新源地址
+% <CTAN mirrors> 形如 https://mirrors.tuna.tsinghua.edu.cn/CTAN
+tlmgr repository set <CTAN mirrors>/systems/texlive/tlnet
+% 查看宏包信息，加 --list 参数可列出宏包的所有文件
+tlmgr info <package-name>
 \end{verbatim}
 
 \begin{verbatim}
 % MikTeX 命令行工具 mpm 的使用示例
 % 建议始终加 --admin 参数使用
-mpm --admin --install <package-name>   % 安装某个宏包
-mpm --admin --uninstall <package-name> % 卸载某个宏包
-mpm --admin --update                   % 更新所有宏包
-mpm --admin --set-repository=http://.../CTAN/systems/win32/miktex/tm/packages
-                                       % 指定更新源（CTAN）地址
+% 安装/卸载宏包
+mpm --admin --install <package-name>
+mpm --admin --uninstall <package-name>
+% 更新所有宏包
+mpm --admin --update
+% 列出所有可更新的宏包
+mpm --admin --find-updates
+% 指定更新源地址
+mpm --admin --set-repository=<CTAN mirrors>/systems/win32/miktex/tm/packages
+% 查看宏包信息
 mpm --admin --print-package-info <package-name>
-                                       % 查看宏包信息
 \end{verbatim}
 
-\TeX\ Live 默认安装所有宏包，而 Mik\TeX\ 的安装程序只包含了若干用于 \LaTeX\ 的基本宏包。从 \TeX\ Live 的光盘镜像和 Mik\-\TeX\ 的安装包体积可见一斑。
+\TeX\ Live 默认安装所有宏包，而 Mik\TeX\ 的安装程序只包含了 \LaTeX\ 的一些基本宏包。从 \TeX\ Live 的光盘镜像和 Mik\-\TeX\ 的安装包体积可见一斑。
 默认情况下，编译过程中如果遇到宏包未安装而报错的情况下，Mik\TeX\ 会弹出一个对话框，让用户可以选择临时安装宏包，安装成功后继续编译。
 
 \subsection{手动安装宏包}\label{subsec:pkg-manual-install}
@@ -108,6 +117,7 @@ mpm --admin --print-package-info <package-name>
   \item[\texttt{tex/latex}] \LaTeX\ 宏包。
   \item[\texttt{doc/latex}] \LaTeX\ 宏包的帮助文档。
   \item[\texttt{source/latex}] \LaTeX\ 宏包的源代码。
+  \item[\texttt{bibtex}] \hologo{BibTeX} 工具相关文件，许多宏包配套的 \hologo{BibTeX} 格式文件位于子目录 \texttt{bst} 中。
   \item[\texttt{fonts/tfm}] \TeX\ 使用的字体文件，TFM 格式。
   \item[\texttt{fonts/type1}] PostScript 字体文件（Type1），PFB 格式。
   \item[\texttt{fonts/opentype}] OpenType 格式的字体文件。

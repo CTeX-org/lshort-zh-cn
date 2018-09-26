@@ -200,8 +200,8 @@ He likes {\LARGE large and
 \subsection{使用 \pkg{fontspec} 宏包更改字体 (\texttt{xelatex})}\label{subsec:fontspec}
 
 \index{xelatex@\texttt{xelatex} 命令}
-\texttt{xelatex} 编译命令能够支持直接调用系统安装的 \texttt{.ttf} 或 \texttt{.otf} 格式字体%
-\footnote{Linux 下的 \TeX\ Live 为了支持系统安装的字体，需要额外的配置。详见附录 \ref{app:install}。}。相比于上一小节，我们有了更多修改字体的余地。
+\texttt{xelatex} 编译命令能够支持直接调用系统和 \TeX\ 发行版中的 \texttt{.ttf} 或 \texttt{.otf} 格式字体%
+\footnote{Linux 下的 \TeX\ Live 为了令 \hologo{XeTeX} 使用 OpenType 字体，需要额外的配置。详见附录 \ref{app:install}。}。相比于上一小节，我们有了更多修改字体的余地。
 
 \pkgindex{fontspec}
 \cmdindex[fontspec]{setmainfont,setsansfont,setmonofont}
@@ -399,14 +399,16 @@ nor\qquad mal\\
 
 在页面中，段落、章节标题、行间公式、列表、浮动体等元素之间的间距是 \LaTeX\ 预设的。比如 \cmd{parskip} ，默认设置为 \texttt{0pt plus 1pt}。
 
-\cmdindex{vspace}
-如果我们想要人为地增加段落之间的垂直间距，可以在两个段落之间的位置使用如下命令：
-\begin{command}
-\cmd{vspace}\marg{length}
-\end{command}
+\cmdindex{vspace,vspace*}
+如果我们想要人为地增加段落之间的垂直间距，可以在两个段落之间的位置使用 \cmd{vspace} 命令：
+\begin{example}
+A paragraph.
 
-\cmdindex{vspace*}
-\cmd{vspace} 的间距在一页的顶端或底端可能被“吞掉”，类似 \cmd{hspace} 在一行的开头和末尾那样。
+\vspace{2ex}
+Another paragraph.
+\end{example}
+
+\cmd{vspace} 命令生成的垂直间距在一页的顶端或底端可能被“吞掉”，类似 \cmd{hspace} 在一行的开头和末尾那样。
 对应地，\cmd{vspace*} 命令产生不会因断页而消失的垂直间距。\cmd{vspace} 也可用 \cmd{stretch} 设置无限延伸的垂直长度。
 
 \index{\@\crcmd\ (\textit{换行})}
@@ -515,15 +517,14 @@ but it also breaks the paragraph.
 
 \LaTeX\ 默认将页面内容在垂直方向分散对齐。对于有大量图表的文档，许多时候想要做到排版匀称的页面很困难，
 垂直分散对齐会造成某些页面的垂直间距过宽，还可能报大量的 \texttt{Underfull} \cmd{vbox} 消息。
+\LaTeX\ 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。
 
 \cmdindex{raggedbottom, flushbottom}
-\LaTeX\ 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。在导言区或者适合的位置使用
-\cmd{raggedbottom} 开启顶部对齐的效果：
+以下命令分别令页面在垂直方向向顶部对齐 / 分散对齐：
 \begin{command}
-\cmd{raggedbottom}
+\cmd{raggedbottom} \\
+\cmd{flushbottom}
 \end{command}
-
-相反地，\cmd{flushbottom} 命令用于设置成默认的分散对齐。
 
 \subsection{分栏}\label{subsec:columns}
 
