@@ -130,13 +130,13 @@ He likes {\LARGE large and
 
 \subsection{字体编码}\label{subsec:font-encs}
 
-字体编码对于 \LaTeX\ 用户来讲是一个比较晦涩的概念。它指定了一个字体里面包含了哪些符号、用哪些 \LaTeX\ 命令表示符号等细节。
-需要明确一点：字体编码并不与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等一一对应。
+字体编码对于 \LaTeX\ 用户来讲是一个比较晦涩的概念。它规定了一个字体里包含的符号，并将若干符号用 \LaTeX\ 命令定义。
+注意字体编码并不与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等一一对应。
 
 常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX\ 默认使用兼容 plain \TeX\ 的 \texttt{OT1} 编码，使用起来有诸多限制：
-高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体（\cmd{rmfamily} 或 \cmd{sffamily}）里，
-这些符号所在的位置被其它符号所占据（在默认的 OT1 字体编码下 \texttt< 和 \texttt> 排版\ !` 和\ ?` 两个倒立的标点符号，
-正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；等宽字体（\cmd{ttfamily}）里是正常的大于号和小于号）。
+高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体里这些符号所在的位置被其它符号所占据
+（\texttt{OT1} 字体编码、\cmd{rmfamily} 和 \cmd{sffamly} 字体族下， \texttt< 和 \texttt> 排版\ !` 和\ ?` 两个倒立的标点符号，
+正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；\cmd{ttfamily} 字体族下是正常的大于号和小于号）。
 
 扩展的 \texttt{T1} 字体编码则更加靠近 ASCII 文本编码，不会出现上述的大于号、小于号的问题。
 \texttt{T1} 字体编码配合一些字体宏包如 \pkg{txfonts}、\pkg{lmodern} 等，还能够令用户使用 \cmd{textasciitilde} 命令
@@ -605,6 +605,17 @@ but it also breaks the paragraph.
   \item[\cls{book/report} 文档类，\texttt{oneside} 选项] 页眉为章标题和页码。
 \end{description}
 
+\cmdindex{pagenumbering}
+\cmd{pagenumbering} 命令令我们能够改变页眉页脚中的页码样式：
+\begin{command}
+\cmd{pagenumbering}\marg{style}
+\end{command}
+
+\cmdindex{frontmatter,mainmatter}
+\Arg{style} 为页码样式，默认为 \texttt{arabic}（阿拉伯数字），还可修改为 \texttt{roman}（小写罗马数字）、
+\texttt{Roman}（大写罗马数字）等。注意使用 \cmd{pagenumbering} 命令后会将页码重置为 1。\cls{book} 文档类的 \cmd{front\-matter} 和 \cmd{main\-matter} 内部就使用了 \cmd{page\-numbering} 命令切换页码样式。
+对页码格式的详细说明见 \ref{sec:counters} 节。
+
 \subsection{手动更改页眉页脚的内容}\label{subsec:marks}
 
 \cmdindex{markright,markboth}
@@ -639,7 +650,7 @@ but it also breaks the paragraph.
 \pkg{fancyhdr} 宏包改善了页眉页脚样式的定义方式，允许我们将内容自由安置在页眉和页脚的左、中、右三个位置，还为页眉和页脚各加了一条横线。
 
 \cmdindex[fancyhdr]{fancyhead,fancyfoot,fancyhf}
-\pkg{fancyhdr} 自定义了样式名称 fancy。使用 \pkg{fancyhdr} 宏包定义页眉页脚之前，通常先用 \cmd{page\-style}\marg*{fancy} 调用这个样式。
+\pkg{fancyhdr} 自定义了样式名称 \texttt{fancy}。使用 \pkg{fancyhdr} 宏包定义页眉页脚之前，通常先用 \cmd{page\-style}\marg*{fancy} 调用这个样式。
 在 \pkg{fancyhdr} 中定义页眉页脚的命令为：
 \begin{command}
 \cmd{fancyhf}\oarg{position}\marg*{\ldots}\\
@@ -674,6 +685,7 @@ but it also breaks the paragraph.
 \begin{verbatim}
 % 自定义 myfancy 样式
 \fancypagestyle{myfancy}{%
+  \fancyhf{}
   \fancyhead{...}
   \fancyfoot{...}
 }

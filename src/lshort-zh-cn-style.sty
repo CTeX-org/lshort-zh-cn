@@ -79,8 +79,8 @@
 % 索引依赖 multicols 环境排版
 % 
 \renewenvironment{thebibliography}[1]
-  {\chapter{\bibname%
-    \protect\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}}%
+  {\chapter{\bibname}%
+  \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
   \list{\@biblabel{\@arabic\c@enumiv}}%
    {\settowidth\labelwidth{\@biblabel{#1}}%
     \leftmargin\labelwidth
@@ -98,8 +98,8 @@
      {\@latex@warning{Empty `thebibliography' environment}}%
   \endlist}
 \renewenvironment{theindex}%
-  {\chapter{\indexname%
-    \protect\@mkboth{\MakeUppercase\indexname}{\MakeUppercase\indexname}}
+  {\chapter{\indexname}%
+   \@mkboth{\MakeUppercase\indexname}{\MakeUppercase\indexname}%
    \parskip\z@ \@plus .3\p@\relax
    \let\item\@idxitem
    \small
@@ -111,8 +111,8 @@
 % 不依赖 float 宏包的 \listof，因此要补充定义 \l@sourcecode
 % 
 \renewcommand\tableofcontents%
-  {\chapter{\contentsname%
-    \protect\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+  {\chapter{\contentsname}%
+  \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
   \begin{multicols}{2}
     \@starttoc{toc}%
   \end{multicols}

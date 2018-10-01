@@ -248,12 +248,8 @@ My humble subjects \ldots
 \end{verbatim}
 
 \cmdindex{pagenumbering}
-如果只是简单将计数器输出格式应用到页码上的话，有个更方便的命令 \cmd{page\-number\-ing}：
-\begin{verbatim}
-\pagenumbering{Roman}
-\end{verbatim}
-不过它在修改 page 计数器输出格式的同时，还将计数器的值改为 1，令修改后的页码总是从 1 开始。\cls{book} 文档类的
-\cmd{frontmatter} 和 \cmd{mainmatter} 等都用了 \cmd{pagenumbering} 命令。
+我们在 \ref{subsec:basic-pagesyle} 小节中见过命令 \cmd{pagenum\-bering}。
+它的内部机制是修改 page 计数器的格式 \cmd{thepage}，并将计数器的值重置为 1。
 
 最后介绍两个有用的计数器：
 

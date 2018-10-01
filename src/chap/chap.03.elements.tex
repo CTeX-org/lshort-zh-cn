@@ -9,7 +9,7 @@
 
 \subsection{章节标题}\label{subsec:secs}
 
-\cmdindex{chapter,section,subsection,subsubsection,paragraph,subparagraph}
+\cmdindex{part,chapter,section,subsection,subsubsection,paragraph,subparagraph}
 \clsindex{article,book,report}
 
 一篇结构化的、条理清晰文档一定是层次分明的，通过不同的命令分割为章、节、小节。三个标准文档类 \cls{article}、\cls{report} 和 \cls{book}%
@@ -25,12 +25,7 @@
 \cmd{subparagraph}\marg{title}
 \end{command}
 其中 \cmd{chapter} \textbf{只在 \cls{book} 和 \cls{report} 文档类有定义}。这些命令生成章节标题，并能够自动编号。
-
-\cmdindex{part}
-\cmd{part} 命令用以将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号：
-\begin{command}
-\cmd{part}\marg{title}
-\end{command}
+除此之外 \LaTeX\ 还提供了 \cmd{part} 命令，用来将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号。
 
 上述命令除了生成带编号的标题之外，还向目录中添加条目，并影响页眉页脚的内容（详见 \ref{sec:pagestyle} 节）。每个命令有两种变体：
 \begin{itemize}
@@ -53,12 +48,14 @@
 \subsection{目录}\label{sec:toc}
 
 \cmdindex{tableofcontents}
+\pkgindex{tocbibind,tocloft,titletoc}
 在 \LaTeX\ 中生成目录非常容易，只需在合适的地方使用命令：
 \begin{command}
 \cmd{tableofcontents}
 \end{command}
 
-这个命令会生成单独的一个章节，标题默认为 ``Contents''{}，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
+这个命令会生成单独的一章（\cls{book} / \cls{report}）或一节（\cls{article}），标题默认为 ``Contents''{}，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
+\cmd{tableof\-contents} 生成的章节默认不写入目录（\cmd{section*} 或 \cmd{chapter*}），可使用 \pkg{tocbibind} 等宏包修改设置。
 
 正确生成目录项，一般需要编译两次源代码。
 
@@ -70,6 +67,8 @@
 \end{command}
 
 其中 \Arg{level} 为章节层次 \texttt{chapter} 或 \texttt{section} 等，\Arg{title} 为出现于目录项的章节标题。
+
+\pkg{titletoc}、\pkg{tocloft} 等宏包提供了具体定制目录项格式的功能，详情请参考宏包的帮助文档。
 
 \subsection{文档结构的划分}\label{sec:matters}
 
@@ -138,10 +137,7 @@
 
 \cmdindex{maketitle}
 \pinyinindex{biaotiye}{标题页}
-在信息给定后，就可以使用 \cmd{maketitle} 命令生成一个简单的标题页了：
-\begin{command}
-\cmd{maketitle}
-\end{command}
+在信息给定后，就可以使用 \cmd{maketitle} 命令生成一个简单的标题页了。
 源代码 \ref{code:titlepage} 给出了一个标题页的示例和大致效果。
 \cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
 可在 \cmd{document\-class} 命令调用文档类时指定 \texttt{titlepage / notitlepage} 选项以修改默认的行为。
@@ -1038,6 +1034,8 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \cmd{listoftables} \\
 \cmd{listoffigures}
 \end{command}
+
+它们类似 \cmd{tableofcontents} 生成单独的章节。
 
 \subsection{并排和子图表}\label{subsec:subfig}
 
