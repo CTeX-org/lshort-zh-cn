@@ -47,7 +47,7 @@
 Partl~\cite{germenTeX} has proposed that \ldots
 
 \begin{thebibliography}{99}
-\bibitem{germenTeX} H.~Partl: \emph{German \TeX}, 
+\bibitem{germenTeX} H.~Partl: \emph{German \TeX},
   TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
 \end{document}
@@ -185,7 +185,7 @@ Partl~\cite{germenTeX} has proposed that \ldots
 \bibliographystyle{plain}
 \begin{document}
 \section{Some words}
-Some excellent books, for example, \cite{citation1} 
+Some excellent books, for example, \cite{citation1}
 and \cite{citation2} \ldots
 
 \bibliography{books}
@@ -241,6 +241,108 @@ xelatex demo
 \pkg{natbib} 宏包还有更多选项和用法，比如默认的引用是用小括号包裹的，可指定 \texttt{square} 选项改为中括号；
 再比如 \cmd{citep} 命令也支持可选参数，为引用前后都添加额外内容。这里不再赘述，请参考 \pkg{natbib} 宏包的帮助文档。
 
+
+\subsection{使用 biblatex 排版参考文献}\label{subsec:biblatex}
+
+除前述两种参考文献排版方式外，还有另一种参考文献排版方法，就是基于 biblatex 宏包的方法。biblatex 宏包提供了一套完整的参考文献解决方案，几乎能够满足所有的常见需求，其核心优点包括非常便捷的格式(全部由 tex 宏决定)控制、强大的排序/分类/筛选/多文献表机制、完善的UTF-8支持/数据映射等功能。但要注意的是，虽然biblatex 由于其全面的功能已经得到越来越多的应用，但一些期刊和出版商由于长期使用自家的 bst 样式，可能不接收使用 biblatex 的文档，所以这种情况下仍然要采用前述的基于 bibtex 的参考文献排版方法。
+
+基于 biblatex 宏包的参考文献排版与基于 bibtex 的方法类似，但存在一定的差别，下面从文档结构和命令、编译方式、样式选择等方面逐一介绍：
+
+\subsubsection{结构和命令}
+
+记住，使用 biblatex 宏包排版参考文献时仅需要使用 biblatex 一个宏包，而不需要任何其它参考文献功能的宏包，因为 biblatex 提供的功能基本覆盖诸如 natbib、chapterbib、multibib、mcitesplus、inlinebib 等宏包提供的功能。
+
+类似于基于 bibtex 的排版方法，biblatex 需要引入参考文献数据源即bib文件；需要在正文中引用参考文献；需要在文档合适的位置打印文献表；还需要指定需要的参考文献排版格式。从如下的简单例子中可以观察其基本结构：
+
+\begin{verbatim}
+\documentclass{article}
+\usepackage{ctex}
+\usepackage[backend=biber,style=gb7714-2015]{biblatex}
+\usepackage{filecontents}
+\begin{filecontents}{egbibdata.bib}
+@Book{蔡敏2006--,
+  Title                    = {UML基础和Rose建模教程},
+  Address                  = {北京},
+  Author                   = {蔡敏 and 徐慧慧 and 黄柄强},
+  Publisher                = {人民邮电出版社},
+  Year                     = {2006},
+  Month                    = {1}
+}
+\end{filecontents}
+
+\addbibresource[location=local]{egbibdata.bib}
+
+\begin{document}
+
+见文献\cite{蔡敏2006--}
+
+\printbibliography[title=参考文献]
+\end{document} 
+\end{verbatim}
+
+其中 \pkg{biblatex} 宏包由 \cmd{usepackage} 命令引入；文献数据源由 \cmd{addbibresource} 引入；文献引用仍然使用 \cmd{cite} 命令(注意可以使用中文的引用关键字)，在biblatex 宏包引入 natbib 选项后同样可以使用前述的 \cmd{citet}/\cmd{citet}命令；文献表打印则使用 \cmd{printbibliography}，其中 \Arg{title=参考文献} 指定了参考文献表的标题内容；而文献排版格式由 \pkg{biblatex} 的 style 选项指定，这里 \Arg{style=gb7714-2015} 表明使用中文的GB/T 7714-2015 参考文献著录标准。
+
+注意：在 beamer 文档类中用法也是类似的，引用命令 \cmd{cite} 出现在各个 frame 的内容中，然后在需要打印文献的 frame 页中使用 \cmd{printbibliography} 。
+
+
+\subsubsection{编译方式}
+
+使用 biblatex 宏包排版参考文献时编译命令与基于 bibtex 的方法类似，唯一的差别在于处理参考文献数据的程序由 bibtex 变为 biber，即：
+
+\begin{verbatim}
+xelatex demo.TEX
+biber demo
+xelatex demo.TEX
+xelatex demo.TEX
+\end{verbatim}
+
+注意：\Arg{biber} 一行命令中输入的文件名不带扩展名，因为biber 默认使用的时 \Arg{demo.bcf} 文件而不是 \Arg{demo.aux} 文件，如果一定要带上扩展名则应加上 \Arg{.bcf}而不是 \Arg{.aux} 。
+
+注意：除了使用\Arg{xelatex}作为编译引擎外， \Arg{pdflatex}同样可以使用，但要小心文档的编码并注意文献的引用关键字是否为英文。
+
+
+\subsubsection{样式选择}
+
+参考文献的样式，包括参考文献表的著录格式和正文中文献引用的标注格式，也可以称为参考文献的排版格式。根据前述内容已经知道，文献样式的选择通过 \pkg{biblatex} 的 style 选项指定。目前可以选择的样式除了 biblatex 宏包自带的多种样式外，还有大量的第三方样式可供选择，这里介绍一些常用的样式：
+
+\begin{description}
+  \item[\texttt{trad-plain}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 plain 一致。
+  \item[\texttt{trad-unsrt}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 unsrt 一致。
+  \item[\texttt{trad-alpha}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 alpha 一致。
+  \item[\texttt{trad-abbrv}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 abbrv 一致。
+  \item[\texttt{ieee}]  作者是 Joseph Wright。排版效果与bst样式 IEEEtran 一致。
+  \item[\texttt{apa}]  作者是 Philip Kime。排版效果与bst样式 apalike 一致。
+  \item[\texttt{Chicago}]  作者是 David Fussner。排版效果与bst样式 Chicago 一致。
+  \item[\texttt{gb7714-2015}]  作者是 hushidong。中文文献著录标准 GB/T 7714-2015 顺序编码制样式，排版效果与zepinglee 开发 bst 样式 gbt7714-unsrt.bst 一致。
+  \item[\texttt{gb7714-2015ay}]  作者是 hushidong。中文文献著录标准 GB/T 7714-2015 著者年份制样式，排版效果与zepinglee 开发 bst 样式 gbt7714-plain.bst 一致。
+  \item[\texttt{caspervector}]  作者是 Casper vector。一种优秀的中文文献样式。
+  \item[\texttt{nature}]   作者是 Joseph Wright。 Nature 期刊的样式
+  \item[\texttt{science}]   作者是 Joseph Wright。 science 期刊的样式
+\end{description}
+
+需要注意的是，中文文献著录标准 GB/T 7714 除2015版标准外，还有2005版的标准，因此也有之前的不同作者的多种实现，无论是bibtex的bst样式还是biblatex的样式，感兴趣的读者可以在github搜索相关内容。
+
+\subsubsection{更多说明}
+
+上述内容仅仅介绍了基本功能，biblatex 提供的更多高级功能并未涉猎，有更深需求以及感兴趣的读者可以参考 biblatex 的手册以及一些介绍性文档。包括：
+
+\begin{itemize}
+  \item \href{https://github.com/plk/biblatex}{biblatex 手册} \href{https://github.com/hushidong/biblatex-zh-cn}{中文版}
+  \item \href{https://github.com/hushidong/biblatex-solution-to-latex-bibliography}{LaTeX 文档参考文献的biblatex解决方案}
+  \item \href{https://github.com/plk/biblatex/blob/dev/doc/latex/biblatex/biblatex-quickstart.tex}{biblatex quickstart}
+      
+  \item \href{https://github.com/PaulStanley/biblatex-tutorial}{biblatex-tutorial}
+\href{https://github.com/hushidong/biblatex-tutorial-cn}{中文摘译版}  
+
+  \item \href{https://github.com/hushidong/biblatex-gb7714-2015}{biblatex-gb7714-2015 宏包}
+
+  \item \href{https://github.com/CasperVector/biblatex-caspervector}{biblatex-caspervector 宏包}
+
+\end{itemize}
+
+
+
+
 \section{索引和 makeindex 工具}\label{sec:index}
 
 \pinyinindex{suoyin}{索引}
@@ -280,7 +382,7 @@ xelatex demo
 \cmd{index}\marg{index entry}
 \end{command}
 
-其中 \Arg{index entry} 为索引项，写法由表 \ref{tbl:index-entry} 汇总。其中 \texttt!、\texttt @ 和 \texttt| 
+其中 \Arg{index entry} 为索引项，写法由表 \ref{tbl:index-entry} 汇总。其中 \texttt!、\texttt @ 和 \texttt|
 为特殊符号，如果要向索引项直接输出这些符号，需要加前缀 \texttt"；而 \texttt" 需要输入两个引号 \texttt{""} 才能输出到索引项。
 
 \begin{table}[htp]
@@ -291,12 +393,12 @@ xelatex demo
   \textbf{举例} &\textbf{索引项} &\textbf{备注}\\
   \hline
   \multicolumn{3}{l}{普通索引} \\[.8ex]
-  \verb+hello+              & hello, 1             & 普通索引 \\ 
+  \verb+hello+              & hello, 1             & 普通索引 \\
   \hline
   \multicolumn{3}{l}{分级索引，以 \texttt! 分隔，最多支持三级} \\[.8ex]
-  \verb+hello+              & hello, 1             & 一级索引 \\ 
-  \verb+hello!Peter+        &\quad Peter, 3 & 二级索引 \\ 
-  \verb+hello!Peter!Jack+   &\qquad Jack,  3 & 三级索引 \\ 
+  \verb+hello+              & hello, 1             & 一级索引 \\
+  \verb+hello!Peter+        &\quad Peter, 3 & 二级索引 \\
+  \verb+hello!Peter!Jack+   &\qquad Jack,  3 & 三级索引 \\
   \hline
   \multicolumn{3}{l}{格式化索引，形式为 \Arg{alpha}\texttt @\Arg{format}} \\
   \multicolumn{3}{l}{\Arg{alpha}为纯字母，用来排序} \\
@@ -347,17 +449,17 @@ Test index.
 \pkg{color} 宏包支持 \texttt{rgb}、\texttt{cmyk} 和 \texttt{gray} 模型，\pkg{xcolor} 支持更多的模型如 \texttt{hsb} 等。
 \begin{example}
 \large\sffamily
-{\color[gray]{0.6} 
+{\color[gray]{0.6}
   60\% 灰色} \\
-{\color[rgb]{0,1,1} 
-  青色} 
+{\color[rgb]{0,1,1}
+  青色}
 \end{example}
 
 其二是直接使用名称代表颜色，前提是已经定义了颜色名称（没定义的话会报错）：
 \begin{example}
 \large\sffamily
 {\color{red} 红色} \\
-{\color{blue} 蓝色} 
+{\color{blue} 蓝色}
 \end{example}
 
 \pkgindex{xcolor}
@@ -478,30 +580,30 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
  \hline
  \textbf{参数}                & \textbf{默认值}  & \textbf{含义} \\
  \hline
- \texttt{colorlinks=}\Arg{true\textnormal|false} 
+ \texttt{colorlinks=}\Arg{true\textnormal|false}
                               & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
  \texttt{hidelinks}           &                 & 取消链接的颜色和边框 \\
- \texttt{pdfborder=}\marg*{\Arg{n} \Arg{n} \Arg{n}}   
+ \texttt{pdfborder=}\marg*{\Arg{n} \Arg{n} \Arg{n}}
                               &  0 0 1          & 超链接边框设置，设为 0 0 0 可取消边框 \\
  \hline
  \texttt{bookmarks=}\Arg{true\textnormal|false} \textsuperscript{\dag}
                               & \textit{true}   & 是否生成书签 \\
- \texttt{bookmarksopen=}\Arg{true\textnormal|false} 
+ \texttt{bookmarksopen=}\Arg{true\textnormal|false}
                               & \textit{false}  & 是否展开书签 \\
- \texttt{bookmarksnumbered=}\Arg{true\textnormal|false} 
+ \texttt{bookmarksnumbered=}\Arg{true\textnormal|false}
                               & \textit{false}  & 书签是否带章节编号 \\
- \texttt{CJKbookmarks=}\Arg{true\textnormal|false} 
+ \texttt{CJKbookmarks=}\Arg{true\textnormal|false}
                               & \textit{false}  & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须设定的参数，
                                                 需要将生成的 \texttt{.out} 文件用工具处理编码，或调用 \pkg{xCJK2uni} 宏包 \\
  \texttt{unicode}             &                 & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须设定的参数 \\
  \hline
- \texttt{pdftitle=}\Arg{string} 
+ \texttt{pdftitle=}\Arg{string}
                               & 空               & 标题 \\
- \texttt{pdfauthor=}\Arg{string} 
+ \texttt{pdfauthor=}\Arg{string}
                               & 空               & 作者 \\
- \texttt{pdfsubject=}\Arg{string} 
+ \texttt{pdfsubject=}\Arg{string}
                               & 空               & 主题 \\
- \texttt{pdfkeywords=}\Arg{string} 
+ \texttt{pdfkeywords=}\Arg{string}
                               & 空               & 关键词 \\
  \texttt{pdfstartview=}\Arg{Fit\textnormal|FitH\textnormal|FitV}
                               & \textit{Fit}     & 设置 PDF 页面以适合页面/适合宽度/适合高度等方式显示，默认为适合页面 \\
