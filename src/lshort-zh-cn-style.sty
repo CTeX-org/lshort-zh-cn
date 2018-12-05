@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 基本工具宏包
-% 
+%
 \RequirePackage{amsmath,amsthm}
 \RequirePackage{hologo,ulem,verbatim,fancyvrb,layout,multicol}
 \RequirePackage{colortbl,tabularx,multirow,makecell,booktabs}
@@ -21,14 +21,33 @@
 % 中文正文字体使用 Fandol
 %
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[fontset=fandol,zihao=false,scheme=chinese,heading=true]{ctex}[2015/06/24]
+\RequirePackage[zihao=false,scheme=chinese,heading=true]{ctex}[2015/06/24]
 
 %
 % 字体和符号宏包
-% 
-\RequirePackage{lmodern}  % 西文正文字体使用 Latin Modern
+%
+\setmainfont{cmun}[
+  Extension      = .otf,
+  UprightFont    = *rm,
+  ItalicFont     = *ti,
+  BoldFont       = *bx,
+  BoldItalicFont = *bi,
+]
+\setsansfont{cmun}[
+  Extension      = .otf,
+  UprightFont    = *ss,
+  ItalicFont     = *si,
+  BoldFont       = *sx,
+  BoldItalicFont = *so,
+]
+\setmonofont{cmun}[
+  Extension      = .otf,
+  UprightFont    = *btl,% light version
+  ItalicFont     = *bto,%  light version
+  BoldFont       = *tb,
+  BoldItalicFont = *tx,
+]
 \RequirePackage{amssymb,latexsym,textcomp,mathrsfs,euscript,yhmath} % 与默认字体不冲突的一些符号包
-\RequirePackage[LGR,T1]{fontenc}
 
 % 调整 layout 宏包的命令使之能够放入浮动体，手动指定奇偶页的 layout
 \input lshort-zh-cn-layout
@@ -55,7 +74,7 @@
 
 %
 % 不依赖 fancyhdr 的页眉页脚设定
-% 
+%
 \addtolength{\headheight}{1.6pt}
 \newdimen\headwidth \headwidth\textwidth
 \newdimen\headrulewidth \headrulewidth=0.4pt
@@ -77,7 +96,7 @@
 %
 % 不依赖 tocbibind 的参考文献/索引修改
 % 索引依赖 multicols 环境排版
-% 
+%
 \renewenvironment{thebibliography}[1]
   {\chapter{\bibname}%
   \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
@@ -109,7 +128,7 @@
 %
 % 将主目录和源代码目录合并排版
 % 不依赖 float 宏包的 \listof，因此要补充定义 \l@sourcecode
-% 
+%
 \renewcommand\tableofcontents%
   {\chapter{\contentsname}%
   \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
@@ -122,7 +141,7 @@
 
 %
 % 令 \cleardoublepage 的偶数页页眉页脚为空
-% 
+%
 \renewcommand{\cleardoublepage}
     {\clearpage\if@twoside \ifodd\c@page\else
     \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
@@ -143,7 +162,7 @@
 \DeclareRobustCommand*\TikZ{Ti\textit{k\/}Z}
 %
 % PDF 书签中对符号的特殊处理
-% 
+%
 \pdfstringdefDisableCommands{%
   \def\AmS{AMS}%
   \def\TikZ{TikZ}%
@@ -158,6 +177,7 @@
 % 命令和环境的写法
 %
 \DeclareRobustCommand*\cmd[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
 \def\crcmd{\cmd{\char`\\}}
 \DeclareRobustCommand*\env[1]{\texttt{#1}}
 \DeclareRobustCommand*\pkg[1]{\textsf{#1}}
@@ -217,11 +237,11 @@
   \begin{tabular}{>{\columncolor{blue!5}}l}
   }{\end{tabular}\endtrivlist}
 
-% 
+%
 % 示例环境 example
 % 环境中的代码写入临时文件 lshort-zh-cn-example.aux
 % 再从临时文件中读取，分别生成代码盒子和示例盒子
-% 
+%
 \newwrite\example@out
 \newlength\savefboxrule
 \newlength\savefboxsep

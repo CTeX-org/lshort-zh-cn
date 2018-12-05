@@ -140,7 +140,7 @@ He likes {\LARGE large and
 
 扩展的 \texttt{T1} 字体编码则更加靠近 ASCII 文本编码，不会出现上述的大于号、小于号的问题。
 \texttt{T1} 字体编码配合一些字体宏包如 \pkg{txfonts}、\pkg{lmodern} 等，还能够令用户使用 \cmd{textasciitilde} 命令
-输入位置居中的波浪号，比如表示近似的用法 \textasciitilde 24，相比数学符号 \texttt\$\cmd{sim}\texttt\$ 来得合理一些。
+输入位置居中的波浪号。
 
 \pkgindex{fontenc}
 切换字体编码要用到 \pkg{fontenc} 宏包：
@@ -178,7 +178,7 @@ He likes {\LARGE large and
  \multicolumn{2}{c}{\textbf{文本字体宏包}} \\
  \multicolumn{2}{l}{\footnotesize 以下字体包括传统的 \LaTeX\ 字体格式以及 TrueType / OpenType 格式。} \\
  \hline
- \pkg{cm-unicode}  & Computer Modern 风格的 Unicode 字体，支持多种西方语言 \\ 
+ \pkg{cm-unicode}  & Computer Modern 风格的 Unicode 字体，支持多种西方语言 \\
  \pkg{dejavu}      & DejaVu 开源字体 \\
  \pkg{droid}       & Droid 开源字体 \\
  \pkg{inconsolata} & Inconsolata 开源等宽字体 \\
@@ -264,7 +264,7 @@ He likes {\LARGE large and
 \end{tabular}
 \end{table}
 
-在一些情况下还会用到可伸缩的“弹性长度”，如 \texttt{12pt plus 2pt minus 3pt} 
+在一些情况下还会用到可伸缩的“弹性长度”，如 \texttt{12pt plus 2pt minus 3pt}
 表示基础长度为 \texttt{12pt}，可以伸展到 \texttt{14pt} ，也可以收缩到 \texttt{9pt}。
 也可只定义 \texttt{plus} 或者 \texttt{minus} 的部分，如 \texttt{0pt plus 5pt}。
 
@@ -301,7 +301,7 @@ He likes {\LARGE large and
 \begin{example}
 {\linespread{2.0}\selectfont
 The baseline skip is set to be
-twice the normal baseline skip. 
+twice the normal baseline skip.
 Pay attention to the \verb|\par|
 command at the end. \par}
 
@@ -415,12 +415,12 @@ Another paragraph.
 在段落内的两行之间增加垂直间距，一般通过给断行命令 \crcmd\ 加可选参数，如 \crcmd\texttt{[6pt]} 或 \crcmd\texttt{*[6pt]}。
 \cmd{vspace} 也可以在段落内使用，区别在于 \cmd{vspace} 只引入垂直间距而不断行：
 \begin{example}
-Use command \verb|\vspace{12pt}| 
+Use command \verb|\vspace{12pt}|
 to add \vspace{12pt} some spaces
 between lines in a paragraph.
 
 Or you can use \verb|\\[12pt]|
-to \\[12pt] add vertical space, 
+to \\[12pt] add vertical space,
 but it also breaks the paragraph.
 \end{example}
 
@@ -452,13 +452,13 @@ but it also breaks the paragraph.
 
 页边距等比较直观的参数则必须间接设置。我们根据图 \ref{fig:layouts} 将各个方向的页边距计算公式给出（以奇数页为例）：
 \begin{align*}
-\text{\Arg{left-margin}}   &= \text{\ttfamily 1in} 
+\text{\Arg{left-margin}}   &= \text{\ttfamily 1in}
                             + \text{\cmd{hoffset}}
                             + \text{\cmd{oddsidemargin}} \\
-\text{\Arg{right-margin}}  &= \text{\cmd{paperwidth}} 
+\text{\Arg{right-margin}}  &= \text{\cmd{paperwidth}}
                             - \text{\Arg{left-margin}}
                             - \text{\cmd{textwidth}} \\
-\text{\Arg{top-margin}}    &= \text{\ttfamily 1in} 
+\text{\Arg{top-margin}}    &= \text{\ttfamily 1in}
                             + \text{\cmd{voffset}}
                             + \text{\cmd{topmargin}}
                             + \text{\cmd{headheight}}
@@ -529,7 +529,7 @@ but it also breaks the paragraph.
 \subsection{分栏}\label{subsec:columns}
 
 \cmdindex{onecolumn,twocolumn}
-\LaTeX\ 支持简单的单栏或双栏排版。标准文档类的全局选项 \texttt{onecolumn}、\texttt{twocolumn} 
+\LaTeX\ 支持简单的单栏或双栏排版。标准文档类的全局选项 \texttt{onecolumn}、\texttt{twocolumn}
 可控制全文分单栏或双栏排版。\LaTeX\ 也提供了切换单/双栏排版的命令：
 \begin{command}
 \cmd{onecolumn} \\
@@ -679,7 +679,7 @@ but it also breaks the paragraph.
   \end{Verbatim}
   \caption{\pkg{fancyhdr} 宏包的使用方法示例。}\label{code:fancyhdr}
 \end{sourcecode}
-  
+
 \cmdindex[fancyhdr]{fancypagestyle}
 \pkg{fancyhdr} 还支持用 \cmd{fancy\-page\-style} 为自定义的页眉页脚样式命名，或者重新定义已有的样式如 \texttt{plain} 等：
 \begin{verbatim}
