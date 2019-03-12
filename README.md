@@ -9,8 +9,6 @@ For detailed information, see the section entitled 'GNU Free Documentation Licen
 Update `ctex` and `xeCJK` (and all the packages they rely on) in your TeX distritusion. And make sure you've installed
 all the other packages used in `lshort-zh-cn-style.sty` and updated them to the newest version.
 
-This document uses `fandol` font package. You may receive a warning like 'script-not-exist' made by `fontspec` package. Just leave it alone.
-
 ## Typesetting
 
 ### Manually typesetting
@@ -34,3 +32,7 @@ make install
 ```
 
 For Windows users, we also provide a batch file `make.bat` in the 'src' directory, which you can double-click to do the typesetting.
+
+### Using latexmk
+
+We also provide `latexmkrc` configuration file for building with `latexmk` tool. Run the command `latexmk` in `src` directory for typesetting, then move the PDF document to the root directory.
