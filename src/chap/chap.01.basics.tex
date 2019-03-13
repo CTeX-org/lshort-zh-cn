@@ -95,58 +95,6 @@ xelatex helloworld
 如果编译成功，可以在~\texttt{helloworld.tex}~所在的目录，
 看到生成的 \texttt{helloworld.pdf} 以及一些其它文件。
 
-\subsection{引擎、格式和编译命令}\label{subsec:concepts}
-
-\pinyinindex{paibanyinqing}{排版引擎}
-\index{pdfTeX@\hologo{pdfTeX}}
-\index{XeTeX@\hologo{XeTeX}}
-在此有必要澄清几个概念：
-\begin{description}
-  \item[引擎] 全称为排版引擎，是编译源代码并生成文档的程序，如 \hologo{pdfTeX}、\hologo{XeTeX} 等。有时也称为编译器。
-  \item[格式] 是定义了一组命令的代码集。\LaTeX\ 就是最广泛应用的一个格式，高德纳本人还编写了一个简单的 plain \TeX\ 格式，
-  没有定义诸如 \cmd{document\-class} 和 \cmd{section} 等等命令。
-  \item[编译命令] 是实际调用的、结合了引擎和格式的命令。如 \texttt{xelatex} 命令是结合 \hologo{XeTeX}
-  引擎和 \LaTeX\ 格式的一个编译命令。
-\end{description}
-常见的引擎、格式和编译命令的关系总结于表 \ref{tbl:engine-format-command}。
-
-\begin{table}[htp]
-  \centering
-  \caption{\TeX\ 引擎、格式和编译命令。}
-  \label{tbl:engine-format-command}
-  \begin{tabular}{cccc}
-   \hline
-                        & \textbf{文档格式} & \textbf{plain \TeX\ 格式} & \textbf{\LaTeX\ 格式} \\
-   \hline
-   \TeX\ 引擎           & DVI       & \texttt{tex}     & N/A \\
-   \hologo{pdfTeX} 引擎 & DVI       & \texttt{etex}    & \texttt{latex} \\
-                        & PDF       & \texttt{pdftex}  & \texttt{pdflatex} \\
-   \hologo{XeTeX} 引擎  & PDF       & \texttt{xetex}   & \texttt{xelatex} \\
-   \hologo{LuaTeX} 引擎 & PDF       & \texttt{luatex}  & \texttt{lualatex} \\
-   \hline
-  \end{tabular}
-\end{table}
-
-\texttt{latex} 编译命令和 \LaTeX\ 格式往往容易混淆，在讨论关于 \LaTeX\ 的时候需要明确。
-为避免混淆，本手册中的 \LaTeX\ 一律指的是\textbf{格式}，\textbf{编译命令}则用等宽字体 \texttt{latex} 表示。
-
-在此介绍一下几个编译命令的基本特点：
-\begin{description}
-  \item[\texttt{latex}]
-  虽然名为 \texttt{latex} 命令，底层调用的引擎其实是 \hologo{pdfTeX}。
-  该命令生成 \texttt{dvi}（Device Independent）格式的文档，
-  用 \texttt{dvipdfmx} 命令可以将其转为 \texttt{pdf}。
-  \item[\texttt{pdflatex}]
-  底层调用的引擎也是 \hologo{pdfTeX}，可以直接生成 \texttt{pdf} 格式的文档。
-  \item[\texttt{xelatex}]
-  底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和 TrueType / OpenType 字体。
-  当前较为方便的中文排版解决方案基于 \texttt{xelatex}，详见 \ref{sec:chinese} 节。
-  \item[\texttt{lualatex}]
-  底层调用的引擎是 \hologo{LuaTeX}，这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
-  除了支持 UTF-8 编码和 TrueType / OpenType 字体外，还支持通过 Lua 语言扩展 \TeX\ 的功能。
-  \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatex-ja} 宏包。
-\end{description}
-
 \section{\LaTeX\ 命令和代码结构}\label{sec:src}
 
 \LaTeX\ 的源代码为文本文件。这些文本除了文字本身，还包括各种命令，
@@ -401,5 +349,57 @@ or \TeX{} users?
 \end{verbatim}
 
 如果想生成文档，则用 \texttt\% 注释掉 \cmd{syntaxonly} 命令即可。
+
+\subsection{引擎、格式和编译命令}\label{subsec:concepts}
+
+\pinyinindex{paibanyinqing}{排版引擎}
+\index{pdfTeX@\hologo{pdfTeX}}
+\index{XeTeX@\hologo{XeTeX}}
+在本章的最后有必要澄清几个概念：
+\begin{description}
+  \item[引擎] 全称为排版引擎，是编译源代码并生成文档的程序，如 \hologo{pdfTeX}、\hologo{XeTeX} 等。有时也称为编译器。
+  \item[格式] 是定义了一组命令的代码集。\LaTeX\ 就是最广泛应用的一个格式，高德纳本人还编写了一个简单的 plain \TeX\ 格式，
+  没有定义诸如 \cmd{document\-class} 和 \cmd{section} 等等命令。
+  \item[编译命令] 是实际调用的、结合了引擎和格式的命令。如 \texttt{xelatex} 命令是结合 \hologo{XeTeX}
+  引擎和 \LaTeX\ 格式的一个编译命令。
+\end{description}
+常见的引擎、格式和编译命令的关系总结于表 \ref{tbl:engine-format-command}。
+
+\begin{table}[htp]
+  \centering
+  \caption{\TeX\ 引擎、格式和编译命令。}
+  \label{tbl:engine-format-command}
+  \begin{tabular}{cccc}
+   \hline
+                        & \textbf{文档格式} & \textbf{plain \TeX\ 格式} & \textbf{\LaTeX\ 格式} \\
+   \hline
+   \TeX\ 引擎           & DVI       & \texttt{tex}     & N/A \\
+   \hologo{pdfTeX} 引擎 & DVI       & \texttt{etex}    & \texttt{latex} \\
+                        & PDF       & \texttt{pdftex}  & \texttt{pdflatex} \\
+   \hologo{XeTeX} 引擎  & PDF       & \texttt{xetex}   & \texttt{xelatex} \\
+   \hologo{LuaTeX} 引擎 & PDF       & \texttt{luatex}  & \texttt{lualatex} \\
+   \hline
+  \end{tabular}
+\end{table}
+
+\texttt{latex} 编译命令和 \LaTeX\ 格式往往容易混淆，在讨论关于 \LaTeX\ 的时候需要明确。
+为避免混淆，本手册中的 \LaTeX\ 一律指的是\textbf{格式}，\textbf{编译命令}则用等宽字体 \texttt{latex} 表示。
+
+在此介绍一下几个编译命令的基本特点：
+\begin{description}
+  \item[\texttt{latex}]
+  虽然名为 \texttt{latex} 命令，底层调用的引擎其实是 \hologo{pdfTeX}。
+  该命令生成 \texttt{dvi}（Device Independent）格式的文档，
+  用 \texttt{dvipdfmx} 命令可以将其转为 \texttt{pdf}。
+  \item[\texttt{pdflatex}]
+  底层调用的引擎也是 \hologo{pdfTeX}，可以直接生成 \texttt{pdf} 格式的文档。
+  \item[\texttt{xelatex}]
+  底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和 TrueType / OpenType 字体。
+  当前较为方便的中文排版解决方案基于 \texttt{xelatex}，详见 \ref{sec:chinese} 节。
+  \item[\texttt{lualatex}]
+  底层调用的引擎是 \hologo{LuaTeX}，这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
+  除了支持 UTF-8 编码和 TrueType / OpenType 字体外，还支持通过 Lua 语言扩展 \TeX\ 的功能。
+  \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatex-ja} 宏包。
+\end{description}
 
 \endinput
