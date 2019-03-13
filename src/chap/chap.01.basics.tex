@@ -103,16 +103,17 @@ xelatex helloworld
 \subsection{\LaTeX\ 命令和环境}\label{subsec:cmds}
 
 \index{LaTeX macro@\LaTeX\ 命令}
-\LaTeX\ 命令以反斜线 \texttt{\textbackslash} 开头，为以下两种形式之一：
+\LaTeX\ 中命令\footnote{也叫作控制序列（control sequence）。}以反斜线 \texttt{\textbackslash} 开头，为以下两种形式之一：
 \begin{itemize}
   \item 反斜线和后面的一串字母，如 \cmd{LaTeX}。它们以任意非字母符号（空格、数字、标点等）为界限。
   \item 反斜线和后面的单个非字母符号，如 \cmd{\$}。
 \end{itemize}
 
 要注意 \LaTeX\ 命令是\textbf{对大小写敏感}的，比如输入 \cmd{LaTeX} 命令可以生成错落有致的 \LaTeX\ 字母组合，
-但输入 \cmd{Latex} 或者 \cmd{LaTex} 什么都得不到，还会报错。
+但输入 \cmd{Latex} 或者 \cmd{LaTex} 什么都得不到，还会报错；它们与 \cmd{LaTeX} 是不同的命令。
 
-字母形式的 \LaTeX\ 命令忽略其后的所有空格。如果要人为引入空格，需要在命令后面加一对括号阻止其忽略空格%
+字母形式的 \LaTeX\ 命令忽略其后的所有连续空格。
+如果要人为引入空格，需要在命令后面加一对花括号阻止其忽略空格%
 \footnote{另外也可以在命令后面紧跟一个 \cmd{\textvisiblespace} 命令（反斜线加空格），代表插入一个间距。
 比如 \cmd{TeX}\cmd{\textvisiblespace}\texttt{user} 的输出效果就是 \TeX\ user。}：
 \begin{example}
