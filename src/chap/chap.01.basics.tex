@@ -135,16 +135,18 @@ or \TeX{} users?
 
 \index{LaTeX environment@\LaTeX\ 环境}
 \cmdindex{begin,end}
-\LaTeX\ 还引入了\textbf{环境}的用法，用以令一些效果在局部生效，或是生成特殊的文档元素。
+\LaTeX{} 中还是有所谓的\textbf{环境}，用以令一些效果在局部生效，或是生成特殊的文档元素。
 \LaTeX\ 环境的用法为一对命令 \cmd{begin} 和 \cmd{end}：
 \begin{command}
-\cmd{begin}\marg{environment name}\marg{arguments} \\
+\cmd{begin}\marg{environment name}\oarg{optional arguments}\marg{mandatory arguments} \\
 \ldots \\
 \cmd{end}\marg{environment name}
 \end{command}
 
 其中 \Arg{environment name} 为环境名，\cmd{begin} 和 \cmd{end} 中填写的环境名应当一致。
-\Arg{arguments} 为环境所需的参数，可能包括可选参数。环境允许嵌套使用。
+\oarg{optional arguments}\marg{mandatory arguments} 为环境所需的参数。
+环境可能有参数，也可能没有；环境可能有必选参数，也可能没有；环境可能有可选参数，也可能没有。
+部分环境允许嵌套使用。
 
 \pinyinindex{fenzu}{分组}
 除了 \LaTeX\ 环境之外，花括号本身也起到\textbf{分组}的作用，使命令的效果限制在分组内。
