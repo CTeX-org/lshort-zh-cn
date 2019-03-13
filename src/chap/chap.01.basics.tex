@@ -68,7 +68,7 @@
 
 \section{第一次使用 \LaTeX}\label{sec:run}
 
-我们在此给出一个最小的 \LaTeX\ 源代码示例，见源代码\ref{code:hello-world}。
+源代码~\ref{code:hello-world}~是一份最短的 \LaTeX{} 源代码示例。
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
@@ -80,15 +80,20 @@
 \caption{\LaTeX\ 的一个最简单的源代码示例。}\label{code:hello-world}
 \end{sourcecode}
 
-假设将源代码 \ref{code:hello-world} 保存成 \texttt{helloworld.tex}。如果使用 \TeX works 或 \TeX studio 等编辑器，
-点击编辑器提供的“编译”按钮即可。在此建议将编译命令设为 “XeLaTeX”。编译成功后生成文档 \texttt{helloworld.pdf}。
+这里首先介绍如何编译使用这份源代码，在后续小节中再介绍源代码的细节。
 
-另外也可以使用命令行的方式调用程序进行编译（建议尝试命令行方式，以了解背后的工作原理）。
-打开 Windows 命令提示符或者 Linux / macOS（OS X）的终端，在源代码所在的目录下输入命令：
+你可以将这份源代码保存为~\texttt{helloworld.tex}，而后编译。具体来说:
+\begin{itemize}
+  \item 如果使用 \TeX works! 或 \TeX studio 等编辑器，你可以使用编辑器提供的“编译”按钮
+  或者“排版”按钮。建议将编译命令设置为 “XeLaTeX”。
+  \item 如果使用命令行方式进行编译，则需打开 Windows 命令提示符或者 Linux / macOS（OS X）的终端，在源代码所在的目录下输入命令：
 \begin{verbatim}
 xelatex helloworld
 \end{verbatim}
-此时命令行会闪过许多信息，如果编译成功，可以看到会生成 \texttt{helloworld.pdf} 以及一些其它文件。
+\end{itemize}
+
+如果编译成功，可以在~\texttt{helloworld.tex}~所在的目录，
+看到生成的 \texttt{helloworld.pdf} 以及一些其它文件。
 
 \subsection{引擎、格式和编译命令}\label{subsec:concepts}
 
