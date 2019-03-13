@@ -2,7 +2,7 @@
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
-欢迎加入 \LaTeX\ 使用者的队伍！本章开头用简短的篇幅介绍了 \LaTeX\ 的来源，
+欢迎使用 \LaTeX{}！本章开头用简短的篇幅介绍了 \LaTeX\ 的来源，
 然后介绍了 \LaTeX\ 源代码的写法，如何编译 \LaTeX\ 源代码生成文档，以及理解接下来的章节所必须的一些知识。
 \end{intro}
 
@@ -10,7 +10,7 @@
 
 \subsection{\protect\TeX}\label{subsec:tex}
 
-\index{Knuth@Knuth, Donald E. (\textit{高德纳})} 
+\index{Knuth@Knuth, Donald E. (\textit{高德纳})}
 \index{TeX@\TeX}
 \TeX\ 是高德纳 (Donald E.Knuth)开发的、以排版文字和数学公式为目的的一个计算机软件 \cite{texbook}。
 高德纳从 1977 年开始开发 \TeX\ ，以发掘当时开始用于出版工业的数字印刷设备的潜力。
@@ -106,7 +106,7 @@ xelatex helloworld
   \item[引擎] 全称为排版引擎，是编译源代码并生成文档的程序，如 \hologo{pdfTeX}、\hologo{XeTeX} 等。有时也称为编译器。
   \item[格式] 是定义了一组命令的代码集。\LaTeX\ 就是最广泛应用的一个格式，高德纳本人还编写了一个简单的 plain \TeX\ 格式，
   没有定义诸如 \cmd{document\-class} 和 \cmd{section} 等等命令。
-  \item[编译命令] 是实际调用的、结合了引擎和格式的命令。如 \texttt{xelatex} 命令是结合 \hologo{XeTeX} 
+  \item[编译命令] 是实际调用的、结合了引擎和格式的命令。如 \texttt{xelatex} 命令是结合 \hologo{XeTeX}
   引擎和 \LaTeX\ 格式的一个编译命令。
 \end{description}
 常见的引擎、格式和编译命令的关系总结于表 \ref{tbl:engine-format-command}。
@@ -125,7 +125,7 @@ xelatex helloworld
    \hologo{XeTeX} 引擎  & PDF       & \texttt{xetex}   & \texttt{xelatex} \\
    \hologo{LuaTeX} 引擎 & PDF       & \texttt{luatex}  & \texttt{lualatex} \\
    \hline
-  \end{tabular} 
+  \end{tabular}
 \end{table}
 
 \texttt{latex} 编译命令和 \LaTeX\ 格式往往容易混淆，在讨论关于 \LaTeX\ 的时候需要明确。
@@ -169,8 +169,8 @@ xelatex helloworld
 \footnote{另外也可以在命令后面紧跟一个 \cmd{\textvisiblespace} 命令（反斜线加空格），代表插入一个间距。
 比如 \cmd{TeX}\cmd{\textvisiblespace}\texttt{user} 的输出效果就是 \TeX\ user。}：
 \begin{example}
-Shall we call ourselves 
-\TeX users 
+Shall we call ourselves
+\TeX users
 
 or \TeX{} users?
 \end{example}
@@ -188,7 +188,7 @@ or \TeX{} users?
 \begin{command}
 \cmd{begin}\marg{environment name}\marg{arguments} \\
 \ldots \\
-\cmd{end}\marg{environment name} 
+\cmd{end}\marg{environment name}
 \end{command}
 
 其中 \Arg{environment name} 为环境名，\cmd{begin} 和 \cmd{end} 中填写的环境名应当一致。
