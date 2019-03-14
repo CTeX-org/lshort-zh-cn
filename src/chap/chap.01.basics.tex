@@ -259,11 +259,11 @@ or \TeX{} users?
 \cmd{usepackage}\oarg{options}\marg{package-name}
 \end{command}
 
-\cmd{usepackage}可以一次性调用多个宏包，在 \Arg{package-name} 中用逗号隔开。这种用法一般不要指定选项%
+\cmd{usepackage}~可以一次性调用多个宏包，在 \Arg{package-name} 中用逗号隔开。这种用法一般不要指定选项%
 \footnote{使用多个宏包时指定选项，相当于给每个宏包指定同样的选项。如果有某个宏包不能识别指定的选项，则会出错。}：
 \begin{verbatim}
 % 一次性调用三个排版表格常用的宏包
-\usepackage{tabularx,makecell,multirow}
+\usepackage{tabularx, makecell, multirow}
 \end{verbatim}
 
 附录 \ref{sec:pkg-list} 汇总了常用的一些宏包。我们在手册接下来的章节中，也会穿插介绍一些最常用的宏包的使用方法。
@@ -271,8 +271,8 @@ or \TeX{} users?
 在使用宏包和文档类之前，一定要首先确认它们是否安装在你的计算机中，否则 \cmd{use\-package} 等命令会报错误。
 详见附录 \ref{sec:pkg-manager}。
 
-每个宏包（包括前面所说的文档类）都定义了许多命令和环境，或者修改了 \LaTeX\ 已有的命令和环境。
-为了明白它们的用法，需要查阅宏包和文档类的帮助文档。使用方法是在 Windows 命令提示符或者 Linux 终端下输入命令：
+宏包（包括前面所说的文档类）可能定义了许多命令和环境，或者修改了 \LaTeX\ 已有的命令和环境。
+它们的用法说明记在相应宏包和文档类的帮助文档。在 Windows 命令提示符或者 Linux 终端下输入命令可查阅相应文档：
 \begin{command}
 \texttt{texdoc} \Arg{pkg-name}
 \end{command}
