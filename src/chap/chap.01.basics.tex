@@ -153,26 +153,23 @@ or \TeX{} users?
 \LaTeX{} 的环境隐含了一个分组。也就是说，在环境里使用的命令，不会影响到环境外的内容。%
 \footnote{带有 \cmd{global} 修饰的命令除外。}
 除了 \LaTeX\ 环境之外，花括号也起到\textbf{分组}的作用，也能使命令的效果限制在分组内。
-例如 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法。
+\ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法，即属此类。
 
 \subsection{\LaTeX\ 源代码结构}\label{subsec:struct}
 
 \cmdindex{documentclass}
 \pinyinindex{wendanglei}{文档类}
-\LaTeX\ 源代码以一个 \cmd{document\-class} 命令作为开头，它规定了文档使用的\textbf{文档类}：
+\LaTeX\ 源代码以一个 \cmd{document\-class} 命令作为开头，它指定了文档使用的\textbf{文档类}：
 \begin{verbatim}
 \documentclass{...}
 \end{verbatim}
-
-\cmdindex{usepackage}
-\pinyinindex{hongbao}{宏包}
-之后用 \cmd{usepackage} 命令调用\textbf{宏包}：
+\cmd{document\-class} 命令有一个可选参数。可选参数会传递给相应的文档类，作为文档类的参数。例如：
 \begin{verbatim}
-\usepackage{...}
+\documentclass[UTF8]{ctexart}
 \end{verbatim}
 
 \envindex{document}
-再接着，用 \env{document} 环境来标记正文内容范围：
+\env{document} 环境当中的内容是文档正文。
 \begin{verbatim}
 \begin{document}
 \section{...}
@@ -181,8 +178,15 @@ or \TeX{} users?
 \end{verbatim}
 
 \pinyinindex{daoyanqu}{导言区}
-在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}，除了使用 \cmd{use\-package}
-调用宏包之外，一些对文档的全局设置命令也在这里使用。
+在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}。
+在导言区中一般会使用 \cmd{use\-package} 调用宏包，以及会进行对文档的全局设置。
+
+\cmdindex{usepackage}
+\pinyinindex{hongbao}{宏包}
+\cmd{usepackage} 命令能够调用\textbf{宏包}：
+\begin{verbatim}
+\usepackage{...}
+\end{verbatim}
 
 \section{\LaTeX\ 宏包和文档类}\label{sec:latex-pkgs}
 
