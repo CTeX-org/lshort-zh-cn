@@ -124,46 +124,49 @@ or \TeX{} users?
 \end{example}
 
 \pinyinindex{canshu}{参数}
-许多 \LaTeX\ 命令需要一个或多个参数，每个参数用花括号 \texttt\{ 和 \texttt\} 包裹。
-有些命令可以带一个或多个可选参数，以方括号 \texttt[ 和 \texttt] 包裹。
-还有些命令在命令名称后可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异，
-可以把星号看作一种特殊的可选参数。
+一些 \LaTeX{} 命令可以接收一些参数，然后根据参数的不同产生不同的行为，或者以特定的方式
+排版参数内容。
+\LaTeX{} 的参数分为可选参数和必选参数。
+可选参数以方括号 \texttt[ 和 \texttt] 包裹；必选参数以花括号 \texttt\{ 和 \texttt\} 包裹。%
+\footnote{部分情况下，也可以不用括号包裹，以单个字符充当命令的参数。例如，在数学环境下，
+\cmd{frac}\texttt{12} 和 \cmd{frac}\texttt{\{1\}\{2\}} 的效果是一样的。}
+还有些命令可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异。
+初次接触这些概念时，可以粗略地把星号看作一种特殊的可选参数。
 
 \index{LaTeX environment@\LaTeX\ 环境}
 \cmdindex{begin,end}
-\LaTeX\ 还引入了\textbf{环境}的用法，用以令一些效果在局部生效，或是生成特殊的文档元素。
+\LaTeX{} 中还是有所谓的\textbf{环境}，用以令一些效果在局部生效，或是生成特殊的文档元素。
 \LaTeX\ 环境的用法为一对命令 \cmd{begin} 和 \cmd{end}：
 \begin{command}
-\cmd{begin}\marg{environment name}\marg{arguments} \\
+\cmd{begin}\marg{environment name}\oarg{optional arguments}\marg{mandatory arguments} \\
 \ldots \\
 \cmd{end}\marg{environment name}
 \end{command}
 
 其中 \Arg{environment name} 为环境名，\cmd{begin} 和 \cmd{end} 中填写的环境名应当一致。
-\Arg{arguments} 为环境所需的参数，可能包括可选参数。环境允许嵌套使用。
+\oarg{optional arguments}\marg{mandatory arguments} 为环境所需的参数。
+环境可能有参数，也可能没有；环境可能有必选参数，也可能没有；环境可能有可选参数，也可能没有。
+部分环境允许嵌套使用。
 
 \pinyinindex{fenzu}{分组}
-除了 \LaTeX\ 环境之外，花括号本身也起到\textbf{分组}的作用，使命令的效果限制在分组内。
-例如 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法。
+有些命令（如 \cmd{bfseries}）的效果不是作用在其参数上，而是作用在其后所有的内容上。此时，若要限制其作用范围，则需要使用分组。
+\LaTeX{} 的环境隐含了一个分组。也就是说，在环境里使用的命令，不会影响到环境外的内容。%
+\footnote{带有 \cmd{global} 修饰的命令除外。}
+除了 \LaTeX\ 环境之外，花括号也起到\textbf{分组}的作用，也能使命令的效果限制在分组内。
+\ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法，即属此类。
 
 \subsection{\LaTeX\ 源代码结构}\label{subsec:struct}
 
 \cmdindex{documentclass}
 \pinyinindex{wendanglei}{文档类}
-\LaTeX\ 源代码以一个 \cmd{document\-class} 命令作为开头，它规定了文档使用的\textbf{文档类}：
+\LaTeX\ 源代码以一个 \cmd{document\-class} 命令作为开头，它指定了文档使用的\textbf{文档类}：
 \begin{verbatim}
 \documentclass{...}
 \end{verbatim}
-
-\cmdindex{usepackage}
-\pinyinindex{hongbao}{宏包}
-之后用 \cmd{usepackage} 命令调用\textbf{宏包}：
-\begin{verbatim}
-\usepackage{...}
-\end{verbatim}
+\cmd{document\-class} 命令有一个可选参数。可选参数会传递给相应的文档类，作为文档类的参数（见 \ref{subsec:classes}）。
 
 \envindex{document}
-再接着，用 \env{document} 环境来标记正文内容范围：
+\env{document} 环境当中的内容是文档正文。
 \begin{verbatim}
 \begin{document}
 \section{...}
@@ -172,8 +175,15 @@ or \TeX{} users?
 \end{verbatim}
 
 \pinyinindex{daoyanqu}{导言区}
-在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}，除了使用 \cmd{use\-package}
-调用宏包之外，一些对文档的全局设置命令也在这里使用。
+在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}。
+在导言区中一般会使用 \cmd{use\-package} 调用宏包，以及会进行对文档的全局设置。
+
+\cmdindex{usepackage}
+\pinyinindex{hongbao}{宏包}
+\cmd{usepackage} 命令能够调用\textbf{宏包}：
+\begin{verbatim}
+\usepackage{...}
+\end{verbatim}
 
 \section{\LaTeX\ 宏包和文档类}\label{sec:latex-pkgs}
 
@@ -221,30 +231,21 @@ or \TeX{} users?
 
 \LaTeX\ 的三个标准文档类可指定的选项包括：
 \begin{description}
-\item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。缺省为 \texttt{10pt}。
-
-\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，缺省为美式信纸 \texttt{letterpaper} （$8.5\times11$英寸）。
+\item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。默认为 \texttt{10pt}。
+\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，默认为美式信纸 \texttt{letterpaper} （$8.5\times11$英寸）。
 可指定选项还包括 \texttt{a5paper}，\texttt{b5paper}，\texttt{executivepaper} 和 \texttt{legalpaper}。
-
 \item[\texttt{twoside, oneside}] \quad 指定单面/双面排版。双面排版时，奇偶页的页眉页脚、页边距不同。
-\cls{article} 和 \cls{report} 缺省为 \texttt{oneside}，\cls{book} 缺省为 \texttt{twoside}。
-
-\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。缺省为 \texttt{onecolumn}。
-
+\cls{article} 和 \cls{report} 默认为 \texttt{oneside}，\cls{book} 默认为 \texttt{twoside}。
+\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。默认为 \texttt{onecolumn}。
 \item[\texttt{openright, openany}] \quad 指定新的一章 \cmd{chapter} 是在奇数页（右侧）开始，还是直接紧跟着上一页开始。
-\cls{report} 缺省为 \texttt{openany}，\cls{book} 缺省为 \texttt{openright}。对 \cls{article} 无效。
-
-\item[\texttt{landscape}] \quad 指定横向排版。缺省为纵向。
-
+\cls{report} 默认为 \texttt{openany}，\cls{book} 默认为 \texttt{openright}。对 \cls{article} 无效。
+\item[\texttt{landscape}] \quad 指定横向排版。默认为纵向。
 \item[\texttt{titlepage, notitlepage}] 指定标题命令 \cmd{maketitle} 是否生成单独的标题页。
-\cls{article} 缺省为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 缺省为 \texttt{titlepage}。
-
-\item[\texttt{fleqn}] \quad 令行间公式左对齐。缺省为居中对齐。
-
-\item[\texttt{leqno}] \quad 将公式编号放在左边。缺省为右边。
-
+\cls{article} 默认为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 默认为 \texttt{titlepage}。
+\item[\texttt{fleqn}] \quad 令行间公式左对齐。默认为居中对齐。
+\item[\texttt{leqno}] \quad 将公式编号放在左边。默认为右边。
 \item[\texttt{draft, final}] \quad 指定草稿/终稿模式。
-草稿模式下，断行不良的地方会在行尾添加一个黑色方块。缺省为 \texttt{final}。
+草稿模式下，断行不良的地方会在行尾添加一个黑色方块。默认为 \texttt{final}。
 \end{description}
 
 \subsection{宏包}\label{subsec:packages}
@@ -258,11 +259,11 @@ or \TeX{} users?
 \cmd{usepackage}\oarg{options}\marg{package-name}
 \end{command}
 
-\cmd{usepackage}可以一次性调用多个宏包，在 \Arg{package-name} 中用逗号隔开。这种用法一般不要指定选项%
+\cmd{usepackage}~可以一次性调用多个宏包，在 \Arg{package-name} 中用逗号隔开。这种用法一般不要指定选项%
 \footnote{使用多个宏包时指定选项，相当于给每个宏包指定同样的选项。如果有某个宏包不能识别指定的选项，则会出错。}：
 \begin{verbatim}
 % 一次性调用三个排版表格常用的宏包
-\usepackage{tabularx,makecell,multirow}
+\usepackage{tabularx, makecell, multirow}
 \end{verbatim}
 
 附录 \ref{sec:pkg-list} 汇总了常用的一些宏包。我们在手册接下来的章节中，也会穿插介绍一些最常用的宏包的使用方法。
@@ -270,8 +271,8 @@ or \TeX{} users?
 在使用宏包和文档类之前，一定要首先确认它们是否安装在你的计算机中，否则 \cmd{use\-package} 等命令会报错误。
 详见附录 \ref{sec:pkg-manager}。
 
-每个宏包（包括前面所说的文档类）都定义了许多命令和环境，或者修改了 \LaTeX\ 已有的命令和环境。
-为了明白它们的用法，需要查阅宏包和文档类的帮助文档。使用方法是在 Windows 命令提示符或者 Linux 终端下输入命令：
+宏包（包括前面所说的文档类）可能定义了许多命令和环境，或者修改了 \LaTeX\ 已有的命令和环境。
+它们的用法说明记在相应宏包和文档类的帮助文档。在 Windows 命令提示符或者 Linux 终端下输入命令可查阅相应文档：
 \begin{command}
 \texttt{texdoc} \Arg{pkg-name}
 \end{command}
@@ -291,7 +292,7 @@ or \TeX{} users?
   \item[\texttt{.bst}] \hologo{BibTeX} 用到的参考文献格式模板。详见 \ref{subsec:bibtex-use} 小节。
 \end{description}
 
-\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外，还生成相当多的辅助文件和日志。
+\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外\footnote{\hologo{XeLaTeX} 还可能生成 \texttt{.xdv} 文件。}，还可能会生成相当多的辅助文件和日志。
 一些功能如交叉引用、参考文献、目录、索引等，需要先通过编译生成辅助文件，
 然后再次编译时读入辅助文件得到正确的结果，所以复杂的 \LaTeX\ 源代码可能要编译多次：
 \begin{description}
@@ -310,7 +311,8 @@ or \TeX{} users?
 
 \section{文件的组织方式}\label{sec:latex-multi-files}
 
-当编写较大规模的 \LaTeX\ 源代码，如书籍、毕业论文等，有理由将源代码分成若干个文件，比如每章内容为一个文件，
+当编写长篇文档时，例如当编写书籍、毕业论文时，单个源文件会使修改、校对变得十分困难。
+将源文件分割成若干个文件，例如将每章内容单独写在一个文件中，会大大简化修改和校对的工作。
 可参考源代码 \ref{code:book-struct} 的写法。
 
 \cmdindex{include}
@@ -351,7 +353,11 @@ or \TeX{} users?
 
 如果想生成文档，则用 \texttt\% 注释掉 \cmd{syntaxonly} 命令即可。
 
+<<<<<<< HEAD
 \section{\LaTeX\ 和 \TeX\ 相关的术语和概念}\label{subsec:concepts}
+=======
+\section{\LaTeX\ 和 \TeX\ 相关的术语和概念}\label{sec:concepts}
+>>>>>>> update-2019
 
 \pinyinindex{paibanyinqing}{排版引擎}
 \index{pdfTeX@\hologo{pdfTeX}}
@@ -368,7 +374,7 @@ or \TeX{} users?
 
 \begin{table}[htp]
   \centering
-  \caption{\TeX\ 引擎、格式和编译命令。}
+  \caption{\TeX\ 引擎、格式及其对应的编译命令。}
   \label{tbl:engine-format-command}
   \begin{tabular}{cccc}
    \hline
