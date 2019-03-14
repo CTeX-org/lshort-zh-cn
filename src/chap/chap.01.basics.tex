@@ -163,10 +163,7 @@ or \TeX{} users?
 \begin{verbatim}
 \documentclass{...}
 \end{verbatim}
-\cmd{document\-class} 命令有一个可选参数。可选参数会传递给相应的文档类，作为文档类的参数。例如：
-\begin{verbatim}
-\documentclass[UTF8]{ctexart}
-\end{verbatim}
+\cmd{document\-class} 命令有一个可选参数。可选参数会传递给相应的文档类，作为文档类的参数（见 \ref{subsec:classes}）。
 
 \envindex{document}
 \env{document} 环境当中的内容是文档正文。
@@ -234,30 +231,21 @@ or \TeX{} users?
 
 \LaTeX\ 的三个标准文档类可指定的选项包括：
 \begin{description}
-\item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。缺省为 \texttt{10pt}。
-
-\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，缺省为美式信纸 \texttt{letterpaper} （$8.5\times11$英寸）。
+\item[\texttt{10pt, 11pt, 12pt}] \quad 指定文档的基本字号。默认为 \texttt{10pt}。
+\item[\texttt{a4paper, letterpaper, \ldots}] \quad 指定纸张大小，默认为美式信纸 \texttt{letterpaper} （$8.5\times11$英寸）。
 可指定选项还包括 \texttt{a5paper}，\texttt{b5paper}，\texttt{executivepaper} 和 \texttt{legalpaper}。
-
 \item[\texttt{twoside, oneside}] \quad 指定单面/双面排版。双面排版时，奇偶页的页眉页脚、页边距不同。
-\cls{article} 和 \cls{report} 缺省为 \texttt{oneside}，\cls{book} 缺省为 \texttt{twoside}。
-
-\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。缺省为 \texttt{onecolumn}。
-
+\cls{article} 和 \cls{report} 默认为 \texttt{oneside}，\cls{book} 默认为 \texttt{twoside}。
+\item[\texttt{onecolumn, twocolumn}] \quad 指定单栏/双栏排版。默认为 \texttt{onecolumn}。
 \item[\texttt{openright, openany}] \quad 指定新的一章 \cmd{chapter} 是在奇数页（右侧）开始，还是直接紧跟着上一页开始。
-\cls{report} 缺省为 \texttt{openany}，\cls{book} 缺省为 \texttt{openright}。对 \cls{article} 无效。
-
-\item[\texttt{landscape}] \quad 指定横向排版。缺省为纵向。
-
+\cls{report} 默认为 \texttt{openany}，\cls{book} 默认为 \texttt{openright}。对 \cls{article} 无效。
+\item[\texttt{landscape}] \quad 指定横向排版。默认为纵向。
 \item[\texttt{titlepage, notitlepage}] 指定标题命令 \cmd{maketitle} 是否生成单独的标题页。
-\cls{article} 缺省为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 缺省为 \texttt{titlepage}。
-
-\item[\texttt{fleqn}] \quad 令行间公式左对齐。缺省为居中对齐。
-
-\item[\texttt{leqno}] \quad 将公式编号放在左边。缺省为右边。
-
+\cls{article} 默认为 \texttt{notitlepage}，\cls{report} 和 \cls{book} 默认为 \texttt{titlepage}。
+\item[\texttt{fleqn}] \quad 令行间公式左对齐。默认为居中对齐。
+\item[\texttt{leqno}] \quad 将公式编号放在左边。默认为右边。
 \item[\texttt{draft, final}] \quad 指定草稿/终稿模式。
-草稿模式下，断行不良的地方会在行尾添加一个黑色方块。缺省为 \texttt{final}。
+草稿模式下，断行不良的地方会在行尾添加一个黑色方块。默认为 \texttt{final}。
 \end{description}
 
 \subsection{宏包}\label{subsec:packages}
