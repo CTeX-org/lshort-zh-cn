@@ -149,7 +149,10 @@ or \TeX{} users?
 部分环境允许嵌套使用。
 
 \pinyinindex{fenzu}{分组}
-除了 \LaTeX\ 环境之外，花括号本身也起到\textbf{分组}的作用，使命令的效果限制在分组内。
+有些命令（如 \cmd{bfseries}）的效果不是作用在其参数上，而是作用在其后所有的内容上。此时，若要限制其作用范围，则需要使用分组。
+\LaTeX{} 的环境隐含了一个分组。也就是说，在环境里使用的命令，不会影响到环境外的内容。%
+\footnote{带有 \cmd{global} 修饰的命令除外。}
+除了 \LaTeX\ 环境之外，花括号也起到\textbf{分组}的作用，也能使命令的效果限制在分组内。
 例如 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法。
 
 \subsection{\LaTeX\ 源代码结构}\label{subsec:struct}
