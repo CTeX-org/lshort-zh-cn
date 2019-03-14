@@ -292,7 +292,7 @@ or \TeX{} users?
   \item[\texttt{.bst}] \hologo{BibTeX} 用到的参考文献格式模板。详见 \ref{subsec:bibtex-use} 小节。
 \end{description}
 
-\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外，还生成相当多的辅助文件和日志。
+\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外\footnote{\hologo{XeLaTeX} 还可能生成 \texttt{.xdv} 文件。}，还可能会生成相当多的辅助文件和日志。
 一些功能如交叉引用、参考文献、目录、索引等，需要先通过编译生成辅助文件，
 然后再次编译时读入辅助文件得到正确的结果，所以复杂的 \LaTeX\ 源代码可能要编译多次：
 \begin{description}
