@@ -69,14 +69,14 @@ Partl~\cite{germenTeX} has proposed that \ldots
 \end{command}
 
 其中 \Arg{type} 为文献的类别，如 \texttt{article} 为学术论文，\texttt{book} 为书籍，\texttt{in\-collection} 为论文集中的某一篇，等等。
-\Arg{citation} 为 \cmd{cite} 命令使用的文献标签。在 \Arg{citation} 之后为条目里的各个数据项，以 \Arg{key} = \marg{value} 的形式组织。
+\Arg{citation} 为 \cmd{cite} 命令使用的文献标签。在 \Arg{citation} 之后为条目里的各个字段，以 \Arg{key} = \marg{value} 的形式组织。
 
 我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目类别：
 \begin{description}
-  \item[\texttt{article}] 学术论文，必需数据项有 author, title, journal, year; 可选数据项包括 volume, number, pages, doi 等；
-  \item[\texttt{book}] 书籍，必需数据项有 author/editor, title, publisher, year; 可选数据项包括 volume/number, series, address 等；
-  \item[\texttt{incollection}] 论文集中的一篇，必需数据项有 author, title, booktitle, publisher, year; 可选数据项包括 editor, volume/number, chapter, pages, address 等；
-  \item[\texttt{inbook}] 书中的一章，必需数据项有 author/editor, title, chapter/pages, publisher, year; 可选数据项包括 volume/number, series, address 等。
+  \item[\texttt{article}] 学术论文，必需字段有 author, title, journal, year; 可选字段包括 volume, number, pages, doi 等；
+  \item[\texttt{book}] 书籍，必需字段有 author/editor, title, publisher, year; 可选字段包括 volume/number, series, address 等；
+  \item[\texttt{incollection}] 论文集中的一篇，必需字段有 author, title, booktitle, publisher, year; 可选字段包括 editor, volume/number, chapter, pages, address 等；
+  \item[\texttt{inbook}] 书中的一章，必需字段有 author/editor, title, chapter/pages, publisher, year; 可选字段包括 volume/number, series, address 等。
 \end{description}
 
 例如 \texttt{article} 类别的参考文献数据条目写法如下：
@@ -255,13 +255,15 @@ xelatex demo
 
 \cmdindex[biblatex]{addbibresource,printbibliography}
 \begin{enumerate}
-  \item 首先是在导言区调用 \pkg{biblatex} 宏包。宏包支持许多选项，最常用的选项是 \texttt{style}，用以指定参考文献的样式，类似于传统的 \texttt{bst} 格式。后文会着重介绍 \pkg{biblatex} 使用的样式。
+  \item 首先是在导言区调用 \pkg{biblatex} 宏包。宏包支持以 \Arg{key}=\Arg{value} 形式指定选项，包括参考文献样式 style、参考文献著录排序的规则 sorting 等。
   \item 接着在导言区使用 \cmd{addbibresource} 命令为 \pkg{biblatex} 引入参考文献数据库。与基于 \hologo{BibTeX} 的传统方式不同的是，这里需要写完整的文件名。
-  \item 在正文中使用 \cmd{cite} 命令引用参考文献。除此之外还可以使用丰富的命令达到不同的引用效果，如 \cmd{citeauthor}、\cmd{citeyear}、\cmd{footcite} 等。
+  \item 在正文中使用 \cmd{cite} 命令引用参考文献。除此之外还可以使用丰富的命令达到不同的引用效果，如 \cmd{citeauthor} 和 \cmd{citeyear} 分别单独引用作者和年份，\cmd{textcite} 和 \cmd{parencite} 分别类似 \pkg{natbib} 宏包提供的 \cmd{citet} 和 \cmd{citep} 命令，以及脚注式引用 \cmd{footcite} 等。
   \item 最后在需要排版参考文献的位置使用命令 \cmd{printbibliography}。
 \end{enumerate}
 
-\begin{verbatim}
+\begin{sourcecode}[htp]
+\begin{Verbatim}
+% File: egbibdata.bib
 @book{蔡敏2006,
   title      = {UML基础和Rose建模教程},
   address    = {北京},
@@ -270,13 +272,12 @@ xelatex demo
   year       = {2006},
   month      = {1}
 }
-\end{verbatim}
 
-\begin{verbatim}
+% File: demo.tex
 \documentclass{ctexart}
 % 使用符合 GB/T 7714-2015 规范的参考文献样式
 \usepackage[style=gb7714-2015]{biblatex}
-
+% 注意加 .bib 扩展名
 \addbibresource{egbibdata.bib}
 
 \begin{document}
@@ -285,7 +286,9 @@ xelatex demo
 
 \printbibliography
 \end{document} 
-\end{verbatim}
+\end{Verbatim}
+\caption{应用 \pkg{biblatex} 的示例 egbibdata.bib 和 demo.tex。}
+\end{sourcecode}
 
 \subsubsection{编译方式}
 
@@ -301,21 +304,33 @@ xelatex demo
 
 \subsubsection{\pkg{biblatex} 样式和其它选项}
 
-参考文献的样式，包括参考文献表的著录格式和正文中文献引用的标注格式，也可以称为参考文献的排版格式。根据前述内容已经知道，文献样式的选择通过 \pkg{biblatex} 的 style 选项指定。目前可以选择的样式除了 biblatex 宏包自带的多种样式外，还有大量的第三方样式可供选择，这里介绍一些常用的样式：
+\pkg{biblatex} 使用的参考文献样式分为著录样式（bibliography style）和引用样式（citation style），分别以 \texttt{.bbx} 和 \texttt{.cbx} 为扩展名。参考文献的样式在调用宏包时使用 \texttt{style} 选项指定，或者使用 \texttt{bibstyle} 或 \texttt{citestyle} 分别指定：
+\begin{verbatim}
+% 同时调用 gb7714-2015.bbx 和 gb7714-2015.cbx
+\usepackage[style=gb7714-2015]{biblatex}
+% 著录样式调用 gb7714-2015.bbx，引用样式调用 biblatex 宏包自带的 authoryear 
+\usepackage[bibstyle=gb7714-2015,citestyle=authoryear]{biblatex}
+\end{verbatim}
+
+以下总结一些常用的参考文献样式，除 \pkg{biblatex} 宏包自带的样式外，许多样式以单独的宏包在发行版内发布。
 
 \begin{description}
-  \item[\texttt{trad-plain}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 plain 一致。
-  \item[\texttt{trad-unsrt}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 unsrt 一致。
-  \item[\texttt{trad-alpha}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 alpha 一致。
-  \item[\texttt{trad-abbrv}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 abbrv 一致。
-  \item[\texttt{ieee}]  作者是 Joseph Wright。排版效果与bst样式 IEEEtran 一致。
-  \item[\texttt{apa}]  作者是 Philip Kime。排版效果与bst样式 apalike 一致。
-  \item[\texttt{Chicago}]  作者是 David Fussner。排版效果与bst样式 Chicago 一致。
-  \item[\texttt{gb7714-2015}]  作者是 hushidong。中文文献著录标准 GB/T 7714-2015 顺序编码制样式，排版效果与zepinglee 开发 bst 样式 gbt7714-unsrt.bst 一致。
-  \item[\texttt{gb7714-2015ay}]  作者是 hushidong。中文文献著录标准 GB/T 7714-2015 著者年份制样式，排版效果与zepinglee 开发 bst 样式 gbt7714-plain.bst 一致。
-  \item[\texttt{caspervector}]  作者是 Casper vector。一种优秀的中文文献样式。
-  \item[\texttt{nature}]   作者是 Joseph Wright。 Nature 期刊的样式
-  \item[\texttt{science}]   作者是 Joseph Wright。 science 期刊的样式
+  \item[\texttt{authoryear}]
+  \pkg{biblatex} 自带样式，类似 \pkg{natbib} 默认的引用样式效果。
+  \item[\texttt{authortitle}]
+  \pkg{biblatex} 自带样式，采用作者-题名（shorttitle 字段）的引用样式。
+  \item[\texttt{verbose}]
+  \pkg{biblatex} 自带样式，引用样式中包含作者、题名、书名、页码等字段的信息。
+  \item[\texttt{alphabetic}]
+  \pkg{biblatex} 自带样式，著录样式与 \hologo{BibTeX} 的 \texttt{alpha} 样式类似。
+  \item[\texttt{trad-alpha}]
+  \pkg{biblatex-trad} 样式包，移植自 \hologo{BibTeX} 默认的 \texttt{alpha} 样式。另外还包括 \texttt{trad-abbrv}、\texttt{trad-plain} 和 \texttt{trad-unsrt}。
+  \item[\texttt{gb7714-2015}]
+  符合中文文献著录标准 GB/T 7714-2015 的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{gb7714-2015ay}。
+  \item[\texttt{caspervector}]
+  以中文文献著录标准 GB/T 7714-2015 为基础的一个样式。
+  \item[\texttt{ieee}]
+  兼容 \pkg{IEEEtran} 风格的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{ieee-alphabetic}。
 \end{description}
 
 \section{索引和 makeindex 工具}\label{sec:index}
