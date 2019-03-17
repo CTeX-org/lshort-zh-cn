@@ -8,8 +8,6 @@
 
 将发行版内的 `ctex` 宏包、`xeCJK` 宏包更新到最新（包括它们依赖的所有宏包），并确认 `lshort-zh-cn-style.sty` 调用的其它宏包都已正确安装并更新到最新。
 
-本文档使用 `fandol` 字体包。`fontspec` 宏包会对此字体报 script-not-exist 的警告，可以无视。
-
 ## 编译方式
 
 ### 手动编译
@@ -33,3 +31,7 @@ make install
 ```
 
 Windows 下在 src 目录提供批处理脚本 `make.bat`，双击执行编译。
+
+### 使用 latexmk 编译
+
+在 src 目录下提供了供 `latexmk` 构建工具使用的配置文件 `latexmkrc`。在 src 目录下执行 `latexmk` 命令进行编译，完成后将 PDF 文件移动到根目录。

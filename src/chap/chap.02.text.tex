@@ -118,7 +118,7 @@ Several spaces     equal one.
 
 An empty line starts a new
 paragraph.\par
-A \verb|\par| command also 
+A \verb|\par| command also
 starts a new line.
 \end{example}
 
@@ -147,11 +147,11 @@ ak a word.
 
 如果想要输入以上符号，需要使用以下带反斜线的形式输入：
 \begin{example}
-\# \$ \% \& \{ \} \_ 
+\# \$ \% \& \{ \} \_
 \^{} \~{} \textbackslash
 \end{example}
 
-事实上这些带反斜线的形式就是 \LaTeX\ 命令。\cmd{\textasciicircum} 和 \cmd{\textasciitilde} 
+事实上这些带反斜线的形式就是 \LaTeX\ 命令。\cmd{\textasciicircum} 和 \cmd{\textasciitilde}
 两个命令是需要带参数的，如果不加一对花括号（空参数），就将后面的字符作为参数，形成重音效果（详见 \ref{subsec:accents} 节）。
 \crcmd\ 被直接定义成了手动换行的命令，输入反斜杠就只好用 \cmd{text\-back\-slash}。
 
@@ -206,13 +206,7 @@ one, two, three, \ldots one hundred.
 \subsubsection{波浪号}
 
 我们在 \ref{subsec:special-chars} 小节中了解了 \cmd{\textasciitilde} 命令，它可以用来输入波浪号，
-但位置靠顶端，可能不甚理想（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。有的人可能喜欢用数学公式里的 \cmd{sim} 符号来代替：
-\begin{example}
-1\~{}3 \qquad 1$\sim$2
-\end{example}
-
-更合理的波浪号请参考 \ref{subsec:font-encs} 小节讨论的内容。
-使用中文的全角波浪号也不失为一个办法（西文中使用波浪号的情形较少见）。
+但位置靠顶端（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。西文中较少将波浪号作为标点符号使用，通常使用中文的全角波浪号（～）。
 
 \subsection{特殊西文符号与重音}\label{subsec:accents}
 
@@ -299,7 +293,7 @@ An \underline{underlined} text.
 \cmd{underline} 命令生成下划线的样式比较机械，不同的单词可能生成高低各异的下划线，并且无法换行。
 \pkg{ulem} 宏包解决了这一问题，它提供的 \cmd{uline} 命令能够轻松生成自动换行的下划线：
 \begin{example}
-An example of \uline{some 
+An example of \uline{some
 long and underlined words.}
 \end{example}
 
@@ -307,7 +301,7 @@ long and underlined words.}
 \cmd{emph} 命令用来将文字变为斜体以示强调。如果在本身已经用 \cmd{emph} 命令强调的文字内部嵌套使用 \cmd{emph}，
 内部则使用正常字体的文字：
 \begin{example}
-Some \emph{emphasized words, 
+Some \emph{emphasized words,
 including \emph{double-emphasized}
 words}, are shown here.
 \end{example}

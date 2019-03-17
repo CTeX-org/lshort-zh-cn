@@ -69,14 +69,14 @@ Partl~\cite{germenTeX} has proposed that \ldots
 \end{command}
 
 其中 \Arg{type} 为文献的类别，如 \texttt{article} 为学术论文，\texttt{book} 为书籍，\texttt{in\-collection} 为论文集中的某一篇，等等。
-\Arg{citation} 为 \cmd{cite} 命令使用的文献标签。在 \Arg{citation} 之后为条目里的各个数据项，以 \Arg{key} = \marg{value} 的形式组织。
+\Arg{citation} 为 \cmd{cite} 命令使用的文献标签。在 \Arg{citation} 之后为条目里的各个字段，以 \Arg{key} = \marg{value} 的形式组织。
 
 我们在此简单列举学术论文里使用较多的 \hologo{BibTeX} 文献条目类别：
 \begin{description}
-  \item[\texttt{article}] 学术论文，必需数据项有 author, title, journal, year; 可选数据项包括 volume, number, pages, doi 等；
-  \item[\texttt{book}] 书籍，必需数据项有 author/editor, title, publisher, year; 可选数据项包括 volume/number, series, address 等；
-  \item[\texttt{incollection}] 论文集中的一篇，必需数据项有 author, title, booktitle, publisher, year; 可选数据项包括 editor, volume/number, chapter, pages, address 等；
-  \item[\texttt{inbook}] 书中的一章，必需数据项有 author/editor, title, chapter/pages, publisher, year; 可选数据项包括 volume/number, series, address 等。
+  \item[\texttt{article}] 学术论文，必需字段有 author, title, journal, year; 可选字段包括 volume, number, pages, doi 等；
+  \item[\texttt{book}] 书籍，必需字段有 author/editor, title, publisher, year; 可选字段包括 volume/number, series, address 等；
+  \item[\texttt{incollection}] 论文集中的一篇，必需字段有 author, title, booktitle, publisher, year; 可选字段包括 editor, volume/number, chapter, pages, address 等；
+  \item[\texttt{inbook}] 书中的一章，必需字段有 author/editor, title, chapter/pages, publisher, year; 可选字段包括 volume/number, series, address 等。
 \end{description}
 
 例如 \texttt{article} 类别的参考文献数据条目写法如下：
@@ -242,106 +242,96 @@ xelatex demo
 再比如 \cmd{citep} 命令也支持可选参数，为引用前后都添加额外内容。这里不再赘述，请参考 \pkg{natbib} 宏包的帮助文档。
 
 
-\subsection{使用 biblatex 排版参考文献}\label{subsec:biblatex}
+\subsection{\pkg{biblatex} 宏包}\label{subsec:biblatex}
 
-除前述两种参考文献排版方式外，还有另一种参考文献排版方法，就是基于 biblatex 宏包的方法。biblatex 宏包提供了一套完整的参考文献解决方案，几乎能够满足所有的常见需求，其核心优点包括非常便捷的格式(全部由 tex 宏决定)控制、强大的排序/分类/筛选/多文献表机制、完善的UTF-8支持/数据映射等功能。但要注意的是，虽然biblatex 由于其全面的功能已经得到越来越多的应用，但一些期刊和出版商由于长期使用自家的 bst 样式，可能不接收使用 biblatex 的文档，所以这种情况下仍然要采用前述的基于 bibtex 的参考文献排版方法。
+\pkgindex{biblatex}
+本节的末尾简单介绍一下基于 \pkg{biblatex} 宏包排版参考文献的方式。
+\pkg{biblatex} 宏包是一套基于 \LaTeX\ 宏命令的参考文献解决方案，提供了便捷的格式控制和强大的排序、分类、筛选、多文献表等功能。
+\pkg{biblatex} 宏包也因其对 UTF-8 和中文参考文献的良好支持，被国内较多 \LaTeX\ 模板采用。 
 
-基于 biblatex 宏包的参考文献排版与基于 bibtex 的方法类似，但存在一定的差别，下面从文档结构和命令、编译方式、样式选择等方面逐一介绍：
+基于 \pkg{biblatex} 宏包的方式与基于 \hologo{BibTeX} 的传统方式有一定区别，下面从文档结构和命令、编译方式、样式选择等方面逐一介绍：
 
-\subsubsection{结构和命令}
+\subsubsection{文档结构和 \pkg{biblatex} 相关命令}
 
-记住，使用 biblatex 宏包排版参考文献时仅需要使用 biblatex 一个宏包，而不需要任何其它参考文献功能的宏包，因为 biblatex 提供的功能基本覆盖诸如 natbib、chapterbib、multibib、mcitesplus、inlinebib 等宏包提供的功能。
+\cmdindex[biblatex]{addbibresource,printbibliography}
+\begin{enumerate}
+  \item 首先是在导言区调用 \pkg{biblatex} 宏包。宏包支持以 \Arg{key}=\Arg{value} 形式指定选项，包括参考文献样式 style、参考文献著录排序的规则 sorting 等。
+  \item 接着在导言区使用 \cmd{addbibresource} 命令为 \pkg{biblatex} 引入参考文献数据库。与基于 \hologo{BibTeX} 的传统方式不同的是，这里需要写完整的文件名。
+  \item 在正文中使用 \cmd{cite} 命令引用参考文献。除此之外还可以使用丰富的命令达到不同的引用效果，如 \cmd{citeauthor} 和 \cmd{citeyear} 分别单独引用作者和年份，\cmd{textcite} 和 \cmd{parencite} 分别类似 \pkg{natbib} 宏包提供的 \cmd{citet} 和 \cmd{citep} 命令，以及脚注式引用 \cmd{footcite} 等。
+  \item 最后在需要排版参考文献的位置使用命令 \cmd{printbibliography}。
+\end{enumerate}
 
-类似于基于 bibtex 的排版方法，biblatex 需要引入参考文献数据源即bib文件；需要在正文中引用参考文献；需要在文档合适的位置打印文献表；还需要指定需要的参考文献排版格式。从如下的简单例子中可以观察其基本结构：
-
-\begin{verbatim}
-\documentclass{article}
-\usepackage{ctex}
-\usepackage[backend=biber,style=gb7714-2015]{biblatex}
-\usepackage{filecontents}
-\begin{filecontents}{egbibdata.bib}
-@Book{蔡敏2006--,
-  Title                    = {UML基础和Rose建模教程},
-  Address                  = {北京},
-  Author                   = {蔡敏 and 徐慧慧 and 黄柄强},
-  Publisher                = {人民邮电出版社},
-  Year                     = {2006},
-  Month                    = {1}
+\begin{sourcecode}[htp]
+\begin{Verbatim}
+% File: egbibdata.bib
+@book{蔡敏2006,
+  title      = {UML基础和Rose建模教程},
+  address    = {北京},
+  author     = {蔡敏 and 徐慧慧 and 黄柄强},
+  publisher  = {人民邮电出版社},
+  year       = {2006},
+  month      = {1}
 }
-\end{filecontents}
 
-\addbibresource[location=local]{egbibdata.bib}
+% File: demo.tex
+\documentclass{ctexart}
+% 使用符合 GB/T 7714-2015 规范的参考文献样式
+\usepackage[style=gb7714-2015]{biblatex}
+% 注意加 .bib 扩展名
+\addbibresource{egbibdata.bib}
 
 \begin{document}
 
-见文献\cite{蔡敏2006--}
+见文献\cite{蔡敏2006}。
 
-\printbibliography[title=参考文献]
+\printbibliography
 \end{document} 
-\end{verbatim}
-
-其中 \pkg{biblatex} 宏包由 \cmd{usepackage} 命令引入；文献数据源由 \cmd{addbibresource} 引入；文献引用仍然使用 \cmd{cite} 命令(注意可以使用中文的引用关键字)，在biblatex 宏包引入 natbib 选项后同样可以使用前述的 \cmd{citet}/\cmd{citet}命令；文献表打印则使用 \cmd{printbibliography}，其中 \Arg{title=参考文献} 指定了参考文献表的标题内容；而文献排版格式由 \pkg{biblatex} 的 style 选项指定，这里 \Arg{style=gb7714-2015} 表明使用中文的GB/T 7714-2015 参考文献著录标准。
-
-注意：在 beamer 文档类中用法也是类似的，引用命令 \cmd{cite} 出现在各个 frame 的内容中，然后在需要打印文献的 frame 页中使用 \cmd{printbibliography} 。
-
+\end{Verbatim}
+\caption{应用 \pkg{biblatex} 的示例 egbibdata.bib 和 demo.tex。}
+\end{sourcecode}
 
 \subsubsection{编译方式}
 
-使用 biblatex 宏包排版参考文献时编译命令与基于 bibtex 的方法类似，唯一的差别在于处理参考文献数据的程序由 bibtex 变为 biber，即：
+\index{biber}
+与基于 \hologo{BibTeX} 的传统方式不同的是，\pkg{biblatex} 宏包使用 \texttt{biber} 程序处理参考文献。因此上述文档的编译步骤为：
 
 \begin{verbatim}
-xelatex demo.TEX
+xelatex demo
 biber demo
-xelatex demo.TEX
-xelatex demo.TEX
+xelatex demo
+xelatex demo
 \end{verbatim}
 
-注意：\Arg{biber} 一行命令中输入的文件名不带扩展名，因为biber 默认使用的时 \Arg{demo.bcf} 文件而不是 \Arg{demo.aux} 文件，如果一定要带上扩展名则应加上 \Arg{.bcf}而不是 \Arg{.aux} 。
+\subsubsection{\pkg{biblatex} 样式和其它选项}
 
-注意：除了使用\Arg{xelatex}作为编译引擎外， \Arg{pdflatex}同样可以使用，但要小心文档的编码并注意文献的引用关键字是否为英文。
+\pkg{biblatex} 使用的参考文献样式分为著录样式（bibliography style）和引用样式（citation style），分别以 \texttt{.bbx} 和 \texttt{.cbx} 为扩展名。参考文献的样式在调用宏包时使用 \texttt{style} 选项指定，或者使用 \texttt{bibstyle} 或 \texttt{citestyle} 分别指定：
+\begin{verbatim}
+% 同时调用 gb7714-2015.bbx 和 gb7714-2015.cbx
+\usepackage[style=gb7714-2015]{biblatex}
+% 著录样式调用 gb7714-2015.bbx，引用样式调用 biblatex 宏包自带的 authoryear 
+\usepackage[bibstyle=gb7714-2015,citestyle=authoryear]{biblatex}
+\end{verbatim}
 
-
-\subsubsection{样式选择}
-
-参考文献的样式，包括参考文献表的著录格式和正文中文献引用的标注格式，也可以称为参考文献的排版格式。根据前述内容已经知道，文献样式的选择通过 \pkg{biblatex} 的 style 选项指定。目前可以选择的样式除了 biblatex 宏包自带的多种样式外，还有大量的第三方样式可供选择，这里介绍一些常用的样式：
+以下总结一些常用的参考文献样式，除 \pkg{biblatex} 宏包自带的样式外，许多样式以单独的宏包在发行版内发布。
 
 \begin{description}
-  \item[\texttt{trad-plain}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 plain 一致。
-  \item[\texttt{trad-unsrt}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 unsrt 一致。
-  \item[\texttt{trad-alpha}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 alpha 一致。
-  \item[\texttt{trad-abbrv}]  作者是 MarcoDaniel and MoritzWemheuer。排版效果与bst样式 abbrv 一致。
-  \item[\texttt{ieee}]  作者是 Joseph Wright。排版效果与bst样式 IEEEtran 一致。
-  \item[\texttt{apa}]  作者是 Philip Kime。排版效果与bst样式 apalike 一致。
-  \item[\texttt{Chicago}]  作者是 David Fussner。排版效果与bst样式 Chicago 一致。
-  \item[\texttt{gb7714-2015}]  作者是 hushidong。中文文献著录标准 GB/T 7714-2015 顺序编码制样式，排版效果与zepinglee 开发 bst 样式 gbt7714-unsrt.bst 一致。
-  \item[\texttt{gb7714-2015ay}]  作者是 hushidong。中文文献著录标准 GB/T 7714-2015 著者年份制样式，排版效果与zepinglee 开发 bst 样式 gbt7714-plain.bst 一致。
-  \item[\texttt{caspervector}]  作者是 Casper vector。一种优秀的中文文献样式。
-  \item[\texttt{nature}]   作者是 Joseph Wright。 Nature 期刊的样式
-  \item[\texttt{science}]   作者是 Joseph Wright。 science 期刊的样式
+  \item[\texttt{authoryear}]
+  \pkg{biblatex} 自带样式，类似 \pkg{natbib} 默认的引用样式效果。
+  \item[\texttt{authortitle}]
+  \pkg{biblatex} 自带样式，采用作者-题名（shorttitle 字段）的引用样式。
+  \item[\texttt{verbose}]
+  \pkg{biblatex} 自带样式，引用样式中包含作者、题名、书名、页码等字段的信息。
+  \item[\texttt{alphabetic}]
+  \pkg{biblatex} 自带样式，著录样式与 \hologo{BibTeX} 的 \texttt{alpha} 样式类似。
+  \item[\texttt{trad-alpha}]
+  \pkg{biblatex-trad} 样式包，移植自 \hologo{BibTeX} 默认的 \texttt{alpha} 样式。另外还包括 \texttt{trad-abbrv}、\texttt{trad-plain} 和 \texttt{trad-unsrt}。
+  \item[\texttt{gb7714-2015}]
+  符合中文文献著录标准 GB/T 7714-2015 的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{gb7714-2015ay}。
+  \item[\texttt{caspervector}]
+  以中文文献著录标准 GB/T 7714-2015 为基础的一个样式。
+  \item[\texttt{ieee}]
+  兼容 \pkg{IEEEtran} 风格的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{ieee-alphabetic}。
 \end{description}
-
-需要注意的是，中文文献著录标准 GB/T 7714 除2015版标准外，还有2005版的标准，因此也有之前的不同作者的多种实现，无论是bibtex的bst样式还是biblatex的样式，感兴趣的读者可以在github搜索相关内容。
-
-\subsubsection{更多说明}
-
-上述内容仅仅介绍了基本功能，biblatex 提供的更多高级功能并未涉猎，有更深需求以及感兴趣的读者可以参考 biblatex 的手册以及一些介绍性文档。包括：
-
-\begin{itemize}
-  \item \href{https://github.com/plk/biblatex}{biblatex 手册} \href{https://github.com/hushidong/biblatex-zh-cn}{中文版}
-  \item \href{https://github.com/hushidong/biblatex-solution-to-latex-bibliography}{LaTeX 文档参考文献的biblatex解决方案}
-  \item \href{https://github.com/plk/biblatex/blob/dev/doc/latex/biblatex/biblatex-quickstart.tex}{biblatex quickstart}
-      
-  \item \href{https://github.com/PaulStanley/biblatex-tutorial}{biblatex-tutorial}
-\href{https://github.com/hushidong/biblatex-tutorial-cn}{中文摘译版}  
-
-  \item \href{https://github.com/hushidong/biblatex-gb7714-2015}{biblatex-gb7714-2015 宏包}
-
-  \item \href{https://github.com/CasperVector/biblatex-caspervector}{biblatex-caspervector 宏包}
-
-\end{itemize}
-
-
-
 
 \section{索引和 makeindex 工具}\label{sec:index}
 
