@@ -25,9 +25,9 @@
 
 \index{LaTeX@\LaTeX}
 \index{LaTeX2e@\LaTeXe}
-\LaTeX{} 是一种格式（format）。为免误会，初次接触这一概念的读者可以粗略地将 \LaTeX{} 理解成是对 \TeX{} 的一层封装。
+\LaTeX\ 是一种格式（format）。为免误会，初次接触这一概念的读者可以粗略地将 \LaTeX\ 理解成是对 \TeX\ 的一层封装。
 \LaTeX\ 使用 \TeX\ 程序作为自己的排版引擎。
-\LaTeX{} 最初的设计目标是分离内容与格式，以便作者能够无需关注版式设计，只需专注与内容创作就能得到高质量排版的作品。
+\LaTeX\ 最初的设计目标是分离内容与格式，以便作者能够无需关注版式设计，只需专注与内容创作就能得到高质量排版的作品。
 最初的开发者是 Leslie Lamport 博士\cite{manual}，当前 \LaTeX\ 由 \LaTeX 3 工作组%
 \footnote{\url{https://www.latex-project.org}}维护。
 
@@ -36,12 +36,12 @@
 
 \subsection{\LaTeX\ 的优缺点}\label{subec:advs}
 
-经常有人喜欢对比 \LaTeX{} 和以 Microsoft Office Word 为代表的“所见即所得”%
+经常有人喜欢对比 \LaTeX\ 和以 Microsoft Office Word 为代表的“所见即所得”%
 （What You See Is What You Get）字处理工具。
-这种对比是没有意义的，因为 \TeX{} 是一个排版引擎 \LaTeX{} 是其封装，而 Word 是字处理工具。
+这种对比是没有意义的，因为 \TeX\ 是一个排版引擎，\LaTeX\ 是其封装，而 Word 是字处理工具。
 二者的设计目标不一致，也各自有自己的适用范围。
 
-不过，这里仍旧总结 \LaTeX{} 的一些优点：
+不过，这里仍旧总结 \LaTeX\ 的一些优点：
 \begin{itemize}
   \item 具有专业的排版输出能力，产生的文档看上去就像“印刷品”一样。
   \item 具有方便而强大的数学公式排版能力，无出其右者。
@@ -68,7 +68,7 @@
 
 \section{第一次使用 \LaTeX}\label{sec:run}
 
-源代码~\ref{code:hello-world}~是一份最短的 \LaTeX{} 源代码示例。
+源代码~\ref{code:hello-world}~是一份最短的 \LaTeX\ 源代码示例。
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
@@ -124,9 +124,9 @@ or \TeX{} users?
 \end{example}
 
 \pinyinindex{canshu}{参数}
-一些 \LaTeX{} 命令可以接收一些参数，然后根据参数的不同产生不同的行为，或者以特定的方式
+一些 \LaTeX\ 命令可以接收一些参数，然后根据参数的不同产生不同的行为，或者以特定的方式
 排版参数内容。
-\LaTeX{} 的参数分为可选参数和必选参数。
+\LaTeX\ 的参数分为可选参数和必选参数。
 可选参数以方括号 \texttt[ 和 \texttt] 包裹；必选参数以花括号 \texttt\{ 和 \texttt\} 包裹。%
 \footnote{部分情况下，也可以不用括号包裹，以单个字符充当命令的参数。例如，在数学环境下，
 \cmd{frac}\texttt{12} 和 \cmd{frac}\texttt{\{1\}\{2\}} 的效果是一样的。}
@@ -135,7 +135,7 @@ or \TeX{} users?
 
 \index{LaTeX environment@\LaTeX\ 环境}
 \cmdindex{begin,end}
-\LaTeX{} 中还是有所谓的\textbf{环境}，用以令一些效果在局部生效，或是生成特殊的文档元素。
+\LaTeX\ 中还是有所谓的\textbf{环境}，用以令一些效果在局部生效，或是生成特殊的文档元素。
 \LaTeX\ 环境的用法为一对命令 \cmd{begin} 和 \cmd{end}：
 \begin{command}
 \cmd{begin}\marg{environment name}\oarg{optional arguments}\marg{mandatory arguments} \\
@@ -150,7 +150,7 @@ or \TeX{} users?
 
 \pinyinindex{fenzu}{分组}
 有些命令（如 \cmd{bfseries}）的效果不是作用在其参数上，而是作用在其后所有的内容上。此时，若要限制其作用范围，则需要使用分组。
-\LaTeX{} 的环境隐含了一个分组。也就是说，在环境里使用的命令，不会影响到环境外的内容。%
+\LaTeX\ 的环境隐含了一个分组。也就是说，在环境里使用的命令，不会影响到环境外的内容。%
 \footnote{带有 \cmd{global} 修饰的命令除外。}
 除了 \LaTeX\ 环境之外，花括号也起到\textbf{分组}的作用，也能使命令的效果限制在分组内。
 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法，即属此类。
