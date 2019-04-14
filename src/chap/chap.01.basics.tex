@@ -124,18 +124,17 @@ or \TeX{} users?
 \end{example}
 
 \pinyinindex{canshu}{参数}
-一些 \LaTeX\ 命令可以接收一些参数，然后根据参数的不同产生不同的行为，或者以特定的方式
-排版参数内容。
+一些 \LaTeX\ 命令可以接收一些参数，参数的内容会影响命令的效果。
 \LaTeX\ 的参数分为可选参数和必选参数。
-可选参数以方括号 \texttt[ 和 \texttt] 包裹；必选参数以花括号 \texttt\{ 和 \texttt\} 包裹。%
-\footnote{部分情况下，也可以不用括号包裹，以单个字符充当命令的参数。例如，在数学环境下，
-\cmd{frac}\texttt{12} 和 \cmd{frac}\texttt{\{1\}\{2\}} 的效果是一样的。}
+可选参数以方括号 \texttt[ 和 \texttt] 包裹；必选参数一般以花括号 \texttt\{ 和 \texttt\} 包裹%
+\footnote{以单个字符作为命令的参数时，可以不加括号。例如，在数学环境下，
+\cmd{frac}\texttt{12} 和 \cmd{frac}\texttt{\{1\}\{2\}} 的效果是一样的。}。
 还有些命令可以带一个星号 \texttt*，带星号和不带星号的命令效果有一定差异。
 初次接触这些概念时，可以粗略地把星号看作一种特殊的可选参数。
 
 \index{LaTeX environment@\LaTeX\ 环境}
 \cmdindex{begin,end}
-\LaTeX\ 中还是有所谓的\textbf{环境}，用以令一些效果在局部生效，或是生成特殊的文档元素。
+\LaTeX\ 中还包括\textbf{环境}，用以令一些效果在局部生效，或是生成特殊的文档元素。
 \LaTeX\ 环境的用法为一对命令 \cmd{begin} 和 \cmd{end}：
 \begin{command}
 \cmd{begin}\marg{environment name}\oarg{optional arguments}\marg{mandatory arguments} \\
@@ -144,15 +143,14 @@ or \TeX{} users?
 \end{command}
 
 其中 \Arg{environment name} 为环境名，\cmd{begin} 和 \cmd{end} 中填写的环境名应当一致。
-\oarg{optional arguments}\marg{mandatory arguments} 为环境所需的参数。
-环境可能有参数，也可能没有；环境可能有必选参数，也可能没有；环境可能有可选参数，也可能没有。
+类似命令，\marg{mandatory arguments} 和 \oarg{optional arguments} 为环境所需的必选和可选参数。
+\LaTeX\ 环境可能需要一个或多个必选/可选参数，也可能完全不需要参数。
 部分环境允许嵌套使用。
 
 \pinyinindex{fenzu}{分组}
-有些命令（如 \cmd{bfseries}）的效果不是作用在其参数上，而是作用在其后所有的内容上。此时，若要限制其作用范围，则需要使用分组。
-\LaTeX\ 的环境隐含了一个分组。也就是说，在环境里使用的命令，不会影响到环境外的内容。%
-\footnote{带有 \cmd{global} 修饰的命令除外。}
-除了 \LaTeX\ 环境之外，花括号也起到\textbf{分组}的作用，也能使命令的效果限制在分组内。
+有些命令（如 \cmd{bfseries}）会对其后所有内容产生作用。若要限制其作用范围，则需要使用\textbf{分组}。\LaTeX\ 使用一对花括号 \texttt\{ 和 \texttt\} 作为分组，在分组中使用的命令被限制在分组内，不会影响到分组外的内容%
+\footnote{个别命令在分组内仍然会产生全局作用，例如第 \ref{sec:counters} 节介绍的 \cmd{setcounter} 等命令。}。
+上文提到的 \LaTeX\ 环境隐含了一个分组，在环境中的命令被包裹在分组内。
 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法，即属此类。
 
 \subsection{\LaTeX\ 源代码结构}\label{subsec:struct}
@@ -177,13 +175,6 @@ or \TeX{} users?
 \pinyinindex{daoyanqu}{导言区}
 在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}。
 在导言区中一般会使用 \cmd{use\-package} 调用宏包，以及会进行对文档的全局设置。
-
-\cmdindex{usepackage}
-\pinyinindex{hongbao}{宏包}
-\cmd{usepackage} 命令能够调用\textbf{宏包}：
-\begin{verbatim}
-\usepackage{...}
-\end{verbatim}
 
 \section{\LaTeX\ 宏包和文档类}\label{sec:latex-pkgs}
 
