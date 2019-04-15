@@ -165,8 +165,8 @@ It's dif{}f{}icult to f{}ind \ldots .
 
 \subsection{标点符号}\label{subsec:punct}
 
-中文的标点符号（都是全角的非 ASCII 字符）一般来讲不用特别操心，只要使用中文输入法输入即可。
-而在英文标点的输入上，有许多需要留意的地方。
+中文的标点符号（绝大多数为非 ASCII 字符）使用中文输入法输入即可，一般不需要过多留意。
+而在英文标点符号上，有许多需要留意的地方。
 
 \subsubsection{引号}
 
@@ -185,8 +185,8 @@ It's dif{}f{}icult to f{}ind \ldots .
 \index{biaodianfuhao@标点符号!-@\protect\verb+-+ (\textit{连字号} -)}
 \index{biaodianfuhao@标点符号!--@\protect\verb+--+ (\textit{短破折号} --)}
 \index{biaodianfuhao@标点符号!---@\protect\verb+---+ (\textit{长破折号} ---)}
-\LaTeX\ 中有三种长度的“横线”可用：连字号、短破折号（en-dash）和长破折号（em-dash）。
-它们分别有不同的用途：连字号 - 用来组成复合词；短破折号 -- 将数字连接表示范围；长破折号 --- 作为破折号使用。
+\LaTeX\ 中有三种长度的“横线”可用：连字号（hyphen）、短破折号（en-dash）和长破折号（em-dash）。
+它们分别有不同的用途：连字号 - 用来组成复合词；短破折号 -- 用来连接数字表示范围；长破折号 --- 用来连接单词，与中文语境中的破折号用法类似。
 \begin{example}
 daughter-in-law, X-rated\\
 pages 13--67\\
@@ -298,8 +298,8 @@ long and underlined words.}
 \end{example}
 
 \cmdindex{emph}
-\cmd{emph} 命令用来将文字变为斜体以示强调。如果在本身已经用 \cmd{emph} 命令强调的文字内部嵌套使用 \cmd{emph}，
-内部则使用正常字体的文字：
+\cmd{emph} 命令用来将文字变为斜体以示强调。如果在本身已经用 \cmd{emph} 命令强调的文字内部嵌套使用 \cmd{emph} 命令，
+内部则使用直立体文字：
 \begin{example}
 Some \emph{emphasized words,
 including \emph{double-emphasized}
@@ -316,8 +316,9 @@ words}, are shown here.
 
 \subsection{单词间距和断行}\label{subsec:interword}
 
-通常情况下，断行的位置尽可能选取在两个单词之间，也就是你输入到源文件中的“空格”。
-一般情况下，这个“空格”生成一个间距，它会根据行宽和文字自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
+在西文排版实践中，断行的位置尽可能选取在两个单词之间，也就是用户在源文件中输入的“空格”%
+\footnote{中文排版实现汉字间断行，则需要宏包（如 \pkg{xeCJK} 等）或排版引擎（如 upLaTeX）的支持。}。
+这个“空格”通常生成一个间距，它会根据行宽和上下文自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
 
 \index{~@\texttt\textasciitilde\ (\textit{不断行空格})}
 我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个不会断行的空格（高德纳称之为 tie，“带子”），
@@ -336,7 +337,7 @@ Donale~E. Knuth
 \cmd{newline}
 \end{command}
 
-它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在换行的地方增加垂直间距（见 \ref{subsec:vspace} 小节），
+它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在换行处向下增加垂直间距（见 \ref{subsec:vspace} 小节），
 而 \cmd{newline} 不带可选参数；二是 \crcmd\ 也在表格、公式等地方用于分行，而 \cmd{newline} 只用于文本段落中。
 
 \cmdindex{newpage,clearpage}
