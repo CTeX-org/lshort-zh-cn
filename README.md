@@ -1,4 +1,4 @@
-# The Not So Short Introduction To LaTeX (Chinese Edition), v6.0
+# The Not So Short Introduction To LaTeX (Chinese Edition), v6.01
 
 ## License
 
