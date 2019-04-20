@@ -314,13 +314,14 @@ words}, are shown here.
 文字段落和公式、图表等内容从上到下顺序排布，并在合适的位置断页，分割成匀称的页面。
 在绝大多数时候，我们无需自己操心断行和断页。但偶尔会遇到需要手工调整的地方。
 
-\subsection{单词间距和断行}\label{subsec:interword}
+\subsection{单词间距}\label{subsec:interword}
 
 在西文排版实践中，断行的位置尽可能选取在两个单词之间，也就是用户在源文件中输入的“空格”%
-\footnote{中文排版实现汉字间断行，则需要宏包（如 \pkg{xeCJK} 等）或排版引擎（如 upLaTeX）的支持。}。
+\footnote{中文排版实现汉字间断行，则需要宏包（如 \pkg{xeCJK} 等）或特殊的排版引擎（如 upLaTeX）的支持。}。
 这个“空格”通常生成一个间距，它会根据行宽和上下文自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
 
 \index{~@\texttt\textasciitilde\ (\textit{不断行空格})}
+\LaTeX\ 按照西文排版习惯在单词间的“空格”处断行，“空格”生成的间距也随之舍去。
 我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个不会断行的空格（高德纳称之为 tie，“带子”），
 通常用在英文人名、图表名称等场景：
 \begin{example}
@@ -334,39 +335,56 @@ Donale~E. Knuth
 如果我们确实需要手动断行，可使用如下命令：
 \begin{command}
 \crcmd \oarg{length} \\
+\crcmd*\oarg{length} \\
 \cmd{newline}
 \end{command}
 
-它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在换行处向下增加垂直间距（见 \ref{subsec:vspace} 小节），
-而 \cmd{newline} 不带可选参数；二是 \crcmd\ 也在表格、公式等地方用于分行，而 \cmd{newline} 只用于文本段落中。
+它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在断行处向下增加垂直间距（见 \ref{subsec:vspace} 小节），
+而 \cmd{newline} 不带可选参数；二是 \crcmd\ 也在表格、公式等地方用于换行，而 \cmd{newline} 只用于文本段落中。
+带星号的 \crcmd\ 使得断行处禁止分页。
+
+\begin{example}
+另外需要注意的是，使用 \verb|\\|
+断行命令 \\ 不会令内容另起一段，
+而是在段落中直接开始新的一行。
+\end{example}
 
 \cmdindex{newpage,clearpage}
 断页的命令有两个：
 \begin{command}
-\cmd{newpage}  \quad  or \quad \cmd{clearpage}
+\cmd{newpage} \\
+\cmd{clearpage}
 \end{command}
 
-通常情况下两个命令都能起到另起一页的作用，但有一些区别：一是在双栏排版中 \cmd{newpage} 只起到另起一栏的作用；二是涉及到浮动体的排版上行为不同。
+通常情况下两个命令都能起到另起一页的作用，但有一些区别：一是在双栏排版模式中 \cmd{newpage} 只起到另起一栏的作用；二是涉及到浮动体的排版上行为不同。
 后文的 \ref{sec:float} 节以及 \ref{subsec:columns} 小节会更详细地介绍相关内容。
 
 \cmdindex{linebreak,nolinebreak}
-有时候我们不满足于 \LaTeX\ 默认的断行和断页位置，需要进行微调，就要用以下命令告诉 \LaTeX\ 哪些地方适合断页，哪些地方不适合：
+有时候我们不满足于 \LaTeX\ 默认的断行和断页位置，需要进行微调，可以用以下命令告诉 \LaTeX\ 哪些地方适合断行或断页，哪些地方不适合：
 \begin{command}
 \cmd{linebreak}\oarg{n} \quad \cmd{nolinebreak}\oarg{n} \\
 \cmd{pagebreak}\oarg{n} \quad \cmd{nopagebreak}\oarg{n}
 \end{command}
 
 以上命令都带一个可选参数，用数字 \Arg{n} 代表适合/不适合的程度，取值范围为 0-4，不带可选参数时，缺省为 4。
-比如 \cmd{linebreak}\texttt{[3]} 意味着此处在断行时优先考虑；\cmd{nopagebreak} 或 \cmd{nopagebreak}\texttt{[4]}
+比如 \cmd{linebreak}\texttt{[4]} 意味着此处需要强行断行；\cmd{nopagebreak} 或 \cmd{nopagebreak}\texttt{[4]}
 意味着禁止在此处断页。
 
-以上命令适合给出优先考虑断行断页/禁止断行断页的位置，但不适合直接拿来断行或断页，使用 \cmd{newline} 或 \cmd{newpage} 等是更好的选择%
-\footnote{\cmd{newline} 和 \cmd{newpage} 会在断行/断页位置正确添加空白，但 \cmd{linebreak} 和 \cmd{pagebreak} 不能，
-它们的强行断行/断页会导致 \LaTeX\ 报 \texttt{Underfull \cmd{hbox}} 等警告。}。
+以上命令适合给出优先考虑断行断页/禁止断行断页的位置，但不适合直接拿来断行或断页，使用 \cmd{newline} 或 \cmd{newpage} 等是更好的选择。
+因为 \cmd{newline} 和 \cmd{newpage} 会在断行/断页位置填充适当的间距，但 \cmd{linebreak} 和 \cmd{pagebreak} 不能，
+它们的强行断行/断页可能会制造出糟糕的排版效果，并导致 \LaTeX\ 报 \texttt{Underfull \cmd{hbox}} 等警告。
+
+\begin{example}
+使用 \verb|\newline| 断行的效果
+\newline
+与使用 \verb|\linebreak| 断行的效果
+\linebreak
+进行对比。
+\end{example}
 
 \subsection{断词}\label{subsec:hyphen}
 
-如果 \LaTeX\ 遇到了很长的英文单词，仅在单词之间的位置断行无法生成宽度匀称的行时，就要考虑从单词中间断开。
+如果 \LaTeX\ 遇到了很长的英文单词，仅在单词之间的“空格”处断行无法生成宽度匀称的行时，就会考虑从单词中间断开。
 对于绝大部分单词，\LaTeX\ 能够找到合适的断词位置，在断开的行尾加上连字符 \char\hyphenchar\font 。
 
 \index{-@\cmd{-} (\textit{断词})}
