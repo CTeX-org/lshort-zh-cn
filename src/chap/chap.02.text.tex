@@ -5,8 +5,8 @@
 文字是排版的基础。在介绍 \LaTeX\ 支持的各种文档元素之前，首先应当了解一下如何在 \LaTeX\ 源代码中输入并排版文字，
 尤其是（西文中的）标点符号、连字符、重音等一些细节。
 
-本文的开头首先介绍了中文的支持方式。随着 \LaTeX\ 和底层 \TeX\ 引擎的发展，旧方式（CCT、CJK 等）日渐退出舞台，
-xelatex 编译命令配合 \cls{xeCJK} 或 \cls{ctex} 宏包的方式成为主流。
+本文的开头首先介绍了 \LaTeX\ 中排版中文的支持方式。随着 \LaTeX\ 和底层 \TeX\ 引擎的发展，旧方式（CCT、CJK 等）日渐退出舞台，
+xelatex 编译命令配合 \cls{xeCJK} 或 \cls{ctex} 宏包的方式为当前的主流中文排版支持方式。
 \end{intro}
 
 \section{语言文字和编码}\label{sec:encoding}
@@ -20,7 +20,7 @@ xelatex 编译命令配合 \cls{xeCJK} 或 \cls{ctex} 宏包的方式成为主�
 计算机的基本存储单位是字节（byte），每个字节为八位（8-bit），范围用十六进制写作 0x00-0xFF。
 ASCII （美国通用信息交换码）使用 0x00-0x7F 对文字编码，也就是 7-bit，能够表示 QWERTY 键盘上能够输入的拉丁字母、数字和符号。
 
-由于 \TeX\ 最初面向英语文档的排版，ASCII 编码完全够用，而早期版本的 \TeX\ 也只支持 7-bit 和 ASCII。
+由于 \TeX\ 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，而早期版本的 \TeX\ 也只支持 7-bit 和 ASCII 编码。
 要排版西欧语系中带重音的字符，就必须用到后文所叙述的重音命令，如 M\"obius 必须输入 \texttt{M\char`\\"obius}。
 
 \subsection{扩展编码}\label{subsec:ext-encoding}
@@ -32,22 +32,22 @@ ASCII （美国通用信息交换码）使用 0x00-0x7F 对文字编码，也就
 \pkgindex{inputenc}
 \TeX\ 从 3.0 版开始支持 8-bit，能够处理源代码里编码处于 0x80-0xFF 范围的字符。
 西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 0x80-0xFF 这个范围，处理起来较为方便。
-\texttt{latex} 命令及 \texttt{pdflatex} 命令下，这些编码的处理由 \pkg{inputenc} 宏包支持。
+使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时，这些编码的处理由 \pkg{inputenc} 宏包支持。
 比如将源代码保存为 Latin-1 编码，并在导言区调用宏包：
 \begin{verbatim}
 \usepackage[latin1]{inputenc}
 \end{verbatim}
-接下来，M\"obius 就直接可以通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
+接下来，M\"obius 就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
 
 \index{bianma@编码!GBK}
-GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，这就需要借助一些宏包进行较为复杂的判断和处理。
+GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。
 \pkg{CJK} 宏包就是用于处理中、日、韩等多字节编码的语言文字的宏包。但 \pkg{CJK} 宏包的使用非常不方便，笔者不再推荐直接使用。
 
 \subsection{UTF-8 编码}\label{subsec:utf8}
 
 \index{bianma@编码!UTF-8}
 Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言文字。UTF-8 是 Unicode 的一套编码方案，
-一个字符可以由一个到四个字节编码，其中单字节字符兼容 ASCII 编码。
+一个字符由一个到四个字节编码，其中单字节字符的编码与 ASCII 编码兼容。
 
 \pkgindex{inputenc}
 \texttt{latex} 命令及 \texttt{pdflatex} 命令下可以使用 \pkg{inputenc} 宏包支持 UTF-8 编码：
@@ -71,8 +71,8 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 \index{xelatex@\texttt{xelatex} 命令}
 \pkgindex{xeCJK}
 \texttt{xelatex} 命令支持直接使用系统安装的 TrueType (\texttt{.ttf}) / OpenType (\texttt{.otf}) 等格式的字体，加上对 UTF-8 编码的原生支持，
-免去了预处理字体的麻烦。在此基础上的 \pkg{xeCJK} 宏包更进一步完善了排版中文的一些细节，比如中英文之间插入空隙、
-中文行尾的回车不引入空格、标点符号不出现在行首，等等。
+免去了预处理字体的麻烦。在此基础上的 \pkg{xeCJK} 宏包更进一步完善了排版中文的一些细节，比如中英文之间插入间距、
+中文行尾的换行符不引入空格、标点符号不出现在行首，等等。
 
 \pkg{xeCJK} 宏包支持用简单的命令配置中文字体。举一个在 Windows 下使用 \pkg{xeCJK} 的例子（设置字体的命令详见 \ref{subsec:CJKfont} 小节），
 源代码须保存为 UTF-8 编码，并使用 \texttt{xelatex} 命令编译：
@@ -110,7 +110,7 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 连续的若干个空白字符视为一个空格。一行开头的空格忽略不计。
 
 \cmdindex{par}
-行末的回车视为一个空格；但连续两个回车，也就是空行，会将文字分段。多个空行被视为一个空行。
+行末的换行符视为一个空格；但连续两个换行符，也就是空行，会将文字分段。多个空行被视为一个空行。
 也可以在行末使用 \cmd{par} 命令分段。
 \begin{example}
 Several spaces     equal one.
@@ -126,7 +126,7 @@ starts a new line.
 
 \index{^^e@\texttt\% (\textit{注释})}
 \LaTeX\ 用 \texttt\% 字符作为注释。在这个字符之后直到行末，所有的字符都被忽略，
-行末的回车也不引入空格。
+行末的换行符也不引入空格。
 \begin{example}
 This is an % short comment
 % ---
@@ -174,8 +174,8 @@ It's dif{}f{}icult to f{}ind \ldots .
 \index{biaodianfuhao@标点符号!``@\protect\verb+'+ (\textit{后引号} ')}
 \index{biaodianfuhao@标点符号!'@\protect\verb+``+ (\textit{前双引号} ``)}
 \index{biaodianfuhao@标点符号!''@\protect\verb+''+ (\textit{后双引号} '')}
-\LaTeX\ 的单引号 ` ' 用 \texttt` 和 \texttt' 输入；双引号 `` '' 用 \verb|``| 和 \verb|''| 输入
-（虽然 \texttt" 也能表示双引号，但没有合适的单个符号用来表示前双引号，所以不常用在正文）。
+\LaTeX\ 的单引号 ` ' 用 \texttt` 和 \texttt' 输入；双引号 `` 和 '' 分别用 \verb|``| 和 \verb|''| 输入
+（虽然 \texttt" 也表示双引号，但没有合适的单个符号用来表示前双引号，于是习惯上写为与 \verb|``| 对应的 \verb|''|）。
 \begin{example}
 ``Please press the `x' key.''
 \end{example}
@@ -186,7 +186,7 @@ It's dif{}f{}icult to f{}ind \ldots .
 \index{biaodianfuhao@标点符号!--@\protect\verb+--+ (\textit{短破折号} --)}
 \index{biaodianfuhao@标点符号!---@\protect\verb+---+ (\textit{长破折号} ---)}
 \LaTeX\ 中有三种长度的“横线”可用：连字号（hyphen）、短破折号（en-dash）和长破折号（em-dash）。
-它们分别有不同的用途：连字号 - 用来组成复合词；短破折号 -- 用来连接数字表示范围；长破折号 --- 用来连接单词，与中文语境中的破折号用法类似。
+它们分别有不同的用途：连字号 - 用来组成复合词；短破折号 -- 用来连接数字表示范围；长破折号 --- 用来连接单词，与中文标点符号中的破折号用法类似。
 \begin{example}
 daughter-in-law, X-rated\\
 pages 13--67\\
@@ -208,10 +208,10 @@ one, two, three, \ldots one hundred.
 我们在 \ref{subsec:special-chars} 小节中了解了 \cmd{\textasciitilde} 命令，它可以用来输入波浪号，
 但位置靠顶端（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。西文中较少将波浪号作为标点符号使用，通常使用中文的全角波浪号（～）。
 
-\subsection{特殊西文符号与重音}\label{subsec:accents}
+\subsection{拉丁文扩展与重音}\label{subsec:accents}
 
 \pinyinindex{zhongyin}{重音}
-\LaTeX\ 支持用命令输入各种西欧语言的特殊符号和重音：
+\LaTeX\ 支持用命令输入各种西欧语言所使用的拉丁文扩展字母，主要为带重音的字母：
 \begin{example}
 H\^otel, na\"\i ve, \'el\`eve,\\
 sm\o rrebr\o d, !`Se\ norita!,\\
