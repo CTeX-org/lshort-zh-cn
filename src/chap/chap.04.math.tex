@@ -110,7 +110,8 @@ In display:
 \begin{enumerate}
   \item 数学模式中输入的空格被忽略。数学符号的间距默认由符号的性质（关系符号、运算符等）决定。
   需要人为引入间距时，使用 \cmd{quad} 和 \cmd{qquad} 等命令。详见 \ref{sec:math-space} 节。
-  \item \textbf{不允许有空行（分段）}。行间公式中也无法用 \crcmd\ 命令手动换行。排版多行公式需要用到 \ref{sec:multi-eqns} 节介绍的各种环境。
+  \item \textbf{不允许有空行（分段）}。行间公式中也无法用 \crcmd\ 命令手动换行。排版多行公式需要用到
+  \ref{sec:multi-eqns} 节介绍的各种环境。
   \item 所有的字母被当作数学公式中的变量处理，字母间距与文本模式不一致，也无法生成单词之间的空格。
   如果想在数学公式中输入正体的文本，简单情况下可用 \ref{subsec:math-alpha} 小节中提供的 \cmd{mathrm} 命令。
   或者用 \pkg{amsmath} 提供的 \amscmd{text} 命令%
@@ -154,8 +155,8 @@ $a_1 + a_2 + \cdots + a_n$
 
 \index{^@\texttt\textasciicircum\ (\textit{数学上标})}
 \index{_@\texttt\textunderscore\ (\textit{数学下标})}
-在 \LaTeX\ 中用 \texttt\textasciicircum 和 \texttt\textunderscore 标明上下标。注意上下标的内容（子公式）一般需要\textbf{用花括号包裹}，
-否则上下标只对后面的一个符号起作用。
+在 \LaTeX\ 中用 \texttt\textasciicircum 和 \texttt\textunderscore 标明上下标。
+注意上下标的内容（子公式）一般需要\textbf{用花括号包裹}，否则上下标只对后面的一个符号起作用。
 \begin{example}
 $p^3_{ij} \qquad
 m_\mathrm{Knuth}\qquad
@@ -465,7 +466,7 @@ a & = b + c \\
 
 \cmdindex[amsmath]{notag}
 \amsenv{align} 环境会给每行公式都编号。我们仍然可以用 \amscmd{notag} 去掉某行的编号。
-在以下的例子，为了对齐加号，我们将分隔符放在等号右边，这时需要给等号后添加一对括号 \texttt\{\texttt\} 以产生正常的间距：
+在以下的例子，为了对齐等号，我们将分隔符放在右侧，并且此时需要在等号后添加一对括号 \texttt\{\texttt\} 以产生正常的间距：
 \begin{example}
 \begin{align}
 a ={} & b + c \\
@@ -516,8 +517,8 @@ l + m &= n
 \end{example}
 
 \envindex[amsmath]{split}
-\amsenv{split} 环境和 \amsenv{aligned} 环境用法类似，也用于和 \env{equation} 环境套用，区别是 \amsenv{split} 只能将每行的一个公式分两栏，
-\amsenv{aligned} 允许每行多个公式多栏。
+\amsenv{split} 环境和 \amsenv{aligned} 环境用法类似，也用于和 \env{equation} 环境套用，
+区别是 \amsenv{split} 只能将每行的一个公式分两栏，\amsenv{aligned} 允许每行多个公式多栏。
 
 \pinyinindex{duohanggongshi}{多行公式|)}
 
@@ -876,8 +877,8 @@ E=mc^2.\qedhere
 \end{proof}
 \end{example}
 
-在 \amsenv{align} 等环境中使用 \cmd{qedhere} 命令会使 \qedsymbol\ 盖掉公式的编号；使用 \env{equation} 嵌套 \amsenv{aligned} 等环境时，
-\cmd{qedhere} 命令会将 \qedsymbol\ 直接放在公式后。这些位置都不太正常。
+在 \amsenv{align} 等环境中使用 \cmd{qedhere} 命令会使 \qedsymbol\ 盖掉公式的编号；使用 \env{equation} 嵌套
+\amsenv{aligned} 等环境时，\cmd{qedhere} 命令会将 \qedsymbol\ 直接放在公式后。这些位置都不太正常。
 
 证毕符号 \qedsymbol\ 本身被定义在命令 \cmd{qedsymbol} 中，如果有使用实心符号作为证毕符号的需求，需要自行用 \cmd{re\-new\-comm\-and}
 命令修改（用法见 \ref{subsec:newcmd} 小节）\footnote{注意，这个改法\textbf{只对 \pkg{amsthm} 宏包适用}。
