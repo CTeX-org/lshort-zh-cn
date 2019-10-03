@@ -29,7 +29,7 @@
 如果想要让它在局部生效，需要用花括号\textbf{分组}，也就是写成 \marg*{\cmd{bfseries}\ \Arg{some text}} 这样的形式；
 对应的 \cmd{textbf} 形式带一个参数，只改变参数内部的字体，更为常用。
 
-在公式中，直接使用 \cmd{textbf} 等命令不会起效，甚至报错。\LaTeX\ 已有修改数学字体的命令，详见 \ref{subsec:math-alpha} 小节。
+在公式中，直接使用 \cmd{textbf} 等命令不会起效，甚至报错。\LaTeX\ 提供了修改数学字母样式的命令，如 \cmd{mathbf} 等，详见 \ref{subsec:math-alpha} 小节。
 
 \begin{table}[htp]
 \caption{字体命令。} \label{tbl:fonts}
@@ -122,7 +122,7 @@ He likes {\LARGE large and
 
 至此已经介绍了如何改变字体样式如粗体、斜体等等，以及如何改变字号，
 但你依然用着 \LaTeX\ 默认的那套、由高德纳设计制作的 Computer Modern 字体。
-有的人可能很喜欢 Times、Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX\ 里还不太容易。
+有的人可能很喜欢 Times / Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX\ 里还不太容易。
 
 幸好大部分时候，许多字体宏包为我们完成了整套配置，我们可以在调用宏包之后，照常使用 \cmd{bfseries} 或 \cmd{ttfamily} 等我们熟悉的命令。
 表 \ref{tbl:font-pkgs} 列出了较为常用的字体宏包，其中相当多的宏包还配置了数学字体，或者文本、数学字体兼而有之。
@@ -198,16 +198,16 @@ He likes {\LARGE large and
 
 \index{xelatex@\texttt{xelatex} 命令}
 \texttt{xelatex} 编译命令能够支持直接调用系统和 \TeX\ 发行版中的 \texttt{.ttf} 或 \texttt{.otf} 格式字体%
-\footnote{Linux 下的 \TeX\ Live 为了令 \hologo{XeTeX} 使用 OpenType 字体，需要额外的配置。详见附录 \ref{app:install}。}。相比于上一小节，我们有了更多修改字体的余地。
+\footnote{Linux 下的 \TeX\ Live 为了令 \hologo{XeTeX} 使用 OpenType 字体，需要额外的配置。详见附录 \ref{app:install}。}。相比于前文介绍的字体宏包，我们有了更多自由修改字体的余地。
 
 \pkgindex{fontspec}
 \cmdindex[fontspec]{setmainfont,setsansfont,setmonofont}
 \texttt{xelatex} 命令下支持用户调用字体的宏包是 \pkg{fontspec}。宏包提供了几个设置全局字体的命令，设置 \cmd{rmfamily} 等对应命令的默认字体%
-\footnote{新版本 \pkg{fontspec} 的命令支持（并且推荐）把必选参数 \Arg{font name} 放在可选参数 \Arg{font features} 的前面。}：
+\footnote{旧版本 \pkg{fontspec} 的命令把必选参数 \Arg{font name} 放在可选参数 \Arg{font features} 的后面。新版本目前兼容旧版本的用法，但推荐使用新版本的用法。}：
 \begin{command}
-\cmd{setmainfont}\oarg{font features}\marg{font name} \\
-\cmd{setsansfont}\oarg{font features}\marg{font name} \\
-\cmd{setmonofont}\oarg{font features}\marg{font name}
+\cmd{setmainfont}\marg{font name}\oarg{font features} \\
+\cmd{setsansfont}\marg{font name}\oarg{font features} \\
+\cmd{setmonofont}\marg{font name}\oarg{font features}
 \end{command}
 其中 \Arg{font name} 使用字体的文件名（带扩展名）或者字体的英文名称。\Arg{font features} 用来手动配置对应的粗体或斜体
 ，比如为 Windows 下的无衬线字体 Arial 配置粗体和斜体（通常情况下自动检测并设置对应的粗体和斜体，无需手动指定）：
@@ -226,13 +226,58 @@ He likes {\LARGE large and
 \cmdindex[xeCJK]{setCJKmainfont,setCJKsansfont,setCJKmonofont}
 前文已经介绍过的 \pkg{xeCJK} 宏包使用了和 \pkg{fontspec} 宏包非常类似的语法设置中文字体：
 \begin{command}
-\cmd{setCJKmainfont}\oarg{font features}\marg{font name} \\
-\cmd{setCJKsansfont}\oarg{font features}\marg{font name} \\
-\cmd{setCJKmonofont}\oarg{font features}\marg{font name}
+\cmd{setCJKmainfont}\marg{font name}\oarg{font features} \\
+\cmd{setCJKsansfont}\marg{font name}\oarg{font features} \\
+\cmd{setCJKmonofont}\marg{font name}\oarg{font features}
 \end{command}
 
 由于中文字体少有对应的粗体或斜体，\Arg{font features} 里多用其他字体来配置，
-比如将宋体对应的 \texttt{BoldFont} 配置为黑体，而 \texttt{ItalicFont} 配置为楷体。
+比如在 Windows 中设定基本字体为宋体，并设定对应的 \texttt{BoldFont} 为黑体， \texttt{ItalicFont} 为楷体：
+\begin{verbatim}
+\setCJKmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi]
+\end{verbatim}
+
+\subsection{使用 \pkg{unicode-math} 宏包配置 Unicode 数学字体}\label{subsec:unicode-math}
+
+\pkgindex{unicode-math}
+\cmdindex[unicode-math]{setmathfont}
+Unicode 数学字体是一类 OpenType 字体，包含了 Unicode 字符集中的数学符号部分，字体中也设定了数学公式排版所需的一些参数。在 \texttt{xelatex} 或者 \texttt{lualatex} 编译命令下，借助 \pkg{unicode-math} 宏包可以调用 Unicode 数学字体配置数学公式的字体风格。
+
+在导言区使用 \cmd{usepackage}\marg*{unicode-math} 后，使用 \cmd{setmathfont} 命令即可：
+\begin{command}
+\cmd{setmathfont}\marg{font name}\oarg{font features}
+\end{command}
+
+绝大多数时候，只需要给定字体名称 \Arg{font name} 即可。由于篇幅所限，在此不介绍可选参数 \Arg{font feature} 涉及的配置，有兴趣的读者请参考宏包的帮助文档。
+
+Unicode 数学字体相比于正文字体的选择余地不多。表 \ref{tbl:uni-math-fonts} 给出了较为常用的 Unicode 数学字体。
+
+\begin{table}[htp]
+\centering\small
+\caption{常用 Unicode 数学字体。}
+\label{tbl:uni-math-fonts}
+\begin{tabular}{llp{20em}}
+\hline
+\textbf{数学字体名称} & \textbf{配套正文字体名称} & \textbf{备注}\\
+\hline
+\multicolumn{3}{c}{开源字体，发布于 CTAN} \\
+\hline
+\texttt{Latin Modern Math}       & \texttt{Latin Modern}         & 基于 Computer Modern 风格 \\
+\texttt{STIX Math}               & \texttt{STIX}                 & Times 风格 \\
+\texttt{XITS Math}               & \texttt{XITS}                 & 基于 STIX，Times 风格，有粗体 XITS Math Bold 可用 \\
+\texttt{TeX Gyre Pagella Math}   & \texttt{TeX Gyre Pagella}     & Palatino 风格 \\
+\texttt{TeX Gyre Termes Math}    & \texttt{TeX Gyre Termes}      & Times 风格 \\
+\texttt{Libertinus Math}         & \texttt{Libertinus}           & Linux Libertine 风格 \\
+\texttt{Fira Math}               & \texttt{Fira Sans}            & 无衬线数学字体 \\
+\hline
+\multicolumn{3}{c}{商业字体} \\
+\hline
+\texttt{Cambria Math}            & \texttt{Cambria}              & 较新版本的微软 Office 预装数学字体 \\
+\texttt{Lucida Bright Math OT}   & \texttt{Lucida Bright OT}     & 须购买商业授权 \\
+\texttt{Minion Math}             & \texttt{Minion Pro}           & 须购买商业授权 \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{段落格式和间距}\label{sec:par-lengths}
 

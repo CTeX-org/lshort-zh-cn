@@ -25,8 +25,7 @@
 
 \index{LaTeX@\LaTeX}
 \index{LaTeX2e@\LaTeXe}
-\LaTeX\ 是一种格式（format）。为免误会，初次接触这一概念的读者可以粗略地将 \LaTeX\ 理解成是对 \TeX\ 的一层封装。
-\LaTeX\ 使用 \TeX\ 程序作为自己的排版引擎。
+\LaTeX\ 是一种格式（format），使用 \TeX\ 程序作为自己的排版引擎。可以粗略地将 \LaTeX\ 理解成是对 \TeX\ 的一层封装。
 \LaTeX\ 最初的设计目标是分离内容与格式，以便作者能够无需关注版式设计，只需专注与内容创作就能得到高质量排版的作品。
 最初的开发者是 Leslie Lamport 博士\cite{manual}，当前 \LaTeX\ 由 \LaTeX 3 工作组%
 \footnote{\url{https://www.latex-project.org}}维护。
@@ -84,8 +83,8 @@
 
 你可以将这份源代码保存为~\texttt{helloworld.tex}，而后编译。具体来说:
 \begin{itemize}
-  \item 如果使用 \TeX works! 或 \TeX studio 等编辑器，你可以使用编辑器提供的“编译”按钮
-  或者“排版”按钮。建议将编译命令设置为 “XeLaTeX”。
+  \item 如果使用 \TeX works 或 \TeX studio 等编辑器，你可以使用编辑器提供的“编译”按钮
+  或者“排版”按钮。建议使用 “XeLaTeX” 作为默认的编译方式。
   \item 如果使用命令行方式进行编译，则需打开 Windows 命令提示符或者 Linux / macOS（OS X）的终端，在源代码所在的目录下输入命令：
 \begin{verbatim}
 xelatex helloworld
@@ -94,6 +93,18 @@ xelatex helloworld
 
 如果编译成功，可以在~\texttt{helloworld.tex}~所在的目录，
 看到生成的 \texttt{helloworld.pdf} 以及一些其它文件。
+
+源代码~\ref{code:hello-world-chinese}~是在 \LaTeX\ 排版中文的一个最简示例。编译的方式与上一份源代码相同，使用 XeLaTeX 编译方式\footnote{注意两个问题：1. 文档保存为 UTF-8 编码；2. 某些发行版需要补充安装较多宏包（如 Mik\TeX\ ）。}。中文支持的详细内容见 \ref{sec:chinese} 节。
+
+\begin{sourcecode}[htp]
+  \begin{Verbatim}
+  \documentclass{ctexart}
+  \begin{document}
+  “你好，世界！” 来自 \LaTeX{} 的问候。
+  \end{document}
+  \end{Verbatim}
+  \caption{在\LaTeX\ 中排版中文的最简源代码示例。}\label{code:hello-world-chinese}
+\end{sourcecode}
 
 \section{\LaTeX\ 命令和代码结构}\label{sec:src}
 
@@ -388,12 +399,12 @@ or \TeX{} users?
   \item[\texttt{pdflatex}]
   底层调用的引擎也是 \hologo{pdfTeX}，可以直接生成 \texttt{pdf} 格式的文档。
   \item[\texttt{xelatex}]
-  底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和 TrueType / OpenType 字体。
+  底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和对 TrueType / OpenType 字体的调用。
   当前较为方便的中文排版解决方案基于 \texttt{xelatex}，详见 \ref{sec:chinese} 节。
   \item[\texttt{lualatex}]
   底层调用的引擎是 \hologo{LuaTeX}，这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
-  除了支持 UTF-8 编码和 TrueType / OpenType 字体外，还支持通过 Lua 语言扩展 \TeX\ 的功能。
-  \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatex-ja} 宏包。
+  除了支持 UTF-8 编码和对 TrueType / OpenType 字体的调用外，还支持通过 Lua 语言扩展 \TeX\ 的功能。
+  \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatexja} 宏包。
 \end{description}
 
 \endinput

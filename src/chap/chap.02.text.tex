@@ -37,7 +37,8 @@ ASCII （美国通用信息交换码）使用 0x00-0x7F 对文字编码，也就
 \begin{verbatim}
 \usepackage[latin1]{inputenc}
 \end{verbatim}
-接下来，M\"obius 就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
+接下来，M\"obius 就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了%
+\footnote{并非所有拉丁文扩展字符都能够直接使用 \pkg{inputenc} 宏包排版出来。一些符号需要借助 \pkg{fontenc} 宏包对字体做进一步配置。}。
 
 \index{bianma@编码!GBK}
 GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。
@@ -70,9 +71,9 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 
 \index{xelatex@\texttt{xelatex} 命令}
 \pkgindex{xeCJK}
-\texttt{xelatex} 命令支持直接使用系统安装的 TrueType (\texttt{.ttf}) / OpenType (\texttt{.otf}) 等格式的字体，加上对 UTF-8 编码的原生支持，
+\texttt{xelatex} 命令支持直接使用操作系统和 \TeX\ 发行版安装的 TrueType (\texttt{.ttf}) / OpenType (\texttt{.otf}) 等格式的字体，加上对 UTF-8 编码的原生支持，
 免去了预处理字体的麻烦。在此基础上的 \pkg{xeCJK} 宏包更进一步完善了排版中文的一些细节，比如中英文之间插入间距、
-中文行尾的换行符不引入空格、标点符号不出现在行首，等等。
+汉字之间的换行符去掉额外的空白、标点符号不出现在行首，等等。
 
 \pkg{xeCJK} 宏包支持用简单的命令配置中文字体。举一个在 Windows 下使用 \pkg{xeCJK} 的例子（设置字体的命令详见 \ref{subsec:CJKfont} 小节），
 源代码须保存为 UTF-8 编码，并使用 \texttt{xelatex} 命令编译：
@@ -317,7 +318,7 @@ words}, are shown here.
 \subsection{单词间距}\label{subsec:interword}
 
 在西文排版实践中，断行的位置尽可能选取在两个单词之间，也就是用户在源文件中输入的“空格”%
-\footnote{中文排版实现汉字间断行，则需要宏包（如 \pkg{xeCJK} 等）或特殊的排版引擎（如 upLaTeX）的支持。}。
+\footnote{中文排版实现汉字间断行，则需要宏包（如 \pkg{xeCJK} 等）或特殊的排版引擎（如 up\LaTeX{}）的支持。}。
 这个“空格”通常生成一个间距，它会根据行宽和上下文自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
 
 \index{~@\texttt\textasciitilde\ (\textit{不断行空格})}

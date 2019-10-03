@@ -303,7 +303,7 @@ In display:
 \end{example}
 
 \mathindex{limits,nolimits}
-巨算符的上下标位置可由 \cmd{limits} 和 \cmd{nolimits} 控制，前者令巨算符类似 $\lim$ 或求和算符 $\sum$，上下标位于上下方；
+巨算符的上下标位置可由 \cmd{limits} 和 \cmd{nolimits} 调整，前者令巨算符类似 $\lim$ 或求和算符 $\sum$，上下标位于上下方；
 后者令巨算符类似积分号，上下标位于右上方和右下方。
 \begin{example}
 In text: 
@@ -655,7 +655,7 @@ f(x)g(y) \diff x \diff y \\
 \mathindex{mathrm,mathsf,mathtt,mathit,mathbf,mathcal,mathnormal}
 \cmdindex[amssymb]{mathbb,mathfrak}
 \cmdindex[mathrsfs]{mathscr}
-\LaTeX\ 允许一部分数学符号切换字体，主要是拉丁字母、数字等等。
+\LaTeX\ 允许一部分数学符号切换字体，主要是拉丁字母、数字、大写希腊字母以及重音符号等。
 表 \ref{tbl:math-fonts} 给出了切换字体的命令。某一些命令需要字体宏包的支持。
 \begin{example}
 $\mathcal{R} \quad \mathfrak{R} 
@@ -689,6 +689,9 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 \end{tabular}
 \end{table}
 
+\pkgindex{unicode-math}
+如果需要为所有的数学符号切换字体，则需要直接调用数学字体宏包（见 \ref{subsec:font-pkgs} 小节）。在 \texttt{xelatex} 或者 \texttt{lualatex} 编译命令下，还可以使用基于 \pkg{fontspec} 宏包的 \pkg{unicode-math} 宏包配置 Unicode 数学字体，详见 \ref{subsec:unicode-math} 小节。
+
 \subsection{数学符号的尺寸}\label{subsec:math-styles}
 
 \mathindex{displaystyle,textstyle,scriptstyle,scriptscriptstyle}
@@ -709,10 +712,10 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 \end{tabular}
 \end{table}
 
-例如行间公式的分式内，分子分母使用行内公式尺寸，巨算符采用行内尺寸的形式。对比一下分子分母使用 \cmd{display\-style} 命令与否的区别：
+我们通过以下示例对比行间公式和行内公式的区别。在分式中，分子分母默认为行内公式尺寸，示例中将分母切换到行间公式尺寸：
 \begin{example}
 \[
-P = \frac
+r = \frac
   {\sum_{i=1}^n (x_i- x)(y_i- y)} 
   {\displaystyle \left[
     \sum_{i=1}^n (x_i-x)^2
@@ -724,10 +727,10 @@ P = \frac
 \subsection{加粗的数学符号}\label{subsec:math-bold}
 
 在 \LaTeX\ 中为符号切换数学字体并不十分自由，只能通过 \cmd{mathbf} 等有限的命令切换字体。比如想得到粗斜体的符号，就没有现成的命令%
-\footnote{国内使用粗斜体符号表示矢量，见 GB3102-11.93。}；再比如 \cmd{mathbf} 只能改变拉丁字母，希腊字母就没有用。
+\footnote{国内使用粗斜体符号表示矢量，见 GB3102-11.93。}；再比如 \cmd{mathbf} 只能改变拉丁字母和大写希腊字母，小写希腊字母就没有用。
 
 \cmdindex{boldmath}
-\LaTeX\ 提供了一个命令 \cmd{boldmath} 令用户可以将整套数学字体切换为粗体版本。但这个命令\textbf{只能在公式外使用}：
+\LaTeX\ 提供了一个命令 \cmd{boldmath} 令用户可以将整套数学字体切换为粗体版本（前提是数学字体宏包本身支持粗体符号）。但这个命令\textbf{只能在公式外使用}：
 \begin{example}
 $\mu, M \qquad
 \mathbf{\mu}, \mathbf{M}$
@@ -744,8 +747,8 @@ $\mu, M \qquad
 
 \pkgindex{bm}
 \cmdindex[bm]{bm}
-然而定界符、巨算符等一些符号本身没有粗体版本，\amscmd{boldsymbol} 也得不到粗体。
-\LaTeX\ 工具宏集之一的 \pkg{bm} 宏包可以用 \cmd{bm} 命令生成“伪粗体”，一定程度上解决了不带粗体版本的符号的问题。这里不做过多介绍，
+然而在许多数学字体宏包中，定界符、巨算符等一些符号本身没有粗体版本，\amscmd{boldsymbol} 也得不到粗体。
+\LaTeX\ 工具宏集之一的 \pkg{bm} 宏包可以用 \cmd{bm} 命令生成“伪粗体”，作为粗体符号的一个解决方案。这里不做过多介绍，
 详情请参考 \pkg{bm} 宏包的帮助文档。
 
 \section{定理环境}\label{sec:theorems}
