@@ -248,7 +248,7 @@
 
 \begin{itemize}
   \item \texttt{\Arg{arrow}-\Arg{arrow}} 指定线条首尾的箭头形式。
-  复杂的箭头形式需要使用 \cmd{use\-tikz\-library} \marg*{arrows.meta}。
+  复杂的箭头形式需要在导言区使用 \cmd{use\-tikz\-library} \marg*{arrows.meta}。
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}[thick]
@@ -362,10 +362,11 @@
 \begin{example}
 \begin{tikzpicture}
 \node[circle,fill=blue,text=white,
-  font={\bfseries}]
+  node font={\bfseries}]
   (A) at (0,0) {A node};
 \node[rectangle,rounded corners,
-  draw=gray,font={\sffamily\slshape}]
+  draw=gray,
+  node font={\sffamily\slshape}]
   (B) at (2,0) {B node};
 \end{tikzpicture}
 \end{example}
