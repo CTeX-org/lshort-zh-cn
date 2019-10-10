@@ -826,7 +826,7 @@ for (int i=0; i<4; ++i)
 
 \cmdindex[graphicx]{graphicspath}
 其中 \Arg{filename} 为图片文件名，与 \cmd{include} 命令的用法类似，文件名可能需要用相对路径或绝对路径表示（见 \ref{sec:latex-multi-files} 节）。
-图片文件的扩展名一般可不写。另外一定要注意，\textbf{文件名里不要有空格}，否则宏包在解析文件名的过程中会出错。
+图片文件的扩展名一般可不写。另外一定要注意，\textbf{文件名里既不要有空格（类似 \cmd{include}），也不要有多余的英文点号}，否则宏包在解析文件名的过程中会出错。
 
 另外 \pkg{graphicx} 宏包还提供了 \cmd{graphics\-path} 命令，用于声明一个或多个图片文件存放的目录，
 使用这些目录里的图片时可不用写路径：
