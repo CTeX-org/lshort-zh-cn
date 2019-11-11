@@ -6,6 +6,7 @@ This document is distributed under the **GNU Free Documentation License, version
 For detailed information, see the section entitled 'GNU Free Documentation License' in the document, or the source code file `fdl.tex`.
 
 ## Preparation for typesetting
+
 Update `ctex` and `xeCJK` (and all the packages they rely on) in your TeX distritusion. And make sure you've installed
 all the other packages used in `lshort-zh-cn-style.sty` and updated them to the newest version.
 
@@ -14,7 +15,8 @@ all the other packages used in `lshort-zh-cn-style.sty` and updated them to the 
 ### Manually typesetting
 
 In 'src' directory, typeset the source code in the following order:
-```
+
+```sh
 xelatex lshort-zh-cn
 makeindex -s lshort-zh-cn.ist lshort-zh-cn
 xelatex lshort-zh-cn
@@ -26,7 +28,8 @@ If typesetting succeeds and the target PDF document is made correctly, then move
 ### Using scripts and Makefile
 
 For GNU/Linux and OS/X users, we provide Makefile in the 'src' directory. Use GNU make tool in the following order:
-```
+
+```sh
 make
 make install
 ```
