@@ -17,31 +17,30 @@ xelatex 编译命令配合 \cls{xeCJK} 或 \cls{ctex} 宏包的方式为当前�
 \subsection{ASCII 编码}\label{subsec:ascii}
 
 \index{bianma@编码!ASCII}
-计算机的基本存储单位是字节（byte），每个字节为八位（8-bit），范围用十六进制写作 0x00-0xFF。
-ASCII （美国通用信息交换码）使用 0x00-0x7F 对文字编码，也就是 7-bit，能够表示 QWERTY 键盘上能够输入的拉丁字母、数字和符号。
+计算机的基本存储单位是字节（byte），每个字节为八位（8-bit），范围用十六进制写作 \texttt{0x00}--\texttt{0xFF}。
+ASCII （美国通用信息交换码）使用 \texttt{0x00}--\texttt{0x7F} 对文字编码，也就是 7-bit，能够表示一般
+QWERTY 键盘上可输入的拉丁字母、数字和符号，以及一些不可显示的控制字符（如换行符、制表符等）。
 
-由于 \TeX\ 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，而早期版本的 \TeX\ 也只支持 7-bit 和 ASCII 编码。
-要排版西欧语系中带重音的字符，就必须用到后文所叙述的重音命令，如 M\"obius 必须输入 \texttt{M\char`\\"obius}。
+由于 \TeX\ 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，因而早期版本的 \TeX\ 只支持 7-bit 和 ASCII 编码。
+要排版西欧语系中带重音的字符，就必须用到后文所叙述的重音命令，如 M\"obius 必须用 \verb|M\"obius| 输入。
 
 \subsection{扩展编码}\label{subsec:ext-encoding}
 
-在 ASCII 之后，各种语言文字都发展了自己的编码，比如西欧语言的 Latin-1，日本的 Shift-JIS，中国大陆的 GB2312-80 和 GBK 等。
-它们之中的绝大多数都向下兼容 ASCII，因此无论是在哪种编码下，\TeX\ 以及 \LaTeX\ 的命令和符号都能用。
+在 ASCII 之后，各种语言文字都发展了自己的编码，比如西欧语言的 Latin-1、日本的 Shift-JIS、中国大陆的 GB2312-80 和 GBK 等。
+它们中的绝大多数都向下兼容 ASCII，因此无论是在哪种编码下，\TeX\ 以及 \LaTeX\ 的命令和符号都能用。
 
 \index{bianma@编码!Latin-1}
 \pkgindex{inputenc}
-\TeX\ 从 3.0 版开始支持 8-bit，能够处理源代码里编码处于 0x80-0xFF 范围的字符。
-西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 0x80-0xFF 这个范围，处理起来较为方便。
-使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时，这些编码的处理由 \pkg{inputenc} 宏包支持。
-比如将源代码保存为 Latin-1 编码，并在导言区调用宏包：
-\begin{verbatim}
-\usepackage[latin1]{inputenc}
-\end{verbatim}
-接下来，M\"obius 就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了%
+\TeX\ 从 3.0 版开始支持 8-bit，能够处理源代码里编码处于 \texttt{0x80}--\texttt{0xFF} 范围的字符。
+西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 \texttt{0x80}--\texttt{0xFF} 这个范围，
+处理起来较为方便。使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时，这些编码的处理由 \pkg{inputenc} 宏包支持。
+比如将源代码相应编码，并在导言区调用 \pkg{inputenc} 宏包后，M\"obius 这样的词语就可以直接通过（用适当输入法）
+输入 \texttt{M\"obius} 得到了%
 \footnote{并非所有拉丁文扩展字符都能够直接使用 \pkg{inputenc} 宏包排版出来。一些符号需要借助 \pkg{fontenc} 宏包对字体做进一步配置。}。
 
 \index{bianma@编码!GBK}
-GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。
+用于汉字的 GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，使用
+\texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。早期，
 \pkg{CJK} 宏包就是用于处理中、日、韩等多字节编码的语言文字的宏包。但 \pkg{CJK} 宏包的使用非常不方便，笔者不再推荐直接使用。
 
 \subsection{UTF-8 编码}\label{subsec:utf8}
@@ -50,15 +49,28 @@ GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASC
 Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言文字。UTF-8 是 Unicode 的一套编码方案，
 一个字符由一个到四个字节编码，其中单字节字符的编码与 ASCII 编码兼容。
 
-\pkgindex{inputenc}
-\texttt{latex} 命令及 \texttt{pdflatex} 命令下可以使用 \pkg{inputenc} 宏包支持 UTF-8 编码：
+现行版本的 \LaTeX\ 使用 UTF-8 作为默认编码%
+\footnote{在 2018 年 4 月之前，需要调用 \pkg{inputenc} 宏包并指定 \texttt{utf8} 选项才能使用 UTF-8 编码。}。
+因此，大部分西欧语言（拉丁字母）的文档可以在保存成 UTF-8 编码后直接编译：
+
 \begin{verbatim}
-\usepackage[utf8]{inputenc}
+\documentclass{article}
+\begin{document}
+Français Português Español Føroyskt
+\end{document}
 \end{verbatim}
 
-\texttt{xelatex} 和 \texttt{lualatex} 命令原生支持 UTF-8 编码，而且也\textbf{不适用 \pkg{inputenc} 宏包}。将 \texttt{.tex} 源代码保存为 UTF-8 编码，
-并借助 \pkg{fontspec} 宏包（见 \ref{subsec:fontspec} 小节）调用适当的字体，就可以在源代码中输入任意语言的文字。
-但各个语言（印地语、阿拉伯语等）的特殊排版要求需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等。
+由于种种限制，俄文（西里尔字母）、希腊文、阿拉伯文等不使用拉丁字母的文字系统，以及超过 8-bit 范围的 CJK 文字，
+仍然不能按此种方法直接在 \LaTeX\ 中使用。
+
+\pkgindex{inputenc,fontspec,babel,polyglossia}
+较为现代的 \TeX\ 引擎，如 \hologo{XeTeX} 和 \hologo{LuaTeX}，它们均原生支持 UTF-8 编码。
+使用 \texttt{xelatex} 和 \texttt{lualatex} 排版时，将 \texttt{.tex} 源代码保存为 UTF-8 编码，并借助
+\pkg{fontspec} 宏包（见 \ref{subsec:fontspec} 小节）调用适当的字体，原则上就可以在源代码中输入任意语言的文字。
+注意此时\textbf{不再适用 \pkg{inputenc} 宏包}。
+
+当然，良好的排版远不只是让字符能够显示出来，还要求断词规则、文字方向、标点禁则等诸多细节。因此，复杂语言
+（如印地语、阿拉伯语等）的特殊排版还需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等，此处不再涉及。
 
 \section{排版中文}\label{sec:chinese}
 
