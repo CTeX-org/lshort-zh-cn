@@ -36,17 +36,17 @@
 \centering
 \begin{tabular}{*{4}{l}}
 \hline
-\cmd{rmfamily}\cmdindex{rmfamily} & \cmd{textrm}\cmdindex{textrm}\marg*{\ldots}   & \textrm{roman}      & 衬线字体（罗马体）\\
-\cmd{sffamily}\cmdindex{sffamily} & \cmd{textsf}\cmdindex{textsf}\marg*{\ldots}   & \textsf{sans serif} & 无衬线字体        \\
-\cmd{ttfamily}\cmdindex{ttfamily} & \cmd{texttt}\cmdindex{texttt}\marg*{\ldots}   & \texttt{typewriter} & 等宽字体          \\[\medskipamount]
-\cmd{mdseries}\cmdindex{mdseries} & \cmd{textmd}\cmdindex{textmd}\marg*{\ldots}   & \textrm{medium}     & 正常粗细（中等）  \\
-\cmd{bfseries}\cmdindex{bfseries} & \cmd{textbf}\cmdindex{textbf}\marg*{\ldots}   & \textbf{bold face}  & 粗体              \\[\medskipamount]
-\cmd{upshape}\cmdindex{upshape}   & \cmd{textup}\cmdindex{textup}\marg*{\ldots}   & \textup{upright}    & 直立体            \\
-\cmd{itshape}\cmdindex{itshape}   & \cmd{textit}\cmdindex{textit}\marg*{\ldots}   & \textit{italic}     & 意大利斜体        \\
-\cmd{slshape}\cmdindex{slshape}   & \cmd{textsl}\cmdindex{textsl}\marg*{\ldots}   & \textsl{slanted}    & 倾斜体            \\
-\cmd{scshape}\cmdindex{scshape}   & \cmd{textsc}\cmdindex{textsc}\marg*{\ldots}   & \textsc{Small Caps} & 小字母大写        \\[\medskipamount]
-\cmd{em}\cmdindex{em}             & \cmd{emph}\cmdindex{emph}\marg*{\ldots}     & \emph{emphasized}   & 强调，默认斜体    \\
-\cmd{normalfont}\cmdindex{normalfont}  & \cmd{textnormal}\cmdindex{textnormal}\marg*{\ldots}   & \textnormal{normal font} & 默认字体 \\
+\cmd{rmfamily}\cmdindex{rmfamily}      & \cmd{textrm}\cmdindex{textrm}\marg*{\ldots}           & \textrm{roman}           & 衬线字体（罗马体）\\
+\cmd{sffamily}\cmdindex{sffamily}      & \cmd{textsf}\cmdindex{textsf}\marg*{\ldots}           & \textsf{sans serif}      & 无衬线字体        \\
+\cmd{ttfamily}\cmdindex{ttfamily}      & \cmd{texttt}\cmdindex{texttt}\marg*{\ldots}           & \texttt{typewriter}      & 等宽字体          \\[\medskipamount]
+\cmd{mdseries}\cmdindex{mdseries}      & \cmd{textmd}\cmdindex{textmd}\marg*{\ldots}           & \textrm{medium}          & 正常粗细（中等）  \\
+\cmd{bfseries}\cmdindex{bfseries}      & \cmd{textbf}\cmdindex{textbf}\marg*{\ldots}           & \textbf{bold face}       & 粗体              \\[\medskipamount]
+\cmd{upshape}\cmdindex{upshape}        & \cmd{textup}\cmdindex{textup}\marg*{\ldots}           & \textup{upright}         & 直立体            \\
+\cmd{itshape}\cmdindex{itshape}        & \cmd{textit}\cmdindex{textit}\marg*{\ldots}           & \textit{italic}          & 意大利斜体        \\
+\cmd{slshape}\cmdindex{slshape}        & \cmd{textsl}\cmdindex{textsl}\marg*{\ldots}           & \textsl{slanted}         & 倾斜体            \\
+\cmd{scshape}\cmdindex{scshape}        & \cmd{textsc}\cmdindex{textsc}\marg*{\ldots}           & \textsc{Small Caps}      & 小型大写字母      \\[\medskipamount]
+\cmd{em}\cmdindex{em}                  & \cmd{emph}\cmdindex{emph}\marg*{\ldots}               & \emph{emphasized}        & 强调，默认斜体    \\
+\cmd{normalfont}\cmdindex{normalfont}  & \cmd{textnormal}\cmdindex{textnormal}\marg*{\ldots}   & \textnormal{normal font} & 默认字体          \\
 \hline
 \end{tabular}
 \end{table}
@@ -131,7 +131,7 @@ He likes {\LARGE large and
 \subsection{字体编码}\label{subsec:font-encs}
 
 字体编码对于 \LaTeX\ 用户来讲是一个比较晦涩的概念。它规定了一个字体里包含的符号，并将若干符号用 \LaTeX\ 命令定义。
-注意字体编码并不与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等一一对应。
+注意字体编码与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等并非一一对应。
 
 常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX\ 默认使用兼容 plain \TeX\ 的 \texttt{OT1} 编码，使用起来有诸多限制：
 高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体里这些符号所在的位置被其它符号所占据
@@ -194,15 +194,18 @@ He likes {\LARGE large and
 \end{tabular}
 \end{table}
 
-\subsection{使用 \pkg{fontspec} 宏包更改字体 (\texttt{xelatex})}\label{subsec:fontspec}
+\subsection{使用 \pkg{fontspec} 宏包更改字体}\label{subsec:fontspec}
 
 \index{xelatex@\texttt{xelatex} 命令}
-\texttt{xelatex} 编译命令能够支持直接调用系统和 \TeX\ 发行版中的 \texttt{.ttf} 或 \texttt{.otf} 格式字体%
-\footnote{Linux 下的 \TeX\ Live 为了令 \hologo{XeTeX} 使用 OpenType 字体，需要额外的配置。详见附录 \ref{app:install}。}。相比于前文介绍的字体宏包，我们有了更多自由修改字体的余地。
+\index{lualatex@\texttt{lualatex} 命令}
+\texttt{xelatex} 和 \texttt{lualatex} 编译命令能够支持直接调用系统和 \TeX\ 发行版中的 \texttt{.ttf} 或 \texttt{.otf} 格式字体%
+\footnote{Linux 下的 \TeX\ Live 为了令 \hologo{XeTeX} 使用 OpenType 字体，需要额外的配置。详见附录 \ref{app:install}。}。
+相比于前文介绍的字体宏包，我们有了更多自由修改字体的余地。
 
 \pkgindex{fontspec}
 \cmdindex[fontspec]{setmainfont,setsansfont,setmonofont}
-\texttt{xelatex} 命令下支持用户调用字体的宏包是 \pkg{fontspec}。宏包提供了几个设置全局字体的命令，设置 \cmd{rmfamily} 等对应命令的默认字体%
+\texttt{xelatex} 和 \texttt{lualatex} 命令下支持用户调用字体的宏包是 \pkg{fontspec}。
+宏包提供了几个设置全局字体的命令，设置 \cmd{rmfamily} 等对应命令的默认字体%
 \footnote{旧版本 \pkg{fontspec} 的命令把必选参数 \Arg{font name} 放在可选参数 \Arg{font features} 的后面。新版本目前兼容旧版本的用法，但推荐使用新版本的用法。}：
 \begin{command}
 \cmd{setmainfont}\marg{font name}\oarg{font features} \\
@@ -217,14 +220,14 @@ He likes {\LARGE large and
 \Arg{font features} 还能配置字体本身的各种特性，这里不再赘述，感兴趣的读者请参考 \pkg{fontspec} 宏包的帮助文档。
 
 需要注意的是：\pkg{fontspec} 宏包会覆盖数学字体设置。需要调用表 \ref{tbl:font-pkgs} 中列出的一些数学字体宏包时，
-应当在调用 \pkg{fontspec} 宏包时指定 \texttt{no-math} 选项。\pkg{fontspec} 宏包可能被其它宏包或文档类（如 \pkg{xeCJK}、\pkg{ctex} 文档类）自动调用时，
+应当在调用 \pkg{fontspec} 宏包时指定 \texttt{no-math} 选项。\pkg{fontspec} 宏包可能被其它宏包或文档类（如 \pkg{ctex} 文档类）自动调用时，
 则在文档开头的 \cmd{document\-class} 命令里指定 \texttt{no-math} 选项。
 
-\subsection{使用 \pkg{xeCJK} 宏包更改中文字体}\label{subsec:CJKfont}
+\subsection{在 \pkg{ctex} 宏包或文档类中更改中文字体}\label{subsec:CJKfont}
 
 \pkgindex{xeCJK}
 \cmdindex[xeCJK]{setCJKmainfont,setCJKsansfont,setCJKmonofont}
-前文已经介绍过的 \pkg{xeCJK} 宏包使用了和 \pkg{fontspec} 宏包非常类似的语法设置中文字体：
+前文已经介绍过的 \pkg{ctex} 宏包或文档类提供了和 \pkg{fontspec} 宏包非常类似的语法设置中文字体：
 \begin{command}
 \cmd{setCJKmainfont}\marg{font name}\oarg{font features} \\
 \cmd{setCJKsansfont}\marg{font name}\oarg{font features} \\

@@ -13,7 +13,8 @@
 ### 手动编译
 
 在 src 目录下按照以下顺序编译：
-```
+
+```sh
 xelatex lshort-zh-cn
 makeindex -s lshort-zh-cn.ist lshort-zh-cn
 xelatex lshort-zh-cn
@@ -25,7 +26,8 @@ xelatex lshort-zh-cn
 ### 使用脚本和 Makefile 编译
 
 Linux 下提供了 GNU make 可用的 Makefile，使用 GNU make 的顺序为：
-```
+
+```sh
 make
 make install
 ```
