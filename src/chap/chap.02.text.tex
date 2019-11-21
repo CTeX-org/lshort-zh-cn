@@ -18,11 +18,10 @@
 
 \index{bianma@编码!ASCII}
 计算机的基本存储单位是字节（byte），每个字节为八位（8-bit），范围用十六进制写作 \texttt{0x00}--\texttt{0xFF}。
-ASCII （美国通用信息交换码）使用 \texttt{0x00}--\texttt{0x7F} 对文字编码，也就是 7-bit，能够表示一般
-QWERTY 键盘上可输入的拉丁字母、数字和符号，以及一些不可显示的控制字符（如换行符、制表符等）。
+ASCII （美国通用信息交换码）使用 \texttt{0x00}--\texttt{0x7F} 对文字编码，也就是 7-bit，覆盖了基本的拉丁字母、数字和符号，以及一些不可显示的控制字符（如换行符、制表符等）。
 
 由于 \TeX\ 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，因而早期版本的 \TeX\ 只支持 7-bit 和 ASCII 编码。
-要排版西欧语系中带重音的字符，就必须用到后文所叙述的重音命令，如 M\"obius 必须用 \verb|M\"obius| 输入。
+要排版扩展拉丁字符，就必须用到后文所叙述的各种符号和重音命令，如 M\"obius 必须用 \verb|M\"obius| 输入。
 
 \subsection{扩展编码}\label{subsec:ext-encoding}
 
@@ -33,15 +32,13 @@ QWERTY 键盘上可输入的拉丁字母、数字和符号，以及一些不可�
 \pkgindex{inputenc}
 \TeX\ 从 3.0 版开始支持 8-bit，能够处理源代码里编码处于 \texttt{0x80}--\texttt{0xFF} 范围的字符。
 西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 \texttt{0x80}--\texttt{0xFF} 这个范围，
-处理起来较为方便。使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时，这些编码的处理由 \pkg{inputenc} 宏包支持。
-比如将源代码相应编码，并在导言区调用 \pkg{inputenc} 宏包后，M\"obius 这样的词语就可以直接通过（用适当输入法）
-输入 \texttt{M\"obius} 得到了%
+处理起来较为方便。使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时，对源代码的编码处理由 \pkg{inputenc} 宏包支持。
+比如将源代码保存为 Latin-1 编码，并在导言区调用 \pkg{inputenc} 宏包后，M\"obius 这样的词语就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了%
 \footnote{并非所有拉丁文扩展字符都能够直接使用 \pkg{inputenc} 宏包排版出来。一些符号需要借助 \pkg{fontenc} 宏包对字体做进一步配置。}。
 
 \index{bianma@编码!GBK}
 用于汉字的 GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，使用
-\texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。早期，
-\pkg{CJK} 宏包就是用于处理中、日、韩等多字节编码的语言文字的宏包。但 \pkg{CJK} 宏包的使用非常不方便，笔者不再推荐直接使用。
+\texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。早期排版中文须使用 \pkg{CJK} 宏包，它是一个用于处理中、日、韩等东亚语言文字编码和字体配置的宏包。但 \pkg{CJK} 宏包的使用非常不方便，目前已不再推荐直接使用。
 
 \subsection{UTF-8 编码}\label{subsec:utf8}
 
@@ -51,7 +48,7 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 
 现行版本的 \LaTeX\ 使用 UTF-8 作为默认编码%
 \footnote{在 2018 年 4 月之前，需要调用 \pkg{inputenc} 宏包并指定 \texttt{utf8} 选项才能使用 UTF-8 编码。}。
-因此，大部分西欧语言（拉丁字母）的文档可以在保存成 UTF-8 编码后直接编译：
+因此，使用拉丁字母的文档可以在保存成 UTF-8 编码后用 \texttt{pdflatex} 直接编译：
 
 \begin{verbatim}
 \documentclass{article}
@@ -60,45 +57,31 @@ Français Português Español Føroyskt
 \end{document}
 \end{verbatim}
 
-由于种种限制，俄文（西里尔字母）、希腊文、阿拉伯文等不使用拉丁字母的文字系统，以及超过 8-bit 范围的 CJK 文字，
-仍然不能按此种方法直接在 \LaTeX\ 中使用。
+但是非拉丁字母仍然不能按此种方法直接在 \LaTeX\ 中使用，如西里尔字母（俄文）、希腊字母、阿拉伯文等要调用 \pkg{fontenc} 宏包，中、日、韩等东亚文字一般需要使用 \pkg{CJKutf8} 宏包。
 
 \pkgindex{inputenc,fontspec,babel,polyglossia}
 较为现代的 \TeX\ 引擎，如 \hologo{XeTeX} 和 \hologo{LuaTeX}，它们均原生支持 UTF-8 编码。
 使用 \texttt{xelatex} 和 \texttt{lualatex} 排版时，将 \texttt{.tex} 源代码保存为 UTF-8 编码，并借助
 \pkg{fontspec} 宏包（见 \ref{subsec:fontspec} 小节）调用适当的字体，原则上就可以在源代码中输入任意语言的文字。
-注意此时\textbf{不再适用 \pkg{inputenc} 宏包}。
-
-当然，良好的排版远不只是让字符能够显示出来，还要求断词规则、文字方向、标点禁则等诸多细节。因此，复杂语言
-（如印地语、阿拉伯语等）的特殊排版还需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等，此处不再涉及。
+注意此时\textbf{不再适用 \pkg{inputenc} 宏包}。但一些复杂语言（如印地语、阿拉伯语等）的排版需要考虑到断词规则、文字方向、标点禁则等诸多细节，因此需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等，此处不再涉及。
 
 \section{排版中文}\label{sec:chinese}
 
-用 \LaTeX\ 排版中文的一大难题是中文字体的处理。\TeX\ 使用的字体格式仅支持不超过 256 个字符，
-旧式的中文排版方案如 \pkg{CJK} 宏包往往需要复杂的预处理，将中文字体拆分成数百个小字体，非常麻烦%
-\footnote{现在的 \texttt{pdflatex} 以及 \texttt{latex} + \texttt{dvipdfmx} 命令通过字体映射的方式支持
-直接使用中文字体，不需要经过预处理，但仍然是不方便新手操作的。}。
-除此之外，中文排版中的一些细节，比如中英文之间插入间距、汉字之间允许断行、移除换行符带来的额外空白、
-标点符号禁则处理（如句号、逗号不允许出现在行首）等都需要复杂而繁琐的设置。
-
 \pkgindex{CJK,xeCJK,luatexja}
-为了解决上述问题，在不同的 \TeX\ 引擎下需要使用不同的宏包，如 \texttt{latex} 和 \texttt{pdflatex} 中需要 \pkg{CJK} 包，
-\texttt{xelatex} 中需要 \pkg{xeCJK} 包，\texttt{lualatex} 中需要 \pkg{luatexja} 包。对一般用户而言，仍比较麻烦。
+用 \LaTeX\ 排版中文需要解决两方面问题，一方面是对中文字体的支持，另一方面是对中文排版中的一些细节的处理，包括汉字之间的断行、标点符号的禁则（如句号、逗号不允许出现在行首）、中英文之间插入间距等。\pkg{CJK} 宏包对中文字体的支持比较麻烦，已经不再适合新手使用。\hologo{XeTeX} 和 \hologo{LuaTeX} 除了直接支持 UTF-8 编码外，还支持直接调用 TrueType / OpenType 格式的字体。\pkg{xeCJK} 及 \pkg{luatex-ja} 宏包则在此基础上封装了对汉字排版细节的处理功能。
 
 \pkgindex{ctex}
 \clsindex{ctexart,ctexbook,ctexrep}
-\pkg{ctex} 宏包和文档类对 \pkg{CJK}、\pkg{xeCJK}、\pkg{luatexja} 等宏包的进一步封装%
-\footnote{C\TeX\ 还经常用来指一个过时的 \TeX\ 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}。
-\pkg{ctex} 文档类包括\cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}，对应 \LaTeX\ 的三个标准文档类%
-\footnote{\pkg{ctex} 文档类中还包含有 \cls{ctexbeamer}，对应原 \cls{beamer} 文档类，用于排版幻灯片。}。
-它们对 \LaTeX\ 默认的排版样式做了一些调整，以切合中文排版风格。\pkg{ctex} 宏包 / 文档类还能够根据
-操作系统自动选择字体，因此基本无需额外配置即可排版中文文档。下面举一个简单的例子：
+\pkg{ctex} 宏包和文档类\footnote{C\TeX\ 还经常用来指一个过时的 \TeX\ 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}
+对 \pkg{CJK}、\pkg{xeCJK}、\pkg{luatexja} 等宏包的进一步封装，使得用户在排版中文时不用再考虑排版引擎等细节。
+\pkg{ctex} 文档类包括 \cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}，对应 \LaTeX\ 的三个标准文档类。
+它们对 \LaTeX\ 默认的排版样式做了一些调整，以切合中文排版风格。\pkg{ctex} 宏包和文档类能够识别用户的
+操作系统中安装的中文字体，因此基本无需额外配置即可排版中文文档。下面举一个最简单的例子：
+
 \begin{verbatim}
 \documentclass{ctexart}
 \begin{document}
-中文 \LaTeX{} 排版。
-汉字 English 汉字English之间手动输入的空格不会影响
-排版结果。换行符也不会影响。
+在\LaTeX{}中排版中文。
 \end{document}
 \end{verbatim}
 
@@ -107,7 +90,7 @@ Français Português Español Føroyskt
 注意源代码须保存为 UTF-8 编码，并使用 \texttt{xelatex} 或 \texttt{lualatex} 命令编译。
 
 虽然 \pkg{ctex} 宏包和文档类保留了对 GBK 编码以及 \texttt{latex} + \texttt{dvipdfmx}、\texttt{pdflatex} 等旧的编译命令的支持，
-笔者建议在使用 \pkg{ctex} 宏包和文档类时总是将源代码保存为 UTF-8 编码，用 \texttt{xelatex} 命令编译。
+笔者建议在使用 \pkg{ctex} 宏包和文档类时总是将源代码保存为 UTF-8 编码，用 \texttt{xelatex} 或 \texttt{lualatex} 命令编译。
 
 \section{\LaTeX\ 中的字符}\label{sec:text-symbols}
 
