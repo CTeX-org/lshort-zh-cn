@@ -19,12 +19,12 @@
 
   Mac\TeX\ 是 macOS（OS X）系统下的一个定制化的 \TeX\ Live 版本，与 \TeX\ Live 同步更新。
 
-  \item \textbf{Mik\TeX}\par
-  Mik\TeX\ 是主要用于 Windows 平台的一个稳定发展的 \TeX\ 发行版。
-  在中国大陆曾经发行过“C\TeX\ 套装”，它是一个经过本地化配置的 Mik\TeX ，不过其配置较为过时，也不再有更新支持，使用起来可能有诸多问题，现已不推荐使用。
+  \item \textbf{MiK\TeX}\par
+  MiK\TeX\ 是主要用于 Windows 平台的一个稳定发展的 \TeX\ 发行版。
+  在中国大陆曾经发行过“C\TeX\ 套装”，它是一个经过本地化配置的 MiK\TeX ，不过其配置较为过时，也不再有更新支持，使用起来可能有诸多问题，现已不推荐使用。
 \end{itemize}
 
-\TeX\ Live 和 Mik\TeX\ 都集成了一个简单的 \LaTeX\ 源代码编辑器 \TeX works（Mac\TeX\ 则集成了类似的 \TeX shop）。
+\TeX\ Live 和 MiK\TeX\ 都集成了一个简单的 \LaTeX\ 源代码编辑器 \TeX works（Mac\TeX\ 则集成了类似的 \TeX shop）。
 用户在安装完毕后，可直接使用 \TeX works 编写和编译 \LaTeX\ 源代码。
 
 \subsection{安装发行版}\label{subsec:install-dists}
@@ -58,15 +58,15 @@ Linux 下 \TeX\ Live 安装完毕后，一般还需要在 root 权限下进行�
   \item 运行 \texttt{fc-cache -fsv}。
 \end{enumerate}
 
-\subsubsection{Mik\TeX}
-从 Mik\TeX\ 官网 \url{http://www.miktex.org/} 下载名为 \texttt{basic-miktex-***.exe} 的 Windows 安装程序包。
+\subsubsection{MiK\TeX}
+从 MiK\TeX\ 官网 \url{http://www.miktex.org/} 下载名为 \texttt{basic-miktex-***.exe} 的 Windows 安装程序包。
 下载后直接双击打开，按照程序的提示进行安装即可。
 
 \section{安装和更新宏包}\label{sec:pkg-manager}
 
-\TeX\ Live 提供了图形界面的宏包管理器 \TeX\ Live Manager 用于安装和更新宏包，而 Mik\-\TeX\ 也提供了管理器
-Mik\-\TeX\ Package Manager。用户可直接打开程序，进行宏包的安装和更新
-（Mik\-\TeX\ Package Manager 有普通权限和管理员权限的版本，建议总是使用管理员权限的版本）。
+\TeX\ Live 提供了图形界面的宏包管理器 \TeX\ Live Manager 用于安装和更新宏包，而 MiK\-\TeX\ 也提供了管理器
+MiK\-\TeX\ Package Manager。用户可直接打开程序，进行宏包的安装和更新
+（MiK\-\TeX\ Package Manager 有普通权限和管理员权限的版本，建议总是使用管理员权限的版本）。
 
 两者也可以通过各自的命令行工具安装和更新宏包：
 \begin{verbatim}
@@ -86,7 +86,7 @@ tlmgr info <package-name>
 \end{verbatim}
 
 \begin{verbatim}
-% MikTeX 命令行工具 mpm 的使用示例
+% MiKTeX 命令行工具 mpm 的使用示例
 % 建议始终加 --admin 参数使用
 % 安装/卸载宏包
 mpm --admin --install <package-name>
@@ -101,12 +101,12 @@ mpm --admin --set-repository=<CTAN mirrors>/systems/win32/miktex/tm/packages
 mpm --admin --print-package-info <package-name>
 \end{verbatim}
 
-\TeX\ Live 默认安装所有宏包，而 Mik\TeX\ 的安装程序只包含了 \LaTeX\ 的一些基本宏包。从 \TeX\ Live 的光盘镜像和 Mik\-\TeX\ 的安装包体积可见一斑。
-默认情况下，编译过程中如果遇到宏包未安装而报错的情况下，Mik\TeX\ 会弹出一个对话框，让用户可以选择临时安装宏包，安装成功后继续编译。
+\TeX\ Live 默认安装所有宏包，而 MiK\TeX\ 的安装程序只包含了 \LaTeX\ 的一些基本宏包。从 \TeX\ Live 的光盘镜像和 MiK\-\TeX\ 的安装包体积可见一斑。
+默认情况下，编译过程中如果遇到宏包未安装而报错的情况下，MiK\TeX\ 会弹出一个对话框，让用户可以选择临时安装宏包，安装成功后继续编译。
 
 \subsection{手动安装宏包}\label{subsec:pkg-manual-install}
 
-\textbf{\textcolor{red}{如非万不得已，尽量不要手动安装宏包}}。绝大多数宏包都已打包到 \TeX\ Live 和 Mik\TeX\ 两大发行版的安装源，
+\textbf{\textcolor{red}{如非万不得已，尽量不要手动安装宏包}}。绝大多数宏包都已打包到 \TeX\ Live 和 MiK\TeX\ 两大发行版的安装源，
 可用宏包管理器安装。如果你知道某个宏包的名称，但不确定是否在发行版中已打包，可在 CTAN 中搜索。
 
 如果确实有手动安装宏包的需要，本小节的内容将有所帮助。在手动安装之前，有必要了解一下 \TeX\ 目录结构（\TeX\ Directory Structure, TDS）。
@@ -129,7 +129,7 @@ mpm --admin --print-package-info <package-name>
 \begin{verbatim}
 mktexlsr
 \end{verbatim}
-Mik\TeX\ 用户的命令为：
+MiK\TeX\ 用户的命令为：
 \begin{verbatim}
 initexmf --update-fndb
 \end{verbatim}
