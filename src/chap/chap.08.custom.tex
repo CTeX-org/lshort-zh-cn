@@ -23,7 +23,7 @@
 \end{example}
 
 这个例子中使用了一个新的环境 \env{command}。这个环境负责给命令代码加上一个带颜色的矩形背景框。
-同时还使用了一个命令：\cmd{cmd}， 这个命令负责输出命令的名字，包括前面的反斜杠。
+同时还使用了一个命令：\cmd{cmd}， 这个命令负责输出命令的名字，包括前面的反斜线。
 
 一旦笔者想要修改命令代码的样式，比如更换颜色、加边框等等，可以通过改变 \env{command} 环境的定义来很容易地创建新的外观，
 而不是挨个修改每个命令示例。
@@ -35,13 +35,13 @@
 \begin{command}
 \cmd{newcommand}\marg*{\cmd{\Arg{name}}}\oarg{num}\marg{definition}
 \end{command}
-基本上，这个命令有两个参数，第一个 \Arg{name} 是你想要建立的命令的名称（带反斜杠），
-第二个 \Arg{definition} 是命令的定义。方括号里的参数 \Arg{num} 是可选的，
-用于指定新命令所需的参数数目（最多 9 个）。如果缺省可选参数，默认就是 0，也就是新建的命令不带任何参数。
+\cmd{newcommand} 的基本用法需要两个必选参数，第一个参数 \Arg{name} 是要定义的命令名称（带反斜线），
+第二个参数 \Arg{definition} 是命令的具体定义。方括号里的参数 \Arg{num} 是可选的，
+用于指定新命令所需的参数数目（最多 9 个）。如果缺省可选参数，默认就是 0，也就是新定义的命令不带任何参数。
 
-接下来的两个例子有助你的理解。第一个例子定义了一个新的命令：\cmd{tnss}。
+接下来的两个例子有助于理解。第一个例子定义了一个新的命令 \cmd{tnss}。
 这个命令是本手册英文名称 ``The Not So Short Introduction to \LaTeXe'' 的简写。
-如果你需要在文档中多次使用本手册的名称，那么使用这个命令是一个非常方便的办法。
+如果需要在文档中多次使用本手册的名称，那么使用这个命令是一个非常方便的办法。
 
 \begin{example}
 \newcommand{\tnss}{The not
@@ -66,12 +66,12 @@ This is ``\tnss'' \ldots{}
 \end{example}
 
 \cmdindex{renewcommand}
-\LaTeX\ 不允许你定义一个与现有命令重名的命令。如果需要修改命令定义的话，使用 \cmd{re\-new\-comm\-and} 命令。它使用与命令 \cmd{new\-comm\-and}
+\LaTeX\ 不允许使用 \cmd{newcommand} 定义一个与现有命令重名的命令。如果需要修改命令定义的话，使用 \cmd{re\-new\-comm\-and} 命令。它使用与命令 \cmd{new\-comm\-and}
 相同的语法。
 
 \cmdindex{providecommand}
-在某些情况之下，你可能会希望使用 \cmd{pro\-vide\-comm\-and} 命令。在命令不存在时，它相当于 \cmd{new\-comm\-and} 
-；在命令已经存在时，仍沿用存在的定义。
+在某些情况之下，使用 \cmd{pro\-vide\-comm\-and} 命令是一种比较理想的方案。在命令未定义时，它相当于 \cmd{new\-comm\-and} 
+；在命令已定义时，沿用已有的定义。
 
 \subsection{定义环境}\label{subsec:newenv}
 

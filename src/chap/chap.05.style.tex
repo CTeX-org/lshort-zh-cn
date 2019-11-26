@@ -410,13 +410,15 @@ But remember I am a liar.}\par
 它们和设置行距的命令一样，在分段时生效。
 
 \cmdindex{indent,noindent}
+控制段落缩进的命令为：
+
 \begin{command}
 \cmd{indent} \\
 \cmd{noindent}
 \end{command}
 
-\LaTeX\ 默认在段落开始时缩进，长度为用上述命令设置的 \cmd{parindent}。如果你在某一段不想使用缩进，可使用某一段开头使用
-\cmd{noindent} 命令。相反地，\cmd{indent} 命令强制开启一段首行缩进的段落。多个 \cmd{indent} 命令可以累加缩进量。
+\LaTeX\ 默认在段落开始时缩进，长度为用上述命令设置的 \cmd{parindent}。如果需要在某一段不缩进，可在段落开头使用
+\cmd{noindent} 命令。相反地，\cmd{indent} 命令强制开启一段首行缩进的段落。在段落开头使用多个 \cmd{indent} 命令可以累加缩进量。
 
 \pkgindex{indentfirst}
 \LaTeX\ 还默认\textbf{在 \cmd{chapter}、\cmd{section} 等章节标题命令之后的第一段不缩进}%
@@ -432,14 +434,14 @@ But remember I am a liar.}\par
 \subsection{水平间距}\label{subsec:hspace}
 
 \cmdindex{hspace}
-\LaTeX 默认为将单词之间的“空格”转化为水平间距。如果需要在文中手动插入额外的水平间距，可使用 \cmd{hspace} 命令：
+\LaTeX\ 默认为将单词之间的“空格”转化为水平间距。如果需要在文中手动插入额外的水平间距，可使用 \cmd{hspace} 命令：
 \begin{example}
 This\hspace{1.5cm}is a space
 of 1.5 cm.
 \end{example}
 
 \cmdindex{hspace*}
-\cmd{hspace} 命令生成的水平间距如果位于一行的开头或末尾，则有可能因为断行而被“吞掉”。可使用 \cmd{hspace*} 命令代替 \cmd{hspace} 命令
+\cmd{hspace} 命令生成的水平间距如果位于一行的开头或末尾，则有可能因为断行而被舍弃。可使用 \cmd{hspace*} 命令代替 \cmd{hspace} 命令
 得到不会因断行而消失的水平间距。
 
 \cmdindex{stretch,fill}
@@ -494,7 +496,7 @@ between lines in a paragraph.
 
 Or you can use \verb|\\[12pt]|
 to \\[12pt] add vertical space,
-but it also breaks the paragraph.
+but it also breaks the line.
 \end{example}
 
 \cmdindex{bigskip,medskip,smallskip}
@@ -702,8 +704,8 @@ but it also breaks the paragraph.
 在双面排版、\texttt{headings / myheadings} 页眉页脚样式下，\Arg{left-mark} 和 \Arg{right-mark} 的内容分别预期出现在左页（偶数页）和右页（奇数页）。
 事实上 \cmd{chapter} 和 \cmd{section} 等章节命令内部也使用 \cmd{mark\-both} 或者 \cmd{mark\-right} 生成页眉。
 
-\LaTeX\ 默认将页眉的内容都转为大写字母。如果你不喜欢这样，可以尝试以下代码
-（相关命令的用法参照 \ref{subsec:newcmd} 节）%
+\LaTeX\ 默认将页眉的内容都转为大写字母。如果需要保持字母的大小写，可以尝试以下代码
+（\cmd{\renewcommand} 命令的用法详见 \ref{subsec:newcmd} 节）%
 \footnote{但是这不能改变页眉的斜体样式（\cmd{slshape}），斜体是定义在 \texttt{headings} 样式里的。
 如果不喜欢斜体，可在 \cmd{mark\-both} 等命令的参数里先使用 \cmd{normal\-font} ，再使用想要的字体样式命令，
 或直接尝试使用 \pkg{fancyhdr} 宏包。}：
