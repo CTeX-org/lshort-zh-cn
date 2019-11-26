@@ -2,11 +2,10 @@
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
-文字是排版的基础。在介绍 \LaTeX\ 支持的各种文档元素之前，首先应当了解一下如何在 \LaTeX\ 源代码中输入并排版文字，
-尤其是（西文中的）标点符号、连字符、重音等一些细节。
+文字是排版的基础。本章主要介绍如何在 \LaTeX\ 中输入各种文字符号，包括标点符号、连字符、重音等，以及控制文字断行和断页的方式。
 
-本章还介绍了 \LaTeX\ 中排版中文的基本方式。随着 \LaTeX\ 和底层 \TeX\ 引擎的发展，旧方式（CCT、\pkg{CJK} 等）日渐退出舞台，
-\texttt{xelatex} 和 \texttt{lualatex} 编译命令配合 \cls{ctex} 宏包 / 文档类的方式为当前的主流中文排版支持方式。
+本章简要介绍了在 \LaTeX\ 中排版中文的方法。随着 \LaTeX\ 和底层 \TeX\ 引擎的发展，旧方式（CCT、\pkg{CJK} 等）日渐退出舞台，
+\texttt{xelatex} 和 \texttt{lualatex} 编译命令配合 \cls{ctex} 宏包 / 文档类的方式成为当前的主流中文排版支持方式。
 \end{intro}
 
 \section{语言文字和编码}\label{sec:encoding}
@@ -18,11 +17,10 @@
 
 \index{bianma@编码!ASCII}
 计算机的基本存储单位是字节（byte），每个字节为八位（8-bit），范围用十六进制写作 \texttt{0x00}--\texttt{0xFF}。
-ASCII （美国通用信息交换码）使用 \texttt{0x00}--\texttt{0x7F} 对文字编码，也就是 7-bit，能够表示一般
-QWERTY 键盘上可输入的拉丁字母、数字和符号，以及一些不可显示的控制字符（如换行符、制表符等）。
+ASCII （美国通用信息交换码）使用 \texttt{0x00}--\texttt{0x7F} 对文字编码，也就是 7-bit，覆盖了基本的拉丁字母、数字和符号，以及一些不可打印的控制字符（如换行符、制表符等）。
 
 由于 \TeX\ 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，因而早期版本的 \TeX\ 只支持 7-bit 和 ASCII 编码。
-要排版西欧语系中带重音的字符，就必须用到后文所叙述的重音命令，如 M\"obius 必须用 \verb|M\"obius| 输入。
+排版扩展拉丁字符必须使用后文所述的各种符号和重音命令，如 M\"obius 必须通过输入 \verb|M\"obius| 得到。
 
 \subsection{扩展编码}\label{subsec:ext-encoding}
 
@@ -31,17 +29,14 @@ QWERTY 键盘上可输入的拉丁字母、数字和符号，以及一些不可�
 
 \index{bianma@编码!Latin-1}
 \pkgindex{inputenc}
-\TeX\ 从 3.0 版开始支持 8-bit，能够处理源代码里编码处于 \texttt{0x80}--\texttt{0xFF} 范围的字符。
-西欧（拉丁字母）、俄语系（西里尔字母）等语言的编码方案刚好能够利用 \texttt{0x80}--\texttt{0xFF} 这个范围，
-处理起来较为方便。使用 \texttt{latex} 及 \texttt{pdflatex} 编译命令时，这些编码的处理由 \pkg{inputenc} 宏包支持。
-比如将源代码相应编码，并在导言区调用 \pkg{inputenc} 宏包后，M\"obius 这样的词语就可以直接通过（用适当输入法）
-输入 \texttt{M\"obius} 得到了%
-\footnote{并非所有拉丁文扩展字符都能够直接使用 \pkg{inputenc} 宏包排版出来。一些符号需要借助 \pkg{fontenc} 宏包对字体做进一步配置。}。
+\TeX\ 从 3.0 版开始支持 8-bit，能够处理编码在 \texttt{0x80}--\texttt{0xFF} 范围内的字符。
+西欧（拉丁字母）、俄语系（西里尔字母）等语言文字的编码方案大都利用了 \texttt{0x80}--\texttt{0xFF} 这个范围，
+处理起来较为方便。使用 \texttt{latex} 或 \texttt{pdflatex} 编译命令时，对源代码的编码处理由 \pkg{inputenc} 宏包支持。
+比如将源代码保存为 Latin-1 编码，并在导言区调用 \pkg{inputenc} 宏包并指定 \texttt{latin1} 选项后，M\"obius 这样的词语就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
 
 \index{bianma@编码!GBK}
 用于汉字的 GBK 等编码是多字节编码，ASCII 字符为一个字节，汉字等非 ASCII 字符为两个字节，使用
-\texttt{latex} 及 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。早期，
-\pkg{CJK} 宏包就是用于处理中、日、韩等多字节编码的语言文字的宏包。但 \pkg{CJK} 宏包的使用非常不方便，笔者不再推荐直接使用。
+\texttt{latex} 或 \texttt{pdflatex} 编译命令时需要借助一些宏包进行较为复杂的判断和处理。早期排版中文须使用 \pkg{CJK} 宏包，它是一个用于处理中、日、韩等东亚语言文字编码和字体配置的宏包。但 \pkg{CJK} 宏包的使用非常不方便，目前已不再推荐直接使用。
 
 \subsection{UTF-8 编码}\label{subsec:utf8}
 
@@ -51,7 +46,7 @@ Unicode 是一个多国字符的集合，覆盖了几乎全球范围内的语言
 
 现行版本的 \LaTeX\ 使用 UTF-8 作为默认编码%
 \footnote{在 2018 年 4 月之前，需要调用 \pkg{inputenc} 宏包并指定 \texttt{utf8} 选项才能使用 UTF-8 编码。}。
-因此，大部分西欧语言（拉丁字母）的文档可以在保存成 UTF-8 编码后直接编译：
+将使用拉丁字母的文档保存为 UTF-8 编码后，可以用 \texttt{pdflatex} 直接编译，比如：
 
 \begin{verbatim}
 \documentclass{article}
@@ -60,54 +55,40 @@ Français Português Español Føroyskt
 \end{document}
 \end{verbatim}
 
-由于种种限制，俄文（西里尔字母）、希腊文、阿拉伯文等不使用拉丁字母的文字系统，以及超过 8-bit 范围的 CJK 文字，
-仍然不能按此种方法直接在 \LaTeX\ 中使用。
+但是非拉丁字母仍然无法直接在 \LaTeX\ 中使用，如西里尔字母（俄文）、希腊字母、阿拉伯字母以及东亚文字等。
 
-\pkgindex{inputenc,fontspec,babel,polyglossia}
+\pkgindex{fontspec,babel,polyglossia}
 较为现代的 \TeX\ 引擎，如 \hologo{XeTeX} 和 \hologo{LuaTeX}，它们均原生支持 UTF-8 编码。
-使用 \texttt{xelatex} 和 \texttt{lualatex} 排版时，将 \texttt{.tex} 源代码保存为 UTF-8 编码，并借助
+使用 \texttt{xelatex} 和 \texttt{lualatex} 排版时，将源代码保存为 UTF-8 编码，并借助
 \pkg{fontspec} 宏包（见 \ref{subsec:fontspec} 小节）调用适当的字体，原则上就可以在源代码中输入任意语言的文字。
-注意此时\textbf{不再适用 \pkg{inputenc} 宏包}。
-
-当然，良好的排版远不只是让字符能够显示出来，还要求断词规则、文字方向、标点禁则等诸多细节。因此，复杂语言
-（如印地语、阿拉伯语等）的特殊排版还需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等，此处不再涉及。
+注意此时\textbf{不再适用 \pkg{inputenc} 宏包}。但一些复杂语言（如印地语、阿拉伯语等）的排版需要考虑到断词规则、文字方向、标点禁则等诸多细节，因此需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等，此处不再涉及。
 
 \section{排版中文}\label{sec:chinese}
 
-用 \LaTeX\ 排版中文的一大难题是中文字体的处理。\TeX\ 使用的字体格式仅支持不超过 256 个字符，
-旧式的中文排版方案如 \pkg{CJK} 宏包往往需要复杂的预处理，将中文字体拆分成数百个小字体，非常麻烦%
-\footnote{现在的 \texttt{pdflatex} 以及 \texttt{latex} + \texttt{dvipdfmx} 命令通过字体映射的方式支持
-直接使用中文字体，不需要经过预处理，但仍然是不方便新手操作的。}。
-除此之外，中文排版中的一些细节，比如中英文之间插入间距、汉字之间允许断行、移除换行符带来的额外空白、
-标点符号禁则处理（如句号、逗号不允许出现在行首）等都需要复杂而繁琐的设置。
-
-\pkgindex{CJK,xeCJK,luatexja}
-为了解决上述问题，在不同的 \TeX\ 引擎下需要使用不同的宏包，如 \texttt{latex} 和 \texttt{pdflatex} 中需要 \pkg{CJK} 包，
-\texttt{xelatex} 中需要 \pkg{xeCJK} 包，\texttt{lualatex} 中需要 \pkg{luatexja} 包。对一般用户而言，仍比较麻烦。
+\pkgindex{xeCJK,luatexja}
+用 \LaTeX\ 排版中文需要解决两方面问题，一方面是对中文字体的支持，另一方面是对中文排版中的一些细节的处理，包括在汉字之间控制断行、标点符号的禁则（如句号、逗号不允许出现在行首）、中英文之间插入间距等。\pkg{CJK} 宏包对中文字体的支持比较麻烦，已经不再推荐直接使用。
+\hologo{XeTeX} 和 \hologo{LuaTeX} 除了直接支持 UTF-8 编码外，还支持直接调用 TrueType / OpenType 格式的字体。\pkg{xeCJK} 及 \pkg{luatexja} 宏包则在此基础上封装了对汉字排版细节的处理功能。
 
 \pkgindex{ctex}
 \clsindex{ctexart,ctexbook,ctexrep}
-\pkg{ctex} 宏包和文档类对 \pkg{CJK}、\pkg{xeCJK}、\pkg{luatexja} 等宏包的进一步封装%
-\footnote{C\TeX\ 还经常用来指一个过时的 \TeX\ 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}。
-\pkg{ctex} 文档类包括\cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}，对应 \LaTeX\ 的三个标准文档类%
-\footnote{\pkg{ctex} 文档类中还包含有 \cls{ctexbeamer}，对应原 \cls{beamer} 文档类，用于排版幻灯片。}。
-它们对 \LaTeX\ 默认的排版样式做了一些调整，以切合中文排版风格。\pkg{ctex} 宏包 / 文档类还能够根据
-操作系统自动选择字体，因此基本无需额外配置即可排版中文文档。下面举一个简单的例子：
+\pkg{ctex} 宏包和文档类\footnote{C\TeX\ 还经常用来指一个过时的 \TeX\ 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}%
+进一步封装了 \pkg{CJK}、\pkg{xeCJK}、\pkg{luatexja} 等宏包，使得用户在排版中文时不用再考虑排版引擎等细节。\pkg{ctex} 宏包本身用于配合各种文档类排版中文，而 \pkg{ctex} 文档类对 \LaTeX\ 的标准文档类进行了封装，对一些排版根据中文排版习惯做了调整，包括 \cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}。
+\pkg{ctex} 宏包和文档类能够识别操作系统和 \TeX\ 发行版中安装的中文字体，因此基本无需额外配置即可排版中文文档。下面举一个使用 \pkg{ctex} 文档类排版中文的最简例子：
+
 \begin{verbatim}
 \documentclass{ctexart}
 \begin{document}
-中文 \LaTeX{} 排版。
-汉字 English 汉字English之间手动输入的空格不会影响
-排版结果。换行符也不会影响。
+在\LaTeX{}中排版中文。
+汉字和English单词混排，通常不需要在中英文之间添加额外的空格。
+汉字换行时不会引入多余的空格。
 \end{document}
 \end{verbatim}
 
 \index{xelatex@\texttt{xelatex} 命令}
 \index{lualatex@\texttt{lualatex} 命令}
 注意源代码须保存为 UTF-8 编码，并使用 \texttt{xelatex} 或 \texttt{lualatex} 命令编译。
-
-虽然 \pkg{ctex} 宏包和文档类保留了对 GBK 编码以及 \texttt{latex} + \texttt{dvipdfmx}、\texttt{pdflatex} 等旧的编译命令的支持，
-笔者建议在使用 \pkg{ctex} 宏包和文档类时总是将源代码保存为 UTF-8 编码，用 \texttt{xelatex} 命令编译。
+虽然 \pkg{ctex} 宏包和文档类保留了对 GBK 编码以及 \texttt{latex} 和 \texttt{pdflatex} 编译命令的兼容，
+笔者建议在使用 \pkg{ctex} 宏包和文档类时总是将源代码保存为 UTF-8 编码，用 \texttt{xelatex} 或 \texttt{lualatex} 命令编译。
 
 \section{\LaTeX\ 中的字符}\label{sec:text-symbols}
 
@@ -152,28 +133,28 @@ ak a word.
 # $ % & { } _ ^ ~ \
 \end{verbatim}
 
-如果想要输入以上符号，需要使用以下带反斜线的形式输入：
+如果想要输入以上符号，需要使用以下带反斜线的形式输入，类似编程语言里的“转义”符号：
 \begin{example}
 \# \$ \% \& \{ \} \_
 \^{} \~{} \textbackslash
 \end{example}
 
-事实上这些带反斜线的形式就是 \LaTeX\ 命令。\cmd{\textasciicircum} 和 \cmd{\textasciitilde}
-两个命令是需要带参数的，如果不加一对花括号（空参数），就将后面的字符作为参数，形成重音效果（详见 \ref{subsec:accents} 节）。
-\crcmd\ 被直接定义成了手动换行的命令，输入反斜杠就只好用 \cmd{text\-back\-slash}。
+这些“转义”符号事实上是一些 \LaTeX\ 命令。其中 \cmd{\textasciicircum} 和 \cmd{\textasciitilde}
+两个命令需要一个参数，加一对花括号的写法相当于提供了空的参数，否则它们可能会将后面的字符作为参数，形成重音效果（详见 \ref{subsec:accents} 节）。
+\crcmd\ 被直接定义成了手动换行的命令，输入反斜杠就需要用 \cmd{text\-back\-slash}。
 
 \subsection{连字}\label{subsec:ligatures}
 
 西文排版中经常会出现连字（Ligatures），常见的有 ff / fi / fl / ffi / ffl{}。
 \begin{example}
-It's difficult to find \ldots .\\
-It's dif{}f{}icult to f{}ind \ldots .
+It's difficult to find \ldots\\
+It's dif{}f{}icult to f{}ind \ldots
 \end{example}
 
 \subsection{标点符号}\label{subsec:punct}
 
 中文的标点符号（绝大多数为非 ASCII 字符）使用中文输入法输入即可，一般不需要过多留意。
-而在英文标点符号上，有许多需要留意的地方。
+而输入西文标点符号时，有不少地方需要留意。
 
 \subsubsection{引号}
 
@@ -181,8 +162,8 @@ It's dif{}f{}icult to f{}ind \ldots .
 \index{biaodianfuhao@标点符号!``@\protect\verb+'+ (\textit{后引号} ')}
 \index{biaodianfuhao@标点符号!'@\protect\verb+``+ (\textit{前双引号} ``)}
 \index{biaodianfuhao@标点符号!''@\protect\verb+''+ (\textit{后双引号} '')}
-\LaTeX\ 的单引号 ` ' 用 \texttt` 和 \texttt' 输入；双引号 `` 和 '' 分别用 \verb|``| 和 \verb|''| 输入
-（虽然 \texttt" 也表示双引号，但没有合适的单个符号用来表示前双引号，于是习惯上写为与 \verb|``| 对应的 \verb|''|）。
+\LaTeX\ 中单引号 ` ' 分别用 \verb|`| 和 \verb|'| 输入；双引号 `` 和 '' 分别用 \verb|``| 和 \verb|''| 输入
+（\verb|"| 可以输入后双引号，但没有直接输入前双引号的字符，习惯上用 \verb|''| 输入以和 \verb|``| 更好地对应）。
 \begin{example}
 ``Please press the `x' key.''
 \end{example}
@@ -193,7 +174,7 @@ It's dif{}f{}icult to f{}ind \ldots .
 \index{biaodianfuhao@标点符号!--@\protect\verb+--+ (\textit{短破折号} --)}
 \index{biaodianfuhao@标点符号!---@\protect\verb+---+ (\textit{长破折号} ---)}
 \LaTeX\ 中有三种长度的“横线”可用：连字号（hyphen）、短破折号（en-dash）和长破折号（em-dash）。
-它们分别有不同的用途：连字号 - 用来组成复合词；短破折号 -- 用来连接数字表示范围；长破折号 --- 用来连接单词，与中文标点符号中的破折号用法类似。
+它们分别有不同的用途：连字号 - 用来组成复合词；短破折号 -- 用来连接数字表示范围；长破折号 --- 用来连接单词，语义上类似中文的破折号。
 \begin{example}
 daughter-in-law, X-rated\\
 pages 13--67\\
@@ -204,8 +185,8 @@ yes---or no?
 
 \index{biaodianfuhao@标点符号!ldots@\cmd{ldots} (\textit{省略号} \ldots)}
 \index{biaodianfuhao@标点符号!dots@\cmd{dots} (\textit{省略号} \dots)|see{\cmd{ldots}}}
-\LaTeX\ 提供了命令 \cmd{ldots} 来生成省略号，相对于直接输入三个点的方式更为合理。
-\cmd{ldots} 和 \cmd{dots} 是两个等效的命令。
+\LaTeX\ 提供了 \cmd{ldots} 命令表示省略号，相对于直接输入三个点的方式更为合理。
+\cmd{dots} 与 \cmd{ldots} 命令等效。
 \begin{example}
 one, two, three, \ldots one hundred.
 \end{example}
@@ -213,12 +194,12 @@ one, two, three, \ldots one hundred.
 \subsubsection{波浪号}
 
 我们在 \ref{subsec:special-chars} 小节中了解了 \cmd{\textasciitilde} 命令，它可以用来输入波浪号，
-但位置靠顶端（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。西文中较少将波浪号作为标点符号使用，通常使用中文的全角波浪号（～）。
+但位置靠顶端（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。西文中较少将波浪号作为标点符号使用，在中文环境中一般直接使用全角波浪号（～）。
 
 \subsection{拉丁文扩展与重音}\label{subsec:accents}
 
 \pinyinindex{zhongyin}{重音}
-\LaTeX\ 支持用命令输入各种西欧语言所使用的拉丁文扩展字母，主要为带重音的字母：
+\LaTeX\ 支持用命令输入西欧语言中使用的各种拉丁文扩展字符，主要为带重音的字母：
 \begin{example}
 H\^otel, na\"\i ve, \'el\`eve,\\
 sm\o rrebr\o d, !`Se\ norita!,\\
@@ -285,52 +266,22 @@ Stra\ss e
 \end{tabular}
 \end{center}
 
-\section{文字强调}\label{sec:emph}
-
-强调文字的方法，要么是添加下划线等装饰物，要么是改变文字的字体。
-
-\cmdindex{underline}
-\LaTeX\ 定义了 \cmd{underline} 命令用来为文字添加下划线：
-\begin{example}
-An \underline{underlined} text.
-\end{example}
-
-\pkgindex{ulem}
-\cmdindex[ulem]{uline}
-\cmd{underline} 命令生成下划线的样式比较机械，不同的单词可能生成高低各异的下划线，并且无法换行。
-\pkg{ulem} 宏包解决了这一问题，它提供的 \cmd{uline} 命令能够轻松生成自动换行的下划线：
-\begin{example}
-An example of \uline{some
-long and underlined words.}
-\end{example}
-
-\cmdindex{emph}
-\cmd{emph} 命令用来将文字变为斜体以示强调。如果在本身已经用 \cmd{emph} 命令强调的文字内部嵌套使用 \cmd{emph} 命令，
-内部则使用直立体文字：
-\begin{example}
-Some \emph{emphasized words,
-including \emph{double-emphasized}
-words}, are shown here.
-\end{example}
-
-如果需要用其它字体表示强调，可参考后文的 \ref{subsec:fontshape} 小节。
-
 \section{断行和断页}\label{sec:break}
 
-\LaTeX\ 将文字段落在合适的位置进行断行，尽可能做到每行的宽度一致，并且单词间距匀称。
+\LaTeX\ 将文字段落在合适的位置进行断行，尽可能做到每行的疏密程度匀称，单词间距不会过宽或过窄。
 文字段落和公式、图表等内容从上到下顺序排布，并在合适的位置断页，分割成匀称的页面。
 在绝大多数时候，我们无需自己操心断行和断页。但偶尔会遇到需要手工调整的地方。
 
 \subsection{单词间距}\label{subsec:interword}
 
-在西文排版实践中，断行的位置尽可能选取在两个单词之间，也就是用户在源文件中输入的“空格”%
+在西文排版实践中，断行的位置优先选取在两个单词之间，也就是在源代码中输入的“空格”%
 \footnote{中文排版实现汉字间断行，则需要宏包（如 \pkg{xeCJK} 等）或特殊的排版引擎（如 up\LaTeX{}）的支持。}。
-这个“空格”通常生成一个间距，它会根据行宽和上下文自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
+“空格”本身通常生成一个间距，它会根据行宽和上下文自动调整，文字密一些的地方，单词间距就略窄，反之略宽。
 
 \index{~@\texttt\textasciitilde\ (\textit{不断行空格})}
-\LaTeX\ 按照西文排版习惯在单词间的“空格”处断行，“空格”生成的间距也随之舍去。
-我们可以使用字符 \texttt\textasciitilde 在合适的位置插入一个不会断行的空格（高德纳称之为 tie，“带子”），
-通常用在英文人名、图表名称等场景：
+文字在单词间的“空格”处断行时，“空格”生成的间距随之舍去。
+我们可以使用字符 \texttt\textasciitilde 输入一个不会断行的空格（高德纳称之为 tie，“带子”），
+通常用在英文人名、图表名称等上下文环境：
 \begin{example}
 Fig.~2a \\
 Donale~E. Knuth
@@ -341,14 +292,14 @@ Donale~E. Knuth
 \index{\@\crcmd\ (\textit{换行})} \cmdindex{newline}
 如果我们确实需要手动断行，可使用如下命令：
 \begin{command}
-\crcmd \oarg{length} \\
+\crcmd \oarg{length} \qquad
 \crcmd*\oarg{length} \\
 \cmd{newline}
 \end{command}
 
 它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在断行处向下增加垂直间距（见 \ref{subsec:vspace} 小节），
 而 \cmd{newline} 不带可选参数；二是 \crcmd\ 也在表格、公式等地方用于换行，而 \cmd{newline} 只用于文本段落中。
-带星号的 \crcmd\ 使得断行处禁止分页。
+带星号的 \crcmd\ 表示禁止在断行处分页。
 
 \begin{example}
 另外需要注意的是，使用 \verb|\\|
@@ -363,7 +314,7 @@ Donale~E. Knuth
 \cmd{clearpage}
 \end{command}
 
-通常情况下两个命令都能起到另起一页的作用，但有一些区别：一是在双栏排版模式中 \cmd{newpage} 只起到另起一栏的作用；二是涉及到浮动体的排版上行为不同。
+通常情况下两个命令都起到另起一页的作用，区别在于：第一，在双栏排版模式中 \cmd{newpage} 起到另起一栏的作用，\cmd{clearpage} 则能够另起一页；第二，在涉及到浮动体的排版上行为不同。
 后文的 \ref{sec:float} 节以及 \ref{subsec:columns} 小节会更详细地介绍相关内容。
 
 \cmdindex{linebreak,nolinebreak}
@@ -374,12 +325,12 @@ Donale~E. Knuth
 \end{command}
 
 以上命令都带一个可选参数，用数字 \Arg{n} 代表适合/不适合的程度，取值范围为 0-4，不带可选参数时，缺省为 4。
-比如 \cmd{linebreak}\texttt{[4]} 意味着此处需要强行断行；\cmd{nopagebreak} 或 \cmd{nopagebreak}\texttt{[4]}
+比如 \cmd{linebreak} 或者 \cmd{linebreak}\texttt{[4]} 意味着此处需要强行断行；\cmd{nopagebreak} 或 \cmd{nopagebreak}\texttt{[4]}
 意味着禁止在此处断页。
 
-以上命令适合给出优先考虑断行断页/禁止断行断页的位置，但不适合直接拿来断行或断页，使用 \cmd{newline} 或 \cmd{newpage} 等是更好的选择。
-因为 \cmd{newline} 和 \cmd{newpage} 会在断行/断页位置填充适当的间距，但 \cmd{linebreak} 和 \cmd{pagebreak} 不能，
-它们的强行断行/断页可能会制造出糟糕的排版效果，并导致 \LaTeX\ 报 \texttt{Underfull \cmd{hbox}} 等警告。
+以上命令适合给出优先考虑断行断页/禁止断行断页的位置，但不适合直接拿来断行或断页，使用 \cmd{newline} 或 \cmd{newpage} 等命令是更好的选择。
+因为 \cmd{newline} 和 \cmd{newpage} 会在断行/断页位置填充适当的间距，但 \cmd{linebreak} 和 \cmd{pagebreak} 不能，使用
+这些命令强行断行/断页可能会制造出糟糕的排版效果，并导致 \LaTeX\ 报 \texttt{Underfull \cmd{hbox}} 等警告。
 
 \begin{example}
 使用 \verb|\newline| 断行的效果
@@ -391,8 +342,8 @@ Donale~E. Knuth
 
 \subsection{断词}\label{subsec:hyphen}
 
-如果 \LaTeX\ 遇到了很长的英文单词，仅在单词之间的“空格”处断行无法生成宽度匀称的行时，就会考虑从单词中间断开。
-对于绝大部分单词，\LaTeX\ 能够找到合适的断词位置，在断开的行尾加上连字符 \char\hyphenchar\font 。
+如果 \LaTeX\ 遇到了很长的英文单词，仅在单词之间的“空格”处断行无法生成疏密程度匀称的段落时，就会考虑从单词中间断开。
+对于绝大多数单词，\LaTeX\ 能够找到合适的断词位置，在断开的行尾加上连字符 \char\hyphenchar\font 。
 
 \index{-@\cmd{-} (\textit{断词})}
 如果一些单词没能自动断词，我们可以在单词内手动使用 \cmd{-} 命令指定断词的位置：

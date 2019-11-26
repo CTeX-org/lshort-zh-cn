@@ -282,6 +282,34 @@ Unicode 数学字体相比于正文字体的选择余地不多。表 \ref{tbl:un
 \end{tabular}
 \end{table}
 
+\section{文字装饰和强调}\label{sec:emphasize}
+
+强调文字的方法，或者是添加下划线等装饰物，或者是改变文字的字体。
+
+\cmdindex{underline}
+\LaTeX\ 定义了 \cmd{underline} 命令用来为文字添加下划线：
+\begin{example}
+An \underline{underlined} text.
+\end{example}
+
+\pkgindex{ulem}
+\cmdindex[ulem]{uline}
+\cmd{underline} 命令生成下划线的样式不够灵活，不同的单词可能生成高低各异的下划线，并且无法换行。
+\pkg{ulem} 宏包提供了更灵活的解决方案，它提供的 \cmd{uline} 命令能够轻松生成自动换行的下划线：
+\begin{example}
+An example of \uline{some
+long and underlined words.}
+\end{example}
+
+\cmdindex{emph}
+前一节介绍了 \cmd{emph} 命令，它将文字变为斜体以示强调，而如果在已强调的文字中嵌套使用 \cmd{emph} 命令，
+命令内则使用直立体文字：
+\begin{example}
+Some \emph{emphasized words,
+including \emph{double-emphasized}
+words}, are shown here.
+\end{example}
+
 \section{段落格式和间距}\label{sec:par-lengths}
 
 \subsection{长度和长度变量}\label{subsec:lengths}
