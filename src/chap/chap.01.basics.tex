@@ -65,6 +65,34 @@
   \item 相比“所见即所得”的模式有一些不便，为了查看生成文档的效果，用户总要不停地编译。
 \end{itemize}
 
+\subsection{命令行基础}
+
+\LaTeX\ 和 \TeX\ 及相关软件大多仅提供了命令行接口，而不像 Word、Adobe InDesign 一样有图形用户界面。
+命令行程序的结构往往比较简单，它们接受用户输入，读取相关文件，进行一些操作和运算后输出目标文件，
+有时还会将提示信息、运行结果显示在屏幕上。在 Windows 系统上，如需进入命令行，可在开始菜单中搜索
+“命令提示符”，也可在“运行”窗口中输入 \texttt{cmd} 打开；Linux 或 macOS 系统中可搜索“Terminal”打开
+终端。部分系统也提供了一些快捷方式，具体请参考相关手册。
+
+与常规软件类似，命令行程序也都是可执行程序，在 Windows 上后缀名为 \texttt{.exe}，而在类 Unix 系统上
+则需要带有 \texttt{x} 权限。在大多数命令行环境中，系统会根据\textbf{环境变量} \texttt{PATH} 中存储
+的路径来搜索可供执行的程序。因此在运行之前，需确保 \LaTeX 、\TeX\ 及相关程序所在路径已包含在
+\texttt{PATH} 中。
+
+在命令行中运行程序时，需要先输入程序名，其后可加一系列用空格分隔的参数，并按下 Enter 键执行。
+一般情况下，命令行程序执行完毕会自行退出。若遇到错误或中断，可输入 Ctrl+C 以强制结束。
+
+使用命令行程序输入、输出文件时，需确保文件路径正确。通常需要先切换到文件所在目录，再执行有关程序。
+切换路径可以执行
+\begin{command}
+\verb|cd| \Arg{path}
+\end{command}
+注意 \Arg{path} 中的多级目录在 Windows 系统上使用反斜线 \verb|\| 分隔，而在类 Unix 系统上使用正斜线
+\verb|/| 分隔。如果 \Arg{path} 中带有空格，则需加上引号 \verb|"|。此外，在 Windows 系统上如果要切换
+到其他分区，还需加上 \verb|/d| 选项，例如 \verb|cd /d "C:\Program Files (x86)\"|。
+
+许多用户会使用 \TeX works 或 \TeX studio 等编辑器来编写 \LaTeX\ 文档。这些编辑器提供的编译功能，
+实际上只是对特定命令行程序的封装，而并非魔法。
+
 \section{第一次使用 \LaTeX}\label{sec:run}
 
 源代码~\ref{code:hello-world}~是一份最短的 \LaTeX\ 源代码示例。
@@ -80,21 +108,28 @@
 \end{sourcecode}
 
 这里首先介绍如何编译使用这份源代码，在后续小节中再介绍源代码的细节。
-
-你可以将这份源代码保存为~\texttt{helloworld.tex}，而后编译。具体来说:
+你可以将这份源代码保存为 \texttt{helloworld.tex}，而后编译。具体来说:
 \begin{itemize}
-  \item 如果使用 \TeX works 或 \TeX studio 等编辑器，你可以使用编辑器提供的“编译”按钮
-  或者“排版”按钮。建议使用 “XeLaTeX” 作为默认的编译方式。
-  \item 如果使用命令行方式进行编译，则需打开 Windows 命令提示符或者 Linux / macOS（OS X）的终端，在源代码所在的目录下输入命令：
+  \item 如果使用 \TeX works 或 \TeX studio 等编辑器，你可以使用编辑器提供的“编译”按钮或者“排版”
+  按钮。建议使用 \hologo{pdfLaTeX} 或 \hologo{XeLaTeX} 作为默认的编译方式（不同编译方式的差别，
+  见~\ref{sec:concepts}~节）。
+  \item 如果使用命令行方式进行编译，则需打开 Windows 命令提示符或者 Linux / macOS（OS X）的终端，
+  在源代码所在的目录下输入：
+\begin{verbatim}
+pdflatex helloworld
+\end{verbatim}
+或者
 \begin{verbatim}
 xelatex helloworld
 \end{verbatim}
 \end{itemize}
 
-如果编译成功，可以在~\texttt{helloworld.tex}~所在的目录，
-看到生成的 \texttt{helloworld.pdf} 以及一些其它文件。
+如果编译成功，可以在 \texttt{helloworld.tex} 所在目录看到生成的 \texttt{helloworld.pdf} 以及一些其它文件。
 
-源代码~\ref{code:hello-world-chinese}~是在 \LaTeX\ 排版中文的一个最简示例。编译的方式与上一份源代码相同，使用 XeLaTeX 编译方式\footnote{注意两个问题：1. 文档保存为 UTF-8 编码；2. 某些发行版需要补充安装较多宏包（如 Mik\TeX\ ）。}。中文支持的详细内容见 \ref{sec:chinese} 节。
+源代码~\ref{code:hello-world-chinese}~是在 \LaTeX\ 排版中文的一个最简示例。
+编译的方式与上一份源代码相同，但需使用 \hologo{XeLaTeX} 编译方式%
+\footnote{注意两个问题：1. 文档保存为 UTF-8 编码；2. 某些发行版需要补充安装较多宏包（如 MiK\TeX\ ）。}。
+中文支持的详细内容见 \ref{sec:chinese} 节。
 
 \begin{sourcecode}[htp]
   \begin{Verbatim}
@@ -159,7 +194,8 @@ or \TeX{} users?
 部分环境允许嵌套使用。
 
 \pinyinindex{fenzu}{分组}
-有些命令（如 \cmd{bfseries}）会对其后所有内容产生作用。若要限制其作用范围，则需要使用\textbf{分组}。\LaTeX\ 使用一对花括号 \texttt\{ 和 \texttt\} 作为分组，在分组中使用的命令被限制在分组内，不会影响到分组外的内容%
+有些命令（如 \cmd{bfseries}）会对其后所有内容产生作用。若要限制其作用范围，则需要使用\textbf{分组}。
+\LaTeX\ 使用一对花括号 \verb|{| 和 \verb|}| 作为分组，在分组中使用的命令被限制在分组内，不会影响到分组外的内容%
 \footnote{个别命令在分组内仍然会产生全局作用，例如第 \ref{sec:counters} 节介绍的 \cmd{setcounter} 等命令。}。
 上文提到的 \LaTeX\ 环境隐含了一个分组，在环境中的命令被包裹在分组内。
 \ref{subsec:fontshape} 和 \ref{subsec:fontsize} 小节中介绍的修改字体和字号的命令用法，即属此类。
@@ -294,7 +330,8 @@ or \TeX{} users?
   \item[\texttt{.bst}] \hologo{BibTeX} 用到的参考文献格式模板。详见 \ref{subsec:bibtex-use} 小节。
 \end{description}
 
-\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外\footnote{\hologo{XeLaTeX} 还可能生成 \texttt{.xdv} 文件。}，还可能会生成相当多的辅助文件和日志。
+\LaTeX\ 在编译过程中除了生成 \texttt{.dvi} 或 \texttt{.pdf} 格式的文档外%
+\footnote{\hologo{XeLaTeX} 还可能生成 \texttt{.xdv} 文件。}，还可能会生成相当多的辅助文件和日志。
 一些功能如交叉引用、参考文献、目录、索引等，需要先通过编译生成辅助文件，
 然后再次编译时读入辅助文件得到正确的结果，所以复杂的 \LaTeX\ 源代码可能要编译多次：
 \begin{description}
@@ -332,7 +369,8 @@ or \TeX{} users?
 \Arg{filename} 可以不带扩展名，此时默认扩展名为 \texttt{.tex}。
 
 \cmdindex{input}
-值得注意的是 \cmd{include} 在读入 \Arg{filename} 之前会另起一页。有的时候我们并不需要这样，而是用 \cmd{input} 命令，它纯粹是把文件里的内容插入：
+值得注意的是 \cmd{include} 在读入 \Arg{filename} 之前会另起一页。有的时候我们并不需要这样，而是用
+\cmd{input} 命令，它纯粹是把文件里的内容插入：
 \begin{command}
 \cmd{input}\marg{filename}
 \end{command}

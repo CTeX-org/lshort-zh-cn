@@ -27,7 +27,7 @@ If typesetting succeeds and the target PDF document is made correctly, then move
 
 ### Using scripts and Makefile
 
-For GNU/Linux and OS/X users, we provide Makefile in the 'src' directory. Use GNU make tool in the following order:
+For GNU/Linux and macOS users, we provide Makefile in the 'src' directory. Use GNU make tool in the following order:
 
 ```sh
 make
