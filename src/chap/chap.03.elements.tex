@@ -503,7 +503,7 @@ for (int i=0; i<4; ++i)
 \envindex{tabular}
 \cmdindex{hline}
 \index{&@\texttt\& (\textit{单元格/对齐})}
-\index{\@\crcmd\ (\textit{换行})}
+\index{\@\crcmd{} (\textit{换行})}
 排版表格最基本的 \env{tabular} 环境用法为：
 \begin{command}
 \cmd{begin}\marg*{tabular}\oarg{align}\marg{column-spec}\\
@@ -513,7 +513,7 @@ for (int i=0; i<4; ++i)
 \cmd{end}\marg*{tabular}
 \end{command}
 其中 \Arg{column-spec} 是列格式标记，在接下来的内容将仔细介绍；\texttt\& 用来分隔单元格；
-\crcmd\ 用来换行；\cmd{hline} 用来在行与行之间绘制横线。
+\crcmd{} 用来换行；\cmd{hline} 用来在行与行之间绘制横线。
 
 直接使用 \env{tabular} 环境的话，会\textbf{和周围的文字混排}。\env{tabular} 环境可带一个可选参数 \Arg{align} 控制垂直对齐（默认是垂直居中）：
 \begin{example}
@@ -591,9 +591,9 @@ for (int i=0; i<4; ++i)
 
 辅助格式甚至支持插入 \cmd{centering} 等命令改变 \texttt{p} 列格式的对齐方式，
 一般还要加额外的命令 \cmd{array\-back\-slash} 以免出错%
-\footnote{\cmd{centering} 等对齐命令会破坏表格环境里 \crcmd\ 换行命令的定义，
+\footnote{\cmd{centering} 等对齐命令会破坏表格环境里 \crcmd{} 换行命令的定义，
 \cmd{array\-back\-slash} 用来恢复之。如果不加 \cmd{array\-back\-slash} 命令，
-也可以用 \cmd{tabular\-newline} 命令代替原来的 \crcmd\ 实现表格换行。}：
+也可以用 \cmd{tabular\-newline} 命令代替原来的 \crcmd{} 实现表格换行。}：
 \begin{example}
 \begin{tabular}
 {>{\centering\arraybackslash}p{9em}}
@@ -764,8 +764,8 @@ for (int i=0; i<4; ++i)
 \end{tabular}
 \end{example}
 
-\index{\@\crcmd\ (\textit{换行})}
-另一种增加间距的办法是给换行命令 \crcmd\ 添加可选参数，在这一行下面加额外的间距，适合用于在行间不加横线的表格：
+\index{\@\crcmd{} (\textit{换行})}
+另一种增加间距的办法是给换行命令 \crcmd{} 添加可选参数，在这一行下面加额外的间距，适合用于在行间不加横线的表格：
 \begin{example}
 \begin{tabular}{c}
   \hline
@@ -776,7 +776,7 @@ for (int i=0; i<4; ++i)
 \end{example}
 
 但是这种换行方式的存在导致了一个缺陷——\textbf{表格的首个单元格不能直接使用中括号 \texttt{[]}}，
-否则 \crcmd\ 往往会将下一行的中括号当作自己的可选参数，因而出错。如果要使用中括号，应当放在花括号 \marg*{} 里面。
+否则 \crcmd{} 往往会将下一行的中括号当作自己的可选参数，因而出错。如果要使用中括号，应当放在花括号 \marg*{} 里面。
 或者也可以选择将换行命令写成 \crcmd\texttt{[0pt]}。
 
 \pinyinindex{biaoge}{表格|)}
@@ -1040,7 +1040,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \subsection{并排和子图表}\label{subsec:subfig}
 
 我们时常有在一个浮动体里面放置多张图的用法。最简单的用法就是直接并排放置，
-也可以通过分段或者换行命令 \crcmd\ 排版多行多列的图片。以下为示意代码，效果大致如图 \ref{fig:parallel-fig} 所示。
+也可以通过分段或者换行命令 \crcmd{} 排版多行多列的图片。以下为示意代码，效果大致如图 \ref{fig:parallel-fig} 所示。
 \begin{verbatim}
 \begin{figure}[htbp]
   \centering

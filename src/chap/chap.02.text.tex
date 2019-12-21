@@ -141,7 +141,7 @@ ak a word.
 
 这些“转义”符号事实上是一些 \LaTeX{} 命令。其中 \cmd{\textasciicircum} 和 \cmd{\textasciitilde}
 两个命令需要一个参数，加一对花括号的写法相当于提供了空的参数，否则它们可能会将后面的字符作为参数，形成重音效果（详见 \ref{subsec:accents} 节）。
-\crcmd\ 被直接定义成了手动换行的命令，输入反斜线就需要用 \cmd{text\-back\-slash}。
+\crcmd{} 被直接定义成了手动换行的命令，输入反斜线就需要用 \cmd{text\-back\-slash}。
 
 \subsection{连字}\label{subsec:ligatures}
 
@@ -289,7 +289,7 @@ Donald~E. Knuth
 
 \subsection{手动断行和断页}\label{subsec:manual-break}
 
-\index{\@\crcmd\ (\textit{换行})} \cmdindex{newline}
+\index{\@\crcmd{} (\textit{换行})} \cmdindex{newline}
 如果我们确实需要手动断行，可使用如下命令：
 \begin{command}
 \crcmd \oarg{length} \qquad
@@ -297,9 +297,9 @@ Donald~E. Knuth
 \cmd{newline}
 \end{command}
 
-它们有两点区别：一是 \crcmd\ 可以带可选参数 \Arg{length}，用于在断行处向下增加垂直间距（见 \ref{subsec:vspace} 小节），
-而 \cmd{newline} 不带可选参数；二是 \crcmd\ 也在表格、公式等地方用于换行，而 \cmd{newline} 只用于文本段落中。
-带星号的 \crcmd\ 表示禁止在断行处分页。
+它们有两点区别：一是 \crcmd{} 可以带可选参数 \Arg{length}，用于在断行处向下增加垂直间距（见 \ref{subsec:vspace} 小节），
+而 \cmd{newline} 不带可选参数；二是 \crcmd{} 也在表格、公式等地方用于换行，而 \cmd{newline} 只用于文本段落中。
+带星号的 \crcmd{} 表示禁止在断行处分页。
 
 \begin{example}
 另外需要注意的是，使用 \verb|\\|
