@@ -2,7 +2,7 @@
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
-除了排版文字，\LaTeX{} 也支持用代码表示图形。不同的扩展已经极大地丰富了 \LaTeX{} 的图形功能，\TikZ\ 就是其中之一。
+除了排版文字，\LaTeX{} 也支持用代码表示图形。不同的扩展已经极大地丰富了 \LaTeX{} 的图形功能，\TikZ{} 就是其中之一。
 本章将带你了解一些基本的绘图功能。
 
 一些特殊的绘图，如交换图、树状图甚至分子式和电路图也能够通过代码绘制，
@@ -20,10 +20,10 @@
   以 PostSciprt 语法为基础的绘图宏包，具有优秀的绘图能力。它对老式的 \texttt{latex + dvips} 编译命令支持最好，
   而现在的几种编译命令下使用起来都不够方便。
 
-  \item \TikZ\ \& \pkg{pgf} \par
+  \item \TikZ{} \& \pkg{pgf} \par
   德国的 Till Tantau 教授在开发著名的 \LaTeX{} 幻灯片文档类 \cls{beamer} 时一并开发了绘图宏包 \pkg{pgf}，
   目的是令其能够在 \texttt{pdflatex} 或 \texttt{xelatex} 等不同的编译命令下都能使用。
-  \TikZ\ 是在 \pkg{pgf} 基础上封装的一个宏包，采用了类似 \hologo{METAPOST} 的语法，提供了方便的绘图命令，绘图能力不输 PSTricks。
+  \TikZ{} 是在 \pkg{pgf} 基础上封装的一个宏包，采用了类似 \hologo{METAPOST} 的语法，提供了方便的绘图命令，绘图能力不输 PSTricks。
 
   \item \hologo{METAPOST} \& Asymptote \par
   \hologo{METAPOST} 脱胎于高德纳为 \TeX{} 配套开发的字体生成程序 \hologo{METAFONT}，
@@ -32,17 +32,17 @@
   它们作为独立的程序，通常的用法是将代码写在单独的文件里，编译生成图片供 \LaTeX{} 引用，也可以借助特殊的宏包在 \LaTeX{} 代码里直接使用。
 \end{itemize}
 
-本手册将介绍 \TikZ\ 绘图宏包里最基本的部分。\TikZ\ 还支持各种自定义的扩展，基于 \TikZ\ 的专门用途的绘图宏包也不胜枚举，
-其复杂程度已远远超出入门手册的范围（\TikZ\ 的帮助文档有上千页之厚）。
+本手册将介绍 \TikZ{} 绘图宏包里最基本的部分。\TikZ{} 还支持各种自定义的扩展，基于 \TikZ{} 的专门用途的绘图宏包也不胜枚举，
+其复杂程度已远远超出入门手册的范围（\TikZ{} 的帮助文档有上千页之厚）。
 对此感兴趣的读者需要自行查阅帮助文档，或者到互联网上参考现成的范例。
 
-\section{\TikZ\ 绘图语言}\label{sec:tikz}
+\section{\TikZ{} 绘图语言}\label{sec:tikz}
 
 \index{TikZ@\TikZ}
 \pkgindex{tikz}
 \envindex[tikz]{tikzpicture}
 \cmdindex[tikz]{tikz}
-在导言区调用 \pkg{tikz} 宏包，就可以用以下命令和环境使用 \TikZ\ 的绘图功能了%
+在导言区调用 \pkg{tikz} 宏包，就可以用以下命令和环境使用 \TikZ{} 的绘图功能了%
 \footnote{\texttt{latex + dvipdfmx} 编译方式要在 \pkg{tikz} 宏包之前调用 \pkg{graphicx} 宏包并指定 \texttt{dvipdfmx} 选项。}：
 \begin{command}
 \cmd{tikz}\oarg*{\ldots} \Arg{tikz code}\texttt{;} \\[1ex]
@@ -57,9 +57,9 @@
 前一种用法为 \cmd{tikz} 带单条绘图命令，以分号结束，一般用于在文字之间插入简单的图形；
 后两种用法较为常见，使用多条绘图命令，可以在 \env{figure} 等浮动体中使用。
 
-\subsection{\TikZ\ 坐标和路径}\label{subsec:tikz-path}
+\subsection{\TikZ{} 坐标和路径}\label{subsec:tikz-path}
 
-\TikZ\ 用直角坐标系或者极坐标系描述点的位置。
+\TikZ{} 用直角坐标系或者极坐标系描述点的位置。
 \begin{itemize}
   \item 直角坐标下，点的位置写作 \texttt{(\Arg{$x$},\Arg{$y$})}，坐标 \Arg{$x$} 和 \Arg{$y$} 可以用 \LaTeX{} 支持的任意单位表示，
   缺省为 \texttt{cm}；
@@ -91,7 +91,7 @@
 \end{example}
 
 
-\TikZ\ 最基本的路径为两点之间连线，如 \texttt{(\Arg{$x_1$},\Arg{$y_1$}) -{}- (\Arg{$x_2$},\Arg{$y_2$})}，可以连用表示多个连线（折线）。
+\TikZ{} 最基本的路径为两点之间连线，如 \texttt{(\Arg{$x_1$},\Arg{$y_1$}) -{}- (\Arg{$x_2$},\Arg{$y_2$})}，可以连用表示多个连线（折线）。
 连续使用连线时，可以使用 \texttt{cycle} 令路径回到起点，生成闭合的路径。
 \begin{example}
 \begin{tikzpicture}
@@ -186,10 +186,10 @@
 \end{tikzpicture}
 \end{example}
 
-\subsection{\TikZ\ 绘图命令和参数}\label{subsec:tikz-draw}
+\subsection{\TikZ{} 绘图命令和参数}\label{subsec:tikz-draw}
 
 \cmdindex[tikz]{draw,fill,filldraw}
-除了 \cmd{draw} 命令之外，\TikZ\ 还提供了 \cmd{fill} 命令用来填充图形，\cmd{filldraw} 命令则同时填充和描边。
+除了 \cmd{draw} 命令之外，\TikZ{} 还提供了 \cmd{fill} 命令用来填充图形，\cmd{filldraw} 命令则同时填充和描边。
 除了矩形、圆等现成的闭合图形外，\cmd{fill} 和 \cmd{filldraw} 命令也能够填充人为构造的闭合路径。
 \begin{command}
 \cmd{draw}\oarg*{\ldots} \Arg{path}; \\
@@ -200,7 +200,7 @@
 绘图参数可作为可选参数用在 \env{tikzpiture} 环境或 \cmd{tikz} 命令时，参数会影响到所有具体的绘图命令；
 用在单个绘图命令 \cmd{draw}、\cmd{filldraw} 等时，只对这个命令起效。
 
-\TikZ\ 有数不清的绘图参数，这些参数令 \TikZ\ 能够绘制丰富多彩的图像，同时也令 \TikZ\ 难以精通。
+\TikZ{} 有数不清的绘图参数，这些参数令 \TikZ{} 能够绘制丰富多彩的图像，同时也令 \TikZ{} 难以精通。
 以下示例常用的一些绘图参数。
 
 \begin{itemize}
@@ -294,7 +294,7 @@
 \end{tikzpicture}
 \end{example}
 
-为了重复利用绘图参数，减少代码冗余，\TikZ\ 引入了“样式”的概念，可以定义一个样式包含绘图参数，
+为了重复利用绘图参数，减少代码冗余，\TikZ{} 引入了“样式”的概念，可以定义一个样式包含绘图参数，
 然后将样式作为一个参数用于绘图：
 \begin{example}
 \begin{tikzpicture}
@@ -307,7 +307,7 @@
 \end{example}
 
 \envindex[tikz]{scope}
-\TikZ\ 还提供了 \env{scope} 环境，令绘图参数或样式在局部生效：
+\TikZ{} 还提供了 \env{scope} 环境，令绘图参数或样式在局部生效：
 \begin{example}
 \begin{tikzpicture}
 \draw (0,0) rectangle (2.5, 2.5);
@@ -317,10 +317,10 @@
 \end{tikzpicture}
 \end{example}
 
-\subsection{\TikZ\ 文字结点}\label{subsec:tikz-node}
+\subsection{\TikZ{} 文字结点}\label{subsec:tikz-node}
 
 \cmdindex[tikz]{node}
-\TikZ\ 用 \cmd{node} 命令绘制文字结点：
+\TikZ{} 用 \cmd{node} 命令绘制文字结点：
 \begin{command}
 \cmd{node}\oarg{options} \texttt{(\Arg{name})} \texttt{at (\Arg{coordinate})} \marg{text}\texttt{;}
 \end{command}
@@ -435,13 +435,13 @@
   at (b) {$\displaystyle \int_a^b {f(x)\,\mathrm{d}x} = F(b) - F(a)$};
 \end{tikzpicture}
 \end{center}
-\caption{\TikZ\ 绘图示例源代码和效果。}\label{code:tikz-example}
+\caption{\TikZ{} 绘图示例源代码和效果。}\label{code:tikz-example}
 \end{sourcecode}
 
-\subsection{在 \TikZ\ 中使用循环}
+\subsection{在 \TikZ{} 中使用循环}
 
 \cmdindex[tikz]{foreach}
-\TikZ\ 通过 \pkg{pgffor} 功能宏包实现了简单的循环功能，语法为：
+\TikZ{} 通过 \pkg{pgffor} 功能宏包实现了简单的循环功能，语法为：
 \begin{command}
 \cmd{foreach} \cmd{a} \texttt{in} \marg{list} \marg{commands}
 \end{command}
