@@ -834,7 +834,7 @@ statement.\end{jury}
 
 \envindex[amsthm]{proof}
 \pkg{amsthm} 还提供了一个 \env{proof} 环境用于排版定理的证明过程。\env{proof} 环境末尾
-自动加上一个 \qedsymbol\ 证毕符号：
+自动加上一个 \qedsymbol{} 证毕符号：
 \begin{example}
 \begin{proof}
 For simplicity, we use
@@ -846,8 +846,8 @@ That's it.
 \end{example}
 
 \cmdindex[amsthm]{qedhere}
-如果行末是一个不带编号的公式，\qedsymbol\ 符号会另起一行，
-这时可使用 \cmd{qedhere} 命令将 \qedsymbol\ 符号放在公式末尾：
+如果行末是一个不带编号的公式，\qedsymbol{} 符号会另起一行，
+这时可使用 \cmd{qedhere} 命令将 \qedsymbol{} 符号放在公式末尾：
 \begin{example}
 \begin{proof}
 For simplicity, we use
@@ -870,7 +870,7 @@ p &= \gamma m_0v \qedhere
 \end{example}
 
 在使用带编号的公式时，建议最好\textbf{不要在公式末尾使用} \cmd{qedhere} 命令。
-对带编号的公式使用 \cmd{qedhere} 命令会使 \qedsymbol\ 符号放在一个难看的位置，紧贴着公式：
+对带编号的公式使用 \cmd{qedhere} 命令会使 \qedsymbol{} 符号放在一个难看的位置，紧贴着公式：
 \begin{example}
 \begin{proof}
 For simplicity, we use
@@ -880,10 +880,10 @@ E=mc^2.\qedhere
 \end{proof}
 \end{example}
 
-在 \amsenv{align} 等环境中使用 \cmd{qedhere} 命令会使 \qedsymbol\ 盖掉公式的编号；使用 \env{equation} 嵌套
-\amsenv{aligned} 等环境时，\cmd{qedhere} 命令会将 \qedsymbol\ 直接放在公式后。这些位置都不太正常。
+在 \amsenv{align} 等环境中使用 \cmd{qedhere} 命令会使 \qedsymbol{} 盖掉公式的编号；使用 \env{equation} 嵌套
+\amsenv{aligned} 等环境时，\cmd{qedhere} 命令会将 \qedsymbol{} 直接放在公式后。这些位置都不太正常。
 
-证毕符号 \qedsymbol\ 本身被定义在命令 \cmd{qedsymbol} 中，如果有使用实心符号作为证毕符号的需求，需要自行用 \cmd{re\-new\-comm\-and}
+证毕符号 \qedsymbol{} 本身被定义在命令 \cmd{qedsymbol} 中，如果有使用实心符号作为证毕符号的需求，需要自行用 \cmd{re\-new\-comm\-and}
 命令修改（用法见 \ref{subsec:newcmd} 小节）\footnote{注意，这个改法\textbf{只对 \pkg{amsthm} 宏包适用}。
 其它宏包如 \pkg{ntheorem} 等须参考帮助文档里提供的修改方法。}。
 我们可以利用在 \ref{subsec:rules} 小节介绍的标尺盒子来生成一个适当大小的“实心矩形”：
