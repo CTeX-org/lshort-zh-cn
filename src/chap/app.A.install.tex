@@ -13,26 +13,26 @@
 一个\textbf{\TeX\ 发行版}是 \TeX\ 排版引擎、支持排版的文件（基本格式、\LaTeX\ 宏包、字体等）以及一些辅助工具的集合。
 各式各样的 \TeX\ 发行版经过十多年的发展，大浪淘沙，现今的两个主流发行版为：
 \begin{itemize}
-  \item \textbf{\TeX\ Live}\par
-  \TeX\ Live 由类 UNIX 系统上的 te\TeX\ 发展并取而代之，最终成为跨平台的 \TeX\ 发行版。
-  \TeX\ Live 自 2011 年起以年份作为发行版的版本号，保持了一年一更的频率。
+  \item \textbf{\hologo{TeXLive}}\par
+  \hologo{TeXLive} 由类 UNIX 系统上的 te\TeX\ 发展并取而代之，最终成为跨平台的 \TeX\ 发行版。
+  \hologo{TeXLive} 自 2011 年起以年份作为发行版的版本号，保持了一年一更的频率。
 
-  Mac\TeX\ 是 macOS（OS X）系统下的一个定制化的 \TeX\ Live 版本，与 \TeX\ Live 同步更新。
+  Mac\TeX\ 是 macOS（OS X）系统下的一个定制化的 \hologo{TeXLive} 版本，与 \hologo{TeXLive} 同步更新。
 
   \item \textbf{\hologo{MiKTeX}}\par
   \hologo{MiKTeX} 是主要用于 Windows 平台的一个稳定发展的 \TeX\ 发行版。
   在中国大陆曾经发行过“C\TeX\ 套装”，它是一个经过本地化配置的 \hologo{MiKTeX}，不过其配置较为过时，也不再有更新支持，使用起来可能有诸多问题，现已不推荐使用。
 \end{itemize}
 
-\TeX\ Live 和 \hologo{MiKTeX} 都集成了一个简单的 \LaTeX\ 源代码编辑器 \TeX works（Mac\TeX\ 则集成了类似的 \TeX shop）。
+\hologo{TeXLive} 和 \hologo{MiKTeX} 都集成了一个简单的 \LaTeX\ 源代码编辑器 \TeX works（Mac\TeX\ 则集成了类似的 \TeX shop）。
 用户在安装完毕后，可直接使用 \TeX works 编写和编译 \LaTeX\ 源代码。
 
 \subsection{安装发行版}\label{subsec:install-dists}
 
-\subsubsection{\TeX\ Live}
+\subsubsection{\hologo{TeXLive}}
 
-\TeX\ Live 的光盘镜像发布于 \url{http://www.tug.org/texlive/}%
-\footnote{Linux 发行版的软件源也提供 \TeX\ Live 的安装，不过不够完整，更新也不是很及时。建议直接从镜像安装。}。
+\hologo{TeXLive} 的光盘镜像发布于 \url{http://www.tug.org/texlive/}%
+\footnote{Linux 发行版的软件源也提供 \hologo{TeXLive} 的安装，不过不够完整，更新也不是很及时。建议直接从镜像安装。}。
 下载镜像到本地，挂载到虚拟光驱，或者用压缩工具解压后，在其根目录有几个用于安装的脚本：
 \begin{itemize}
   \item 用于 Windows 的批处理文件：
@@ -50,7 +50,7 @@
 \end{itemize}
 另外也可以下载在线安装程序 \texttt{install-tl.zip}，包含以上所有安装脚本。安装过程中会从 CTAN 软件源下载所有组件。
 
-Linux 下 \TeX\ Live 安装完毕后，一般还需要在 root 权限下进行以下操作，使得 \hologo{XeLaTeX} 能正确通过 \pkg{fontspec}
+Linux 下 \hologo{TeXLive} 安装完毕后，一般还需要在 root 权限下进行以下操作，使得 \hologo{XeLaTeX} 能正确通过 \pkg{fontspec}
 等宏包使用字体\footnote{\url{http://www.tug.org/texlive/doc/texlive-zh-cn/texlive-zh-cn.pdf}，%
 可用 \texttt{texdoc texlive-zh-cn} 在本地打开。}：
 \begin{enumerate}
@@ -64,7 +64,7 @@ Linux 下 \TeX\ Live 安装完毕后，一般还需要在 root 权限下进行�
 
 \section{安装和更新宏包}\label{sec:pkg-manager}
 
-\TeX\ Live 提供了图形界面的宏包管理器 \TeX\ Live Manager 用于安装和更新宏包，而 \hologo{MiKTeX} 也提供了管理器
+\hologo{TeXLive} 提供了图形界面的宏包管理器 \hologo{TeXLive} Manager 用于安装和更新宏包，而 \hologo{MiKTeX} 也提供了管理器
 \hologo{MiKTeX} Package Manager。用户可直接打开程序，进行宏包的安装和更新
 （\hologo{MiKTeX} Package Manager 有普通权限和管理员权限的版本，建议总是使用管理员权限的版本）。
 
@@ -101,18 +101,18 @@ mpm --admin --set-repository=<CTAN mirrors>/systems/win32/miktex/tm/packages
 mpm --admin --print-package-info <package-name>
 \end{verbatim}
 
-\TeX\ Live 默认安装所有宏包，而 \hologo{MiKTeX} 的安装程序只包含了 \LaTeX\ 的一些基本宏包。从 \TeX\ Live 的光盘镜像和 \hologo{MiKTeX} 的安装包体积可见一斑。
+\hologo{TeXLive} 默认安装所有宏包，而 \hologo{MiKTeX} 的安装程序只包含了 \LaTeX\ 的一些基本宏包。从 \hologo{TeXLive} 的光盘镜像和 \hologo{MiKTeX} 的安装包体积可见一斑。
 默认情况下，编译过程中如果遇到宏包未安装而报错的情况下，\hologo{MiKTeX} 会弹出一个对话框，让用户可以选择临时安装宏包，安装成功后继续编译。
 
 \subsection{手动安装宏包}\label{subsec:pkg-manual-install}
 
-\textbf{\textcolor{red}{如非万不得已，尽量不要手动安装宏包}}。绝大多数宏包都已打包到 \TeX\ Live 和 \hologo{MiKTeX} 两大发行版的安装源，
+\textbf{\textcolor{red}{如非万不得已，尽量不要手动安装宏包}}。绝大多数宏包都已打包到 \hologo{TeXLive} 和 \hologo{MiKTeX} 两大发行版的安装源，
 可用宏包管理器安装。如果用户知道某个宏包的名称，但不确定是否在发行版中已打包，可在 CTAN 中搜索。
 
 如果确实有手动安装宏包的需要，本小节的内容将有所帮助。在手动安装之前，有必要了解一下 \TeX\ 目录结构（\TeX\ Directory Structure, TDS）。
 它是 \TeX\ 发行版中宏包、字体、帮助文档等文件的组织结构。TDS 有时也称为 TEXMF 树，取 \TeX$+$\hologo{METAFONT} 之意。
 
-以 \TeX\ Live 为例，假设系统的 TEXMF 树根目录为 \nolinkurl{C:\\texlive\\2015\\texmf-dist}，其下有很多子目录，仅举几例：
+以 \hologo{TeXLive} 为例，假设系统的 TEXMF 树根目录为 \nolinkurl{C:\\texlive\\2015\\texmf-dist}，其下有很多子目录，仅举几例：
 \begin{description}
   \item[\texttt{tex/latex}] \LaTeX\ 宏包。
   \item[\texttt{doc/latex}] \LaTeX\ 宏包的帮助文档。
@@ -124,8 +124,8 @@ mpm --admin --print-package-info <package-name>
 \end{description}
 
 需要手动安装的宏包，一般已经按照上述目录结构打包完成。手动安装时，尽量不要拷贝到系统的 TEXMF 树，而是拷贝到发行版提供的用户 TEXMF 树，如
-\TeX Live 的 \nolinkurl{C:\\texlive\\texmf-local}。安装完成后，还需\textbf{刷新 \TeX\ 发行版的文件名数据库}，令新安装的宏包文件能够被系统找到。
-\TeX\ Live 用户须在 Windows 命令行或者 Linux 终端执行命令：
+\hologo{TeXLive} 的 \nolinkurl{C:\\texlive\\texmf-local}。安装完成后，还需\textbf{刷新 \TeX\ 发行版的文件名数据库}，令新安装的宏包文件能够被系统找到。
+\hologo{TeXLive} 用户须在 Windows 命令行或者 Linux 终端执行命令：
 \begin{verbatim}
 mktexlsr
 \end{verbatim}

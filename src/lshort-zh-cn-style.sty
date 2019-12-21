@@ -148,6 +148,11 @@
     {\clearpage\if@twoside \ifodd\c@page\else
     \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
+% 新定义 hologo
+\def\HoLogo@TeXLive#1{%
+  \hologo{TeX}\HOLOGO@space\HOLOGO@mbox{Live}%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % lshort 用到的自定义命令
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
