@@ -1,4 +1,4 @@
-\chapter{自定义 \LaTeX\ 命令和功能}\label{chap:custom}
+\chapter{自定义 \LaTeX{} 命令和功能}\label{chap:custom}
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
@@ -13,7 +13,7 @@
 \section{自定义命令和环境}\label{sec:defs}
 
 你也许已经意识到了，在本手册中介绍的所有命令都被包含在一个带颜色的矩形背景框中。
-笔者并没有直接使用基础的 \LaTeX\ 命令来实现这个效果，而是创建了一个\textbf{宏包}，
+笔者并没有直接使用基础的 \LaTeX{} 命令来实现这个效果，而是创建了一个\textbf{宏包}，
 并在其中定义了笔者所需要的命令和环境。现在我只需写成这样简单的形式：
 
 \begin{example}
@@ -51,7 +51,7 @@ This is ``\tnss'' \ldots{}
 ``\tnss''
 \end{example}
 
-第二个例子演示了如何定义一个带参数的命令。在命令的定义中，标记 \verb|#1| 
+第二个例子演示了如何定义一个带参数的命令。在命令的定义中，标记 \verb|#1|
 代表指定的参数。如果想使用多个参数，可以依次使用 \verb|#2|、……、\verb|#9| 等标记。
 
 \begin{example}
@@ -66,11 +66,11 @@ This is ``\tnss'' \ldots{}
 \end{example}
 
 \cmdindex{renewcommand}
-\LaTeX\ 不允许使用 \cmd{newcommand} 定义一个与现有命令重名的命令。如果需要修改命令定义的话，使用 \cmd{re\-new\-comm\-and} 命令。它使用与命令 \cmd{new\-comm\-and}
+\LaTeX{} 不允许使用 \cmd{newcommand} 定义一个与现有命令重名的命令。如果需要修改命令定义的话，使用 \cmd{re\-new\-comm\-and} 命令。它使用与命令 \cmd{new\-comm\-and}
 相同的语法。
 
 \cmdindex{providecommand}
-在某些情况之下，使用 \cmd{pro\-vide\-comm\-and} 命令是一种比较理想的方案。在命令未定义时，它相当于 \cmd{new\-comm\-and} 
+在某些情况之下，使用 \cmd{pro\-vide\-comm\-and} 命令是一种比较理想的方案。在命令未定义时，它相当于 \cmd{new\-comm\-and}
 ；在命令已定义时，沿用已有的定义。
 
 \subsection{定义环境}\label{subsec:newenv}
@@ -99,7 +99,7 @@ My humble subjects \ldots
 \end{example}
 
 \cmdindex{renewenvironment}
-参数 \Arg{num} 的使用方式与 \cmd{new\-comm\-and} 命令相同。\LaTeX\ 还同样保证你
+参数 \Arg{num} 的使用方式与 \cmd{new\-comm\-and} 命令相同。\LaTeX{} 还同样保证你
 不会不小心新建重名的环境。如果你确实希望改变一个现有的环境，你可以使用命令
  \cmd{re\-new\-environ\-ment}，它使用和命令 \cmd{new\-environ\-ment} 相同的语法。
 
@@ -109,7 +109,7 @@ My humble subjects \ldots
 
 \cmdindex{usepackage}
 如果你定义了很多新的环境和命令，你的文档的导言区将变得相当长，在这种情况下，好的方式是
-建立一个新的 \LaTeX\ 宏包来存放所有你自己定义的命令和环境，
+建立一个新的 \LaTeX{} 宏包来存放所有你自己定义的命令和环境，
 然后在你的文档中使用 \cmd{use\-package} 命令来调用自定义的宏包。
 
 \begin{sourcecode}[htp]
@@ -132,7 +132,7 @@ My humble subjects \ldots
 \cmd{ProvidesPackage}\marg{package name}
 \end{command}
 这个命令应该放在你的宏包的最前面，并且一定要注意：\textbf{\Arg{package name} 需要和宏包的文件名一致。}
-\cmd{Provides\-Package} 让 \LaTeX\ 记录宏包的名称，从而在 \cmd{usepackage} 命令再次调用同一个宏包的时候忽略之%
+\cmd{Provides\-Package} 让 \LaTeX{} 记录宏包的名称，从而在 \cmd{usepackage} 命令再次调用同一个宏包的时候忽略之%
 \footnote{但如果你以\emph{不同的选项}多次引入宏包，则有可能会引起错误，见附录 \ref{sec:errors}。}。
 源代码 \ref{code:package} 给出了一个小的宏包示例，其中包含了我们之前定义的一些命令。
 
@@ -140,7 +140,7 @@ My humble subjects \ldots
 
 \cmdindex{RequirePackage}
 如果你想进一步把各种宏包的功能汇总到一个文件里，而不是在文档的导言区罗列一大堆宏包的话，
-\LaTeX\ 允许你在自己编写的宏包中调用其它宏包，命令为 \cmd{RequirePackage}，用法和 \cmd{usepackage}
+\LaTeX{} 允许你在自己编写的宏包中调用其它宏包，命令为 \cmd{RequirePackage}，用法和 \cmd{usepackage}
 一致：
 \begin{command}
 \cmd{RequirePackage}\oarg{options}\marg{package name}
@@ -167,7 +167,7 @@ My humble subjects \ldots
 \section{计数器}\label{sec:counters}
 
 \pinyinindex{jishuqi}{计数器}
-我们早就见识到了 \LaTeX\ 对文档元素自动计数的能力：章节符号、列表、图表……它们都是依靠 \LaTeX\ 提供的计数器功能完成的。
+我们早就见识到了 \LaTeX{} 对文档元素自动计数的能力：章节符号、列表、图表……它们都是依靠 \LaTeX{} 提供的计数器功能完成的。
 
 \subsection{定义和修改计数器}\label{subsec:count-defs}
 
@@ -230,7 +230,7 @@ My humble subjects \ldots
 \renewcommand\thesubsection{\thesection.\arabic{subsection}}
 \end{verbatim}
 
-\subsection{\LaTeX\ 中的计数器}\label{subsec:latex-counts}
+\subsection{\LaTeX{} 中的计数器}\label{subsec:latex-counts}
 
 \begin{itemize}
   \item 所有章节命令 \cmd{chapter}、\cmd{section} 等分别对应计数器 chapter、section 等等，而且有上下级的关系。
@@ -256,7 +256,7 @@ My humble subjects \ldots
 \subsubsection{secnumdepth}
 
 \index{secnumdepth@secnumdepth (\textit{计数器})}
-\LaTeX\ 标准文档类对章节划分了层级：
+\LaTeX{} 标准文档类对章节划分了层级：
 \begin{itemize}
   \item 在 \cls{article} 文档类里 part 为 0，section 为 1，依此类推；
   \item 在 \cls{report}/\cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
@@ -276,15 +276,15 @@ secnumdepth 计数器在 \cls{article} 文档类里默认为 3 （subsubsection 
 \index{tocdepth@tocdepth (\textit{计数器})}
 tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth，那么章节将不会自动写入目录项。默认值同 secnumdepth。
 
-\section{\LaTeX\ 可定制的一些命令和参数}\label{sec:latex-settings}
+\section{\LaTeX{} 可定制的一些命令和参数}\label{sec:latex-settings}
 
-\LaTeX\ 事实上有相当一些可以定制的命令和参数，不过对于修改样式或者开发宏包来说，这些定制项还远远不够。
+\LaTeX{} 事实上有相当一些可以定制的命令和参数，不过对于修改样式或者开发宏包来说，这些定制项还远远不够。
 
 对于用户来讲，容易定制的是这一些项目：
 
 \begin{itemize}
   \item 标题名称/前后缀等。表 \ref{tbl:latex-settings-names} 列出了标准文档类里可定制的项目，
-  表中所有的 \LaTeX\ 命令都可以用 \cmd{re\-new\-comm\-and} 来修改。
+  表中所有的 \LaTeX{} 命令都可以用 \cmd{re\-new\-comm\-and} 来修改。
   \item 长度。前文在叙述各种排版元素时已经涉及到一些，现归纳于表 \ref{tbl:latex-settings-lengths}。
   表中所有的长度命令可用 \cmd{setlength} 来修改。
   大多数控制页面尺寸的长度参数在图 \ref{fig:layouts} 给出，此处不再赘述。
@@ -292,7 +292,7 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
 
 \begin{table}[htp]
 \centering
-\caption{\LaTeX\ 可定制的标题名称/前后缀。}\label{tbl:latex-settings-names}
+\caption{\LaTeX{} 可定制的标题名称/前后缀。}\label{tbl:latex-settings-names}
 \small
 \begin{tabular}{llp{24em}}
  \hline
@@ -307,9 +307,9 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
  \cmd{listtablename}  & List of Tables  & \cmd{listoftables} 命令生成的表格目录标题 \\[1ex]
  \cmd{tablename}      & Table           & \env{table} 浮动体中 \cmd{caption} 命令生成的标题前缀 \\
  \cmd{figurename}     & Figure          & \env{figure} 浮动体中 \cmd{caption} 命令生成的标题前缀 \\[1ex]
- \cmd{refname}        & References      & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+ \cmd{refname}        & References      & \env{thebibliography} 环境或 \cmd{biblio\-graphy}
                                           命令生成的参考文献标题（\cls{article} 文档类） \\
- \cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy} 
+ \cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy}
                                           命令生成的参考文献标题（\cls{book / report} 文档类）\\
  \cmd{indexname}      & Index           & \cmd{printindex} 命令生成的索引标题 \\
  \hline
@@ -322,7 +322,7 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
 
 \begin{table}[htp]
 \centering
-\caption{\LaTeX\ 可定制的长度参数。}\label{tbl:latex-settings-lengths}
+\caption{\LaTeX{} 可定制的长度参数。}\label{tbl:latex-settings-lengths}
 \small
 \begin{tabular}{lll}
  \hline

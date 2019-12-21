@@ -25,7 +25,7 @@
 \cmd{subparagraph}\marg{title}
 \end{command}
 其中 \cmd{chapter} \textbf{只在 \cls{book} 和 \cls{report} 文档类有定义}。这些命令生成章节标题，并能够自动编号。
-除此之外 \LaTeX\ 还提供了 \cmd{part} 命令，用来将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号。
+除此之外 \LaTeX{} 还提供了 \cmd{part} 命令，用来将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号。
 
 上述命令除了生成带编号的标题之外，还向目录中添加条目，并影响页眉页脚的内容（详见 \ref{sec:pagestyle} 节）。每个命令有两种变体：
 \begin{itemize}
@@ -43,13 +43,13 @@
 对此的详细解释和调整方法见 \ref{subsec:latex-counts} 小节。
 
 \pkgindex{titlesec}
-\LaTeX\ 及标准文档类并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助文档。
+\LaTeX{} 及标准文档类并未提供为 \cmd{section} 等章节命令定制格式的功能，这一功能由 \pkg{titlesec} 宏包提供。详情请参考宏包的帮助文档。
 
 \subsection{目录}\label{sec:toc}
 
 \cmdindex{tableofcontents}
 \pkgindex{tocbibind,tocloft,titletoc}
-在 \LaTeX\ 中生成目录非常容易，只需在合适的地方使用命令：
+在 \LaTeX{} 中生成目录非常容易，只需在合适的地方使用命令：
 \begin{command}
 \cmd{tableofcontents}
 \end{command}
@@ -103,7 +103,7 @@
 \begin{document}
 \frontmatter
 \maketitle % 标题页
-\include{preface} % 前言章节 preface.tex 
+\include{preface} % 前言章节 preface.tex
 \tableofcontents
 \mainmatter
 \include{chapter1} % 第一章 chapter1.tex
@@ -125,14 +125,14 @@
 
 \cmdindex{title,author,date,today}
 \cmdindex{thanks,and}
-\LaTeX\ 支持生成简单的标题页。首先需要给定标题和作者等信息：
+\LaTeX{} 支持生成简单的标题页。首先需要给定标题和作者等信息：
 \begin{command}
 \cmd{title}\marg{title} \quad
 \cmd{author}\marg{author} \quad
 \cmd{date}\marg{date}
 \end{command}
 其中前两个命令是必须的（不用 \cmd{title} 会报错；不用 \cmd{author} 会警告），\cmd{date} 命令可选。
-\LaTeX\ 还提供了一个 \cmd{today} 命令自动生成当前日期，\cmd{date} 默认使用 \cmd{today}。
+\LaTeX{} 还提供了一个 \cmd{today} 命令自动生成当前日期，\cmd{date} 默认使用 \cmd{today}。
 在 \cmd{title}、\cmd{author} 等命令内可以使用 \cmd{thanks} 命令生成标题页的脚注，用 \cmd{and} 隔开多个人名。
 
 \cmdindex{maketitle}
@@ -148,7 +148,7 @@
 \author{ Mary\thanks{E-mail:*****@***.com}
   \and Ted\thanks{Corresponding author}
   \and Louis}
-\date{\today}  
+\date{\today}
 \end{Verbatim}
 \bigskip
 \makeatletter
@@ -174,11 +174,11 @@
     {\large September 10, 2015}%
 \end{minipage}
 \makeatother
-\caption{\LaTeX\ 默认的标题页示例和效果。}\label{code:titlepage}
+\caption{\LaTeX{} 默认的标题页示例和效果。}\label{code:titlepage}
 \end{sourcecode}
 
 \envindex{titlepage}
-\LaTeX\ 标准类还提供了一个简单的 \env{titlepage} 环境，生成不带页眉页脚的一页。用户可以在这个环境中使用各种排版元素自由发挥，
+\LaTeX{} 标准类还提供了一个简单的 \env{titlepage} 环境，生成不带页眉页脚的一页。用户可以在这个环境中使用各种排版元素自由发挥，
 生成自定义的标题页以替代 \cmd{maketitle} 命令。甚至可以利用 \env{titlepage} 环境重新定义 \cmd{maketitle}：
 \begin{verbatim}
 \renewcommand{\maketitle}{\begin{titlepage}
@@ -188,14 +188,14 @@
 
 事实上，为标准文档类指定了 \texttt{titlepage} 选项以后，使用 \cmd{maketitle} 命令生成的标题页就是一个 \env{titlepage} 环境。
 
-以上是 \LaTeX\ 标准文档类的标题页相关命令用法。在各种文档模板中经常有自定义的标题页，
+以上是 \LaTeX{} 标准文档类的标题页相关命令用法。在各种文档模板中经常有自定义的标题页，
 有可能需要除了 \cmd{title} 和 \cmd{author} 以外的命令给定信息，用法也可能与标准文档类的不一致
 （甚至有些模板可能没有定义 \env{titlepage} 等环境）。使用文档模板前\textbf{一定要仔细阅读文档模板的帮助文档}。
 
 \section{交叉引用}\label{sec:crossref}
 
 \cmdindex{label}
-交叉引用是 \LaTeX\ 强大的自动排版功能的体现之一。在能够被交叉引用的地方，如章节、公式、图表、定理等位置使用 \cmd{label} 命令：
+交叉引用是 \LaTeX{} 强大的自动排版功能的体现之一。在能够被交叉引用的地方，如章节、公式、图表、定理等位置使用 \cmd{label} 命令：
 \begin{command}
 \cmd{label}\marg{label-name}
 \end{command}
@@ -285,7 +285,7 @@ page~\pageref{sec:this}.''
 
 \envindex{enumerate,itemize}
 \cmdindex{item}
-\LaTeX\ 提供了基本的有序和无序列表环境 \env{enumerate} 和 \env{itemize}，两者的用法很类似，都用 \cmd{item} 标明每个列表项。
+\LaTeX{} 提供了基本的有序和无序列表环境 \env{enumerate} 和 \env{itemize}，两者的用法很类似，都用 \cmd{item} 标明每个列表项。
 \env{enumerate} 环境会自动对列表项编号。
 \begin{command}
 \cmd{begin}\marg*{enumerate} \\
@@ -297,7 +297,7 @@ page~\pageref{sec:this}.''
 列表可以嵌套使用，最多嵌套四层。
 \begin{example}
 \begin{enumerate}
-  \item An item. 
+  \item An item.
   \begin{enumerate}
     \item A nested item.\label{itref}
     \item[*] A starred item.
@@ -358,7 +358,7 @@ page~\pageref{sec:this}.''
 \end{enumerate}
 \end{example}
 
-默认的列表间距比较宽，\LaTeX\ 本身也未提供方便的定制功能，可用 \pkg{enumitem} 宏包定制各种列表间距。
+默认的列表间距比较宽，\LaTeX{} 本身也未提供方便的定制功能，可用 \pkg{enumitem} 宏包定制各种列表间距。
 \pkg{enumitem} 宏包还提供了对列表标签、引用等的定制。有兴趣的读者可参考其帮助文档。
 
 \subsection{对齐环境}\label{subsec:flush}
@@ -412,7 +412,7 @@ Right-aligned text paragraph.
 \subsection{引用环境}\label{subsec:quote}
 
 \envindex{quote,quotation}
-\LaTeX\ 提供了两种引用的环境：\env{quote} 用于引用较短的文字，首行不缩进；\env{quotation} 用于引用若干段文字，首行缩进。
+\LaTeX{} 提供了两种引用的环境：\env{quote} 用于引用较短的文字，首行不缩进；\env{quotation} 用于引用若干段文字，首行缩进。
 引用环境较一般文字有额外的左右缩进。
 \begin{example}
 Francis Bacon says:
@@ -438,8 +438,8 @@ Knowledge is power.
 \begin{example}
 Rabindranath Tagore's short poem:
 \begin{verse}
-Beauty is truth's smile 
-when she beholds her own face in 
+Beauty is truth's smile
+when she beholds her own face in
 a perfect mirror.
 \end{verse}
 \end{example}
@@ -498,7 +498,7 @@ for (int i=0; i<4; ++i)
 \section{表格}\label{sec:tabular}
 
 \pinyinindex{biaoge}{表格|(}
-\LaTeX\ 里排版表格不如 Word 等所见即所得的工具简便和自由，不过对于不太复杂的表格来讲，完全能够胜任。
+\LaTeX{} 里排版表格不如 Word 等所见即所得的工具简便和自由，不过对于不太复杂的表格来讲，完全能够胜任。
 
 \envindex{tabular}
 \cmdindex{hline}
@@ -535,7 +535,7 @@ for (int i=0; i<4; ++i)
 \env{tabular} 环境使用 \Arg{column-spec} 参数指定表格的列数以及每列的格式。基本的列格式见表 \ref{tbl:table-column-spec}。
 \begin{table}[htp]
 \centering
-\caption{\LaTeX\ 表格列格式。}\label{tbl:table-column-spec}
+\caption{\LaTeX{} 表格列格式。}\label{tbl:table-column-spec}
 \begin{tabular}{*{2}{l}}
  \hline
  \textbf{列格式} & \textbf{说明} \\
@@ -551,7 +551,7 @@ for (int i=0; i<4; ++i)
 \begin{example}
 \begin{tabular}{lcr|p{6em}}
   \hline
-  left & center & right 
+  left & center & right
        & par box with fixed width\\
   L    & C      & R     & P \\
  \hline
@@ -571,7 +571,7 @@ for (int i=0; i<4; ++i)
 \end{tabular}
 \end{example}
 
-另外 \LaTeX\ 还提供了简便的将格式参数重复的写法 \texttt*\marg{n}\marg{column-spec}，比如以下两种写法是等效的：
+另外 \LaTeX{} 还提供了简便的将格式参数重复的写法 \texttt*\marg{n}\marg{column-spec}，比如以下两种写法是等效的：
 \begin{verbatim}
 \begin{tabular}{|c|c|c|c|c|p{4em}|p{4em}|}
 \begin{tabular}{|*{5}{c|}*{2}{p{4em}|}}
@@ -598,7 +598,7 @@ for (int i=0; i<4; ++i)
 \begin{tabular}
 {>{\centering\arraybackslash}p{9em}}
   \hline
-  Some center-aligned long text. \\ 
+  Some center-aligned long text. \\
   \hline
 \end{tabular}
 \end{example}
@@ -612,17 +612,17 @@ for (int i=0; i<4; ++i)
   \hline
   pos & \txt & \txt & \txt \\
   \hline
-\end{tabular}    
+\end{tabular}
 \end{example}
 
 \subsection{列宽}\label{subsec:colwidth}
 
-在控制列宽方面，\LaTeX\ 表格有着明显的不足：\texttt{l/c/r} 格式的列宽是由文字内容的自然宽度决定的，
+在控制列宽方面，\LaTeX{} 表格有着明显的不足：\texttt{l/c/r} 格式的列宽是由文字内容的自然宽度决定的，
 而 \texttt{p} 格式给定了列宽却不好控制对齐（可用 \pkg{array} 宏包的辅助格式），
 更何况列与列之间通常还有间距，所以直接生成给定总宽度的表格并不容易。
 
 \envindex{tabular*}
-\LaTeX\ 本身提供了 \env{tabular*} 环境用来排版定宽表格，但是不太方便使用，
+\LaTeX{} 本身提供了 \env{tabular*} 环境用来排版定宽表格，但是不太方便使用，
 比如要用到 \texttt{@} 格式插入额外命令，令单元格之间的间距为 \cmd{fill}，但即使这样仍然有瑕疵：
 \begin{example}
 \begin{tabular*}{14em}%
@@ -680,7 +680,7 @@ for (int i=0; i<4; ++i)
 
 \subsection{合并单元格}\label{subsec:tabular-multicol}
 
-\LaTeX\ 是一行一行排版表格的，横向合并单元格较为容易，由 \cmd{multi\-column} 命令实现：
+\LaTeX{} 是一行一行排版表格的，横向合并单元格较为容易，由 \cmd{multi\-column} 命令实现：
 \begin{command}
 \cmd{multicolumn}\marg{n}\marg{column-spec}\marg{item}
 \end{command}
@@ -710,7 +710,7 @@ for (int i=0; i<4; ++i)
 \begin{example}
 \begin{tabular}{ccc}
   \hline
-  \multirow{2}{*}{Item} & 
+  \multirow{2}{*}{Item} &
     \multicolumn{2}{c}{Value} \\
   \cline{2-3}
     & First & Second \\ \hline
@@ -720,7 +720,7 @@ for (int i=0; i<4; ++i)
 
 \subsection{嵌套表格}\label{subsec:tabular-embed}
 
-相对于合并单元格，拆分单元格对于 \LaTeX\ 来说并非易事。在单元格中嵌套一个小表格可以起到“拆分单元格”的效果。
+相对于合并单元格，拆分单元格对于 \LaTeX{} 来说并非易事。在单元格中嵌套一个小表格可以起到“拆分单元格”的效果。
 在以下的例子中，注意要用 \cmd{multi\-column} 命令配合 \texttt{@\{\}} 格式把单元格的额外边距去掉，使得嵌套的表格线能和外层的表格线正确相连：
 
 \begin{example}
@@ -729,7 +729,7 @@ for (int i=0; i<4; ++i)
  a & b & c \\ \hline
  a & \multicolumn{1}{@{}c@{}|}
  {\begin{tabular}{c|c}
-   e & f \\ \hline 
+   e & f \\ \hline
    e & f \\
   \end{tabular}}
        & c \\ \hline
@@ -753,7 +753,7 @@ for (int i=0; i<4; ++i)
 \subsection{行距控制}\label{subsec:tabular-colht}
 
 \cmdindex{arraystretch}
-\LaTeX\ 生成的表格看起来通常比较紧凑。修改参数 \cmd{array\-stretch} 可以得到行距更加宽松的表格
+\LaTeX{} 生成的表格看起来通常比较紧凑。修改参数 \cmd{array\-stretch} 可以得到行距更加宽松的表格
 （相关命令参考 \ref{subsec:newcmd} 小节）：
 \begin{example}
 \renewcommand\arraystretch{1.8}
@@ -785,16 +785,16 @@ for (int i=0; i<4; ++i)
 
 \pkgindex{graphicx}
 
-\LaTeX\ 本身不支持插图功能，需要由 \pkg{graphicx} 宏包辅助支持。
+\LaTeX{} 本身不支持插图功能，需要由 \pkg{graphicx} 宏包辅助支持。
 
 使用 \texttt{latex + dvipdfmx} 编译命令时，调用 \pkg{graphicx} 宏包时要指定 \texttt{dvipdfmx} 选项%
 \footnote{早期常使用 \texttt{latex + dvips} 组合命令，后者将 \texttt{.dvi} 文件转为 \texttt{.ps} 文件（PostScript），
-可进一步通过 \texttt{ps2pdf} 工具生成 PDF。\texttt{dvips} 和 \texttt{dvipdfmx} 在图形、颜色、超链接等功能的实现上有差别，而 \LaTeX\ 无法识别
+可进一步通过 \texttt{ps2pdf} 工具生成 PDF。\texttt{dvips} 和 \texttt{dvipdfmx} 在图形、颜色、超链接等功能的实现上有差别，而 \LaTeX{} 无法识别
 用户是用 \texttt{dvips} 还是 \texttt{dvipdfmx}，所以要指定选项（缺省为 \texttt{dvips}）。
 \ref{sec:hyperlinks} 节中的 \pkg{hyperref} 宏包同理。}；而使用 \texttt{pdflatex} 或 \texttt{xelatex} 命令编译时不需要。
 
-读者可能听说过“\LaTeX\ 只能插入 \texttt{.eps} 格式的图片，需要把 \texttt{.jpg} 转成 \texttt{.eps} 格式”的观点。
-\LaTeX\ 发展到今天，这个观点早已过时。事实上不同的编译命令支持的图片格式范围各异，见表 \ref{tbl:figure-format}。
+读者可能听说过“\LaTeX{} 只能插入 \texttt{.eps} 格式的图片，需要把 \texttt{.jpg} 转成 \texttt{.eps} 格式”的观点。
+\LaTeX{} 发展到今天，这个观点早已过时。事实上不同的编译命令支持的图片格式范围各异，见表 \ref{tbl:figure-format}。
 这个表格也能解答诸如“为什么 \texttt{.eps} 格式图片在 \texttt{pdflatex} 编译命令下出错”之类的问题。本表格也再一次说明，使用
 \texttt{xelatex} 命令是笔者最推荐的方式。
 
@@ -853,10 +853,10 @@ for (int i=0; i<4; ++i)
 
 \section{盒子}\label{sec:box}
 
-盒子是 \LaTeX\ 排版的基础单元，虽然解释上去有些抽象：每一行是一个盒子，
+盒子是 \LaTeX{} 排版的基础单元，虽然解释上去有些抽象：每一行是一个盒子，
 里面的文字从左到右依次排列；每一页也是一个盒子，各行文字从上到下依次排布……颇有一些活字印刷术的味道。
 
-不管如何，\LaTeX\ 提供了一些命令让我们生成一些有特定用途的盒子。
+不管如何，\LaTeX{} 提供了一些命令让我们生成一些有特定用途的盒子。
 
 \subsection{水平盒子}\label{subsec:mbox}
 
@@ -908,7 +908,7 @@ for (int i=0; i<4; ++i)
 
 \cmdindex{parbox}
 \envindex{minipage}
-如果需要排版一个文字可以换行的盒子，\LaTeX\ 提供了两种方式：
+如果需要排版一个文字可以换行的盒子，\LaTeX{} 提供了两种方式：
 \begin{command}
 \cmd{parbox}\oarg{align}\oarg{height}\oarg{inner-align}\marg{width}\marg*{\ldots} \\[0.5ex]
 \cmd{begin}\marg*{minipage}\oarg{align}\oarg{height}\oarg{inner-align}\marg{width} \\
@@ -949,7 +949,7 @@ for (int i=0; i<4; ++i)
 \cmd{rule}\oarg{raise}\marg{width}\marg{height}
 \end{command}
 \begin{example}
-Black \rule{12pt}{4pt} box. 
+Black \rule{12pt}{4pt} box.
 
 Upper \rule[4pt]{6pt}{8pt} and
 lower \rule[-4pt]{6pt}{8pt} box.
@@ -960,10 +960,10 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \section{浮动体}\label{sec:float}
 
 内容丰富的文章或者书籍往往包含许多图片和表格等内容。这些内容的尺寸往往太大，导致分页困难。
-\LaTeX\ 为此引入了浮动体的机制，令大块的内容可以脱离上下文，放置在合适的位置。
+\LaTeX{} 为此引入了浮动体的机制，令大块的内容可以脱离上下文，放置在合适的位置。
 
 \envindex{figure,table}
-\LaTeX\ 预定义了两类浮动体环境 \env{figure} 和 \env{table}。习惯上 \env{figure} 里放图片，\env{table} 里放表格，
+\LaTeX{} 预定义了两类浮动体环境 \env{figure} 和 \env{table}。习惯上 \env{figure} 里放图片，\env{table} 里放表格，
 但并没有严格限制，可以在任何一个浮动体里放置文字、公式、表格、图片等等任意内容。
 
 以 \env{table} 环境的用法举例，\env{figure} 同理：
@@ -990,7 +990,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
  \hline
 \end{tabular}
 \begin{quote}\footnotesize
-注 1：排版位置的选取与参数里符号的顺序无关，\LaTeX\ 总是以 \texttt{h-t-b-p} 的优先级顺序决定浮动体位置。
+注 1：排版位置的选取与参数里符号的顺序无关，\LaTeX{} 总是以 \texttt{h-t-b-p} 的优先级顺序决定浮动体位置。
 也就是说 \texttt{[!htp]} 和 \texttt{[ph!t]} 没有区别。\par
 注 2：限制包括浮动体个数（除单独成页外，默认每页不超过 3 个浮动体，其中顶部不超过 2 个，底部不超过 1 个）
 以及浮动体空间占页面的百分比（默认顶部不超过 70\%，底部不超过 30\%）。
@@ -998,7 +998,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \end{table}
 
 \envindex{table*,figure*}
-双栏排版环境下，\LaTeX\ 提供了 \env{table*} 和 \env{figure*} 环境用来排版跨栏的浮动体。
+双栏排版环境下，\LaTeX{} 提供了 \env{table*} 和 \env{figure*} 环境用来排版跨栏的浮动体。
 它们的用法与 \env{table} 和 \env{figure} 一样，不同之处为双栏的 \Arg{placement} 参数只能用 \texttt{tp} 两个位置。
 
 \cmdindex{clearpage}
@@ -1047,7 +1047,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
   \includegraphics[width=...]{...}
   \qquad
   \includegraphics[width=...]{...} \\[..pt]
-  \includegraphics[width=...]{...} 
+  \includegraphics[width=...]{...}
   \caption{...}
 \end{figure}
 \end{verbatim}
@@ -1077,7 +1077,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
     \centering
     \includegraphics[width=...]{...}
     \caption{...}
-  \end{minipage}  
+  \end{minipage}
 \end{figure}
 \end{verbatim}
 

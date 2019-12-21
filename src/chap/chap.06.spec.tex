@@ -2,7 +2,7 @@
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
-本章介绍一些特色的 \LaTeX\ 辅助功能。前两个功能 \hologo{BibTeX} 和 makeindex 依靠一些辅助程序自动生成参考文献、索引等；
+本章介绍一些特色的 \LaTeX{} 辅助功能。前两个功能 \hologo{BibTeX} 和 makeindex 依靠一些辅助程序自动生成参考文献、索引等；
 之后的使用颜色、超链接等则令我们生成美观易用的电子文档。
 \end{intro}
 
@@ -11,11 +11,11 @@
 \subsection{基本的参考文献和引用}\label{subsec:bib-basics}
 
 \pinyinindex{cankaowenxian}{参考文献}
-\LaTeX\ 提供的参考文献和引用方式比较原始，需要用户自行书写参考文献列表（包括格式），
+\LaTeX{} 提供的参考文献和引用方式比较原始，需要用户自行书写参考文献列表（包括格式），
 因此较难直接使用。相关的命令我们只作最简单的介绍。
 
 \cmdindex{cite}
-\LaTeX\ 提供了最基本的 \cmd{cite} 命令用于在正文中引用参考文献：
+\LaTeX{} 提供了最基本的 \cmd{cite} 命令用于在正文中引用参考文献：
 \begin{command}
 \cmd{cite}\marg{citation}
 \end{command}
@@ -159,7 +159,7 @@ Partl~\cite{germenTeX} has proposed that \ldots
 现在我们来看如何利用 \hologo{BibTeX} 数据库生成参考文献和引用。
 
 第一步：准备一份 \hologo{BibTeX} 数据库，假设数据库文件名为 \texttt{books.bib}，
-和 \LaTeX\ 源代码\textbf{一般位于同一个目录下}。
+和 \LaTeX{} 源代码\textbf{一般位于同一个目录下}。
 
 第二步：在源代码中添加必要的命令。假设源代码名为 \texttt{demo.tex}（见源代码 \ref{code:bibtex-demo}）。
 \begin{enumerate}
@@ -198,7 +198,7 @@ and \cite{citation2} \ldots
 
 第三步：写好了以上两个文件之后，我们就可以开始编译了。
 \begin{enumerate}
-  \item 首先使用 \texttt{pdflatex} 或 \texttt{xelatex} 等命令编译 \LaTeX\ 源代码 \texttt{demo.tex}；
+  \item 首先使用 \texttt{pdflatex} 或 \texttt{xelatex} 等命令编译 \LaTeX{} 源代码 \texttt{demo.tex}；
   \item 接下来用 \texttt{bibtex} 命令处理 \texttt{demo.aux} 辅助文件记录的参考文献格式、引用条目等信息。
   \texttt{bibtex} 命令处理完毕后会生成 \texttt{demo.bbl} 文件，内容就是一个 \env{thebibliography} 环境；
   \item 再使用 \texttt{pdflatex} 或 \texttt{xelatex} 等命令把源代码 \texttt{demo.tex} 编译\textbf{两遍}，读入参考文献并正确生成引用。
@@ -229,7 +229,7 @@ xelatex demo
 \end{command}
 
 它们分别生成形如(\emph{Axford et~al.}, 2013) 和 \emph{Axford et~al.} (2013) 的人名——年份引用。
-正确排版人名——年份引用还依赖于特定的 \hologo{BibTeX} 样式。\pkg{natbib} 提供了与 \LaTeX\ 预定义样式相对应的几个样式，
+正确排版人名——年份引用还依赖于特定的 \hologo{BibTeX} 样式。\pkg{natbib} 提供了与 \LaTeX{} 预定义样式相对应的几个样式，
 包括 \texttt{plainnat}、\texttt{abbrvnat} 和 \texttt{unsrtnat}。学术论文模板是否支持 \pkg{natbib}，需要参考其帮助文档。
 
 \pkg{natbib} 宏包同样也支持数字引用，并且支持将引用的序号压缩，例如：
@@ -246,8 +246,8 @@ xelatex demo
 
 \pkgindex{biblatex}
 本节的末尾简单介绍一下基于 \pkg{biblatex} 宏包排版参考文献的方式。
-\pkg{biblatex} 宏包是一套基于 \LaTeX\ 宏命令的参考文献解决方案，提供了便捷的格式控制和强大的排序、分类、筛选、多文献表等功能。
-\pkg{biblatex} 宏包也因其对 UTF-8 和中文参考文献的良好支持，被国内较多 \LaTeX\ 模板采用。 
+\pkg{biblatex} 宏包是一套基于 \LaTeX{} 宏命令的参考文献解决方案，提供了便捷的格式控制和强大的排序、分类、筛选、多文献表等功能。
+\pkg{biblatex} 宏包也因其对 UTF-8 和中文参考文献的良好支持，被国内较多 \LaTeX{} 模板采用。
 
 基于 \pkg{biblatex} 宏包的方式与基于 \hologo{BibTeX} 的传统方式有一定区别，下面从文档结构和命令、编译方式、样式选择等方面逐一介绍：
 
@@ -285,7 +285,7 @@ xelatex demo
 见文献\cite{caimin2006}。
 
 \printbibliography
-\end{document} 
+\end{document}
 \end{Verbatim}
 \caption{应用 \pkg{biblatex} 的示例 egbibdata.bib 和 demo.tex。}
 \end{sourcecode}
@@ -308,7 +308,7 @@ xelatex demo
 \begin{verbatim}
 % 同时调用 gb7714-2015.bbx 和 gb7714-2015.cbx
 \usepackage[style=gb7714-2015]{biblatex}
-% 著录样式调用 gb7714-2015.bbx，引用样式调用 biblatex 宏包自带的 authoryear 
+% 著录样式调用 gb7714-2015.bbx，引用样式调用 biblatex 宏包自带的 authoryear
 \usepackage[bibstyle=gb7714-2015,citestyle=authoryear]{biblatex}
 \end{verbatim}
 
@@ -337,7 +337,7 @@ xelatex demo
 
 \pinyinindex{suoyin}{索引}
 \index{makeindex@makeindex 工具}
-书籍和大文档通常用索引来归纳关键词，方便用户查阅。\LaTeX\ 借助配套的 makeindex 程序完成对索引的排版。
+书籍和大文档通常用索引来归纳关键词，方便用户查阅。\LaTeX{} 借助配套的 makeindex 程序完成对索引的排版。
 
 \subsection{使用 makeindex 工具的方法}\label{subsec:makeidx}
 
@@ -345,7 +345,7 @@ xelatex demo
 
 \pkgindex{makeidx}
 \cmdindex[makeidx]{makeindex}
-第一步，在 \LaTeX\ 源代码的导言区调用 \pkg{makeidx} 宏包，并使用 \cmd{makeindex} 命令开启索引的收集：
+第一步，在 \LaTeX{} 源代码的导言区调用 \pkg{makeidx} 宏包，并使用 \cmd{makeindex} 命令开启索引的收集：
 \begin{verbatim}
 \usepackage{makeidx}
 \makeindex
@@ -423,7 +423,7 @@ Test index.
 \section{使用颜色}\label{sec:color}
 
 \pinyinindex{yanse}{颜色}
-原始的 \LaTeX\ 不支持使用各种颜色。\pkg{color} 宏包或者 \pkg{xcolor} 宏包提供了对颜色的支持，给 PDF 输出生成颜色的特殊指令。
+原始的 \LaTeX{} 不支持使用各种颜色。\pkg{color} 宏包或者 \pkg{xcolor} 宏包提供了对颜色的支持，给 PDF 输出生成颜色的特殊指令。
 
 \subsection{颜色的表达方式}\label{subsec:color-code}
 
@@ -543,12 +543,12 @@ Test index.
 
 \pinyinindex{chaolianjie}{超链接}
 PDF 文档格式是现今最流行的电子文档格式，而电子文档最实用的需求之一就是超链接功能。
-\LaTeX\ 中实现这一功能的是 \pkg{hyperref} 宏包。
+\LaTeX{} 中实现这一功能的是 \pkg{hyperref} 宏包。
 
 \subsection{\pkg{hyperref} 宏包}\label{subsec:hyperref}
 
 \pkgindex{hyperref}
-\pkg{hyperref} 宏包涉及到的链接遍布 \LaTeX\ 的每一个角落——目录、引用、脚注、索引、参考文献等等都被封装成超链接。
+\pkg{hyperref} 宏包涉及到的链接遍布 \LaTeX{} 的每一个角落——目录、引用、脚注、索引、参考文献等等都被封装成超链接。
 但这也使得它与其它宏包发生冲突的可能性大大增加，虽然宏包已经尽力解决各方面的兼容性，但仍不能面面俱到。
 为减少可能的冲突，习惯上将 \pkg{hyperref} 宏包\textbf{放在其它宏包之后调用}。
 
@@ -664,11 +664,11 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \Arg{bookmark} 为书签名称，\Arg{anchor} 为书签项使用的锚点（类似交叉引用的标签）。可选参数 \Arg{level} 为书签的层级，默认为 0。
 
 \cmdindex[hyperref]{texorpdfstring}
-章节命令里往往有 \LaTeX\ 命令甚至数学公式，而 PDF 书签是纯文本，对命令和公式的处理很困难，有出错的风险。
+章节命令里往往有 \LaTeX{} 命令甚至数学公式，而 PDF 书签是纯文本，对命令和公式的处理很困难，有出错的风险。
 \pkg{hyperref} 宏包已经为我们处理了许多常见命令，如 \cmd{LaTeX} 和字体命令 \cmd{textbf} 等，
-对于未被处理的命令或数学公式，就要在章节标题中使用如下命令，分别提供 \LaTeX\ 代码和 PDF 书签可用的纯文本：
+对于未被处理的命令或数学公式，就要在章节标题中使用如下命令，分别提供 \LaTeX{} 代码和 PDF 书签可用的纯文本：
 \begin{command}
-\cmd{texorpdfstring}\marg{\LaTeX\ code}\marg{PDF bookmark text}
+\cmd{texorpdfstring}\marg{\LaTeX{} code}\marg{PDF bookmark text}
 \end{command}
 比如在章节名称里使用公式 $E=mc^2$，而书签使用字符 \texttt{E=mc\textasciicircum 2}：
 \begin{verbatim}

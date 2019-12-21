@@ -3,13 +3,13 @@
 
 \begin{intro}
 至此你已经基本学会排版内容丰富的文档，标题、目录、章节、公式、列表、图片、表格等等应有尽有。但是你可能已经有点不甘心了，
-因为似乎你排版出来的文档是千篇一律的模样——\LaTeX\ 默认的字体、单调的页眉页脚、不太令你满意的页边距，等等。
-本章的内容将带你一览如何修改 \LaTeX\ 的排版样式。
+因为似乎你排版出来的文档是千篇一律的模样——\LaTeX{} 默认的字体、单调的页眉页脚、不太令你满意的页边距，等等。
+本章的内容将带你一览如何修改 \LaTeX{} 的排版样式。
 \end{intro}
 
 \section{字体和字号}\label{sec:font}
 
-\LaTeX\ 根据文档的逻辑结构（章节、脚注等）来选择默认的字体样式以及字号。
+\LaTeX{} 根据文档的逻辑结构（章节、脚注等）来选择默认的字体样式以及字号。
 需要更改字体样式或字号的话，可以使用表 \ref{tbl:fonts} 和表 \ref{tbl:sizes} 中列出的命令。
 \begin{example}
 {\small The small and
@@ -18,18 +18,18 @@
 {\itshape Italy}.}
 \end{example}
 
-\LaTeXe\ 相比于较早的 \LaTeX\ 版本（2.09版或更早）在字体样式和字号的设定上有很大改进，令字体的各种属性相互独立（“正交”），
+\LaTeXe\ 相比于较早的 \LaTeX{} 版本（2.09版或更早）在字体样式和字号的设定上有很大改进，令字体的各种属性相互独立（“正交”），
 用户可以改变字体的大小，而仍然保留字体原有的粗体或者斜体的特性。
 
 \subsection{字体样式}\label{subsec:fontshape}
 
 \pinyinindex{ziti}{字体}
 \pinyinindex{fenzu}{分组}
-\LaTeX\ 提供了两组修改字体的命令，见表 \ref{tbl:fonts}。其中诸如 \cmd{bfseries} 形式的命令将会影响之后所有的字符，
+\LaTeX{} 提供了两组修改字体的命令，见表 \ref{tbl:fonts}。其中诸如 \cmd{bfseries} 形式的命令将会影响之后所有的字符，
 如果想要让它在局部生效，需要用花括号\textbf{分组}，也就是写成 \marg*{\cmd{bfseries}\ \Arg{some text}} 这样的形式；
 对应的 \cmd{textbf} 形式带一个参数，只改变参数内部的字体，更为常用。
 
-在公式中，直接使用 \cmd{textbf} 等命令不会起效，甚至报错。\LaTeX\ 提供了修改数学字母样式的命令，如 \cmd{mathbf} 等，详见 \ref{subsec:math-alpha} 小节。
+在公式中，直接使用 \cmd{textbf} 等命令不会起效，甚至报错。\LaTeX{} 提供了修改数学字母样式的命令，如 \cmd{mathbf} 等，详见 \ref{subsec:math-alpha} 小节。
 
 \begin{table}[htp]
 \caption{字体命令。} \label{tbl:fonts}
@@ -107,7 +107,7 @@ He likes {\LARGE large and
 \end{example}
 
 \cmdindex{fontsize}
-\LaTeX\ 还提供了一个基础的命令 \cmd{fontsize} 用于设定任意大小的字号：
+\LaTeX{} 还提供了一个基础的命令 \cmd{fontsize} 用于设定任意大小的字号：
 \begin{command}
 \cmd{fontsize}\marg{size}\marg{base line-skip}
 \end{command}
@@ -121,8 +121,8 @@ He likes {\LARGE large and
 \subsection{选用字体宏包}\label{subsec:font-pkgs}
 
 至此已经介绍了如何改变字体样式如粗体、斜体等等，以及如何改变字号，
-但你依然用着 \LaTeX\ 默认的那套、由高德纳设计制作的 Computer Modern 字体。
-有的人可能很喜欢 Times / Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX\ 里还不太容易。
+但你依然用着 \LaTeX{} 默认的那套、由高德纳设计制作的 Computer Modern 字体。
+有的人可能很喜欢 Times / Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX{} 里还不太容易。
 
 幸好大部分时候，许多字体宏包为我们完成了整套配置，我们可以在调用宏包之后，照常使用 \cmd{bfseries} 或 \cmd{ttfamily} 等我们熟悉的命令。
 表 \ref{tbl:font-pkgs} 列出了较为常用的字体宏包，其中相当多的宏包还配置了数学字体，或者文本、数学字体兼而有之。
@@ -130,10 +130,10 @@ He likes {\LARGE large and
 
 \subsection{字体编码}\label{subsec:font-encs}
 
-字体编码对于 \LaTeX\ 用户来讲是一个比较晦涩的概念。它规定了一个字体里包含的符号，并将若干符号用 \LaTeX\ 命令定义。
+字体编码对于 \LaTeX{} 用户来讲是一个比较晦涩的概念。它规定了一个字体里包含的符号，并将若干符号用 \LaTeX{} 命令定义。
 注意字体编码与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等并非一一对应。
 
-常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX\ 默认使用兼容 plain \TeX\ 的 \texttt{OT1} 编码，使用起来有诸多限制：
+常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX{} 默认使用兼容 plain \TeX\ 的 \texttt{OT1} 编码，使用起来有诸多限制：
 高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体里这些符号所在的位置被其它符号所占据
 （\texttt{OT1} 字体编码、\cmd{rmfamily} 和 \cmd{sffamly} 字体族下， \texttt< 和 \texttt> 排版\ !` 和\ ?` 两个倒立的标点符号，
 正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；\cmd{ttfamily} 字体族下是正常的大于号和小于号）。
@@ -145,13 +145,13 @@ He likes {\LARGE large and
 \cmd{usepackage}\oarg*{T1}\marg*{fontenc}
 \end{command}
 
-\pkg{fontenc} 宏包是用来配合传统的 \LaTeX\ 字体的，如表 \ref{tbl:font-pkgs} 中的一些传统字体宏包。如果使用 \texttt{xelatex} 编译方式，
+\pkg{fontenc} 宏包是用来配合传统的 \LaTeX{} 字体的，如表 \ref{tbl:font-pkgs} 中的一些传统字体宏包。如果使用 \texttt{xelatex} 编译方式，
 并使用 \pkg{fontspec} 宏包调用 \texttt{ttf} 或 \texttt{otf} 格式字体，就不要再使用 \pkg{fontenc} 宏包。
 使用表 \ref{tbl:font-pkgs} 中的字体宏包之前最好查看一下宏包的帮助文档，了解使用方法和注意事项。
 
 \begin{table}[!p]
 \centering\small
-\caption{常见的 \LaTeX\ 字体宏包。}\label{tbl:font-pkgs}
+\caption{常见的 \LaTeX{} 字体宏包。}\label{tbl:font-pkgs}
 \begin{tabular}{lp{30em}}
  \hline
  \multicolumn{2}{c}{\textbf{文本 / 数学字体搭配的宏包}} \\
@@ -173,7 +173,7 @@ He likes {\LARGE large and
  \pkg{mathdesign}  & 配合 Charter / Garamond / Utopia 正文字体的数学字体宏包 \\
  \hline
  \multicolumn{2}{c}{\textbf{文本字体宏包}} \\
- \multicolumn{2}{l}{\footnotesize 以下字体包括传统的 \LaTeX\ 字体格式以及 TrueType / OpenType 格式。} \\
+ \multicolumn{2}{l}{\footnotesize 以下字体包括传统的 \LaTeX{} 字体格式以及 TrueType / OpenType 格式。} \\
  \hline
  \pkg{cm-unicode}  & Computer Modern 风格的 Unicode 字体，支持多种西方语言 \\
  \pkg{dejavu}      & DejaVu 开源字体 \\
@@ -287,7 +287,7 @@ Unicode 数学字体相比于正文字体的选择余地不多。表 \ref{tbl:un
 强调文字的方法，或者是添加下划线等装饰物，或者是改变文字的字体。
 
 \cmdindex{underline}
-\LaTeX\ 定义了 \cmd{underline} 命令用来为文字添加下划线：
+\LaTeX{} 定义了 \cmd{underline} 命令用来为文字添加下划线：
 \begin{example}
 An \underline{underlined} text.
 \end{example}
@@ -322,7 +322,7 @@ words}, are shown here.
 
 \begin{table}[htp]
 \centering
-\caption{\TeX\ / \LaTeX\ 中的长度单位。}\label{tbl:length-unit}
+\caption{\TeX\ / \LaTeX{} 中的长度单位。}\label{tbl:length-unit}
 \begin{tabular}{ll}
  \hline
  \texttt{pt}\unitindex{pt} & 点阵宽度，1/72.27\texttt{in} \\
@@ -344,7 +344,7 @@ words}, are shown here.
 长度的数值还可以用长度变量本身或其倍数来表达，如 \texttt{2.5}\cmd{parindent} 等。
 
 \cmdindex{newlength,setlength,addtolength}
-\LaTeX\ 预定义了大量的长度变量用于控制版面格式。如页面宽度和高度、首行缩进、段落间距等。
+\LaTeX{} 预定义了大量的长度变量用于控制版面格式。如页面宽度和高度、首行缩进、段落间距等。
 如果需要自定义长度变量，需使用如下命令：
 \begin{command}
 \cmd{newlength}\marg*{\cmd{\Arg{length command}}}
@@ -417,11 +417,11 @@ But remember I am a liar.}\par
 \cmd{noindent}
 \end{command}
 
-\LaTeX\ 默认在段落开始时缩进，长度为用上述命令设置的 \cmd{parindent}。如果需要在某一段不缩进，可在段落开头使用
+\LaTeX{} 默认在段落开始时缩进，长度为用上述命令设置的 \cmd{parindent}。如果需要在某一段不缩进，可在段落开头使用
 \cmd{noindent} 命令。相反地，\cmd{indent} 命令强制开启一段首行缩进的段落。在段落开头使用多个 \cmd{indent} 命令可以累加缩进量。
 
 \pkgindex{indentfirst}
-\LaTeX\ 还默认\textbf{在 \cmd{chapter}、\cmd{section} 等章节标题命令之后的第一段不缩进}%
+\LaTeX{} 还默认\textbf{在 \cmd{chapter}、\cmd{section} 等章节标题命令之后的第一段不缩进}%
 \footnote{\pkg{ctex} 宏包和文档类默认按照中文习惯保持标题后第一段的首行缩进。}。
 如果不习惯这种设定，可以调用 \pkg{indent\-first} 宏包，令第一段的首行缩进照常。
 
@@ -434,7 +434,7 @@ But remember I am a liar.}\par
 \subsection{水平间距}\label{subsec:hspace}
 
 \cmdindex{hspace}
-\LaTeX\ 默认为将单词之间的“空格”转化为水平间距。如果需要在文中手动插入额外的水平间距，可使用 \cmd{hspace} 命令：
+\LaTeX{} 默认为将单词之间的“空格”转化为水平间距。如果需要在文中手动插入额外的水平间距，可使用 \cmd{hspace} 命令：
 \begin{example}
 This\hspace{1.5cm}is a space
 of 1.5 cm.
@@ -472,7 +472,7 @@ nor\qquad mal\\
 
 \subsection{垂直间距}\label{subsec:vspace}
 
-在页面中，段落、章节标题、行间公式、列表、浮动体等元素之间的间距是 \LaTeX\ 预设的。比如 \cmd{parskip} ，默认设置为 \texttt{0pt plus 1pt}。
+在页面中，段落、章节标题、行间公式、列表、浮动体等元素之间的间距是 \LaTeX{} 预设的。比如 \cmd{parskip} ，默认设置为 \texttt{0pt plus 1pt}。
 
 \cmdindex{vspace,vspace*}
 如果我们想要人为地增加段落之间的垂直间距，可以在两个段落之间的位置使用 \cmd{vspace} 命令：
@@ -500,7 +500,7 @@ but it also breaks the line.
 \end{example}
 
 \cmdindex{bigskip,medskip,smallskip}
-另外 \LaTeX\ 还提供了\cmd{bigskip}, \cmd{medskip}, \cmd{smallskip} 来增加预定义长度的垂直间距。
+另外 \LaTeX{} 还提供了\cmd{bigskip}, \cmd{medskip}, \cmd{smallskip} 来增加预定义长度的垂直间距。
 \begin{example}
 \parbox[t]{3em}{TeX\par TeX}
 \parbox[t]{3em}{TeX\par\smallskip TeX}
@@ -510,7 +510,7 @@ but it also breaks the line.
 
 \section{页面和分栏}\label{sec:page-columns}
 
-我们不妨回顾一下第一章介绍的文档类属性。\LaTeX\ 允许用户通过为文档类指定选项来控制纸张的大小（见 \ref{subsec:classes} 小节），
+我们不妨回顾一下第一章介绍的文档类属性。\LaTeX{} 允许用户通过为文档类指定选项来控制纸张的大小（见 \ref{subsec:classes} 小节），
 包括 \texttt{a4paper}、\texttt{letterpaper}等等，并配合字号设置了适合的页边距。
 
 \cmdindex{textheight,textwidth}
@@ -590,9 +590,9 @@ but it also breaks the line.
 
 \subsection{页面内容的垂直对齐}\label{subsec:raggedbottom}
 
-\LaTeX\ 默认将页面内容在垂直方向分散对齐。对于有大量图表的文档，许多时候想要做到排版匀称的页面很困难，
+\LaTeX{} 默认将页面内容在垂直方向分散对齐。对于有大量图表的文档，许多时候想要做到排版匀称的页面很困难，
 垂直分散对齐会造成某些页面的垂直间距过宽，还可能报大量的 \texttt{Underfull} \cmd{vbox} 消息。
-\LaTeX\ 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。
+\LaTeX{} 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。
 
 \cmdindex{raggedbottom, flushbottom}
 以下命令分别令页面在垂直方向向顶部对齐 / 分散对齐：
@@ -604,8 +604,8 @@ but it also breaks the line.
 \subsection{分栏}\label{subsec:columns}
 
 \cmdindex{onecolumn,twocolumn}
-\LaTeX\ 支持简单的单栏或双栏排版。标准文档类的全局选项 \texttt{onecolumn}、\texttt{twocolumn}
-可控制全文分单栏或双栏排版。\LaTeX\ 也提供了切换单/双栏排版的命令：
+\LaTeX{} 支持简单的单栏或双栏排版。标准文档类的全局选项 \texttt{onecolumn}、\texttt{twocolumn}
+可控制全文分单栏或双栏排版。\LaTeX{} 也提供了切换单/双栏排版的命令：
 \begin{command}
 \cmd{onecolumn} \\
 \cmd{twocolumn}\oarg{one-column top material}
@@ -645,7 +645,7 @@ but it also breaks the line.
 \cmdindex{pagestyle,thispagestyle}
 \pinyinindex{yemei}{页眉}
 \pinyinindex{yejiao}{页脚}
-\LaTeX\ 中提供了命令 \cmd{pagestyle} 来修改页眉页脚的样式：
+\LaTeX{} 中提供了命令 \cmd{pagestyle} 来修改页眉页脚的样式：
 \begin{command}
 \cmd{pagestyle}\marg{page-style}
 \end{command}
@@ -655,11 +655,11 @@ but it also breaks the line.
 \cmd{thispagestyle}\marg{page-style}
 \end{command}
 
-\Arg{page-style} 参数为样式的名称，在 \LaTeX\ 里预定义了四类样式，见表 \ref{tbl:pagestyle}。
+\Arg{page-style} 参数为样式的名称，在 \LaTeX{} 里预定义了四类样式，见表 \ref{tbl:pagestyle}。
 
 \begin{table}[htp]
 \centering
-\caption{\LaTeX\ 预定义的页眉页脚样式。}\label{tbl:pagestyle}
+\caption{\LaTeX{} 预定义的页眉页脚样式。}\label{tbl:pagestyle}
 \begin{tabular}{lp{30em}}
  \hline
  \texttt{empty}  & 页眉页脚为空 \\
@@ -694,7 +694,7 @@ but it also breaks the line.
 \subsection{手动更改页眉页脚的内容}\label{subsec:marks}
 
 \cmdindex{markright,markboth}
-对于 headings 或者 myheadings 样式，\LaTeX\ 允许用户使用命令手动修改页眉上面的内容，
+对于 headings 或者 myheadings 样式，\LaTeX{} 允许用户使用命令手动修改页眉上面的内容，
 特别是因为使用了 \cmd{chapter*} 等命令而无法自动生成页眉页脚的情况：
 \begin{command}
 \cmd{markright}\marg{right-mark}\\
@@ -704,7 +704,7 @@ but it also breaks the line.
 在双面排版、\texttt{headings / myheadings} 页眉页脚样式下，\Arg{left-mark} 和 \Arg{right-mark} 的内容分别预期出现在左页（偶数页）和右页（奇数页）。
 事实上 \cmd{chapter} 和 \cmd{section} 等章节命令内部也使用 \cmd{mark\-both} 或者 \cmd{mark\-right} 生成页眉。
 
-\LaTeX\ 默认将页眉的内容都转为大写字母。如果需要保持字母的大小写，可以尝试以下代码
+\LaTeX{} 默认将页眉的内容都转为大写字母。如果需要保持字母的大小写，可以尝试以下代码
 （\cmd{\renewcommand} 命令的用法详见 \ref{subsec:newcmd} 节）%
 \footnote{但是这不能改变页眉的斜体样式（\cmd{slshape}），斜体是定义在 \texttt{headings} 样式里的。
 如果不喜欢斜体，可在 \cmd{mark\-both} 等命令的参数里先使用 \cmd{normal\-font} ，再使用想要的字体样式命令，

@@ -2,7 +2,7 @@
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
-准备好了！本章将见识到 \LaTeX\ 闻名的强项——排版数学公式。当然你得注意了，本章的内容只是一点皮毛，
+准备好了！本章将见识到 \LaTeX{} 闻名的强项——排版数学公式。当然你得注意了，本章的内容只是一点皮毛，
 虽然对大多数人来说已经够用了，但是如果不能解决你的问题的话也不要大惊小怪，求助于搜索引擎或者有经验的人不失为一个好办法。
 \end{intro}
 \DeclareRobustCommand*\amscmd[1]{\textcolor{blue}{\cmd{#1}}}
@@ -12,8 +12,8 @@
 
 \pkgindex{amsmath,amsfonts,amssymb,amsthm}
 在介绍数学公式排版之前，简单介绍一下 \AmS\ 宏集。\AmS\ 宏集合是美国数学学会(American Mathematical Society)提供的对
-\LaTeX\ 原生的数学公式排版的扩展，其核心是 \pkg{amsmath} 宏包，对多行公式的排版提供了有力的支持。
-此外，\pkg{amsfonts} 宏包以及基于它的 \pkg{amssymb} 宏包提供了丰富的数学符号；\pkg{amsthm} 宏包扩展了 \LaTeX\ 定理证明格式。
+\LaTeX{} 原生的数学公式排版的扩展，其核心是 \pkg{amsmath} 宏包，对多行公式的排版提供了有力的支持。
+此外，\pkg{amsfonts} 宏包以及基于它的 \pkg{amssymb} 宏包提供了丰富的数学符号；\pkg{amsthm} 宏包扩展了 \LaTeX{} 定理证明格式。
 
 本章介绍的许多命令和环境依赖于 \pkg{amsmath} 宏包，这些命令和环境将以\textcolor{blue}{蓝色}示意。以下示例都假定了导言区中写有
 \begin{verbatim}
@@ -37,7 +37,7 @@ $a^2 + b^2 = c^2$.
 \envindex{equation}
 \cmdindex{label,ref,nonumber}
 \cmdindex[amsmath]{eqref,tag,notag}
-单独成行的\textbf{行间公式}在 \LaTeX\ 里由 \env{equation} 环境包裹。
+单独成行的\textbf{行间公式}在 \LaTeX{} 里由 \env{equation} 环境包裹。
 \env{equation} 环境为公式自动生成一个编号，这个编号可以用 \cmd{label} 和 \cmd{ref} 生成交叉引用，
 \pkg{amsmath} 的 \amscmd{eqref} 命令甚至为引用自动加上圆括号；还可以用 \amscmd{tag} 命令手动修改公式的编号，
 或者用 \amscmd{notag} 命令取消为公式编号（与之基本等效的命令是 \cmd{nonumber}）。
@@ -105,7 +105,7 @@ In display:
 
 \pinyinindex{shuxuemoshi}{数学模式}
 \cmdindex[amsmath]{text}
-当用户使用 \texttt\$ 开启行内公式输入，或是使用 \cmd{[} 命令、\env{equation} 环境时，\LaTeX\ 就进入了\textbf{数学模式}。
+当用户使用 \texttt\$ 开启行内公式输入，或是使用 \cmd{[} 命令、\env{equation} 环境时，\LaTeX{} 就进入了\textbf{数学模式}。
 数学模式相比于文本模式有以下特点：
 \begin{enumerate}
   \item 数学模式中输入的空格被忽略。数学符号的间距默认由符号的性质（关系符号、运算符等）决定。
@@ -129,7 +129,7 @@ x\in\mathbb{R}$
 \def\msym#1{$\csname #1\endcsname$ (\cmd{#1})}
 
 \pkgindex{amssymb}
-本节我们将接触到形形色色的数学符号，它们是 \LaTeX\ 卓越的数学公式排版能力的基础。\LaTeX\ 默认提供了常用的数学符号，
+本节我们将接触到形形色色的数学符号，它们是 \LaTeX{} 卓越的数学公式排版能力的基础。\LaTeX{} 默认提供了常用的数学符号，
 \pkg{amssymb} 宏包提供了一些次常用的符号。大多数常用的数学符号都能在本章末尾的 \ref{sec:math-tables} 节列出的各个表格里查到。
 更多符号可查阅参考文献\cite{symbols}。
 
@@ -155,7 +155,7 @@ $a_1 + a_2 + \cdots + a_n$
 
 \index{^@\texttt\textasciicircum\ (\textit{数学上标})}
 \index{_@\texttt\textunderscore\ (\textit{数学下标})}
-在 \LaTeX\ 中用 \texttt\textasciicircum 和 \texttt\textunderscore 标明上下标。
+在 \LaTeX{} 中用 \texttt\textasciicircum 和 \texttt\textunderscore 标明上下标。
 注意上下标的内容（子公式）一般需要\textbf{用花括号包裹}，否则上下标只对后面的一个符号起作用。
 \begin{example}
 $p^3_{ij} \qquad
@@ -210,14 +210,14 @@ Pascal's rule is
 \subsection{关系符}\label{subsec:math-rel}
 
 \msymindex{ne,ge,le,approx,equiv,propto,sim}
-\LaTeX\ 常见的关系符号除了可以直接输入的 $=$，$>$，$<$，其它符号用命令输入，常用的有不等号 \msym{ne}、
+\LaTeX{} 常见的关系符号除了可以直接输入的 $=$，$>$，$<$，其它符号用命令输入，常用的有不等号 \msym{ne}、
 大于等于号 \msym{ge} 和小于等于号 \msym{le}%
 \footnote{倾斜的关系符号 \msym{leqslant} 和 \msym{geqslant} 由 \pkg{amssymb} 提供，见表 \ref{tbl:ams-rel}。}、
 约等号 \msym{approx}、等价 \msym{equiv}、正比 \msym{propto}、相似 \msym{sim} 等等。
 更多符号命令可参考表 \ref{tbl:math-rel} 以及表 \ref{tbl:ams-rel}。
 
 \mathindex{stackrel}
-\LaTeX\ 还提供了自定义二元关系符的命令 \cmd{stackrel}，用于将一个符号叠加在原有的二元关系符之上：
+\LaTeX{} 还提供了自定义二元关系符的命令 \cmd{stackrel}，用于将一个符号叠加在原有的二元关系符之上：
 \begin{example}
 \[
 f_n(x) \stackrel{*}{\approx} 1
@@ -227,7 +227,7 @@ f_n(x) \stackrel{*}{\approx} 1
 \subsection{算符}\label{subsec:math-op}
 
 \msymindex{times,div,cdot,pm,mp}
-\LaTeX\ 中的算符大多数是二元算符，除了直接用键盘可以输入的 $+$、$-$、$*$、$/$，其它符号用命令输入，
+\LaTeX{} 中的算符大多数是二元算符，除了直接用键盘可以输入的 $+$、$-$、$*$、$/$，其它符号用命令输入，
 常用的有乘号 \msym{times}、 除号 \msym{div}、点乘 \msym{cdot}、加减号 \msym{pm} / \msym{mp} 等等。
 更多符号命令可参考表 \ref{tbl:math-op} 以及表 \ref{tbl:ams-op}。
 
@@ -235,12 +235,12 @@ f_n(x) \stackrel{*}{\approx} 1
 \msym{nabla} 和 \msym{partial} 也是常用的算符，虽然它们不属于二元算符。
 
 \pinyinindex{shuxuehanshu}{数学函数}
-\LaTeX\ 将数学函数的名称作为一个算符排版，字体为直立字体。其中有一部分符号在上下位置可以书写一些内容作为条件，
+\LaTeX{} 将数学函数的名称作为一个算符排版，字体为直立字体。其中有一部分符号在上下位置可以书写一些内容作为条件，
 类似于后文所叙述的巨算符。
 
 \begin{table}[htp]
 \centering
-\caption{\LaTeX\ 作为算符的函数名称一览。}\label{tbl:math-functions}
+\caption{\LaTeX{} 作为算符的函数名称一览。}\label{tbl:math-functions}
 \begin{tabular}{*{5}{p{5em}}}
 \hline
 \multicolumn{5}{c}{\textbf{不带上下限的算符}} \\
@@ -267,14 +267,14 @@ f_n(x) \stackrel{*}{\approx} 1
 \end{example}
 
 \mathindex{bmod,pmod}
-对于求模表达式，\LaTeX\ 提供了 \cmd{bmod} 和 \cmd{pmod} 命令，前者相当于一个二元运算符，后者作为同余表达式的后缀：
+对于求模表达式，\LaTeX{} 提供了 \cmd{bmod} 和 \cmd{pmod} 命令，前者相当于一个二元运算符，后者作为同余表达式的后缀：
 \begin{example}
 $a\bmod b \\
  x\equiv a \pmod{b}$
 \end{example}
 
 \cmdindex[amsmath]{DeclareMathOperator}
-如果表 \ref{tbl:math-functions} 中的算符不够用的话，\pkg{amsmath} 允许用户用 \amscmd{Declare\-Math\-Operator} 
+如果表 \ref{tbl:math-functions} 中的算符不够用的话，\pkg{amsmath} 允许用户用 \amscmd{Declare\-Math\-Operator}
 定义自己的算符，其中带星号的命令定义带上下限的算符：
 \begin{verbatim}
 \DeclareMathOperator{\argh}{argh}
@@ -290,7 +290,7 @@ $a\bmod b \\
 \msymindex{int,oint,sum,prod}
 积分号 \msym{int}、求和号 \msym{sum} 等符号称为\textbf{巨算符}。巨算符在行内公式和行间公式的大小和形状有区别。
 \begin{example}
-In text: 
+In text:
 $\sum_{i=1}^n \quad
 \int_0^{\frac{\pi}{2}} \quad
 \oint_0^{\frac{\pi}{2}} \quad
@@ -306,7 +306,7 @@ In display:
 巨算符的上下标位置可由 \cmd{limits} 和 \cmd{nolimits} 调整，前者令巨算符类似 $\lim$ 或求和算符 $\sum$，上下标位于上下方；
 后者令巨算符类似积分号，上下标位于右上方和右下方。
 \begin{example}
-In text: 
+In text:
 $\sum\limits_{i=1}^n \quad
 \int\limits_0^{\frac{\pi}{2}} \quad
 \prod\limits_\epsilon $ \\
@@ -318,7 +318,7 @@ In display:
 
 \cmdindex[amsmath]{substack}
 \envindex[amsmath]{subarray}
-\pkg{amsmath} 宏包还提供了 \amscmd{substack}，能够在下限位置书写多行表达式；\amsenv{subarray} 
+\pkg{amsmath} 宏包还提供了 \amscmd{substack}，能够在下限位置书写多行表达式；\amsenv{subarray}
 环境更进一步，令多行表达式可选择居中 (c) 或左对齐 (l)：
 \begin{example}
 \[
@@ -350,7 +350,7 @@ $\hat{\mathbf{e}_x} \quad
 
 \waccindex{overline,underline}
 \waccindex{widehat,overrightarrow}
-\LaTeX\ 也能为多个字符加重音，包括直接画线的 \cmd{overline} 和 \cmd{underline} 命令（可叠加使用）、宽重音符号 \cmd{widehat}、
+\LaTeX{} 也能为多个字符加重音，包括直接画线的 \cmd{overline} 和 \cmd{underline} 命令（可叠加使用）、宽重音符号 \cmd{widehat}、
 表示向量的箭头 \cmd{overrightarrow} 等。后两者详见表 \ref{tbl:math-accents} 和 \ref{tbl:math-arrow-accents} 等。
 \begin{example}
 $0.\overline{3} =
@@ -383,7 +383,7 @@ _\text{meaning of life} = 42$
 
 \subsection{括号和定界符}\label{subsec:math-delims}
 
-\LaTeX\ 提供了多种括号和定界符表示公式块的边界，如小括号 $()$、中括号 $[]$、
+\LaTeX{} 提供了多种括号和定界符表示公式块的边界，如小括号 $()$、中括号 $[]$、
 大括号 $\{\}$（\cmd{\{} \cmd{\}}）、尖括号 $\langle \rangle$ （\cmd{langle} \cmd{rangle}）等。
 更多的括号/定界符命令见表 表 \ref{tbl:math-delims} 和 \ref{tbl:math-large-delims}。
 \begin{example}
@@ -392,7 +392,7 @@ ${a,b,c} \neq \{a,b,c\}$
 
 \mathindex{left,right}
 \mathindex{right}
-使用 \cmd{left} 和 \cmd{right} 命令可令括号（定界符）的大小可变，在行间公式中常用。\LaTeX\ 会自动根据括号内的公式大小决定定界符大小。
+使用 \cmd{left} 和 \cmd{right} 命令可令括号（定界符）的大小可变，在行间公式中常用。\LaTeX{} 会自动根据括号内的公式大小决定定界符大小。
 \cmd{left} 和 \cmd{right} 必须成对使用。需要使用单个定界符时，另一个定界符写成 \cmd{left.} 或 \cmd{right.}。
 \begin{example}
 \[1 + \left(\frac{1}{1-x^{2}}
@@ -404,7 +404,7 @@ ${a,b,c} \neq \{a,b,c\}$
 \mathindex{big,bigg,Big,Bigg}
 \mathindex{bigl,biggl,Bigl,Biggl}
 \mathindex{bigr,biggr,Bigr,Biggr}
-有时我们不满意于 \LaTeX\ 为我们自动调节的定界符大小。这时我们还可以用 \cmd{big}、\cmd{bigg} 等命令生成固定大小的定界符。
+有时我们不满意于 \LaTeX{} 为我们自动调节的定界符大小。这时我们还可以用 \cmd{big}、\cmd{bigg} 等命令生成固定大小的定界符。
 更常用的形式是类似 \cmd{left} 的 \cmd{bigl}、\cmd{biggl} 等，以及类似 \cmd{right} 的 \cmd{bigr}、\cmd{biggr} 等
 （\cmd{bigl} 和 \cmd{bigr} 不必成对出现）。
 \begin{example}
@@ -451,7 +451,7 @@ a + b + c + d + e + f
 \pinyinindex{duohanggongshi}{多行公式|(}
 更多的情况是，我们需要罗列一系列公式，并令其按照等号对齐。
 
-读者可能阅读过其它手册或者资料，知道 \LaTeX\ 提供了 \env{eqnarray} 环境。它按照等号左边——等号——等号右边呈三列对齐，
+读者可能阅读过其它手册或者资料，知道 \LaTeX{} 提供了 \env{eqnarray} 环境。它按照等号左边——等号——等号右边呈三列对齐，
 但等号周围的空隙过大，加上公式编号等一些 bug，目前已不推荐使用\footnote{\url{http://tug.org/pracjourn/2006-4/madsen/madsen.pdf}}。
 
 \envindex[amsmath]{align}
@@ -481,7 +481,7 @@ a ={} & b + c \\
 \begin{example}
 \begin{align}
 a &=1  &  b &=2   & c &=3   \\
-d &=-1 &  e &=-2  & f &=-5 
+d &=-1 &  e &=-2  & f &=-5
 \end{align}
 \end{example}
 
@@ -526,7 +526,7 @@ l + m &= n
 
 \envindex{array}
 \index{&@\texttt\& (\textit{单元格/对齐})}
-为了排版二维数组，\LaTeX\ 提供了 \env{array} 环境，用法与 \env{tabular} 环境极为类似，也需要定义列格式，并用 \crcmd\ 换行。
+为了排版二维数组，\LaTeX{} 提供了 \env{array} 环境，用法与 \env{tabular} 环境极为类似，也需要定义列格式，并用 \crcmd\ 换行。
 数组可作为一个公式块，在外套用 \cmd{left}、\cmd{right} 等定界符：
 \begin{example}
 \[ \mathbf{X} = \left(
@@ -655,11 +655,11 @@ f(x)g(y) \diff x \diff y \\
 \mathindex{mathrm,mathsf,mathtt,mathit,mathbf,mathcal,mathnormal}
 \cmdindex[amssymb]{mathbb,mathfrak}
 \cmdindex[mathrsfs]{mathscr}
-\LaTeX\ 允许一部分数学符号切换字体，主要是拉丁字母、数字、大写希腊字母以及重音符号等。
+\LaTeX{} 允许一部分数学符号切换字体，主要是拉丁字母、数字、大写希腊字母以及重音符号等。
 表 \ref{tbl:math-fonts} 给出了切换字体的命令。某一些命令需要字体宏包的支持。
 \begin{example}
-$\mathcal{R} \quad \mathfrak{R} 
-\quad \mathbb{R}$ 
+$\mathcal{R} \quad \mathfrak{R}
+\quad \mathbb{R}$
 \[\mathcal{L}
 = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}\]
 $\mathfrak{su}(2)$ and
@@ -696,7 +696,7 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 
 \mathindex{displaystyle,textstyle,scriptstyle,scriptscriptstyle}
 数学符号按照符号排版的位置规定尺寸，从大到小包括行间公式尺寸、行内公式尺寸、上下标尺寸、次级上下标尺寸。
-除了字号有别之外，行间和行内公式尺寸下的巨算符也使用不一样的大小。\LaTeX\ 为每个数学尺寸指定了一个切换的命令，见 \ref{tbl:math-size}。
+除了字号有别之外，行间和行内公式尺寸下的巨算符也使用不一样的大小。\LaTeX{} 为每个数学尺寸指定了一个切换的命令，见 \ref{tbl:math-size}。
 \begin{table}[htp]
 \centering
 \caption{数学符号尺寸。}\label{tbl:math-size}
@@ -716,7 +716,7 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 \begin{example}
 \[
 r = \frac
-  {\sum_{i=1}^n (x_i- x)(y_i- y)} 
+  {\sum_{i=1}^n (x_i- x)(y_i- y)}
   {\displaystyle \left[
     \sum_{i=1}^n (x_i-x)^2
     \sum_{i=1}^n (y_i-y)^2
@@ -726,11 +726,11 @@ r = \frac
 
 \subsection{加粗的数学符号}\label{subsec:math-bold}
 
-在 \LaTeX\ 中为符号切换数学字体并不十分自由，只能通过 \cmd{mathbf} 等有限的命令切换字体。比如想得到粗斜体的符号，就没有现成的命令%
+在 \LaTeX{} 中为符号切换数学字体并不十分自由，只能通过 \cmd{mathbf} 等有限的命令切换字体。比如想得到粗斜体的符号，就没有现成的命令%
 \footnote{国内使用粗斜体符号表示矢量，见 GB3102-11.93。}；再比如 \cmd{mathbf} 只能改变拉丁字母和大写希腊字母，小写希腊字母就没有用。
 
 \cmdindex{boldmath}
-\LaTeX\ 提供了一个命令 \cmd{boldmath} 令用户可以将整套数学字体切换为粗体版本（前提是数学字体宏包本身支持粗体符号）。但这个命令\textbf{只能在公式外使用}：
+\LaTeX{} 提供了一个命令 \cmd{boldmath} 令用户可以将整套数学字体切换为粗体版本（前提是数学字体宏包本身支持粗体符号）。但这个命令\textbf{只能在公式外使用}：
 \begin{example}
 $\mu, M \qquad
 \mathbf{\mu}, \mathbf{M}$
@@ -748,22 +748,22 @@ $\mu, M \qquad
 \pkgindex{bm}
 \cmdindex[bm]{bm}
 然而在许多数学字体宏包中，定界符、巨算符等一些符号本身没有粗体版本，\amscmd{boldsymbol} 也得不到粗体。
-\LaTeX\ 工具宏集之一的 \pkg{bm} 宏包可以用 \cmd{bm} 命令生成“伪粗体”，作为粗体符号的一个解决方案。这里不做过多介绍，
+\LaTeX{} 工具宏集之一的 \pkg{bm} 宏包可以用 \cmd{bm} 命令生成“伪粗体”，作为粗体符号的一个解决方案。这里不做过多介绍，
 详情请参考 \pkg{bm} 宏包的帮助文档。
 
 \section{定理环境}\label{sec:theorems}
 
-\subsection{\LaTeX\ 原始的定理环境}\label{subsec:latex-theorems}
+\subsection{\LaTeX{} 原始的定理环境}\label{subsec:latex-theorems}
 
 \cmdindex{newtheorem}
-使用 \LaTeX\ 排版数学和其他科技文档时，会接触到大量的定理、证明等内容。
-\LaTeX\ 提供了一个基本的命令 \cmd{newtheorem} 提供定理环境的定义：
+使用 \LaTeX{} 排版数学和其他科技文档时，会接触到大量的定理、证明等内容。
+\LaTeX{} 提供了一个基本的命令 \cmd{newtheorem} 提供定理环境的定义：
 \begin{command}
 \cmd{newtheorem}\marg{theorem environment}\marg{title}\oarg{section-level} \\
 \cmd{newtheorem}\marg{theorem environment}\oarg{counter}\marg{title}
 \end{command}
 
-\Arg{theorem environment} 为定理环境的名称。原始的\LaTeX\ 里\textbf{没有现成的定理环境}，
+\Arg{theorem environment} 为定理环境的名称。原始的\LaTeX{} 里\textbf{没有现成的定理环境}，
 不加定义而直接使用很可能会出错。\Arg{title} 是定理环境的标题（“定理”，“公理”等）。
 
 定理的序号由两个可选参数之一决定，它们\textbf{不能同时使用}：
@@ -782,24 +782,24 @@ The light speed in vacuum
 is $299,792,458\,\mathrm{m/s}$.
 \end{mythm}
 \begin{mythm}[Energy-momentum relation]
-The relationship of energy, 
-momentum and mass is 
+The relationship of energy,
+momentum and mass is
 \[E^2 = m_0^2 c^4 + p^2 c^2\]
-where $c$ is the light speed 
+where $c$ is the light speed
 described in theorem \ref{thm:light}.
 \end{mythm}
 \end{example}
 
 \subsection{\pkg{amsthm} 宏包}\label{subsec:amsthm}
 
-\LaTeX\ 默认的定理环境格式为粗体标签、斜体正文、定理名用小括号包裹。如果需要修改格式，
+\LaTeX{} 默认的定理环境格式为粗体标签、斜体正文、定理名用小括号包裹。如果需要修改格式，
 则要依赖其它的宏包，如 \pkg{amsthm}、\pkg{ntheorem} 等等。本小节简单介绍一下 \pkg{amsthm} 的用法。
 
 \pkgindex{amsthm}
 \cmdindex[amsthm]{theoremstyle}
 \pkg{amsthm} 提供了 \cmd{theo\-rem\-style} 命令支持定理格式的切换，
 在用 \cmd{new\-theo\-rem} 命令定义定理环境之前使用。
-\pkg{amsthm} 预定义了三种格式用于 \cmd{theo\-rem\-style}：\texttt{plain} 和 \LaTeX\ 原始的格式一致；
+\pkg{amsthm} 预定义了三种格式用于 \cmd{theo\-rem\-style}：\texttt{plain} 和 \LaTeX{} 原始的格式一致；
 \texttt{defi\-ni\-tion} 使用粗体标签、正体内容；\texttt{remark} 使用斜体标签、正体内容。
 
 另外 \pkg{amsthm} 还支持用带星号的 \cmd{new\-theo\-rem*} 定义不带序号的定理环境：
@@ -860,7 +860,7 @@ E=mc^2 \qedhere
 \cmd{qedhere} 对于 \amsenv{align*} 等环境也有效：
 \begin{example}
 \begin{proof}
-Assuming $\gamma 
+Assuming $\gamma
 = 1/\sqrt{1-v^2/c^2}$, then
 \begin{align*}
 E &= \gamma m_0 c^2  \\

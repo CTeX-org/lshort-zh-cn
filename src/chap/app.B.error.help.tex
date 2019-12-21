@@ -1,13 +1,13 @@
 \chapter{排除错误、寻求帮助}\label{chap:error-helps}
 
 \begin{intro}
-\LaTeX\ 入门用户总会为两大问题头疼：我写的代码到底哪里出错了？如果想要实现某种用法该怎么办？
-本章首先总结了常见的 \LaTeX\ 错误及应对的办法。
+\LaTeX{} 入门用户总会为两大问题头疼：我写的代码到底哪里出错了？如果想要实现某种用法该怎么办？
+本章首先总结了常见的 \LaTeX{} 错误及应对的办法。
 \end{intro}
 
-\section{\LaTeX\ 错误}\label{sec:errors}
+\section{\LaTeX{} 错误}\label{sec:errors}
 
-当我们用排版引擎编译 \LaTeX\ 代码时，命令行的窗口（终端）会显示大量信息（TeXworks 等编辑器会有一个区域显示这些信息）。
+当我们用排版引擎编译 \LaTeX{} 代码时，命令行的窗口（终端）会显示大量信息（TeXworks 等编辑器会有一个区域显示这些信息）。
 当编译过程中出现错误时，信息将会停止在出错的地方，等待我们接下来的操作。
 
 比如说我们有一个明显出错的例子：
@@ -35,9 +35,9 @@ l.3 Test \LaTEx
 将``Test and it's friends.''排版出来。但这个例子过于简单，有些复杂的代码中，有可能会由于一个小问题导致一连串的错误。
 此时可以选择按 \textbf{S/R/Q} 选择跳过接下来的所有错误，或者按 \textbf{X} 直接退出编译，将源代码中的错误修改后重新编译。
 
-\subsubsection{常见的 \LaTeX\ 错误信息}
+\subsubsection{常见的 \LaTeX{} 错误信息}
 
-笔者在此总结一些经常发生、问题比较明确的 \LaTeX\ 错误：
+笔者在此总结一些经常发生、问题比较明确的 \LaTeX{} 错误：
 
 \long\def\LaTeXerror#1{\begingroup\color{red}\bfseries\ttfamily{}#1\endgroup}
 
@@ -145,13 +145,13 @@ texdoc fancyhdr
 如果不熟悉命令行工具的话，\hologo{TeXLive} 提供了一个图形界面的程序 TeXdoc GUI。打开后，可以看到程序里的许多按钮，分别代表某一类的帮助文档。
 除此之外，点击 File Search 弹出搜索框，输入想要搜索的宏包和文件并按回车键，TeXdoc GUI 会弹出它搜索到的所有结果，可点击任意一项来打开文档。
 
-当然对于初学者，有一个现实而棘手的问题：\textbf{某个命令到底是 \LaTeX\ 自有的，还是哪个宏包提供的？}
-很遗憾地说，除了通过慢慢积累、熟悉较多宏包之外，没有很方便的办法解决这个问题，因为 \LaTeX\ 的宏包实在太丰富了。
+当然对于初学者，有一个现实而棘手的问题：\textbf{某个命令到底是 \LaTeX{} 自有的，还是哪个宏包提供的？}
+很遗憾地说，除了通过慢慢积累、熟悉较多宏包之外，没有很方便的办法解决这个问题，因为 \LaTeX{} 的宏包实在太丰富了。
 本手册末尾的索引给出了所有在本手册见到的命令和环境，其中哪些命令和环境需要调用哪个宏包才能使用，一目了然。但是这个索引远远不够。
 
 解决这个问题有几点可行的办法：
 \begin{enumerate}
-  \item 查询一些综述性的资料，如总结所有 \LaTeX\ 自带命令的文档 \cite{latex2e}、\LaTeX\ 符号大全 \cite{symbols} 等；
+  \item 查询一些综述性的资料，如总结所有 \LaTeX{} 自带命令的文档 \cite{latex2e}、\LaTeX{} 符号大全 \cite{symbols} 等；
   \item 在互联网上搜索自己不清楚的命令；
   \item 在论坛上提问求助有经验的人。
 \end{enumerate}

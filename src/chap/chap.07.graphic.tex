@@ -2,7 +2,7 @@
 \addtocontents{los}{\protect\addvspace{10pt}}
 
 \begin{intro}
-除了排版文字，\LaTeX\ 也支持用代码表示图形。不同的扩展已经极大地丰富了 \LaTeX\ 的图形功能，\TikZ\ 就是其中之一。
+除了排版文字，\LaTeX{} 也支持用代码表示图形。不同的扩展已经极大地丰富了 \LaTeX{} 的图形功能，\TikZ\ 就是其中之一。
 本章将带你了解一些基本的绘图功能。
 
 一些特殊的绘图，如交换图、树状图甚至分子式和电路图也能够通过代码绘制，
@@ -11,17 +11,17 @@
 
 \section{绘图语言简介}\label{sec:pict-lang}
 
-\LaTeX\ 提供了原始的 \env{picture} 环境，能够绘制一些基本的图形如点、线、矩形、圆、B\'ezier 曲线等等，
-不过受制于 \LaTeX\ 本身，它的绘图功能极为有限，效果也不够美观。
+\LaTeX{} 提供了原始的 \env{picture} 环境，能够绘制一些基本的图形如点、线、矩形、圆、B\'ezier 曲线等等，
+不过受制于 \LaTeX{} 本身，它的绘图功能极为有限，效果也不够美观。
 
-当前较为流行的、用于 \LaTeX\ 的绘图宏包 / 程序主要有：
+当前较为流行的、用于 \LaTeX{} 的绘图宏包 / 程序主要有：
 \begin{itemize}
   \item PSTricks \par
   以 PostSciprt 语法为基础的绘图宏包，具有优秀的绘图能力。它对老式的 \texttt{latex + dvips} 编译命令支持最好，
   而现在的几种编译命令下使用起来都不够方便。
 
   \item \TikZ\ \& \pkg{pgf} \par
-  德国的 Till Tantau 教授在开发著名的 \LaTeX\ 幻灯片文档类 \cls{beamer} 时一并开发了绘图宏包 \pkg{pgf}，
+  德国的 Till Tantau 教授在开发著名的 \LaTeX{} 幻灯片文档类 \cls{beamer} 时一并开发了绘图宏包 \pkg{pgf}，
   目的是令其能够在 \texttt{pdflatex} 或 \texttt{xelatex} 等不同的编译命令下都能使用。
   \TikZ\ 是在 \pkg{pgf} 基础上封装的一个宏包，采用了类似 \hologo{METAPOST} 的语法，提供了方便的绘图命令，绘图能力不输 PSTricks。
 
@@ -29,7 +29,7 @@
   \hologo{METAPOST} 脱胎于高德纳为 \TeX\ 配套开发的字体生成程序 \hologo{METAFONT}，
   具有优秀的绘图能力，并能够调用 \TeX\ 引擎向图片中插入文字和公式。
   Asymptote 在 \hologo{METAPOST} 的基础上更进一步，具有一定的类似 C 语言的编程能力，支持三维图形的绘制。\par
-  它们作为独立的程序，通常的用法是将代码写在单独的文件里，编译生成图片供 \LaTeX\ 引用，也可以借助特殊的宏包在 \LaTeX\ 代码里直接使用。
+  它们作为独立的程序，通常的用法是将代码写在单独的文件里，编译生成图片供 \LaTeX{} 引用，也可以借助特殊的宏包在 \LaTeX{} 代码里直接使用。
 \end{itemize}
 
 本手册将介绍 \TikZ\ 绘图宏包里最基本的部分。\TikZ\ 还支持各种自定义的扩展，基于 \TikZ\ 的专门用途的绘图宏包也不胜枚举，
@@ -61,13 +61,13 @@
 
 \TikZ\ 用直角坐标系或者极坐标系描述点的位置。
 \begin{itemize}
-  \item 直角坐标下，点的位置写作 \texttt{(\Arg{$x$},\Arg{$y$})}，坐标 \Arg{$x$} 和 \Arg{$y$} 可以用 \LaTeX\ 支持的任意单位表示，
+  \item 直角坐标下，点的位置写作 \texttt{(\Arg{$x$},\Arg{$y$})}，坐标 \Arg{$x$} 和 \Arg{$y$} 可以用 \LaTeX{} 支持的任意单位表示，
   缺省为 \texttt{cm}；
   \item 极坐标下，点的位置写作 \texttt{(\Arg{$\theta$}:\Arg{r})}。$\theta$ 为极角，单位是度。
 \end{itemize}
 
 \cmdindex[tikz]{coordinate}
-我们还可以为某个点命名：\cmd{coordinate} \texttt{(A) at (\Arg{coordinate})} 
+我们还可以为某个点命名：\cmd{coordinate} \texttt{(A) at (\Arg{coordinate})}
 然后就可以使用 \texttt{(A)} 作为点的位置了。
 
 \begin{example}
@@ -150,9 +150,9 @@
 \begin{example}
 \begin{tikzpicture}
 \draw (0,0) parabola (1,2);
-\draw (2,0) parabola 
+\draw (2,0) parabola
       bend (2.25,-0.25) (3,2);
-\draw (4,0) parabola 
+\draw (4,0) parabola
       bend (4.75,2.25) (5,2);
 \end{tikzpicture}
 \end{example}
@@ -162,7 +162,7 @@
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}
-\draw (0,0) .. controls 
+\draw (0,0) .. controls
   (2,1) and (3,1) .. (3,0);
 \draw (4,0) .. controls
   (5,1) .. (5,0);
@@ -177,11 +177,11 @@
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}
-\draw[help lines,step=0.5] 
+\draw[help lines,step=0.5]
      (-1,-1) grid (1,1);
 \draw[->] (-1.5,0) -- (1.5,0);
 \draw[->] (0,-1.5) -- (0,1.5);
-\draw[domain=-1:1] 
+\draw[domain=-1:1]
      plot(\x,{\x*\x*2 -1});
 \end{tikzpicture}
 \end{example}
@@ -194,7 +194,7 @@
 \begin{command}
 \cmd{draw}\oarg*{\ldots} \Arg{path}; \\
 \cmd{fill}\oarg*{\ldots} \Arg{path}; \\
-\cmd{filldraw}\oarg*{\ldots} \Arg{path}; 
+\cmd{filldraw}\oarg*{\ldots} \Arg{path};
 \end{command}
 
 绘图参数可作为可选参数用在 \env{tikzpiture} 环境或 \cmd{tikz} 命令时，参数会影响到所有具体的绘图命令；
@@ -213,7 +213,7 @@
 \draw[blue] (0,0) rectangle (1,1);
 \filldraw[fill=yellow,draw=red]
   (2,0.5) circle [radius=0.5];
-\end{tikzpicture}  
+\end{tikzpicture}
 \end{example}
 
 \begin{itemize}
@@ -280,7 +280,7 @@
 \end{example}
 
 \begin{itemize}
-  \item \texttt{scale/xshift/yshift/xslant/yslant/rotate} 设定图形的缩放、位移和旋转。 
+  \item \texttt{scale/xshift/yshift/xslant/yslant/rotate} 设定图形的缩放、位移和旋转。
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}
@@ -301,7 +301,7 @@
   [myarrow/.style={blue,thick,->}]
 \draw (0,0)--(0,1)--(2,1);
 \draw[myarrow] (0,0)--(2,1);
-\draw[myarrow,dotted] 
+\draw[myarrow,dotted]
   (0,0)--(2,0)--(2,1);
 \end{tikzpicture}
 \end{example}
@@ -351,12 +351,12 @@
 \end{example}
 
 \begin{itemize}
-  \item \texttt{shape=\Arg{shape}} 
-  结点的形状，默认可用 \texttt{rectangle} 和 \texttt{circle}，可省略 \texttt{shape=} 直接写。在导言区使用命令 
+  \item \texttt{shape=\Arg{shape}}
+  结点的形状，默认可用 \texttt{rectangle} 和 \texttt{circle}，可省略 \texttt{shape=} 直接写。在导言区使用命令
   \cmd{use\-tikz\-library}\marg*{shapes.geometric} 可用更多的形状。
-  \item \texttt{text=\Arg{color}} 
+  \item \texttt{text=\Arg{color}}
   结点文字的颜色。
-  \item \texttt{node font=\Arg{font command}} 
+  \item \texttt{node font=\Arg{font command}}
   结点文字的字体，形如 \cmd{bfseries} 或 \cmd{itshape} 等。
 \end{itemize}
 \begin{example}
@@ -372,7 +372,7 @@
 \end{example}
 
 \begin{itemize}
-  \item \texttt{inner sep=\Arg{length} / outer sep=\Arg{length}} 
+  \item \texttt{inner sep=\Arg{length} / outer sep=\Arg{length}}
   结点边界向外和向内的额外距离。
   \item \texttt{minimum size=\Arg{length} / minimum height=\Arg{length} / minimum width=\Arg{length}} \\
   结点的最小大小或最小高度/宽度。
@@ -413,10 +413,10 @@
 \coordinate (b)  at (4,1.2);
 \node[below] (a0) at (a |- 0,0) {$a$};
 \node[below] (b0) at (b |- 0,0) {$b$};
-\filldraw[fill=gray!20,draw,thick] 
+\filldraw[fill=gray!20,draw,thick]
   (a0) -- (a) .. controls (1,2.8) and (2.7,0.4) .. (b) -- (b0) -- cycle;
 \node[above right,outer sep=0.2cm, rounded corners,
-  fill=green!20,draw=gray,text=blue!60!black,scale=0.6] 
+  fill=green!20,draw=gray,text=blue!60!black,scale=0.6]
   at (b) {$\displaystyle \int_a^b {f(x)\,\mathrm{d}x} = F(b) - F(a)$};
 \end{tikzpicture}
 \end{Verbatim}
@@ -428,10 +428,10 @@
 \coordinate (b)  at (4,1.2);
 \coordinate[label=below:$a$] (a0) at (a |- 0,0);
 \coordinate[label=below:$b$] (b0) at (b |- 0,0);
-\filldraw[fill=gray!20,draw,thick] 
+\filldraw[fill=gray!20,draw,thick]
   (a0) -- (a) .. controls (1,2.8) and (2.7,0.4) .. (b) -- (b0) -- cycle;
 \node[above right,outer sep=0.2cm, rounded corners,
-  fill=green!20,draw=gray,text=blue!60!black,scale=0.6] 
+  fill=green!20,draw=gray,text=blue!60!black,scale=0.6]
   at (b) {$\displaystyle \int_a^b {f(x)\,\mathrm{d}x} = F(b) - F(a)$};
 \end{tikzpicture}
 \end{center}
@@ -452,7 +452,7 @@
 \begin{tikzpicture}
 \draw (0,0)--(5,0);
 \foreach \i in {0.0,0.1,...,5.0}
-  {\draw[very thin] 
+  {\draw[very thin]
      (\i,0)--(\i,0.15);}
 \foreach \I in {0,1,2,3,4,5}
   {\draw (\I,0)--(\I,0.25)
@@ -463,9 +463,9 @@
 \cmd{foreach} 还可使用变量对参与循环：
 \begin{example}
 \begin{tikzpicture}
-\foreach \n/\t in 
+\foreach \n/\t in
   {0/\alpha,1/\beta,2/\gamma}
-  {\node[circle,fill=lightgray,draw] 
+  {\node[circle,fill=lightgray,draw]
     at (\n,0) {$\t$};}
 \end{tikzpicture}
 \end{example}
