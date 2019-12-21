@@ -133,7 +133,7 @@ He likes {\LARGE large and
 字体编码对于 \LaTeX{} 用户来讲是一个比较晦涩的概念。它规定了一个字体里包含的符号，并将若干符号用 \LaTeX{} 命令定义。
 注意字体编码与我们在 \ref{subsec:ascii} 等小节叙述的 ASCII 编码等并非一一对应。
 
-常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX{} 默认使用兼容 plain \TeX\ 的 \texttt{OT1} 编码，使用起来有诸多限制：
+常见的正文字体编码有 \texttt{OT1} 和 \texttt{T1} 等。\LaTeX{} 默认使用兼容 \hologo{plainTeX} 的 \texttt{OT1} 编码，使用起来有诸多限制：
 高德纳在设计 Computer Modern 字体时认为一些符号，如大于号、小于号等，原则上都应该在公式里出现，所以在正文字体里这些符号所在的位置被其它符号所占据
 （\texttt{OT1} 字体编码、\cmd{rmfamily} 和 \cmd{sffamly} 字体族下， \texttt< 和 \texttt> 排版\ !` 和\ ?` 两个倒立的标点符号，
 正常的大于号和小于号可用命令 \cmd{textgreater} 和 \cmd{textless} 输入；\cmd{ttfamily} 字体族下是正常的大于号和小于号）。
