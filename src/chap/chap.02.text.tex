@@ -4,7 +4,7 @@
 \begin{intro}
 文字是排版的基础。本章主要介绍如何在 \LaTeX{} 中输入各种文字符号，包括标点符号、连字符、重音等，以及控制文字断行和断页的方式。
 
-本章简要介绍了在 \LaTeX{} 中排版中文的方法。随着 \LaTeX{} 和底层 \TeX\ 引擎的发展，旧方式（CCT、\pkg{CJK} 等）日渐退出舞台，
+本章简要介绍了在 \LaTeX{} 中排版中文的方法。随着 \LaTeX{} 和底层 \TeX{} 引擎的发展，旧方式（CCT、\pkg{CJK} 等）日渐退出舞台，
 \texttt{xelatex} 和 \texttt{lualatex} 编译命令配合 \cls{ctex} 宏包 / 文档类的方式成为当前的主流中文排版支持方式。
 \end{intro}
 
@@ -19,17 +19,17 @@
 计算机的基本存储单位是字节（byte），每个字节为八位（8-bit），范围用十六进制写作 \texttt{0x00}--\texttt{0xFF}。
 ASCII （美国通用信息交换码）使用 \texttt{0x00}--\texttt{0x7F} 对文字编码，也就是 7-bit，覆盖了基本的拉丁字母、数字和符号，以及一些不可打印的控制字符（如换行符、制表符等）。
 
-由于 \TeX\ 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，因而早期版本的 \TeX\ 只支持 7-bit 和 ASCII 编码。
+由于 \TeX{} 最初设计用于排版以英文为主的西文文档，ASCII 编码完全够用，因而早期版本的 \TeX{} 只支持 7-bit 和 ASCII 编码。
 排版扩展拉丁字符必须使用后文所述的各种符号和重音命令，如 M\"obius 必须通过输入 \verb|M\"obius| 得到。
 
 \subsection{扩展编码}\label{subsec:ext-encoding}
 
 在 ASCII 之后，各种语言文字都发展了自己的编码，比如西欧语言的 Latin-1、日本的 Shift-JIS、中国大陆的 GB2312-80 和 GBK 等。
-它们中的绝大多数都向下兼容 ASCII，因此无论是在哪种编码下，\TeX\ 以及 \LaTeX{} 的命令和符号都能用。
+它们中的绝大多数都向下兼容 ASCII，因此无论是在哪种编码下，\TeX{} 以及 \LaTeX{} 的命令和符号都能用。
 
 \index{bianma@编码!Latin-1}
 \pkgindex{inputenc}
-\TeX\ 从 3.0 版开始支持 8-bit，能够处理编码在 \texttt{0x80}--\texttt{0xFF} 范围内的字符。
+\TeX{} 从 3.0 版开始支持 8-bit，能够处理编码在 \texttt{0x80}--\texttt{0xFF} 范围内的字符。
 西欧（拉丁字母）、俄语系（西里尔字母）等语言文字的编码方案大都利用了 \texttt{0x80}--\texttt{0xFF} 这个范围，
 处理起来较为方便。使用 \texttt{latex} 或 \texttt{pdflatex} 编译命令时，对源代码的编码处理由 \pkg{inputenc} 宏包支持。
 比如将源代码保存为 Latin-1 编码，并在导言区调用 \pkg{inputenc} 宏包并指定 \texttt{latin1} 选项后，M\"obius 这样的词语就可以直接通过（用适当输入法）输入 \texttt{M\"obius} 得到了。
@@ -58,7 +58,7 @@ Français Português Español Føroyskt
 但是非拉丁字母仍然无法直接在 \LaTeX{} 中使用，如西里尔字母（俄文）、希腊字母、阿拉伯字母以及东亚文字等。
 
 \pkgindex{fontspec,babel,polyglossia}
-较为现代的 \TeX\ 引擎，如 \hologo{XeTeX} 和 \hologo{LuaTeX}，它们均原生支持 UTF-8 编码。
+较为现代的 \TeX{} 引擎，如 \hologo{XeTeX} 和 \hologo{LuaTeX}，它们均原生支持 UTF-8 编码。
 使用 \texttt{xelatex} 和 \texttt{lualatex} 排版时，将源代码保存为 UTF-8 编码，并借助
 \pkg{fontspec} 宏包（见 \ref{subsec:fontspec} 小节）调用适当的字体，原则上就可以在源代码中输入任意语言的文字。
 注意此时\textbf{不再适用 \pkg{inputenc} 宏包}。但一些复杂语言（如印地语、阿拉伯语等）的排版需要考虑到断词规则、文字方向、标点禁则等诸多细节，因此需要更多的宏包支持，如 \pkg{babel}、 \pkg{polyglossia} 等，此处不再涉及。
@@ -71,9 +71,9 @@ Français Português Español Føroyskt
 
 \pkgindex{ctex}
 \clsindex{ctexart,ctexbook,ctexrep}
-\pkg{ctex} 宏包和文档类\footnote{\hologo{CTeX} 还经常用来指一个过时的 \TeX\ 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}%
+\pkg{ctex} 宏包和文档类\footnote{\hologo{CTeX} 还经常用来指一个过时的 \TeX{} 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}%
 进一步封装了 \pkg{CJK}、\pkg{xeCJK}、\pkg{luatexja} 等宏包，使得用户在排版中文时不用再考虑排版引擎等细节。\pkg{ctex} 宏包本身用于配合各种文档类排版中文，而 \pkg{ctex} 文档类对 \LaTeX{} 的标准文档类进行了封装，对一些排版根据中文排版习惯做了调整，包括 \cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}。
-\pkg{ctex} 宏包和文档类能够识别操作系统和 \TeX\ 发行版中安装的中文字体，因此基本无需额外配置即可排版中文文档。下面举一个使用 \pkg{ctex} 文档类排版中文的最简例子：
+\pkg{ctex} 宏包和文档类能够识别操作系统和 \TeX{} 发行版中安装的中文字体，因此基本无需额外配置即可排版中文文档。下面举一个使用 \pkg{ctex} 文档类排版中文的最简例子：
 
 \begin{verbatim}
 \documentclass{ctexart}
@@ -250,7 +250,7 @@ Stra\ss e
 \textregistered{} \texttrademark
 \end{example}
 
-更多的符号多由特定的宏包支持。参考文献 \cite{symbols} 搜集了所有在 \TeX\ 发行版中可用的符号，使用时要留意每个符号所依赖的宏包。
+更多的符号多由特定的宏包支持。参考文献 \cite{symbols} 搜集了所有在 \TeX{} 发行版中可用的符号，使用时要留意每个符号所依赖的宏包。
 
 \subsection{\LaTeX{} 标志}\label{subsec:latex-mark}
 

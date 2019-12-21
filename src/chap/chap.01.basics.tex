@@ -12,20 +12,20 @@
 
 \index{Knuth@Knuth, Donald E. (\textit{高德纳})}
 \index{TeX@\TeX}
-\TeX\ 是高德纳 (Donald E.~Knuth) 开发的、以排版文字和数学公式为目的的软件\cite{texbook}。
+\TeX{} 是高德纳 (Donald E.~Knuth) 开发的、以排版文字和数学公式为目的的软件\cite{texbook}。
 1977 年，正在编写著作《计算机程序设计艺术》的高德纳，意图扭转排版质量每况愈下的状况，以免影响他的出书，
 于是开始开发 \TeX{}，以发掘当时开始用于出版工业的数字印刷设备的潜力。
-\TeX\ 排版引擎发布于 1982 年，在 1989 年又加以改进以更好地支持 8-bit 字符和多语言排版。
-\TeX\ 以其卓越的稳定性、跨平台、几乎没有 bug 而著称。\TeX\ 的版本号不断趋近于 $\pi$，当前为 3.141592653。
+\TeX{} 排版引擎发布于 1982 年，在 1989 年又加以改进以更好地支持 8-bit 字符和多语言排版。
+\TeX{} 以其卓越的稳定性、跨平台、几乎没有 bug 而著称。\TeX{} 的版本号不断趋近于 $\pi$，当前为 3.141592653。
 
-\TeX\ 读作 ``Tech'' ，其中 ``ch'' 的发音类似于 ``h'' ，与汉字“泰赫”的发音相近。\TeX\ 的拼写来自希腊词语
-τεχνική (technique，技术) 的开头几个字母。在 ASCII 字符环境，\TeX\ 写作 \texttt{TeX}。
+\TeX{} 读作 ``Tech'' ，其中 ``ch'' 的发音类似于 ``h'' ，与汉字“泰赫”的发音相近。\TeX{} 的拼写来自希腊词语
+τεχνική (technique，技术) 的开头几个字母。在 ASCII 字符环境，\TeX{} 写作 \texttt{TeX}。
 
 \subsection{\LaTeX}\label{subsec:latex}
 
 \index{LaTeX@\LaTeX}
 \index{LaTeX2e@\LaTeXe}
-\LaTeX{} 是一种格式（format），使用 \TeX\ 程序作为自己的排版引擎。可以粗略地将 \LaTeX{} 理解成是对 \TeX\ 的一层封装。
+\LaTeX{} 是一种格式（format），使用 \TeX{} 程序作为自己的排版引擎。可以粗略地将 \LaTeX{} 理解成是对 \TeX{} 的一层封装。
 \LaTeX{} 最初的设计目标是分离内容与格式，以便作者能够无需关注版式设计，只需专注与内容创作就能得到高质量排版的作品。
 最初的开发者是 Leslie Lamport 博士\cite{manual}，当前 \LaTeX{} 由 \LaTeX 3 工作组%
 \footnote{\url{https://www.latex-project.org}}维护。
@@ -37,7 +37,7 @@
 
 经常有人喜欢对比 \LaTeX{} 和以 Microsoft Office Word 为代表的“所见即所得”%
 （What You See Is What You Get）字处理工具。
-这种对比是没有意义的，因为 \TeX\ 是一个排版引擎，\LaTeX{} 是其封装，而 Word 是字处理工具。
+这种对比是没有意义的，因为 \TeX{} 是一个排版引擎，\LaTeX{} 是其封装，而 Word 是字处理工具。
 二者的设计目标不一致，也各自有自己的适用范围。
 
 不过，这里仍旧总结 \LaTeX{} 的一些优点：
@@ -49,7 +49,7 @@
   \item 强大的可扩展性。世界各地的人开发了数以千计的 \LaTeX{} 宏包用于补充和扩展 \LaTeX{} 的功能。
   本手册附录中的 \ref{sec:pkg-list} 小节可见一瞥。更多的宏包参考 \textit{The \LaTeX{} companion}\cite{companion}。
   \item 能够促使用户写出结构良好的文档——而这也是 \LaTeX{} 存在的初衷。
-  \item \LaTeX{} 和 \TeX\ 及相关软件是跨平台、免费、开源的。
+  \item \LaTeX{} 和 \TeX{} 及相关软件是跨平台、免费、开源的。
   无论用户使用的是 Windows，macOS（OS X），GNU/Linux 还是 FreeBSD 等操作系统，都能轻松获得和使用这一强大的排版工具，并且获得稳定的输出。
 \end{itemize}
 
@@ -67,7 +67,7 @@
 
 \subsection{命令行基础}
 
-\LaTeX{} 和 \TeX\ 及相关软件大多仅提供了命令行接口，而不像 Word、Adobe InDesign 一样有图形用户界面。
+\LaTeX{} 和 \TeX{} 及相关软件大多仅提供了命令行接口，而不像 Word、Adobe InDesign 一样有图形用户界面。
 命令行程序的结构往往比较简单，它们接受用户输入，读取相关文件，进行一些操作和运算后输出目标文件，
 有时还会将提示信息、运行结果显示在屏幕上。在 Windows 系统上，如需进入命令行，可在开始菜单中搜索
 “命令提示符”，也可在“运行”窗口中输入 \texttt{cmd} 打开；Linux 或 macOS 系统中可搜索“Terminal”打开
@@ -75,7 +75,7 @@
 
 与常规软件类似，命令行程序也都是可执行程序，在 Windows 上后缀名为 \texttt{.exe}，而在类 Unix 系统上
 则需要带有 \texttt{x} 权限。在大多数命令行环境中，系统会根据\textbf{环境变量} \texttt{PATH} 中存储
-的路径来搜索可供执行的程序。因此在运行之前，需确保 \LaTeX 、\TeX\ 及相关程序所在路径已包含在
+的路径来搜索可供执行的程序。因此在运行之前，需确保 \LaTeX 、\TeX{} 及相关程序所在路径已包含在
 \texttt{PATH} 中。
 
 在命令行中运行程序时，需要先输入程序名，其后可加一系列用空格分隔的参数，并按下 Enter 键执行。
@@ -161,7 +161,7 @@ xelatex helloworld
 字母形式的 \LaTeX{} 命令忽略其后的所有连续空格。
 如果要人为引入空格，需要在命令后面加一对花括号阻止其忽略空格%
 \footnote{另外也可以在命令后面紧跟一个 \cmd{\textvisiblespace} 命令（反斜线加空格），代表插入一个间距。
-比如 \cmd{TeX}\cmd{\textvisiblespace}\texttt{user} 的输出效果就是 \TeX\ user。}：
+比如 \cmd{TeX}\cmd{\textvisiblespace}\texttt{user} 的输出效果就是 \TeX{} user。}：
 \begin{example}
 Shall we call ourselves
 \TeX users
@@ -395,7 +395,7 @@ or \TeX{} users?
 
 如果想生成文档，则用 \texttt\% 注释掉 \cmd{syntaxonly} 命令即可。
 
-\section{\LaTeX{} 和 \TeX\ 相关的术语和概念}\label{sec:concepts}
+\section{\LaTeX{} 和 \TeX{} 相关的术语和概念}\label{sec:concepts}
 
 \pinyinindex{paibanyinqing}{排版引擎}
 \index{pdfTeX@\hologo{pdfTeX}}
@@ -412,13 +412,13 @@ or \TeX{} users?
 
 \begin{table}[htp]
   \centering
-  \caption{\TeX\ 引擎、格式及其对应的编译命令。}
+  \caption{\TeX{} 引擎、格式及其对应的编译命令。}
   \label{tbl:engine-format-command}
   \begin{tabular}{cccc}
    \hline
                         & \textbf{文档格式} & \textbf{\hologo{plainTeX} 格式} & \textbf{\LaTeX{} 格式} \\
    \hline
-   \TeX\ 引擎           & DVI       & \texttt{tex}     & N/A \\
+   \TeX{} 引擎           & DVI       & \texttt{tex}     & N/A \\
    \hologo{pdfTeX} 引擎 & DVI       & \texttt{etex}    & \texttt{latex} \\
                         & PDF       & \texttt{pdftex}  & \texttt{pdflatex} \\
    \hologo{XeTeX} 引擎  & PDF       & \texttt{xetex}   & \texttt{xelatex} \\
@@ -443,7 +443,7 @@ or \TeX{} users?
   当前较为方便的中文排版解决方案基于 \texttt{xelatex}，详见 \ref{sec:chinese} 节。
   \item[\texttt{lualatex}]
   底层调用的引擎是 \hologo{LuaTeX}，这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
-  除了支持 UTF-8 编码和对 TrueType / OpenType 字体的调用外，还支持通过 Lua 语言扩展 \TeX\ 的功能。
+  除了支持 UTF-8 编码和对 TrueType / OpenType 字体的调用外，还支持通过 Lua 语言扩展 \TeX{} 的功能。
   \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatexja} 宏包。
 \end{description}
 
