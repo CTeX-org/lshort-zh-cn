@@ -1,35 +1,44 @@
 # 中文版 lshort 代码用到的命令
 
-### 约定俗成的习惯
+## 约定俗成的习惯
 
-1. 命令后面用 `\␣` 加空格，如 `\LaTeX\␣`，不用 `\LaTeX{}␣`。
-2. 每章的 `\chapter` 命令后手动给 `.los` 目录写间距：
+1. 在控制序列后面显式加空格时使用空分组 `{}`，如 `\LaTeX{} 命令`。
+2. TeX 专有术语尽量使用 `\hologo` 宏排版。
+3. 每章的 `\chapter` 命令后手动给 `.los` 目录写间距：
 
 ```
 \addtocontents{los}{\protect\addvspace{10pt}}
 ```
 
-### 命令和环境
+## LaTeX 术语的表示方式
 
+### 命令和环境名称
+
+用 `\cmd` 和 `\env` 命令生成命令名 `\cmdname` / 环境名 `envname`，以等宽字体排版：
 ```
 \cmd{cmdname}
 \env{envname}
 ```
-生成命令名 \cmdname / 环境 envname，等宽字体。cmdname 参数不要带斜杠。
+`cmdname` 参数不要带斜杠。名称内在必要的时候添加 `\-` 控制分词。
 
+### 宏包和文档类名称
+
+用 `\pkg` 和 `\cls` 命令生成宏包和文档类的名称，以无衬线字体排版。
 ```
 \pkg{pkgname}
 \cls{clsname}
 ```
-生成宏包和文档类的名称（无衬线字体）。
 
+### 命令参数
+
+用 `\marg` 命令生成必选参数，用 `\oarg` 命令生成可选参数：
 ```
 \marg{argument}
 \marg*{argument}
 \oarg{argument}
 \oarg*{argument}
 ```
-命令的必选参数/可选参数，分别为参数自动包裹大括号和中括号。不带星号的版本生成 meta 形式的 &lt;*argument*&gt;。
+生成的参数自动包裹大括号和中括号。不带星号的版本生成 meta 形式的 &lt;*argument*&gt;。
 
 ```
 \Arg{argument}
@@ -42,12 +51,15 @@
 
 > `\cmd{usepackage}\oarg*{\Arg{key1}=\Arg{value1},\ldots}\marg{pkgname}`
 
+### 其它
+
+CTAN 资源的链接使用以下命令：
 ```
 \CTAN|link|
 ```
-生成 CTAN 资源的链接。参数 link 为链接的子目录名称，如 systems/win32/miktex，macros/contrib/... 等。
+参数 `link` 为链接的子目录名称，如 `systems/win32/miktex`，`macros/contrib/...` 等。
 
-### 索引
+## 索引
 
 ```
 \cmdindex{cmdname}
@@ -55,8 +67,8 @@
 \envindex{envname}
 \envindex[pkgname]{envname}
 ```
-命令和环境的索引项。LaTeX 基本命令用不带可选参数的形式；宏包/文档类的命令在可选参数里指定宏包名称。
-cmdname 和 envname 可写多个命令和环境名，以逗号分隔（唯一例外的是 `\,` 命令）。
+命令和环境的索引项。TeX 原始命令、LaTeX 内核和标准文档类命令用不带可选参数的形式；宏包/文档类的命令在可选参数里指定宏包名称。
+`cmdname` 和 `envname` 可写多个命令和环境名，以逗号分隔（唯一例外的是 `\,` 命令）。
 
 ```
 \pkgindex{pkgname}
@@ -82,7 +94,7 @@ cmdname 和 envname 可写多个命令和环境名，以逗号分隔（唯一例
 ```
 汉字索引项，通过拼音参与排序。
 
-### 排版元素
+## 排版元素
 
 ```
 \demowidth{length}

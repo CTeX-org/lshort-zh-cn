@@ -50,6 +50,10 @@
   BoldItalicFont = *tx,
 ]
 \RequirePackage{amssymb,latexsym,textcomp,mathrsfs,euscript,yhmath} % 与默认字体不冲突的一些符号包
+% 消除 \t 命令的字体 warning
+\AtBeginDocument{%}
+  \renewcommand*\t[1]{{\edef\restore@font{\the\font}\usefont{OML}{cmm}{m}{it}\accent"7F\restore@font#1}}
+}
 
 % 调整 layout 宏包的命令使之能够放入浮动体，手动指定奇偶页的 layout
 \input lshort-zh-cn-layout
@@ -148,6 +152,22 @@
     {\clearpage\if@twoside \ifodd\c@page\else
     \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
+% 允许 hologo 断词
+\hologoSetup{discretionarybreak=true}
+% 新定义 hologo
+\def\HoLogo@TeXLive#1{%
+  \hologo{TeX}\HOLOGO@space\HOLOGO@mbox{Live}%
+}
+\def\HoLogo@MacTeX#1{%
+  \HOLOGO@mbox{Mac}\hologo{TeX}%
+}
+\def\HoLogo@CTeX#1{%
+  \HOLOGO@mbox{C}\hologo{TeX}%
+}
+\def\HoLogo@TikZ#1{%
+  \HOLOGO@mbox{Ti\textit{k\/}Z}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % lshort 用到的自定义命令
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,15 +180,6 @@
 \def\CTANref{\begingroup \urlstyle{tt}\Url}
 \def\CTAN|#1|{\href{http://mirrors.tuna.tsinghua.edu.cn/CTAN/#1}{\CTANref|CTAN://#1|}}
 \newcommand{\contrib}[3]{#1\quad\mailto|#2|{\small\\\quad\textit{#3}}\\[1ex]}
-
-\DeclareRobustCommand*\TikZ{Ti\textit{k\/}Z}
-%
-% PDF 书签中对符号的特殊处理
-%
-\pdfstringdefDisableCommands{%
-  \def\AmS{AMS}%
-  \def\TikZ{TikZ}%
-}
 
 %
 % 示意长度

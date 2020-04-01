@@ -1,13 +1,13 @@
 \chapter{排除错误、寻求帮助}\label{chap:error-helps}
 
 \begin{intro}
-\LaTeX\ 入门用户总会为两大问题头疼：我写的代码到底哪里出错了？如果想要实现某种用法该怎么办？
-本章首先总结了常见的 \LaTeX\ 错误及应对的办法。
+\LaTeX{} 入门用户总会为两大问题头疼：我写的代码到底哪里出错了？如果想要实现某种用法该怎么办？
+本章首先总结了常见的 \LaTeX{} 错误及应对的办法。
 \end{intro}
 
-\section{\LaTeX\ 错误}\label{sec:errors}
+\section{\LaTeX{} 错误}\label{sec:errors}
 
-当我们用排版引擎编译 \LaTeX\ 代码时，命令行的窗口（终端）会显示大量信息（\TeX works 等编辑器会有一个区域显示这些信息）。
+当我们用排版引擎编译 \LaTeX{} 代码时，命令行的窗口（终端）会显示大量信息（TeXworks 等编辑器会有一个区域显示这些信息）。
 当编译过程中出现错误时，信息将会停止在出错的地方，等待我们接下来的操作。
 
 比如说我们有一个明显出错的例子：
@@ -27,7 +27,7 @@ l.3 Test \LaTEx
 
 这种错误信息分两部分，前一部分提示了错误的信息，后一部分指出了错误发生的行号，
 以及通过错落的文字告知发生错误的命令所在位置。如上错误显示 \cmd{LaTEx} 位置发生了错误，错误信息是“未定义的控制序列”，
-意思是 \cmd{LaTEx} 是 \TeX\ 编译器无法识别的一个命令，很显然是我们把 \cmd{LaTeX} 的大小写写错了。
+意思是 \cmd{LaTEx} 是 \TeX{} 编译器无法识别的一个命令，很显然是我们把 \cmd{LaTeX} 的大小写写错了。
 
 \subsubsection{处理方式}
 
@@ -35,9 +35,9 @@ l.3 Test \LaTEx
 将``Test and it's friends.''排版出来。但这个例子过于简单，有些复杂的代码中，有可能会由于一个小问题导致一连串的错误。
 此时可以选择按 \textbf{S/R/Q} 选择跳过接下来的所有错误，或者按 \textbf{X} 直接退出编译，将源代码中的错误修改后重新编译。
 
-\subsubsection{常见的 \LaTeX\ 错误信息}
+\subsubsection{常见的 \LaTeX{} 错误信息}
 
-笔者在此总结一些经常发生、问题比较明确的 \LaTeX\ 错误：
+笔者在此总结一些经常发生、问题比较明确的 \LaTeX{} 错误：
 
 \long\def\LaTeXerror#1{\begingroup\color{red}\bfseries\ttfamily{}#1\endgroup}
 
@@ -47,7 +47,7 @@ l.3 Test \LaTEx
 使用了未定义的命令。拼写错误是原因之一，如把 \cmd{LaTeX} 写作 \cmd{Latex} 这样。
 也有可能是没有调用某个宏包，但用了该宏包定义的命令。
 
-\item \LaTeXerror{!  LaTeX error: Environment \ldots\ undefined.}
+\item \LaTeXerror{!  LaTeX error: Environment ... undefined.}
 
 使用了未定义的环境。
 
@@ -56,9 +56,9 @@ l.3 Test \LaTEx
 缺少数学环境的符号 \texttt\$。多由于将数学符号用在公式之外而导致。
 
 \item \LaTeXerror{Runaway argument? \\
-                  ! Paragraph ended before \ldots\ was complete.}
+                  ! Paragraph ended before ... was complete.}
 
-\item \LaTeXerror{! File ended while scanning definition/use of \ldots}
+\item \LaTeXerror{! File ended while scanning definition/use of ...}
 
 这两个错误主要是由于漏写了包裹命令参数的花括号，导致识别参数时出现错误。许多编辑器的括号配对功能有助于检查和消除这类错误。
 
@@ -71,8 +71,8 @@ l.3 Test \LaTEx
 两个错误信息都与表格有关。
 \begin{itemize}
   \item 前者的字面意义是“一行中使用的列分隔符 \texttt\& 太多”，有时可能确实是 \texttt\& 的个数和列格式不匹配，
-  但多数情况是漏掉了行尾的 \crcmd\ 命令。
-  \item 后者常出现于漏掉了行尾的 \crcmd\ 命令而接着使用 \cmd{hline} 命令画横线的时候。
+  但多数情况是漏掉了行尾的 \crcmd{} 命令。
+  \item 后者常出现于漏掉了行尾的 \crcmd{} 命令而接着使用 \cmd{hline} 命令画横线的时候。
 \end{itemize}
 
 \item \LaTeXerror{!  LaTeX Error: Lonely \cmd{item}-{}-perhaps a missing list environment.}
@@ -82,9 +82,9 @@ l.3 Test \LaTEx
 两个错误信息都与列表环境和 \cmd{item} 命令有关。前者意味着在没有使用列表环境的情况下用了 \cmd{item}；
 后者则相反，是在列表环境中漏了 \cmd{item}。
 
-\item \LaTeXerror{! I can't find file `\ldots'.}
+\item \LaTeXerror{! I can't find file `...'.}
 
-\item \LaTeXerror{!  LaTeX Error: File `\ldots' not found.}
+\item \LaTeXerror{!  LaTeX Error: File `...' not found.}
 
 两个错误都意味着缺少文件。
 \begin{itemize}
@@ -100,18 +100,18 @@ l.3 Test \LaTEx
 
 与上一条相反，由于将必须用于导言区的命令在 \cmd{begin}\marg*{docu\-ment} 之后使用而产生。
 
-\item \LaTeXerror{!  LaTeX Error: \cmd{begin}\marg*{\ldots} on input line \ldots\ ended by \cmd{end}\marg*{\ldots}.}
+\item \LaTeXerror{!  LaTeX Error: \cmd{begin}\marg*{...} on input line ... ended by \cmd{end}\marg*{...}.}
 
 环境首尾不匹配。比如 \cmd{begin}\marg*{enumerate} 用了 \cmd{end}\marg*{itemize} 结尾。或者也可能是由于漏写了 \cmd{begin}
 或者 \cmd{end} 命令。
 
-\item \LaTeXerror{!  LaTeX Error: Option clash for package `\ldots'.}
+\item \LaTeXerror{!  LaTeX Error: Option clash for package `...'.}
 
 以\textbf{不同选项}重复调用宏包造成冲突。有可能是因为其它宏包内部事先调用了这个宏包，用户再次带选项调用而导致冲突。
 解决问题的办法是去掉重复调用的宏包。如果宏包允许的话，尽量使用其定义的命令改变设置，减少宏包选项的使用。
 
-\item \LaTeXerror{!  LaTeX Error: Command \ldots\ already defined, \\
-                     or name \cmd{end}\ldots\ illegal \ldots}
+\item \LaTeXerror{!  LaTeX Error: Command ... already defined, \\
+                     or name \cmd{end}... illegal ...}
 
 使用 \cmd{newcommand} 或 \cmd{newenvironment} 定义已有的命令/环境时产生的错误。如果自己确实作了定义，可考虑用
 \cmd{re\-new\-command} 或 \cmd{re\-new\-environment} 定义；如果是宏包定义的命令产生了这个错误，则属于隐性的宏包冲突。
@@ -120,11 +120,11 @@ l.3 Test \LaTEx
 用户可尝试查找引起冲突的宏包的帮助文档。详尽的手册里通常会告知用户这个宏包应当在某个宏包的前面/后面调用，或者不能与某个宏包一起调用。
 如果是模板调用了大量宏包导致冲突，可联系模板的作者解决。
 
-\item \LaTeXerror{!  LaTeX Error: Unknown option `\ldots' for package `\ldots'.}
+\item \LaTeXerror{!  LaTeX Error: Unknown option `...' for package `...'.}
 
 调用宏包时指定了不能被其识别的选项。此时应该查找宏包的帮助文档来解决问题。
 
-\item \LaTeXerror{!  Package `\ldots' error: \ldots}
+\item \LaTeXerror{!  Package `...' error: ...}
 
 宏包或文档类自定义的错误，由于不正确地使用宏包里的命令而导致。此时应该查找宏包的帮助文档来解决问题。
 
@@ -133,25 +133,25 @@ l.3 Test \LaTEx
 \section{查找帮助文档}\label{sec:texdoc}
 
 \index{texdoc@\texttt{texdoc} 工具}
-无论是 \TeX\ Live 还是 MiK\TeX\ ，提供了一个命令行模式的程序 \texttt{texdoc}。
+无论是 \hologo{TeXLive} 还是 \hologo{MiKTeX}，提供了一个命令行模式的程序 \texttt{texdoc}。
 比如对 \ref{subsec:fancyhdr} 小节的 \pkg{fancyhdr} 宏包感兴趣，这时在 Windows 命令提示符或者 Linux 终端输入以下命令，
 则会弹出宏包的帮助文档 \texttt{fancyhdr.pdf}：
 \begin{verbatim}
 texdoc fancyhdr
 \end{verbatim}
 
-除了宏包的帮助文档外，\TeX\ 发行版还包括了各类有用的文档，有一部分在参考文献中给出。
+除了宏包的帮助文档外，\TeX{} 发行版还包括了各类有用的文档，有一部分在参考文献中给出。
 
-如果不熟悉命令行工具的话，\TeX\ Live 提供了一个图形界面的程序 TeXdoc GUI。打开后，可以看到程序里的许多按钮，分别代表某一类的帮助文档。
+如果不熟悉命令行工具的话，\hologo{TeXLive} 提供了一个图形界面的程序 TeXdoc GUI。打开后，可以看到程序里的许多按钮，分别代表某一类的帮助文档。
 除此之外，点击 File Search 弹出搜索框，输入想要搜索的宏包和文件并按回车键，TeXdoc GUI 会弹出它搜索到的所有结果，可点击任意一项来打开文档。
 
-当然对于初学者，有一个现实而棘手的问题：\textbf{某个命令到底是 \LaTeX\ 自有的，还是哪个宏包提供的？}
-很遗憾地说，除了通过慢慢积累、熟悉较多宏包之外，没有很方便的办法解决这个问题，因为 \LaTeX\ 的宏包实在太丰富了。
+当然对于初学者，有一个现实而棘手的问题：\textbf{某个命令到底是 \LaTeX{} 自有的，还是哪个宏包提供的？}
+很遗憾地说，除了通过慢慢积累、熟悉较多宏包之外，没有很方便的办法解决这个问题，因为 \LaTeX{} 的宏包实在太丰富了。
 本手册末尾的索引给出了所有在本手册见到的命令和环境，其中哪些命令和环境需要调用哪个宏包才能使用，一目了然。但是这个索引远远不够。
 
 解决这个问题有几点可行的办法：
 \begin{enumerate}
-  \item 查询一些综述性的资料，如总结所有 \LaTeX\ 自带命令的文档 \cite{latex2e}、\LaTeX\ 符号大全 \cite{symbols} 等；
+  \item 查询一些综述性的资料，如总结所有 \LaTeX{} 自带命令的文档 \cite{latex2e}、\LaTeX{} 符号大全 \cite{symbols} 等；
   \item 在互联网上搜索自己不清楚的命令；
   \item 在论坛上提问求助有经验的人。
 \end{enumerate}
@@ -161,10 +161,10 @@ texdoc fancyhdr
 \def\pkglabel#1{\makebox[60pt][l]{\pkg{#1}}}
 \newenvironment{pkglist}%
   {\list{}{%
-    \labelwidth=60pt 
-    \itemindent=0pt 
-    \leftmargin=60pt 
-    \labelsep=0pt 
+    \labelwidth=60pt
+    \itemindent=0pt
+    \leftmargin=60pt
+    \labelsep=0pt
     \let\makelabel\pkglabel}}%
   {\endlist}
 
@@ -173,10 +173,10 @@ texdoc fancyhdr
 \subsection{文字、公式和符号}\label{subsec:text-math-symbols}
 
 \begin{pkglist}
-  \item[amsmath]  \AmS\ 数学公式扩展。
+  \item[amsmath]  \hologo{AmS} 数学公式扩展。
   \item[mathtools] 数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等。
-  \item[amsfonts] \AmS\ 扩展符号的基础字体支持。
-  \item[amssymb]  在 \pkg{amsfonts} 基础上将 \AmS\ 扩展符号定义成命令。
+  \item[amsfonts] \hologo{AmS} 扩展符号的基础字体支持。
+  \item[amssymb]  在 \pkg{amsfonts} 基础上将 \hologo{AmS} 扩展符号定义成命令。
   \item[bm]       提供将数学符号加粗的命令 \cmd{bm}。
   \item[siunitx]  以国际单位规范排版物理量的单位。
   \item[mhchem]   排版化学式和方程式。
@@ -200,7 +200,7 @@ texdoc fancyhdr
   \item[algorithm2e] 较为复杂的、可定制的算法排版宏包。类似宏包有 \pkg{algorithmicx} 等。
   \item[ntheorem] 定制定理环境。类似宏包包括 \pkg{theorem}、\pkg{thmtools}、\pkg{amsthm} 等。
   \item[mdframed] 排版可自动断页的带边框文字段落，提供边框样式的定制功能。
-  \item[tcolorbox] 以 \TikZ\ 为基础提供排版样式丰富的彩色盒子的功能。
+  \item[tcolorbox] 以 \hologo{TikZ} 为基础提供排版样式丰富的彩色盒子的功能。
 \end{pkglist}
 
 \subsection{图表和浮动体}\label{subsec:pkg-tab-fig}
