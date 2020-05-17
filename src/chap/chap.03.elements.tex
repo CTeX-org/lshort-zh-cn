@@ -89,33 +89,38 @@
 
 \cmdindex{include}
 以上三个命令还可和 \cmd{appendix} 命令结合，生成有前言、正文、附录、后记四部分的文档。
-源代码 \ref{code:book-struct} 结合 \ref{sec:latex-multi-files} 节的 \cmd{include} 命令和其它一些命令示意了一份完整的文档结构。
+源代码 \ref{code:book-struct} 结合 \ref{sec:latex-multi-files} 节的 \cmd{include} 命令
+和其它一些命令示意了一份完整的文档结构。
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
-\documentclass[...]{book}
+\documentclass{book}
+
 % 导言区，加载宏包和各项设置，包括参考文献、索引等
-\usepackage{...}
-\usepackage{makeidx}
-\makeindex
-\bibliographystyle{...}
+\usepackage{makeidx}        % 调用 makeidx 宏包，用来处理索引
+\makeindex                  % 开启索引的收集
+\bibliographystyle{plain}   % 指定参考文献样式为 plain
 
 \begin{document}
-\frontmatter
-\maketitle % 标题页
-\include{preface} % 前言章节 preface.tex
+
+\frontmatter         % 前言部分
+\maketitle           % 标题页
+\include{preface}    % 前言章节 preface.tex
 \tableofcontents
-\mainmatter
-\include{chapter1} % 第一章 chapter1.tex
-\include{chapter2} % 第二章 chapter2.tex
+
+\mainmatter          % 正文部分
+\include{chapter1}   % 第一章 chapter1.tex
+\include{chapter2}   % 第二章 chapter2.tex
 ...
-\appendix
-\include{appendixA} % 附录 A appendixA.tex
+\appendix            % 附录
+\include{appendixA}  % 附录 A appendixA.tex
 ...
-\backmatter
-\include{prologue} % 后记 prologue.tex
-\bibliography{...} % 利用 BibTeX 工具生成参考文献
-\printindex        % 利用 makeindex 工具生成索引
+
+\backmatter          % 后记部分
+\include{prologue}   % 后记 prologue.tex
+\bibliography{books} % 利用 BibTeX 工具从数据库文件 books.bib 生成参考文献
+\printindex          % 利用 makeindex 工具生成索引
+
 \end{document}
 \end{Verbatim}
 \caption{\cls{book} 文档类的文档结构示例。}\label{code:book-struct}

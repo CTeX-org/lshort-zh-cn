@@ -204,25 +204,24 @@ or \TeX{} users?
 \subsection{\LaTeX{} 源代码结构}\label{subsec:struct}
 
 \cmdindex{documentclass}
-\pinyinindex{wendanglei}{文档类}
-\LaTeX{} 源代码以一个 \cmd{document\-class} 命令作为开头，它指定了文档使用的\textbf{文档类}：
-\begin{verbatim}
-\documentclass{...}
-\end{verbatim}
-\cmd{document\-class} 命令有一个可选参数。可选参数会传递给相应的文档类，作为文档类的参数（见 \ref{subsec:classes}）。
-
 \envindex{document}
+\pinyinindex{wendanglei}{文档类}
+\pinyinindex{hongbao}{宏包}
+\LaTeX{} 源代码以一个 \cmd{document\-class} 命令作为开头，它指定了文档使用的\textbf{文档类}。
 \env{document} 环境当中的内容是文档正文。
-\begin{verbatim}
-\begin{document}
-\section{...}
-正文内容……
-\end{document}
-\end{verbatim}
 
+\cmdindex{usepackage}
 \pinyinindex{daoyanqu}{导言区}
 在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}。
-在导言区中一般会使用 \cmd{use\-package} 调用宏包，以及会进行对文档的全局设置。
+在导言区中一般会使用 \cmd{use\-package} 命令调用\textbf{宏包}，还会进行文档的全局设置。
+\begin{verbatim}
+\documentclass{...}  % ... 为某文档类
+% 导言区
+\begin{document}
+% 正文内容
+\end{document}
+% 此后内容会被忽略
+\end{verbatim}
 
 \section{\LaTeX{} 宏包和文档类}\label{sec:latex-pkgs}
 
@@ -231,8 +230,8 @@ or \TeX{} users?
 \subsection{文档类}\label{subsec:classes}
 
 \pinyinindex{wendanglei}{文档类}
-文档类规定了 \LaTeX{} 源代码所要生成的文档的性质——普通文章、书籍、演示文稿、个人简历等等。\LaTeX{} 源代码的开头须用
-\cmd{document\-class}指定文档类：
+\textbf{文档类}规定了 \LaTeX{} 源代码所要生成的文档的性质——普通文章、书籍、演示文稿、
+个人简历等等。\LaTeX{} 源代码的开头须用\cmd{document\-class}指定文档类：
 \begin{command}
 \cmd{documentclass}\oarg{options}\marg{class-name}
 \end{command}
