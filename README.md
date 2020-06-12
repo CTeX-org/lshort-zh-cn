@@ -14,7 +14,7 @@ all the other packages used in `lshort-zh-cn-style.sty` and updated them to the 
 
 ### Manually typesetting
 
-In 'src' directory, typeset the source code in the following order:
+In `src` directory, typeset the source code in the following order:
 
 ```sh
 xelatex lshort-zh-cn
@@ -27,14 +27,14 @@ If typesetting succeeds and the target PDF document is made correctly, then move
 
 ### Using scripts and Makefile
 
-For GNU/Linux and macOS users, we provide Makefile in the 'src' directory. Use GNU make tool in the following order:
+For GNU/Linux and macOS users, we provide Makefile in the `src` directory. Use GNU make tool in the following order:
 
 ```sh
 make
 make install
 ```
 
-For Windows users, we also provide a batch file `make.bat` in the 'src' directory, which you can double-click to do the typesetting.
+For Windows users, we also provide a batch file `make.bat` in the `src` directory, which you can double-click to do the typesetting.
 
 ### Using latexmk
 

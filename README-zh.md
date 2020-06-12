@@ -12,7 +12,7 @@
 
 ### 手动编译
 
-在 src 目录下按照以下顺序编译：
+在 `src` 目录下按照以下顺序编译：
 
 ```sh
 xelatex lshort-zh-cn
@@ -25,15 +25,15 @@ xelatex lshort-zh-cn
 
 ### 使用脚本和 Makefile 编译
 
-Linux 下提供了 GNU make 可用的 Makefile，使用 GNU make 的顺序为：
+对于 GNU/Linux 或 macOS 用户，我们提供了 GNU make 所需的 Makefile，在 `src` 目录下执行以下命令进行编译：
 
 ```sh
 make
 make install
 ```
 
-Windows 下在 src 目录提供批处理脚本 `make.bat`，双击执行编译。
+对于 Windows 用户，我们也在 `src` 目录提供了批处理脚本 `make.bat`，双击进行编译。
 
 ### 使用 latexmk 编译
 
-在 src 目录下提供了供 `latexmk` 构建工具使用的配置文件 `latexmkrc`。在 src 目录下执行 `latexmk` 命令进行编译，完成后将 PDF 文件移动到根目录。
+在 `src` 目录下有可供 `latexmk` 构建工具使用的配置文件 `latexmkrc`。在 `src` 目录下执行 `latexmk` 命令进行编译，完成后将 PDF 文件移动到根目录。
