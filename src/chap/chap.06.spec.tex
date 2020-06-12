@@ -99,9 +99,9 @@ Partl~\cite{germenTeX} has proposed that \ldots
 \subsection{\hologo{BibTeX} 样式}\label{subsec:bibtex-style}
 
 参考文献的写法在不同文献里千差万别，包括作者、标题、年份等各项的顺序和字体样式、文献在列表中的排序规则等。
-\hologo{BibTeX} 用样式（style）来管理参考文献的写法。\hologo{BibTeX} 提供了几个预定义的样式，如 plain, unsrt, alpha 等。
-如果使用期刊模板的话，可能会提供自用的样式。
-样式文件以 \texttt{.bst} 为扩展名。
+\hologo{BibTeX} 用样式（style）来管理参考文献的写法。\hologo{BibTeX} 提供了几个预定义的样式，
+如 \texttt{plain}, \texttt{unsrt}, \texttt{alpha} 等。
+如果使用期刊模板的话，可能会提供自用的样式。样式文件以 \texttt{.bst} 为扩展名。
 
 \cmdindex{bibliographystyle}
 使用样式文件的方法是在源代码内（一般在导言区）使用 \cmd{biblio\-graphy\-style} 命令：
@@ -236,7 +236,7 @@ xelatex demo
 \begin{verbatim}
 \usepackage[numbers,sort&compress]{natbib}
 \end{verbatim}
-调用 \pkg{natbib} 宏包时指定以上选项后，连续引用多篇文献时，会生成形如 (3-7) 的引用而不是 (3, 4, 5, 6, 7)。
+调用 \pkg{natbib} 宏包时指定以上选项后，连续引用多篇文献时，会生成形如 (3--7) 的引用而不是 (3, 4, 5, 6, 7)。
 
 \pkg{natbib} 宏包还有更多选项和用法，比如默认的引用是用小括号包裹的，可指定 \texttt{square} 选项改为中括号；
 再比如 \cmd{citep} 命令也支持可选参数，为引用前后都添加额外内容。这里不再赘述，请参考 \pkg{natbib} 宏包的帮助文档。
@@ -326,9 +326,9 @@ xelatex demo
   \item[\texttt{trad-alpha}]
   \pkg{biblatex-trad} 样式包，移植自 \hologo{BibTeX} 默认的 \texttt{alpha} 样式。另外还包括 \texttt{trad-abbrv}、\texttt{trad-plain} 和 \texttt{trad-unsrt}。
   \item[\texttt{gb7714-2015}]
-  符合中文文献著录标准 GB/T 7714-2015 的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{gb7714-2015ay}。
+  符合中文文献著录标准 GB/T 7714--2015 的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{gb7714-2015ay}。
   \item[\texttt{caspervector}]
-  以中文文献著录标准 GB/T 7714-2015 为基础的一个样式。
+  以中文文献著录标准 GB/T 7714--2015 为基础的一个样式。
   \item[\texttt{ieee}]
   兼容 \pkg{IEEEtran} 风格的样式，著录按顺序编码排版。另外还包括按作者-年份顺序排版著录的样式 \texttt{ieee-alphabetic}。
 \end{description}
@@ -398,7 +398,7 @@ xelatex demo
   \verb+bold@\textbf{bold}+ & \textbf{bold}, 12    & 输出粗体 \\
   \hline
   \multicolumn{3}{l}{页码范围} \\[.8ex]
-  \verb+morning|(+          & morning, 6-7         & 范围索引的开头 \\
+  \verb+morning|(+          & morning, 6--7        & 范围索引的开头 \\
   \verb+morning|)+          &                      & 范围索引的结尾 \\
   \hline
   \multicolumn{3}{l}{格式化索引页码} \\[.8ex]
