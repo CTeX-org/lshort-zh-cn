@@ -562,6 +562,7 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \cmd{hypersetup}\marg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots} \\
 \cmd{usepackage}\oarg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots}\marg*{hyperref}
 \end{command}
+可用的参数见表 \ref{tbl:hyperref-settings}。
 
 \begin{table}[htp]
 \centering
@@ -582,10 +583,6 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
                               & \textit{false}  & 是否展开书签 \\
  \texttt{bookmarksnumbered=}\Arg{true\textnormal|false}
                               & \textit{false}  & 书签是否带章节编号 \\
- \texttt{CJKbookmarks=}\Arg{true\textnormal|false}
-                              & \textit{false}  & 使用 \pkg{CJK} 宏包/ GBK 编码排版中文时必须设定的参数，
-                                                需要将生成的 \texttt{.out} 文件用工具处理编码，或调用 \pkg{xCJK2uni} 宏包 \\
- \texttt{unicode}             &                 & 使用 \pkg{CJKutf8} 宏包/ UTF-8 编码排版中文时必须设定的参数 \\
  \hline
  \texttt{pdftitle=}\Arg{string}
                               & 空               & 标题 \\
@@ -601,7 +598,7 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \end{tabular}
 \begin{quotation}
 \small
-\textsuperscript{\dag} 该选项只能在调用宏包时指定。
+\textsuperscript{\dag} 该选项只能作为宏包选项，在调用宏包时指定。
 \end{quotation}
 \end{table}
 
@@ -652,9 +649,9 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 默认情况下会为 PDF 自动生成书签。和交叉引用、索引等类似，生成书签也需要多次编译源代码，第一次编译将书签记录写入 \texttt{.out} 文件，
 第二次编译才正确生成书签。
 
-书签的一些属性见表 \ref{tbl:hyperref-settings}。
-在 \texttt{latex} + \texttt{dvipdfmx} 或 \texttt{pdflatex} 命令下使用 \pkg{ctex} 宏包或 \pkg{CJK} 宏包时，
-为了正确生成中文书签而不出现乱码，需要额外的设置，甚至繁琐的工序（这也是我们推荐使用 \texttt{xelatex} 命令处理中文的原因）。
+书签的一些属性见表 \ref{tbl:hyperref-settings}。使用 \pkg{CJK} 宏包时，为了防止中文书签出现乱码，
+需要进行繁琐的设置；但在使用 \pkg{ctex} 宏包和文档类、且使用 \texttt{xelatex} 或 \texttt{lualatex} 编译的情况下，
+无需用户额外干预，即可正确生成中文书签。
 
 \cmdindex[hyperref]{pdfbookmark}
 \pkg{hyperref} 还提供了手动生成书签的命令：
@@ -670,7 +667,7 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \begin{command}
 \cmd{texorpdfstring}\marg{\LaTeX{} code}\marg{PDF bookmark text}
 \end{command}
-比如在章节名称里使用公式 $E=mc^2$，而书签使用字符 \texttt{E=mc\textasciicircum 2}：
+比如在章节名称里使用公式 $E=mc^2$，而书签则使用纯文本形式的 \verb|E=mc^2|：
 \begin{verbatim}
 \section{质能公式 \texorpdfstring{$E=mc^2$}{E=mc\textasciicircum 2}}
 \end{verbatim}
