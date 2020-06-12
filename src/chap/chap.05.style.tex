@@ -225,9 +225,11 @@ He likes {\LARGE large and
 
 \subsection{在 \pkg{ctex} 宏包或文档类中更改中文字体}\label{subsec:CJKfont}
 
-\pkgindex{xeCJK}
-\cmdindex[xeCJK]{setCJKmainfont,setCJKsansfont,setCJKmonofont}
-前文已经介绍过的 \pkg{ctex} 宏包或文档类提供了和 \pkg{fontspec} 宏包非常类似的语法设置中文字体：
+\pkgindex{xeCJK,ctex}
+\cmdindex[xeCJK,ctex]{setCJKmainfont,setCJKsansfont,setCJKmonofont}
+前文已经介绍过的 \pkg{ctex} 宏包或文档类提供了和 \pkg{fontspec} 宏包非常类似的语法设置中文字体%
+\footnote{使用 \texttt{xelatex} 编译时，这几个命令实际上由 \pkg{xeCJK} 宏包提供；
+使用 \texttt{lualatex} 编译时，则是由 \pkg{ctex} 宏包或文档类对 \pkg{luatexja} 宏包提供的类似命令进行额外封装。}：
 \begin{command}
 \cmd{setCJKmainfont}\marg{font name}\oarg{font features} \\
 \cmd{setCJKsansfont}\marg{font name}\oarg{font features} \\
