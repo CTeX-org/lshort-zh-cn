@@ -520,7 +520,8 @@ for (int i=0; i<4; ++i)
 其中 \Arg{column-spec} 是列格式标记，在接下来的内容将仔细介绍；\texttt\& 用来分隔单元格；
 \crcmd{} 用来换行；\cmd{hline} 用来在行与行之间绘制横线。
 
-直接使用 \env{tabular} 环境的话，会\textbf{和周围的文字混排}。\env{tabular} 环境可带一个可选参数 \Arg{align} 控制垂直对齐（默认是垂直居中）：
+直接使用 \env{tabular} 环境的话，会\textbf{和周围的文字混排}。此时可用一个可选参数 \Arg{align} 控制垂直对齐：
+\verb|t| 和 \verb|b| 分别表示按按表格顶部、底部对齐，其他参数或省略不写（默认）表示居中对齐。
 \begin{example}
 \begin{tabular}{|c|}
   center-\\ aligned \\
