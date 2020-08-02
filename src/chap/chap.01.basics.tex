@@ -71,8 +71,9 @@
 \LaTeX{} 和 \TeX{} 及相关软件大多仅提供了命令行接口，而不像 Word、Adobe InDesign 一样有图形用户界面。
 命令行程序的结构往往比较简单，它们接受用户输入，读取相关文件，进行一些操作和运算后输出目标文件，
 有时还会将提示信息、运行结果显示在屏幕上。在 Windows 系统上，如需进入命令行，可在开始菜单中搜索
-“命令提示符”，也可在“运行”窗口中输入 \texttt{cmd} 打开；Linux 或 macOS 等 *nix 系统中可搜索“Terminal”
-打开终端。部分系统也提供了一些快捷方式，具体请参考相关手册。
+“命令提示符”，也可在“运行”窗口中输入 \texttt{cmd} 打开；Linux 或 macOS 等 *nix %
+\footnote{类 Unix 操作系统，包含 Linux、macOS（OS X）。}
+系统中可搜索“Terminal”打开终端。部分系统也提供了一些快捷方式，具体请参考相关手册。
 
 与常规软件类似，命令行程序也都是可执行程序，在 Windows 上后缀名为 \texttt{.exe}，而在类 Unix 系统上
 则需要带有 \texttt{x} 权限。在大多数命令行环境中，系统会根据\textbf{环境变量} \texttt{PATH} 中存储
@@ -114,9 +115,8 @@
   \item 如果使用 TeXworks 或 TeXstudio 等编辑器，你可以使用编辑器提供的“编译”按钮或者“排版”
   按钮。建议使用 \hologo{pdfLaTeX} 或 \hologo{XeLaTeX} 作为默认的编译方式（不同编译方式的差别，
   见~\ref{sec:concepts}~节）。
-  \item 如果使用命令行方式进行编译，则需打开 Windows 命令提示符或者 *nix %
-  \footnote{类 Unix 操作系统，包含 Linux、macOS（OS X）。}
-  的终端，在源代码所在的目录下输入：
+  \item 如果使用命令行方式进行编译，则需打开 Windows 命令提示符或者 *nix 的终端，
+  在源代码所在的目录下输入：
 \begin{verbatim}
 pdflatex helloworld
 \end{verbatim}
