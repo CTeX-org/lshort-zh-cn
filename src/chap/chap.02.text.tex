@@ -163,11 +163,16 @@ It's dif{}f{}icult to f{}ind \ldots
 \index{biaodianfuhao@标点符号!``@\protect\verb+'+ (\textit{后引号} ')}
 \index{biaodianfuhao@标点符号!'@\protect\verb+``+ (\textit{前双引号} ``)}
 \index{biaodianfuhao@标点符号!''@\protect\verb+''+ (\textit{后双引号} '')}
-\LaTeX{} 中单引号 ` ' 分别用 \verb|`| 和 \verb|'| 输入；双引号 `` 和 '' 分别用 \verb|``| 和 \verb|''| 输入
+\LaTeX{} 中单引号 ` 和\ ' 分别用 \verb|`| 和 \verb|'| 输入；双引号 `` 和\ '' 分别用 \verb|``| 和 \verb|''| 输入
 （\verb|"| 可以输入后双引号，但没有直接输入前双引号的字符，习惯上用 \verb|''| 输入以和 \verb|``| 更好地对应）。
 \begin{example}
 ``Please press the `x' key.''
 \end{example}
+
+中文的引号‘~’和“~”与西文的引号实际上是同一组符号%
+\footnote{它们在 Unicode 中共用了同一组码位。有人为了明确区分，会改用中文直角引号「」和『』。}，
+但由于中西文通常用不同的字体显示，它们的具体形状和宽度可能有所不同。在使用 \pkg{ctex} 宏包或文档类
+的情况下，中文引号可以通过输入法直接输入。
 
 \subsubsection{连字号和破折号}
 
