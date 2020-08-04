@@ -241,7 +241,7 @@ My humble subjects \ldots
   \item 页码、脚注的计数器分别是 page 和 footnote。
 \end{itemize}
 
-我们可以利用前面介绍过的命令，修改计数器的样式以达到想要的效果，比如把页码修改成大写罗马字母，左右加横线，或是给脚注加上方括号：
+我们可以利用前面介绍过的命令，修改计数器的样式以达到想要的效果，比如把页码修改成大写罗马数字，左右加横线，或是给脚注加上方括号：
 \begin{verbatim}
 \renewcommand\thepage{--~\Roman{page}~--}
 \renewcommand\thefootnote{[\arabic{footnote}]}
@@ -285,7 +285,7 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
 \begin{itemize}
   \item 标题名称/前后缀等。表 \ref{tbl:latex-settings-names} 列出了标准文档类里可定制的项目，
   表中所有的 \LaTeX{} 命令都可以用 \cmd{re\-new\-comm\-and} 来修改。
-  \item 长度。前文在叙述各种排版元素时已经涉及到一些，现归纳于表 \ref{tbl:latex-settings-lengths}。
+  \item 长度。前文在叙述各种排版元素时已经介绍过一些，现归纳于表 \ref{tbl:latex-settings-lengths}。
   表中所有的长度命令可用 \cmd{setlength} 来修改。
   大多数控制页面尺寸的长度参数在图 \ref{fig:layouts} 给出，此处不再赘述。
 \end{itemize}

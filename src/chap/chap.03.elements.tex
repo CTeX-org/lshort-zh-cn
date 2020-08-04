@@ -82,8 +82,8 @@
 \cmdindex{frontmatter,mainmatter,backmatter}
 \cls{book} 文档类还提供了前言、正文、后记结构的划分命令：
 \begin{description}
-  \item[\cmd{frontmatter}] 前言部分，页码为小写罗马字母格式；其后的 \cmd{chapter} 不编号。
-  \item[\cmd{mainmatter}] 正文部分，页码为阿拉伯数字格式，从 1 开始计数；其后的章节编号正常。
+  \item[\cmd{frontmatter}] 前言部分，页码使用小写罗马数字；其后的 \cmd{chapter} 不编号。
+  \item[\cmd{mainmatter}] 正文部分，页码使用阿拉伯数字，从 1 开始计数；其后的章节编号正常。
   \item[\cmd{backmatter}] 后记部分，页码格式不变，继续正常计数；其后的 \cmd{chapter} 不编号。
 \end{description}
 
@@ -800,7 +800,7 @@ for (int i=0; i<4; ++i)
 \ref{sec:hyperlinks} 节中的 \pkg{hyperref} 宏包同理。}；而使用 \texttt{pdflatex} 或 \texttt{xelatex} 命令编译时不需要。
 
 读者可能听说过“\LaTeX{} 只能插入 \texttt{.eps} 格式的图片，需要把 \texttt{.jpg} 转成 \texttt{.eps} 格式”的观点。
-\LaTeX{} 发展到今天，这个观点早已过时。事实上不同的编译命令支持的图片格式范围各异，见表 \ref{tbl:figure-format}。
+\LaTeX{} 发展到今天，这个观点早已过时。事实上不同编译命令支持的图片格式种类各异，见表~\ref{tbl:figure-format}。
 这个表格也能解答诸如“为什么 \texttt{.eps} 格式图片在 \texttt{pdflatex} 编译命令下出错”之类的问题。本表格也再一次说明，使用
 \texttt{xelatex} 命令是笔者最推荐的方式。
 
