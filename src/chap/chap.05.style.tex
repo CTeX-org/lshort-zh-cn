@@ -154,7 +154,7 @@ He likes {\LARGE large and
 \caption{常见的 \LaTeX{} 字体宏包}\label{tbl:font-pkgs}
 \begin{tabular}{lp{30em}}
  \hline
- \multicolumn{2}{c}{\textbf{文本 / 数学字体搭配的宏包}} \\
+ \multicolumn{2}{c}{\textbf{文本/数学字体搭配的宏包}} \\
  \hline
  \pkg{lmodern}     & Latin Modern 字体，对 Computer Modern 字体的扩展  \\
  \pkg{cmbright}    & 仿 Computer Modern 风格的无衬线字体 \\
@@ -597,7 +597,7 @@ but it also breaks the line.
 \LaTeX{} 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。
 
 \cmdindex{raggedbottom, flushbottom}
-以下命令分别令页面在垂直方向向顶部对齐 / 分散对齐：
+以下命令分别令页面在垂直方向向顶部对齐/分散对齐：
 \begin{command}
 \cmd{raggedbottom} \\
 \cmd{flushbottom}
@@ -678,8 +678,8 @@ but it also breaks the line.
 \begin{description}
   \item[\cls{article} 文档类，\texttt{twoside} 选项] 偶数页为页码和节标题，奇数页为小节标题和页码；
   \item[\cls{article} 文档类，\texttt{oneside} 选项] 页眉为节标题和页码；
-  \item[\cls{book/report} 文档类，\texttt{twoside} 选项] 偶数页为页码和章标题，奇数页为节标题和页码；
-  \item[\cls{book/report} 文档类，\texttt{oneside} 选项] 页眉为章标题和页码。
+  \item[\cls{report} / \cls{book} 文档类，\texttt{twoside} 选项] 偶数页为页码和章标题，奇数页为节标题和页码；
+  \item[\cls{report} / \cls{book} 文档类，\texttt{oneside} 选项] 页眉为章标题和页码。
 \end{description}
 
 \cmdindex{pagenumbering}
@@ -718,7 +718,7 @@ but it also breaks the line.
   \markright{\thesection\quad #1}}
 \end{verbatim}
 
-其中 \cmd{thechapter}、\cmd{thesection} 等命令为章节计数器的数值（详见 \ref{sec:counters} 节）。以上代码适用于 \cls{report/book} 文档类。
+其中 \cmd{thechapter}、\cmd{thesection} 等命令为章节计数器的数值（详见 \ref{sec:counters} 节）。以上代码适用于 \cls{report} / \cls{book} 文档类。
 对于 \cls{article} 文档类，与两个页眉相关的命令分别为 \cmd{sec\-tion\-mark} 和 \cmd{sub\-sec\-tion\-mark}。
 
 \subsection{\pkg{fancyhdr} 宏包}\label{subsec:fancyhdr}

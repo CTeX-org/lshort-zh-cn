@@ -5,7 +5,7 @@
 文字是排版的基础。本章主要介绍如何在 \LaTeX{} 中输入各种文字符号，包括标点符号、连字符、重音等，以及控制文字断行和断页的方式。
 
 本章简要介绍了在 \LaTeX{} 中排版中文的方法。随着 \LaTeX{} 和底层 \TeX{} 引擎的发展，旧方式（CCT、\pkg{CJK} 等）日渐退出舞台，
-\texttt{xelatex} 和 \texttt{lualatex} 编译命令配合 \cls{ctex} 宏包 / 文档类的方式成为当前的主流中文排版支持方式。
+\texttt{xelatex} 和 \texttt{lualatex} 编译命令配合 \cls{ctex} 宏包/文档类的方式成为当前的主流中文排版支持方式。
 \end{intro}
 
 \section{语言文字和编码}\label{sec:encoding}
@@ -70,7 +70,7 @@ Français Português Español Føroyskt
 \hologo{XeTeX} 和 \hologo{LuaTeX} 除了直接支持 UTF-8 编码外，还支持直接调用 TrueType / OpenType 格式的字体。\pkg{xeCJK} 及 \pkg{luatexja} 宏包则在此基础上封装了对汉字排版细节的处理功能。
 
 \pkgindex{ctex}
-\clsindex{ctexart,ctexbook,ctexrep}
+\clsindex{ctexart,ctexrep,ctexbook}
 \pkg{ctex} 宏包和文档类\footnote{\hologo{CTeX} 还经常用来指一个过时的 \TeX{} 发行版，注意与这里的 \pkg{ctex} 宏包和文档类区分。}%
 进一步封装了 \pkg{CJK}、\pkg{xeCJK}、\pkg{luatexja} 等宏包，使得用户在排版中文时不用再考虑排版引擎等细节。\pkg{ctex} 宏包本身用于配合各种文档类排版中文，而 \pkg{ctex} 文档类对 \LaTeX{} 的标准文档类进行了封装，对一些排版根据中文排版习惯做了调整，包括 \cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}。
 \pkg{ctex} 宏包和文档类能够识别操作系统和 \TeX{} 发行版中安装的中文字体，因此基本无需额外配置即可排版中文文档。下面举一个使用 \pkg{ctex} 文档类排版中文的最简例子：

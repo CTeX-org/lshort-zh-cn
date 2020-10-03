@@ -10,7 +10,7 @@
 \subsection{章节标题}\label{subsec:secs}
 
 \cmdindex{part,chapter,section,subsection,subsubsection,paragraph,subparagraph}
-\clsindex{article,book,report}
+\clsindex{article,report,book}
 
 一篇结构化的、条理清晰文档一定是层次分明的，通过不同的命令分割为章、节、小节。三个标准文档类 \cls{article}、\cls{report} 和 \cls{book}%
 \footnote{千万注意是\textbf{标准文档类}，其它文档类，如果不是从标准文档类衍生而来，
@@ -24,7 +24,7 @@
 \cmd{paragraph}\marg{title} \quad
 \cmd{subparagraph}\marg{title}
 \end{command}
-其中 \cmd{chapter} \textbf{只在 \cls{book} 和 \cls{report} 文档类有定义}。这些命令生成章节标题，并能够自动编号。
+其中 \cmd{chapter} \textbf{只在 \cls{report} 和 \cls{book} 文档类有定义}。这些命令生成章节标题，并能够自动编号。
 除此之外 \LaTeX{} 还提供了 \cmd{part} 命令，用来将整个文档分割为大的分块，但不影响 \cmd{chapter} 或 \cmd{section} 等的编号。
 
 上述命令除了生成带编号的标题之外，还向目录中添加条目，并影响页眉页脚的内容（详见 \ref{sec:pagestyle} 节）。每个命令有两种变体：
@@ -38,7 +38,7 @@
 较低层次如 \cmd{paragraph} 和 \cmd{subparagraph} 即使不用带星号的变体，生成的标题默认也不带编号，事实上，除 \cmd{part} 外：
 \begin{itemize}
   \item \cls{article} 文档类带编号的层级为 \cmd{section} / \cmd{subsection} / \cmd{sub\-sub\-section} 三级；
-  \item \cls{report}/\cls{book} 文档类带编号的层级为 \cmd{chapter} / \cmd{section} / \cmd{sub\-section} 三级。
+  \item \cls{report} / \cls{book} 文档类带编号的层级为 \cmd{chapter} / \cmd{section} / \cmd{sub\-section} 三级。
 \end{itemize}
 对此的详细解释和调整方法见 \ref{subsec:latex-counts} 小节。
 
@@ -54,7 +54,7 @@
 \cmd{tableofcontents}
 \end{command}
 
-这个命令会生成单独的一章（\cls{book} / \cls{report}）或一节（\cls{article}），标题默认为 ``Contents''{}，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
+这个命令会生成单独的一章（\cls{report} / \cls{book}）或一节（\cls{article}），标题默认为 ``Contents''{}，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
 \cmd{tableof\-contents} 生成的章节默认不写入目录（\cmd{section*} 或 \cmd{chapter*}），可使用 \pkg{tocbibind} 等宏包修改设置。
 
 正确生成目录项，一般需要编译两次源代码。
@@ -811,7 +811,7 @@ for (int i=0; i<4; ++i)
  \hline
  \textbf{格式}  & \textbf{矢量图} & \textbf{位图} \\
  \hline
- \texttt{latex + dvipdfmx}           & \texttt{.eps}      & n/a \\
+ \texttt{latex + dvipdfmx}           & \texttt{.eps}      & N/A \\
  \quad $\llcorner$（调用 \pkg{bmpsize} 宏包 ）   & \texttt{.eps .pdf}     & \texttt{.jpg .png .bmp} \\[.3\baselineskip]
  \texttt{pdflatex}                   & \texttt{.pdf}      & \texttt{.jpg .png} \\
  \quad $\llcorner$（调用 \pkg{epstopdf} 宏包）   & \texttt{.pdf .eps} & \texttt{.jpg .png} \\[.3\baselineskip]

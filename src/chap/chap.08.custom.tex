@@ -237,7 +237,7 @@ My humble subjects \ldots
         而计数器 part 是独立的。
   \item 有序列表 \env{enumerate} 的各级计数器为 enumi, enumii, enumiii, enumiv，也有上下级的关系。
   \item 图表浮动体的计数器就是 table 和 figure；公式的计数器为 equation。
-        这些计数器在 \cls{article} 文档类中是独立的，而在 \cls{book} 和 \cls{report} 中以 chapter 为上级计数器。
+        这些计数器在 \cls{article} 文档类中是独立的，而在 \cls{report} 和 \cls{book} 中以 chapter 为上级计数器。
   \item 页码、脚注的计数器分别是 page 和 footnote。
 \end{itemize}
 
@@ -259,7 +259,7 @@ My humble subjects \ldots
 \LaTeX{} 标准文档类对章节划分了层级：
 \begin{itemize}
   \item 在 \cls{article} 文档类里 part 为 0，section 为 1，依此类推；
-  \item 在 \cls{report}/\cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
+  \item 在 \cls{report} / \cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
 \end{itemize}
 
 secnumdepth 计数器控制章节编号的深度，如果章节的层级大于 secnumdepth，那么章节的标题、在目录和页眉页脚的标题都不编号
@@ -310,7 +310,7 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
  \cmd{refname}        & References      & \env{thebibliography} 环境或 \cmd{biblio\-graphy}
                                           命令生成的参考文献标题（\cls{article} 文档类） \\
  \cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy}
-                                          命令生成的参考文献标题（\cls{book / report} 文档类）\\
+                                          命令生成的参考文献标题（\cls{report} / \cls{book} 文档类）\\
  \cmd{indexname}      & Index           & \cmd{printindex} 命令生成的索引标题 \\
  \hline
 \end{tabular}
