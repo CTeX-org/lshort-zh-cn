@@ -229,7 +229,7 @@ page~\pageref{sec:this}.''
   \item[定理环境] 在定理环境内部任意位置使用。
 \end{description}
 
-在使用不记编号的命令形式（\cmd{section*}、\cmd{caption*}、带可选参数的 \cmd{item} 命令等）时不要使用 \cmd{label} 命令，
+在使用不记编号的命令形式（\cmd{section*}、\cmd{caption*}\footnote{需加载相关宏包，如 \pkg{caption}}、带可选参数的 \cmd{item} 命令等）时不要使用 \cmd{label} 命令，
 否则生成的引用编号不正确。
 
 \section{脚注和边注}\label{sec:footnote-marginpar}
@@ -1025,7 +1025,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
 \begin{command}
 \cmd{caption}\marg*{\ldots}
 \end{command}
-\cmd{caption} 的用法非常类似于 \cmd{section} 等命令，可以用带星号的命令 \cmd{caption*} 生成不带编号的标题，
+\cmd{caption} 的用法非常类似于 \cmd{section} 等命令，可以用带星号的命令 \cmd{caption*}\footnote{需加载相关宏包，如 \pkg{caption}} 生成不带编号的标题，
 也可以使用带可选参数的形式 \cmd{caption}\oarg*{\ldots}\marg*{\ldots}，使得在目录里使用短标题。
 \cmd{caption} 命令之后还可以紧跟 \cmd{label} 命令标记交叉引用。
 
