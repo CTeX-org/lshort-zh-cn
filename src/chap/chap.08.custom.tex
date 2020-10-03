@@ -330,19 +330,20 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
  \hline
  \cmd{fboxrule}     & 0.4pt & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的线宽 \\
  \cmd{fboxsep}      & 3pt   & \cmd{fbox} 或 \cmd{framebox} 等带框盒子的内边距 \\[1ex]
- \cmd{arraycolsep}  & 5pt   & \env{array} 环境的表格项前后的间距 \\
- \cmd{tabcolsep}    & 6pt   & \env{tabular} 环境的表格项前后的间距 \\
+ \cmd{arraycolsep}  & 5pt   & \env{array} 环境的表格项前后的间距\textsuperscript{注 1} \\
+ \cmd{tabcolsep}    & 6pt   & \env{tabular} 环境的表格项前后的间距\textsuperscript{注 1} \\
  \cmd{arrayrulewidth}     &  0.4pt  & 表格线宽 \\
  \cmd{doublerulesep}      &  2pt    & 连续两根表格线之间的间距 \\[1ex]
- \cmd{abovecaptionskip}   &  10pt   & \cmd{caption} 命令位于图表下方时，与上方图表的间距 \\
- \cmd{belowcaptionskip}   &  0pt    & \cmd{caption} 命令位于图表上方时，与下方图表的间距 \\[1ex]
+ \cmd{abovecaptionskip}   &  10pt   & \cmd{caption} 命令上方的间距\textsuperscript{注 2} \\
+ \cmd{belowcaptionskip}   &  0pt    & \cmd{caption} 命令下方的间距\textsuperscript{注 2} \\[1ex]
  \cmd{columnsep}          &  10pt   & 双栏排版下两栏的间距 \\
  \cmd{columnseprule}      &  0pt    & 双栏排版下两栏之间竖线的宽度 \\
  \hline
 \end{tabular}
 \begin{quotation}\footnotesize%
-注：\cmd{arraycolsep} 和 \cmd{tabcolsep} 是每个表格项本身前后的间距（表格线前后无间距；\texttt{@} 列格式会消除与前后表格项的间距）。
-两个表格项之间的间距相当于 2\cmd{arraycolsep} 或 2\cmd{tabcolsep}。
+注 1：\cmd{arraycolsep} 和 \cmd{tabcolsep} 是每个表格项本身前后的间距（表格线前后无间距；\texttt{@} 列格式会消除与前后表格项的间距）。
+两个表格项之间的间距相当于 2\cmd{arraycolsep} 或 2\cmd{tabcolsep}。\par
+注 2：在默认设置下，\cmd{caption} 命令和位于它下方的图表之间无间距。宏包 \pkg{caption} 改善了这个问题。
 \end{quotation}
 \end{table}
 
