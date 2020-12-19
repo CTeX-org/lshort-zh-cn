@@ -587,6 +587,7 @@ for (int i=0; i<4; ++i)
 有时需要为整列修饰格式，比如整列改变为粗体，如果每个单元格都加上 \cmd{bfseries} 命令会比较麻烦。
 \pkg{array} 宏包提供了辅助格式 \texttt> 和 \texttt<，用于给列格式前后加上修饰命令：
 \begin{example}
+% \usepackage{array}
 \begin{tabular}{>{\itshape}r<{*}l}
   \hline
   italic & normal \\
@@ -601,7 +602,8 @@ for (int i=0; i<4; ++i)
 \cmd{array\-back\-slash} 用来恢复之。如果不加 \cmd{array\-back\-slash} 命令，
 也可以用 \cmd{tabular\-newline} 命令代替原来的 \crcmd{} 实现表格换行。}：
 \begin{example}
-\begin{tabular}
+% \usepackage{array}
+\begin{tabular}%
 {>{\centering\arraybackslash}p{9em}}
   \hline
   Some center-aligned long text. \\
@@ -612,8 +614,8 @@ for (int i=0; i<4; ++i)
 \pkg{array} 宏包还提供了类似 \texttt{p} 格式的 \texttt{m} 格式和 \texttt{b} 格式，
 三者分别在垂直方向上靠顶端对齐、居中以及底端对齐。
 \begin{example}
-\newcommand\txt
-  {a b c d e f g h i}
+% \usepackage{array}
+\newcommand\txt{a b c d e f g h i}
 \begin{tabular}{cp{2em}m{2em}b{2em}}
   \hline
   pos & \txt & \txt & \txt \\
@@ -645,6 +647,7 @@ for (int i=0; i<4; ++i)
 不过会根据表格宽度自动计算列宽，多个 \texttt{X} 列格式平均分配列宽。
 \texttt{X} 列格式也可以用 \pkg{array} 里的辅助格式修饰对齐方式：
 \begin{example}
+% \usepackage{array,tabularx}
 \begin{tabularx}{14em}%
 {|*{4}{>{\centering\arraybackslash}X|}}
   \hline
@@ -672,6 +675,7 @@ for (int i=0; i<4; ++i)
 三线表由 \pkg{booktabs} 宏包支持，它提供了 \cmd{toprule}、\cmd{midrule} 和 \cmd{bottomrule} 命令用以排版三线表的三条线，
 以及和 \cmd{cline} 对应的 \cmd{cmidrule}。除此之外，最好不要用其它横线以及竖线：
 \begin{example}
+% \usepackage{booktabs}
 \begin{tabular}{cccc}
   \toprule
    & \multicolumn{3}{c}{Numbers} \\
@@ -714,6 +718,7 @@ for (int i=0; i<4; ++i)
 
 我们看一个结合 \cmd{cline}、\cmd{multi\-column} 和 \cmd{multi\-row} 命令的例子：
 \begin{example}
+% \usepackage{multirow}
 \begin{tabular}{ccc}
   \hline
   \multirow{2}{*}{Item} &
@@ -747,6 +752,7 @@ for (int i=0; i<4; ++i)
 如果不需要为“拆分的单元格”画线，并且只在垂直方向“拆分”的话，\pkg{makecell} 宏包提供的 \cmd{make\-cell} 命令是一个简单的解决方案：
 
 \begin{example}
+% \usepackage{makecell}
 \begin{tabular}{|c|c|}
  \hline
  a & \makecell{d1 \\ d2} \\
