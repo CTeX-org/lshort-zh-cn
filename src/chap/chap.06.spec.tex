@@ -611,7 +611,9 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \cmd{nolinkurl}\marg{url}
 \end{command}
 
-\cmd{url} 和 \cmd{nolinkurl} 都生成可以点击的 URL，区别是前者有彩色，后者没有。在 \cmd{url} 命令中作为参数的 URL 里，
+\cmd{url} 和 \cmd{nolinkurl} 都像抄录命令 \cmd{verb} 一样输出一个 URL，区别是前者还为 URL 加上了超链接，后者没有。%
+\footnote{注意，一些 PDF 阅读器会为 URL 文本自动加上超链接，这些超链接不是 \LaTeX{} 生成的。}%
+在 \cmd{url} 命令中作为参数的 URL 里，
 \textbf{可直接输入如 \texttt\%、\texttt\& 这样的特殊符号}。
 
 \cmdindex[hyperref]{href}
