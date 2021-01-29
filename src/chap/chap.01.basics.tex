@@ -360,14 +360,14 @@ or \TeX{} users?
 \begin{command}
 \cmd{include}\marg{filename}
 \end{command}
-\Arg{filename} 为文件名，如果和要编译的主文件不在一个目录中，则要加上相对或绝对路径，例如：
+\Arg{filename} 为文件名（不带 \texttt{.tex} 扩展名）%
+\footnote{\LaTeX{} 2020-10-01 版本之后允许添加扩展名。}，
+如果和要编译的主文件不在一个目录中，则要加上相对或绝对路径，例如：
 \begin{verbatim}
-\include{chapters/a.tex} % 相对路径
-\include{/home/Bob/file.tex} % *nix （包含 Linux、macOS（OS X））绝对路径
-\include{D:/file.tex} % Windows 绝对路径，用正斜线
+\include{chapters/file} % 相对路径
+\include{/home/Bob/file} % *nix（包含 Linux、macOS）绝对路径
+\include{D:/file} % Windows 绝对路径，用正斜线
 \end{verbatim}
-
-\Arg{filename} 可以不带扩展名，此时默认扩展名为 \texttt{.tex}。
 
 \cmdindex{input}
 值得注意的是 \cmd{include} 在读入 \Arg{filename} 之前会另起一页。有的时候我们并不需要这样，而是用
@@ -376,15 +376,20 @@ or \TeX{} users?
 \cmd{input}\marg{filename}
 \end{command}
 
-特别要注意的是，使用 \cmd{include} 和 \cmd{input} 命令载入的文件名\textbf{一定不要加空格}，否则通常会出错。
+当导言区内容较多时，常常将其单独放置在一个 \texttt{.tex} 文件中，再用 \cmd{input} 命令插入。
+复杂的图、表、代码等也会用类似的手段处理。
 
 \cmdindex{includeonly}
-另外 \LaTeX{} 提供了一个 \cmd{includeonly} 命令来组织文件，用于\textbf{导言区}，指定只载入某些文件：
+\LaTeX{} 还提供了一个 \cmd{includeonly} 命令来组织文件，用于\textbf{导言区}，指定只载入某些文件。
+导言区使用了 \cmd{includeonly} 后，正文中不在其列表范围的 \cmd{include} 命令不会起效：
 \begin{command}
 \cmd{includeonly}\marg*{\Arg{filename1},\Arg{filename2},\ldots}
 \end{command}
 
-导言区使用了 \cmd{includeonly} 后，正文中不在其列表范围的 \cmd{include} 命令不会起效。
+需要注意的是，使用 \cmd{include} 和 \cmd{input} 命令载入的文件名最好不要加空格和特殊字符，也尽量
+避免使用中文名，否则很可能会出错%
+\footnote{\LaTeX{} 在 2019 到 2020 年间做出了一系列更新，文件名中包含操作系统所允许的字符时
+均不再出错。但保险起见，仍然建议使用拉丁字母、数字、连字符等较为安全的字符组成文件名。}。
 
 \pkgindex{syntonly}
 最后介绍一个实用的工具宏包 \pkg{syntonly}。加载这个宏包后，在导言区使用 \cmd{syntaxonly} 命令，
