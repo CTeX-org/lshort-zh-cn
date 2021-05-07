@@ -1062,7 +1062,7 @@ A \rule[-.4pt]{3em}{.4pt} line.
   \centering
   \includegraphics[width=...]{...}
   \qquad
-  \includegraphics[width=...]{...} \\[..pt]
+  \includegraphics[width=...]{...} \\[...pt]
   \includegraphics[width=...]{...}
   \caption{...}
 \end{figure}
@@ -1112,44 +1112,50 @@ A \rule[-.4pt]{3em}{.4pt} line.
   \end{minipage}
 \end{figure}
 
-\pkgindex{subfig}
-\cmdindex[subfig]{subfloat}
-当我们需要更进一步，给每个图片定义小标题时，就要用到 \pkg{subfig} 宏包的功能了。
-这里仅举一例，效果见图 \ref{fig:subfig}。更详细的用法请参考 \pkg{subfig} 宏包的帮助文档。
+\pkgindex{subcaption}
+\envindex[subcaption]{subfigure}
+当我们需要更进一步，给每个图片定义小标题时，就要用到 \pkg{subcaption} 宏包的功能了。这里仅举一例，
+效果见图 \ref{fig:subfigure-cap1} 和 \ref{fig:subfigure-cap2}。更详细的用法请参考 \pkg{subcaption}
+宏包的帮助文档。
 \begin{verbatim}
 \begin{figure}[htbp]
   \centering
-  \subfloat[...]{\label{sub-fig-1}% 为子图加交叉引用
-   \begin{minipage}{...}
+  \begin{subfigure}{...}
     \centering
     \includegraphics[width=...]{...}
-   \end{minipage}
-  }
+    \caption{...}
+  \end{subfigure}
   \qquad
-  \subfloat[...]{%
-  \begin{minipage}{...}
+  \begin{subfigure}{...}
     \centering
     \includegraphics[width=...]{...}
-  \end{minipage}
-  }
-  \caption{...}
+    \caption{...}
+  \end{subfigure}
 \end{figure}
 \end{verbatim}
 
 \begin{figure}[htp]
   \centering
-  \subfloat[并排子图1]{%
-  \begin{minipage}{12em}
+  \begin{subfigure}{12em}
     \centering
     \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
-  \end{minipage}}
+    \caption{并排子图 1}
+    \label{fig:subfigure-cap1}
+  \end{subfigure}
   \qquad
-  \subfloat[并排子图2]{%
-  \begin{minipage}{12em}
+  \begin{subfigure}{12em}
     \centering
     \fcolorbox[gray]{0}{0.96}{\parbox{10em}{\vrule width 0pt height 12ex\hfil}}
-  \end{minipage}}
-  \caption{使用 \pkg{subfig} 宏包的 \cmd{subfloat} 命令排版子图。}\label{fig:subfig}
+    \caption{并排子图 2}
+    \label{fig:subfigure-cap2}
+  \end{subfigure}
+  \caption{使用 \pkg{subcaption} 宏包的 \env{subfigure} 环境排版子图。}
+  \label{fig:subcaption}
 \end{figure}
+
+\pkgindex{caption,subfig}
+\cmdindex[subfig]{subfloat}
+\pkg{subcaption} 依赖上文提到过的 \pkg{caption} 宏包，因此也支持子图表标题样式的定制。并排子图表的
+功能也可通过 \pkg{subfig} 宏包的 \cmd{subfloat} 命令实现，具体请参考宏包文档。
 
 \endinput
