@@ -566,38 +566,35 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \cmd{hypersetup}\marg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots} \\
 \cmd{usepackage}\oarg*{\Arg{option1},\Arg{option2}=\marg*{value},\ldots}\marg*{hyperref}
 \end{command}
-可用的参数见表 \ref{tbl:hyperref-settings}。
+当选项值为 \texttt{true} 时，可以省略“\texttt{=true}”不写。可用的参数见表 \ref{tbl:hyperref-settings}。
 
 \begin{table}[htp]
 \centering
 \caption{\pkg{hyperref} 宏包提供的参数设置}\label{tbl:hyperref-settings}
+\def\TF{\Arg{true\textnormal|false}}
 \begin{tabular}{llp{19.5em}}
  \hline
- \textbf{参数}                & \textbf{默认值}  & \textbf{含义} \\
+ \textbf{参数}                     & \textbf{默认值} & \textbf{含义} \\
  \hline
- \texttt{colorlinks=}\Arg{true\textnormal|false}
-                              & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
- \texttt{hidelinks}           &                 & 取消链接的颜色和边框 \\
+ \texttt{draft=}\TF                & \textit{false}  & 关闭所有超链接、书签等功能（也可以通过文档类选项指定） \\
+ \texttt{final=}\TF                & \textit{true}   & 开启所有超链接、书签等功能（也可以通过文档类选项指定） \\
+ \hline
+ \texttt{colorlinks=}\TF           & \textit{false}  & 设置为 \textit{true} 为链接文字带颜色，反之加上带颜色的边框 \\
+ \texttt{hidelinks}                &                 & 取消链接的颜色和边框 \\
  \texttt{pdfborder=}\marg*{\Arg{n} \Arg{n} \Arg{n}}
-                              &  0 0 1          & 超链接边框设置，设为 0 0 0 可取消边框 \\
+                                   &  0 0 1          & 超链接边框设置，设为 0 0 0 可取消边框 \\
  \hline
- \texttt{bookmarks=}\Arg{true\textnormal|false}\textsuperscript{\dag}
-                              & \textit{true}   & 是否生成书签 \\
- \texttt{bookmarksopen=}\Arg{true\textnormal|false}
-                              & \textit{false}  & 是否展开书签 \\
- \texttt{bookmarksnumbered=}\Arg{true\textnormal|false}
-                              & \textit{false}  & 书签是否带章节编号 \\
+ \texttt{bookmarks=}\TF\textsuperscript{\dag}
+                                   & \textit{true}   & 是否生成书签 \\
+ \texttt{bookmarksopen=}\TF        & \textit{false}  & 是否展开书签 \\
+ \texttt{bookmarksnumbered=}\TF    & \textit{false}  & 书签是否带章节编号 \\
  \hline
- \texttt{pdftitle=}\Arg{string}
-                              & 空               & 标题 \\
- \texttt{pdfauthor=}\Arg{string}
-                              & 空               & 作者 \\
- \texttt{pdfsubject=}\Arg{string}
-                              & 空               & 主题 \\
- \texttt{pdfkeywords=}\Arg{string}
-                              & 空               & 关键词 \\
+ \texttt{pdftitle=}\Arg{string}    & 空              & 标题 \\
+ \texttt{pdfauthor=}\Arg{string}   & 空              & 作者 \\
+ \texttt{pdfsubject=}\Arg{string}  & 空              & 主题 \\
+ \texttt{pdfkeywords=}\Arg{string} & 空              & 关键词 \\
  \texttt{pdfstartview=}\Arg{Fit\textnormal|FitH\textnormal|FitV}
-                              & \textit{Fit}     & 设置 PDF 页面以适合页面/适合宽度/适合高度等方式显示，默认为适合页面 \\
+                                   & \textit{Fit}    & 设置 PDF 页面以适合页面/适合宽度/适合高度等方式显示，默认为适合页面 \\
  \hline
 \end{tabular}
 \begin{quotation}

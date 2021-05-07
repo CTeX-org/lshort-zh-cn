@@ -847,7 +847,8 @@ for (int i=0; i<4; ++i)
 \graphicspath{{figures/}{logo/}}
 \end{verbatim}
 
-\cmd{includegraphics} 命令的可选参数 \Arg{options} 支持 \Arg{key}=\Arg{value} 形式赋值，常用的参数如下：
+在 \cmd{includegraphics} 命令的可选参数 \Arg{options} 中可以使用 \Arg{key}=\Arg{value} 的形式，
+常用的参数如下：
 \begin{table}[htp]
 \centering
 \caption{\cmd{includegraphics} 命令的可选参数}\label{tbl:graphics-options}
@@ -858,17 +859,20 @@ for (int i=0; i<4; ++i)
  \texttt{width=}\Arg{width}    &  将图片缩放到宽度为 \Arg{width} \\
  \texttt{height=}\Arg{height}  &  将图片缩放到高度为 \Arg{height} \\
  \texttt{scale=}\Arg{scale}    &  将图片相对于原尺寸缩放 \Arg{scale} 倍 \\
- \texttt{angle=}\Arg{angle}    &  令图片逆时针旋转 \Arg{angle} 度 \\
+ \texttt{angle=}\Arg{angle}    &  将图片逆时针旋转 \Arg{angle} 度 \\
  \hline
 \end{tabular}
 \end{table}
 
+\pkg{graphicx} 宏包也支持 \texttt{draft}/\texttt{final} 选项。当 \pkg{graphicx} 宏包或文档类指定
+\texttt{draft} 选项时，图片将不会被实际插入，取而代之的是一个包含文件名的与原图片等大的方框。
+
 \section{盒子}\label{sec:box}
 
-盒子是 \LaTeX{} 排版的基础单元，虽然解释上去有些抽象：每一行是一个盒子，
-里面的文字从左到右依次排列；每一页也是一个盒子，各行文字从上到下依次排布……颇有一些活字印刷术的味道。
+盒子是 \LaTeX{} 排版的基础单元，虽然解释略有抽象：每一行是一个盒子，里面的文字从左到右依次排列；
+每一页也是一个盒子，各行文字从上到下依次排布……颇有一些活字印刷术的味道。
 
-不管如何，\LaTeX{} 提供了一些命令让我们生成一些有特定用途的盒子。
+不管如何，\LaTeX{} 提供了一些命令让我们手动生成一些有特定用途的盒子。
 
 \subsection{水平盒子}\label{subsec:mbox}
 
