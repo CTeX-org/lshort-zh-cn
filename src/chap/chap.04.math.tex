@@ -119,6 +119,7 @@ In display:
   则应该像正常的行内公式那样用，而不是滥用 \amscmd{text} 命令。}。
 \end{enumerate}
 \begin{example}
+% \usepackage{amssymb}
 $x^{2} \geq 0 \qquad
 \text{for \textbf{all} }
 x\in\mathbb{R}$
@@ -321,6 +322,7 @@ In display:
 \pkg{amsmath} 宏包还提供了 \amscmd{substack}，能够在下限位置书写多行表达式；\amsenv{subarray}
 环境更进一步，令多行表达式可选择居中 (c) 或左对齐 (l)：
 \begin{example}
+% \usepackage{amssymb}
 \[
 \sum_{\substack{0\le i\le n \\
   j\in \mathbb{R}}}
@@ -658,6 +660,7 @@ f(x)g(y) \diff x \diff y \\
 \LaTeX{} 允许一部分数学符号切换字体，主要是拉丁字母、数字、大写希腊字母以及重音符号等。
 表 \ref{tbl:math-fonts} 给出了切换字体的命令。某一些命令需要字体宏包的支持。
 \begin{example}
+% \usepackage{amssymb}
 $\mathcal{R} \quad \mathfrak{R}
 \quad \mathbb{R}$
 \[\mathcal{L}
