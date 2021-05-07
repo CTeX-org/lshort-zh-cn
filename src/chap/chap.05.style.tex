@@ -554,48 +554,51 @@ but it also breaks the line.
 
 \pkgindex{geometry}
 \pinyinindex{xuanxiang}{选项（宏包/文档类）}
-\pkg{geometry} 宏包的调用方式类似于 \pkg{graphicx}，在 \texttt{latex} + \texttt{dvipdfmx} 命令下需要指定选项 \texttt{dvipdfm}
-（注意这里不是 \texttt{dvipdfmx}）；\texttt{pdflatex} 和 \texttt{xelatex} 编译命令下不需要。
+\pkg{geometry} 宏包的调用方式类似于 \pkg{graphicx}，在 \texttt{latex} + \texttt{dvipdfmx} 命令下
+需要指定选项 \texttt{dvipdfm} 或 \texttt{dvipdfmx}%
+\footnote{早期版本的 \pkg{geometry} 宏包仅支持 \texttt{dvipdfm} 选项。}；
+\texttt{pdflatex} 和 \texttt{xelatex} 编译命令下不需要。
 
 \cmdindex[geometry]{geometry}
-你既可以调用 \pkg{geometry} 宏包然后用其提供的 \cmd{geometry} 命令设置页面参数：
+既可以调用 \pkg{geometry} 宏包，然后用其提供的 \cmd{geometry} 命令设置页面参数：
 \begin{command}
 \cmd{usepackage}\marg*{geometry} \\
 \cmd{geometry}\marg{geometry-settings}
 \end{command}
-
-也可以将参数指定为宏包的选项：
+也可以直接在宏包选项中设置：
 \begin{command}
 \cmd{usepackage}\oarg{geometry-settings}\marg*{geometry}
 \end{command}
-
 其中 \Arg{geometry-settings} 多以 \Arg{key}=\Arg{value} 的形式组织。
 
-比如，符合 Microsoft Word 习惯的页面设定是 A4 纸张，上下边距 1 英寸，左右边距 1.25 英寸，于是我们可以通过如下两种等效的方式之一设定页边距：
+比如，符合 Microsoft Word 习惯的页面设定是 A4 纸张，上下边距 1 英寸，左右边距 1.25 英寸，于是我们
+可以通过如下两种等效的方式之一设定页边距：
 \begin{verbatim}
-\usepackage[left=1.25in,right=1.25in,%
-  top=1in,bottom=1in]{geometry}
+\geometry{a4paper,left=1.25in,right=1.25in,top=1in,bottom=1in}
 % or like this:
-\usepackage[hmargin=1.25in,vmargin=1in]{geometry}
+\geometry{a4paper,hmargin=1.25in,vmargin=1in}
 \end{verbatim}
 
-又比如，需要设定周围的边距一致为1.25英寸，可以用更简单的语法：
+又比如，需要设定周围的边距一致为 1.25 英寸，可以用更简单的语法：
 \begin{verbatim}
-\usepackage[margin=1.25in]{geometry}
+\geometry{margin=1.25in}
 \end{verbatim}
 
-对于书籍等双面文档，习惯上奇数页右边、偶数页左边留出较多的页边距，而书脊一侧的奇数页左边、偶数页右边页边距较少。我们可以这样设定：
+对于书籍等双面文档，习惯上奇数页右边、偶数页左边留出较大的页边距，而靠近书脊一侧的奇数页左边、
+偶数页右边页边距较小。我们可以这样设定：
 \begin{verbatim}
-\usepackage[inner=1in,outer=1.25in]{geometry}
+\geometry{inner=1in,outer=1.25in}
 \end{verbatim}
 
-\pkg{geometry} 宏包本身也能够修改纸张大小、页眉页脚高度、边注宽度等等参数。更详细的用法不再赘述，
-感兴趣的用户可查阅 \pkg{geometry} 宏包的帮助文档。
+需要指出的是，通过 \pkg{geometry} 宏包设置的纸张大小是输出 PDF 文件的真实大小，而在文档类选项中
+设置的参数（见 \ref{subsec:classes} 小节）实际上只影响输出区域。\pkg{geometry} 宏包还能够修改
+页眉页脚高度、边注宽度等参数，并且能比较好地处理各参数之间的依赖关系。更详细的用法不再赘述，感兴趣
+的用户可查阅其帮助文档。
 
 \subsection{页面内容的垂直对齐}\label{subsec:raggedbottom}
 
-\LaTeX{} 默认将页面内容在垂直方向分散对齐。对于有大量图表的文档，许多时候想要做到排版匀称的页面很困难，
-垂直分散对齐会造成某些页面的垂直间距过宽，还可能报大量的 \texttt{Underfull} \cmd{vbox} 消息。
+\LaTeX{} 默认将页面内容在垂直方向分散对齐。对于有大量图表的文档，许多时候想要做到排版匀称的页面
+很困难，垂直分散对齐会造成某些页面的垂直间距过宽，还可能报大量的 \verb|Underfull \vbox| 消息。
 \LaTeX{} 还提供了另一种策略：将页面内容向顶部对齐，给底部留出高度不一的空白。
 
 \cmdindex{raggedbottom, flushbottom}
