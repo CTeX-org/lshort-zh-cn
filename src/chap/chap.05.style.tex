@@ -167,8 +167,8 @@ He likes {\LARGE large and
  \pkg{newpxtext},\pkg{newpxmath}  & \pkg{pxfonts} 的改进版本，分别设置文本和数学字体  \\
  \pkg{mathptmx}    & \pkg{psnfss} 字体宏集之一，Times 风格，较为陈旧，不推荐使用  \\
  \pkg{mathpazo}    & \pkg{psnfss} 字体宏集之一，Palatino 风格，较为陈旧，不推荐使用  \\
- \pkg{fourier}     & fourier 风格数学字体，配合 Utopia 正文字体 \\
- \pkg{fouriernc}   & fourier 风格数学字体，配合 New Century Schoolbook 正文字体 \\
+ \pkg{fourier}     & Fourier 风格数学字体，配合 Utopia 正文字体 \\
+ \pkg{fouriernc}   & Fourier 风格数学字体，配合 New Century Schoolbook 正文字体 \\
  \pkg{arev}        & Arev 无衬线字体宏包，Vera Sans 风格 \\
  \pkg{mathdesign}  & 配合 Charter / Garamond / Utopia 正文字体的数学字体宏包 \\
  \hline
@@ -219,7 +219,7 @@ He likes {\LARGE large and
 \end{verbatim}
 \Arg{font features} 还能配置字体本身的各种特性，这里不再赘述，感兴趣的读者请参考 \pkg{fontspec} 宏包的帮助文档。
 
-需要注意的是：\pkg{fontspec} 宏包会覆盖数学字体设置。需要调用表 \ref{tbl:font-pkgs} 中列出的一些数学字体宏包时，
+需要注意的是，\pkg{fontspec} 宏包会覆盖数学字体设置。需要调用表 \ref{tbl:font-pkgs} 中列出的一些数学字体宏包时，
 应当在调用 \pkg{fontspec} 宏包时指定 \texttt{no-math} 选项。\pkg{fontspec} 宏包可能被其它宏包或文档类（如 \pkg{ctex} 文档类）自动调用时，
 则在文档开头的 \cmd{document\-class} 命令里指定 \texttt{no-math} 选项。
 
@@ -253,9 +253,7 @@ Unicode 数学字体是一类 OpenType 字体，包含了 Unicode 字符集中�
 \cmd{setmathfont}\marg{font name}\oarg{font features}
 \end{command}
 
-绝大多数时候，只需要给定字体名称 \Arg{font name} 即可。由于篇幅所限，在此不介绍可选参数 \Arg{font feature} 涉及的配置，有兴趣的读者请参考宏包的帮助文档。
-
-Unicode 数学字体相比于正文字体的选择余地不多。表 \ref{tbl:uni-math-fonts} 给出了较为常用的 Unicode 数学字体。
+绝大多数时候，只需要给定字体名称 \Arg{font name} 即可。由于篇幅所限，在此不介绍可选参数 \Arg{font feature} 涉及的配置，有兴趣的读者请参考宏包的帮助文档。Unicode 数学字体相比于正文字体的选择余地不多。表 \ref{tbl:uni-math-fonts} 给出了较为常用的 Unicode 数学字体。
 
 \begin{table}[htp]
 \centering\small
@@ -263,26 +261,30 @@ Unicode 数学字体相比于正文字体的选择余地不多。表 \ref{tbl:un
 \label{tbl:uni-math-fonts}
 \begin{tabular}{llp{20em}}
 \hline
-\textbf{数学字体名称} & \textbf{配套正文字体名称} & \textbf{备注}\\
+\textbf{数学字体名称} & \textbf{配套正文字体名称} & \textbf{备注} \\
 \hline
 \multicolumn{3}{c}{开源字体，发布于 CTAN} \\
 \hline
-\texttt{Latin Modern Math}       & \texttt{Latin Modern}         & 基于 Computer Modern 风格 \\
-\texttt{STIX Math}               & \texttt{STIX}                 & Times 风格 \\
-\texttt{XITS Math}               & \texttt{XITS}                 & 基于 STIX，Times 风格，有粗体 XITS Math Bold 可用 \\
-\texttt{TeX Gyre Pagella Math}   & \texttt{TeX Gyre Pagella}     & Palatino 风格 \\
-\texttt{TeX Gyre Termes Math}    & \texttt{TeX Gyre Termes}      & Times 风格 \\
-\texttt{Libertinus Math}         & \texttt{Libertinus}           & Linux Libertine 风格 \\
-\texttt{Fira Math}               & \texttt{Fira Sans}            & 无衬线数学字体 \\
+Latin Modern Math     & Latin Modern     & 基于 Computer Modern 风格 \\
+STIX Math             & STIX             & Times 风格 \\
+XITS Math             & XITS             & 基于 STIX，Times 风格，有粗体 XITS Math Bold 可用 \\
+TeX Gyre Pagella Math & TeX Gyre Pagella & Palatino 风格 \\
+TeX Gyre Termes Math  & TeX Gyre Termes  & Times 风格 \\
+TeX Gyre DejaVu Math  & DejaVu Serif     & DejaVu 风格 \\
+Libertinus Math       & Libertinus       & Linux Libertine 风格 \\
+Garamond Math         & EB Garamond      & Garamond 风格 \\
+Fira Math             & Fira Sans        & 无衬线数学字体 \\
 \hline
 \multicolumn{3}{c}{商业字体} \\
 \hline
-\texttt{Cambria Math}            & \texttt{Cambria}              & 较新版本的微软 Office 预装数学字体 \\
-\texttt{Lucida Bright Math OT}   & \texttt{Lucida Bright OT}     & 须购买商业授权 \\
-\texttt{Minion Math}             & \texttt{Minion Pro}           & 须购买商业授权 \\
+Cambria Math          & Cambria          & 微软 Office 预装的数学字体 \\
+Lucida Bright Math OT & Lucida Bright OT & 须购买商业授权 \\
+Minion Math           & Minion Pro       & 须购买商业授权 \\
 \hline
 \end{tabular}
 \end{table}
+
+\pkg{unicode-math} 宏包与传统数学字体、符号包并不兼容，但其本身已经提供了大量的符号和字体样式。实际上，\ref{subsec:math-alpha} 和 \ref{subsec:math-bold} 小节中介绍的内容均已被 \pkg{unicode-math} 所涵盖，无需调用其他宏包就可以获得覆盖完整、风格较为统一的字体样式。具体使用方法请参考宏包帮助文档。
 
 \section{文字装饰和强调}\label{sec:emphasize}
 

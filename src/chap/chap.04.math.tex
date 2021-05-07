@@ -627,7 +627,8 @@ x_{n1} & x_{n2} & \ldots & x_{nn}\\
 \end{tabularx}
 \end{center}
 
-一个常见的用途是修正积分的被积函数$f(x)$和微元$\mathrm{d}x$之间的距离。注意微元里的$\mathrm{d}$用的是直立体：
+一个常见的用途是修正积分的被积函数 $f(x)$ 和微元 $\mathrm{d}x$ 之间的距离。
+注意微元里的 $\mathrm{d}$ 用的是直立体：
 \begin{example}
 \[
 \int_a^b f(x)\mathrm{d}x
@@ -636,8 +637,9 @@ x_{n1} & x_{n2} & \ldots & x_{nn}\\
 \]
 \end{example}
 
-另一个用途是生成多重积分号。如果我们直接连写两个 \cmd{int}，之间的间距将会过宽，此时可以使用负间距 \cmd{!} 修正之。
-不过 \pkg{amsmath} 提供了更方便的多重积分号，如二重积分 \amscmd{iint}、三重积分 \amscmd{iiint} 等。
+另一个用途是生成多重积分号。如果我们直接连写两个 \cmd{int}，之间的间距将会过宽，此时可以使用负间距
+\cmd{!} 修正之。不过 \pkg{amsmath} 提供了更方便的多重积分号，如二重积分 \amscmd{iint}、三重积分
+\amscmd{iiint} 等。
 \begin{example}
 \newcommand\diff{\,\mathrm{d}}
 \begin{gather*}
@@ -692,8 +694,31 @@ $\mathbb{ABCDE}$                 & \cmd{mathbb}\marg*{\ldots}    & \pkg{amssymb}
 \end{tabular}
 \end{table}
 
+一般来说，不同的数学字体往往带有不同的语义，如矩阵、向量等常会使用粗体或粗斜体，而数集常会使用 \cmd{mathbb} 表示。出于内容与格式分离以及方便书写的考虑，可以为它们定义新的命令。具体方法详见 \ref{subsec:newcmd} 小节。
+
 \pkgindex{unicode-math}
 如果需要为所有的数学符号切换字体，则需要直接调用数学字体宏包（见 \ref{subsec:font-pkgs} 小节）。在 \texttt{xelatex} 或者 \texttt{lualatex} 编译命令下，还可以使用基于 \pkg{fontspec} 宏包的 \pkg{unicode-math} 宏包配置 Unicode 数学字体，详见 \ref{subsec:unicode-math} 小节。
+
+\subsection{加粗的数学符号}\label{subsec:math-bold}
+
+\cmdindex[amsmath]{boldsymbol}
+表 \ref{tbl:math-fonts} 中的 \cmd{mathbf} 命令只能获得直立、加粗的字母。如果想得到粗斜体%
+\footnote{国内使用粗斜体符号表示矢量，见 GB 3102.11--93。}，可以使用 \pkg{amsmath} 宏包提供的
+\amscmd{boldsymbol} 命令：
+\begin{example}
+$\mu, M \qquad
+\boldsymbol{\mu}, \boldsymbol{M}$
+\end{example}
+
+\pkgindex{bm}
+\cmdindex[bm]{bm}
+也可以使用 \pkg{bm} 宏包提供的 \cmd{bm} 命令：
+\begin{example}
+% \usepackage{bm}
+$\mu, M \qquad \bm{\mu}, \bm{M}$
+\end{example}
+在 \LaTeX{} 默认的数学字体中，一些符号本身并没有粗体版本，使用 \amscmd{boldsymbol} 也得不到粗体。
+此时 \cmd{bm} 命令会生成“伪粗体”，尽管效果比较粗糙，但在某些时候也不失为一种解决方案。
 
 \subsection{数学符号的尺寸}\label{subsec:math-styles}
 
@@ -726,33 +751,6 @@ r = \frac
   \right]^{1/2} }
 \]
 \end{example}
-
-\subsection{加粗的数学符号}\label{subsec:math-bold}
-
-在 \LaTeX{} 中为符号切换数学字体并不十分自由，只能通过 \cmd{mathbf} 等有限的命令切换字体。比如想得到粗斜体的符号，就没有现成的命令%
-\footnote{国内使用粗斜体符号表示矢量，见 GB 3102.11--93。}；再比如 \cmd{mathbf} 只能改变拉丁字母和大写希腊字母，小写希腊字母就没有用。
-
-\cmdindex{boldmath}
-\LaTeX{} 提供了一个命令 \cmd{boldmath} 令用户可以将整套数学字体切换为粗体版本（前提是数学字体宏包本身支持粗体符号）。但这个命令\textbf{只能在公式外使用}：
-\begin{example}
-$\mu, M \qquad
-\mathbf{\mu}, \mathbf{M}$
-\qquad {\boldmath$\mu, M$}
-\end{example}
-
-\cmdindex[amsmath]{boldsymbol}
-\pkg{amsmath} 提供了一个 \amscmd{boldsymbol} 命令（由调用的 \pkg{amsbsy} 宏包提供），用于打破 \cmd{boldmath} 的限制，
-在公式内部将一部分符号切换为粗体。
-\begin{example}
-$\mu, M \qquad
-\boldsymbol{\mu}, \boldsymbol{M}$
-\end{example}
-
-\pkgindex{bm}
-\cmdindex[bm]{bm}
-然而在许多数学字体宏包中，定界符、巨算符等一些符号本身没有粗体版本，\amscmd{boldsymbol} 也得不到粗体。
-\LaTeX{} 工具宏集之一的 \pkg{bm} 宏包可以用 \cmd{bm} 命令生成“伪粗体”，作为粗体符号的一个解决方案。这里不做过多介绍，
-详情请参考 \pkg{bm} 宏包的帮助文档。
 
 \section{定理环境}\label{sec:theorems}
 
