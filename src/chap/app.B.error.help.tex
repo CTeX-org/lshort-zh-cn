@@ -173,74 +173,75 @@ texdoc fancyhdr
 \subsection{文字、公式和符号}\label{subsec:text-math-symbols}
 
 \begin{pkglist}
-  \item[amsmath]  \hologo{AmS} 数学公式扩展。
-  \item[mathtools] 数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等。
-  \item[amsfonts] \hologo{AmS} 扩展符号的基础字体支持。
-  \item[amssymb]  在 \pkg{amsfonts} 基础上将 \hologo{AmS} 扩展符号定义成命令。
-  \item[bm]       提供将数学符号加粗的命令 \cmd{bm}。
-  \item[siunitx]  以国际单位规范排版物理量的单位。
-  \item[mhchem]   排版化学式和方程式。
-  \item[tipa]     排版国际音标。
+  \item[amsmath]      \hologo{AmS} 数学公式扩展。
+  \item[mathtools]    数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等。
+  \item[amsfonts]     \hologo{AmS} 扩展符号的基础字体支持。
+  \item[amssymb]      在 \pkg{amsfonts} 基础上将 \hologo{AmS} 扩展符号定义成命令。
+  \item[bm]           提供将数学符号加粗的命令 \cmd{bm}。
+  \item[unicode-math] 使用 Unicode 数学字体。
+  \item[nicematrix]   排版复杂矩阵。
+  \item[siunitx]      以国际单位规范排版物理量的单位。
+  \item[mhchem]       排版化学式和方程式。
+  \item[tipa]         排版国际音标。
 \end{pkglist}
 
 \subsection{排版元素}\label{subsec:pkg-elements}
 
 \begin{pkglist}
-  \item[ulem]     提供排版可断行下划线的命令 \cmd{uline} 以及其它装饰文字的命令。
-  \item[endnote]  排版尾注。
-  \item[marginnote] 改善的边注排版功能。
-  \item[multicol] 提供将内容自由分栏的 \env{multicols} 环境。
-  \item[multitoc] 生成多栏排版的目录。
-  \item[minitoc]  为章节生成独立的小目录。
-  \item[glossaries] 生成词汇表。
-  \item[verbatim] 对原始的 \env{verbatim} 环境的改善。提供了命令 \cmd{verbatim\-input} 调用源文件。
-  \item[fancyvrb] 提供了代码排版环境 \env{Verbatim} 以及对版式的自定义。
-  \item[listings] 提供了排版关键字高亮的代码环境 \env{lst\-listing} 以及对版式的自定义。类似宏包有 \pkg{minted}。
+  \item[ulem]        提供排版可断行下划线的命令 \cmd{uline} 以及其它装饰文字的命令。
+  \item[endnote]     排版尾注。
+  \item[marginnote]  改善的边注排版功能。
+  \item[multicol]    提供将内容自由分栏的 \env{multicols} 环境。
+  \item[multitoc]    生成多栏排版的目录。
+  \item[minitoc]     为章节生成独立的小目录。
+  \item[glossaries]  生成词汇表。
+  \item[verbatim]    对原始的 \env{verbatim} 环境的改善。提供了命令 \cmd{verbatiminput} 调用源文件。
+  \item[fancyvrb]    提供了代码排版环境 \env{Verbatim} 以及对版式的自定义。
+  \item[listings]    提供了排版关键字高亮的代码环境 \env{lstlisting} 以及对版式的自定义。类似宏包有 \pkg{minted} 等。
   \item[algorithmic] 一个简单的实现算法排版的宏包。如果要生成浮动体的话，需要搭配 \pkg{algorithm} 宏包使用。
   \item[algorithm2e] 较为复杂的、可定制的算法排版宏包。类似宏包有 \pkg{algorithmicx} 等。
-  \item[ntheorem] 定制定理环境。类似宏包包括 \pkg{theorem}、\pkg{thmtools}、\pkg{amsthm} 等。
-  \item[mdframed] 排版可自动断页的带边框文字段落，提供边框样式的定制功能。
-  \item[tcolorbox] 以 \hologo{TikZ} 为基础提供排版样式丰富的彩色盒子的功能。
+  \item[amsthm]      定制定理环境。类似宏包包括 \pkg{theorem}、\pkg{ntheorem}、\pkg{thmtools} 等。
+  \item[mdframed]    排版可自动断页的带边框文字段落，提供边框样式的定制功能。
+  \item[tcolorbox]   以 \hologo{TikZ} 为基础提供排版样式丰富的彩色盒子的功能。
 \end{pkglist}
 
 \subsection{图表和浮动体}\label{subsec:pkg-tab-fig}
 
 \begin{pkglist}
-  \item[booktabs]  排版三线表。
-  \item[array]    对表格列格式的扩展。
-  \item[tabularx] 提供 \env{tabularx} 环境排版定宽表格，支持自动计算宽度的 X 列格式。
-  \item[arydshln] 支持排版虚线表格线。
-  \item[colortbl] 支持修改表格的行、列、单元格的颜色。
-  \item[multirow] 支持合并多行单元格。
-  \item[makecell] 支持在单元格里排版多行内容（嵌套一个单列的小表格）。
-  \item[diagbox]  排版斜线表头。
-  \item[longtable] 提供排版跨页长表格的 \env{longtable} 环境。
-  \item[ltxtable] 跨页长表格可使用 \env{tabularx} 的 X 列格式。
-  \item[tabu]     提供排版复杂格式表格的 \env{tabu} 环境。与 \pkg{longtable} 一同调用时，提供排版复杂格式跨页长表格的 \env{longtabu} 环境。
-  \item[graphicx] 支持插图。
-  \item[bmpsize]  \texttt{latex} + \texttt{dvipdfmx} 命令下支持 BMP/JPG/PNG 等格式的位图。
-  \item[epstopdf] \texttt{pdflatex} 命令下支持 EPS 格式的矢量图。
-  \item[wrapfig]  支持简单的文字在图片周围的绕排。
-  \item[caption]  控制浮动体标题的格式。
-  \item[subcaption]   提供子图表和子标题的排版。类似宏包有 \pkg{subfigure} 和 \pkg{subfig} 等。 
-  \item[bicaption] 生成双语浮动体标题。
-  \item[float]    为浮动体提供不浮动的 H 模式；提供自定义浮动体结构的功能。
+  \item[array]      对表格列格式的扩展。
+  \item[booktabs]   排版三线表。
+  \item[tabularx]   提供 \env{tabularx} 环境排版定宽表格，支持自动计算宽度的 \texttt{X} 列格式。
+  \item[arydshln]   支持排版虚线表格线。
+  \item[colortbl]   支持修改表格的行、列、单元格的颜色。
+  \item[multirow]   支持合并多行单元格。
+  \item[makecell]   支持在单元格里排版多行内容（嵌套一个单列的小表格）。
+  \item[diagbox]    排版斜线表头。
+  \item[longtable]  提供排版跨页长表格的 \env{longtable} 环境。
+  \item[ltxtable]   为跨页长表格提供 \env{tabularx} 的 \texttt{X} 列格式。
+  \item[tabularray] 排版复杂表格（基于 \LaTeX3 实现）。
+  \item[graphicx]   支持插图。
+  \item[bmpsize]    \texttt{latex} + \texttt{dvipdfmx} 命令下支持 BMP/JPG/PNG 等格式的位图。
+  \item[epstopdf]   \texttt{pdflatex} 命令下支持 EPS 格式的矢量图。
+  \item[wrapfig]    支持简单的文字在图片周围的绕排。
+  \item[caption]    控制浮动体标题的格式。类似宏包有 \pkg{keyfloat} 等。
+  \item[subcaption] 提供子图表和子标题的排版。类似宏包有 \pkg{subfigure} 和 \pkg{subfig} 等。
+  \item[bicaption]  生成双语浮动体标题。
+  \item[float]      为浮动体提供不浮动的 \texttt{H} 模式；提供自定义浮动体结构的功能。
 \end{pkglist}
 
 \subsection{修改版式}\label{subsec:pkg-layout}
 
 \begin{pkglist}
-  \item[geometry] 修改页面尺寸、页边距、页眉页脚等参数。
-  \item[fancyhdr] 修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐。
-  \item[titlesec] 修改章节标题 \cmd{chapter}、\cmd{section} 等的格式。
-  \item[titletoc] 修改目录中各条目的格式。
-  \item[tocloft]  类似 \pkg{titletoc} 的修改目录条目格式的宏包。
-  \item[tocbibind] 支持将目录、参考文献、索引本身写入目录项。
-  \item[footmisc] 修改脚注 \cmd{footnote} 的格式。
+  \item[geometry]    修改页面尺寸、页边距、页眉页脚等参数。
+  \item[fancyhdr]    修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐。
+  \item[titlesec]    修改章节标题 \cmd{chapter}、\cmd{section} 等的格式。
+  \item[titletoc]    修改目录中各条目的格式。类似宏包有 \pkg{tocloft} 等。
+  \item[tocbibind]   支持将目录、参考文献、索引本身写入目录项。
+  \item[footmisc]    修改脚注 \cmd{footnote} 的格式。
   \item[indentfirst] 令章节标题后的第一段首行缩进。
-  \item[enumerate] 提供简单的自定义标签格式的 \env{enumerate} 环境。
-  \item[enumitem] 修改列表环境 \env{enumerate} 和 \env{itemize} 等的格式。
-  \item[lettrine] 生成段落首字母大写的效果。
+  \item[enumerate]   提供简单的自定义标签格式的 \env{enumerate} 环境。
+  \item[enumitem]    修改列表环境 \env{enumerate} 和 \env{itemize} 等的格式。
+  \item[lettrine]    生成段落首字母大写的效果。
 \end{pkglist}
 
 \endinput
