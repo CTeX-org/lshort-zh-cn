@@ -19,7 +19,7 @@
 \TeX{} 以其卓越的稳定性、跨平台能力和几乎没有 bug 的特性而著称。
 它的版本号不断趋近于 $\pi$，当前为 3.141592653。
 
-\TeX{} 读作 ``Tech''，与汉字“泰赫”的发音相近，其中 ``ch'' 的发音类似于 ``h''。\TeX{} 的拼写来自希腊词语
+\TeX{} 读作“Tech”，与汉字“泰赫”的发音相近，其中“ch” 的发音类似于“h”。\TeX{} 的拼写来自希腊词语
 τεχνική (technique，技术) 开头的几个字母，在 ASCII 字符环境中写作 \texttt{TeX}。
 
 \subsection{\LaTeX}\label{subsec:latex}
@@ -31,7 +31,7 @@
 \LaTeX{} 起初由 Leslie Lamport 博士\cite{manual}开发，目前由 \LaTeX 3 工作组%
 \footnote{\url{https://www.latex-project.org}}进行维护。
 
-\LaTeX{} 读作 ``Lah-tech'' 或者 ``Lay-tech''，与汉字“拉泰赫”或“雷泰赫”的发音相近，在 ASCII 字符环境写作 \texttt{LaTeX}。
+\LaTeX{} 读作“Lah-tech” 或者“Lay-tech”，与汉字“拉泰赫”或“雷泰赫”的发音相近，在 ASCII 字符环境写作 \texttt{LaTeX}。
 \LaTeXe{} 是 \LaTeX{} 的当前版本，意思是超出了第二版，但还远未达到第三版，在 ASCII 字符环境写作 \texttt{LaTeX2e}。
 
 \subsection{\LaTeX{} 的优缺点}\label{subec:advs}
@@ -56,8 +56,8 @@
 
 \LaTeX{} 的缺点也是显而易见的：
 \begin{itemize}
-  \item 入门门槛高。本手册的副标题叫做 “\pageref{lshort-minutes}~分钟了解 \LaTeXe ”，
-  实际上 \pageref{lshort-minutes} 是本手册正文部分（包括附录）的页数。如果你以平均一页一分钟的速度看完了本手册，
+  \item 入门门槛高。本手册的副标题叫做“\pageref{lshort-minutes}~分钟了解 \LaTeXe”，
+  实际上“\pageref{lshort-minutes}”是本手册正文部分（包括附录）的页数。如果真的以平均一页一分钟的速度看完了本手册，
   你只是粗窥门径而已，离学会它还很远。
   \item 不容易排查错误。\LaTeX{} 作为一个依靠编写代码工作的排版工具，其使用的宏语言比 C++ 或 Python 等程序设计语言在错误排查方面困难得多。
   它虽然能够提示错误，但不提供调试的机制，有时错误提示还很难理解。
@@ -137,7 +137,7 @@ xelatex helloworld
   \begin{Verbatim}
   \documentclass{ctexart}
   \begin{document}
-  “你好，世界！” 来自 \LaTeX{} 的问候。
+  “你好，世界！”来自 \LaTeX{} 的问候。
   \end{document}
   \end{Verbatim}
   \caption{在\LaTeX{} 中排版中文的最简源代码示例。}\label{code:hello-world-chinese}
@@ -209,12 +209,12 @@ or \TeX{} users?
 \pinyinindex{wendanglei}{文档类}
 \pinyinindex{hongbao}{宏包}
 \LaTeX{} 源代码以一个 \cmd{document\-class} 命令作为开头，它指定了文档使用的\textbf{文档类}。
-\env{document} 环境当中的内容是文档正文。
+\env{doc\-u\-ment} 环境当中的内容是文档正文。
 
 \cmdindex{usepackage}
 \pinyinindex{daoyanqu}{导言区}
 在 \cmd{documentclass} 和 \cmd{begin}\marg*{document} 之间的位置称为\textbf{导言区}。
-在导言区中一般会使用 \cmd{use\-package} 命令调用\textbf{宏包}，还会进行文档的全局设置。
+在导言区中常会使用 \cmd{use\-package} 命令调用\textbf{宏包}，还会进行文档的全局设置。
 \begin{verbatim}
 \documentclass{...}  % ... 为某文档类
 % 导言区
