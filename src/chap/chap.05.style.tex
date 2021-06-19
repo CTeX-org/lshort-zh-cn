@@ -212,10 +212,11 @@ He likes {\LARGE large and
 \cmd{setsansfont}\marg{font name}\oarg{font features} \\
 \cmd{setmonofont}\marg{font name}\oarg{font features}
 \end{command}
-其中 \Arg{font name} 使用字体的文件名（带扩展名）或者字体的英文名称。\Arg{font features} 用来手动配置对应的粗体或斜体
-，比如为 Windows 下的无衬线字体 Arial 配置粗体和斜体（通常情况下自动检测并设置对应的粗体和斜体，无需手动指定）：
+其中 \Arg{font name} 使用字体的文件名（带扩展名）或者字体的英文名称。\Arg{font features} 用来
+手动配置对应的粗体或斜体，比如为 Windows 下的无衬线字体 Arial 配置粗体和斜体（通常情况下自动检测
+并设置对应的粗体和斜体，无需手动指定）：
 \begin{verbatim}
-\setsansfont[BoldFont={Arial Bold}, ItalicFont={Arial Italic}]{Arial}
+\setsansfont{Arial}[BoldFont={Arial Bold}, ItalicFont={Arial Italic}]
 \end{verbatim}
 \Arg{font features} 还能配置字体本身的各种特性，这里不再赘述，感兴趣的读者请参考 \pkg{fontspec} 宏包的帮助文档。
 
