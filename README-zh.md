@@ -37,3 +37,38 @@ make install
 ### 使用 latexmk 编译
 
 在 `src` 目录下有可供 `latexmk` 构建工具使用的配置文件 `latexmkrc`。在 `src` 目录下执行 `latexmk` 命令进行编译，完成后将 PDF 文件移动到根目录。
+
+## 在 ubuntu 下安装编译
+
+- 安装
+
+```shell
+$ wget https://mirrors.ustc.edu.cn/CTAN/systems/texlive/tlnet/install-tl-unx.tar.gz
+$ tar -zxvf install-tl-unx.tar.gz
+$ cd inistall-tl-unxxxx
+$ sudo ./install-tl
+$ input:i
+```
+
+- 环境
+
+```shell
+# 在 ~/.profile 尾部添加 其中年份与指令集需要更换
+PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH; export PATH
+MANPATH=/usr/local/texlive/2021/texmf-dist/doc/man:$MANPATH; export MANPATH
+INFOPATH=/usr/local/texlive/2021/texmf-dist/doc/info:$INFOPATH; export INFOPATH
+
+$ sudo source ~/.profile
+```
+
+- 字体
+
+```shell
+$ cd 
+$ mkdir win
+# 把windows c:\windows\Fonts 下的所有文件复制到 ubuntu: ~/win
+
+$ cd 
+$ sudo cp -r ./win /usr/share/fonts/
+$ sudo cp fc-cache -fv
+```
