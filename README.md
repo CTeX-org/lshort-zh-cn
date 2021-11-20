@@ -1,4 +1,9 @@
+[English](https://github.com/CTeX-org/lshort-zh-cn) | [中文](https://github.com/CTeX-org/lshort-zh-cn/blob/master/README-zh.md)
+
 # The Not So Short Introduction To LaTeX (Chinese Edition), v6.03
+
+![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)
 
 ## License
 

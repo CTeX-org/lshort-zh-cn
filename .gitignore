@@ -262,3 +262,6 @@ TSWLatexianTemp*
 
 # macOS
 .DS_Store
+
+# Zip files
+*.zip

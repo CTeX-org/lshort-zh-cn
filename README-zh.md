@@ -1,4 +1,9 @@
+[English](https://github.com/CTeX-org/lshort-zh-cn) | [中文](https://github.com/CTeX-org/lshort-zh-cn/blob/master/README-zh.md)
+
 # 中文版 lshort，6.03 版
+
+![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)
 
 ## 许可证
 
