@@ -888,7 +888,9 @@ for (int i=0; i<4; ++i)
 
 \cmd{makebox} 更进一步，可以加上可选参数用于控制盒子的宽度 \Arg{width}，以及内容的对齐方式 \Arg{align}，
 可选居中 \texttt{c}（默认值）、左对齐 \texttt{l}、右对齐 \texttt{r} 和分散对齐 \texttt{s}%
-\footnote{分散对齐方式强行拉开单词的间距，往往会报 \texttt{Underfull} \cmd{hbox} 的消息。}。
+\footnote{分散对齐方式强行拉开单词的间距，往往会报 \texttt{Underfull} \cmd{hbox} 的警告。}。
+
+% 此处会有 Underfull \hbox 警告
 \begin{example}
 |\mbox{Test some words.}|\\
 |\makebox[10em]{Test some words.}|\\
