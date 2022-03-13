@@ -609,8 +609,9 @@ x_{n1} & x_{n2} & \ldots & x_{nn}\\
 \index{,@\cmd{,}} % The only one which cannot use \cmdindex, oops..
 \mathindex{:,;,"!}
 前文提到过，绝大部分时候，数学公式中各元素的间距是根据符号类型自动生成的，需要我们手动调整的情况极少。
-我们已经认识了两个生成间距的命令 \cmd{quad} 和 \cmd{qquad}。在公式中我们还可能用到的间距包括 \cmd{,}、\cmd{:}、\cmd{;}
-以及负间距 \cmd{!}，其中 \cmd{quad} 、 \cmd{qquad} 和 \cmd{,} 在文本和数学环境中可用，后三个命令只用于数学环境。
+我们已经认识了两个生成间距的命令 \cmd{quad} 和 \cmd{qquad}。在公式中我们可能用到的间距还包括
+\cmd{,}、\cmd{:}、\cmd{;} 以及负间距 \cmd{!}%
+\footnote{\LaTeX{} 2020-10-01 版本之前，\cmd{:}、\cmd{;} 和 \cmd{!} 只能用于数学环境。}。
 文本中的 \cmd{\textvisiblespace} 也能使用在数学公式中。
 
 \newdimen\testdimen \testdimen=\fontdimen6\textfont2 \divide\testdimen18\relax
