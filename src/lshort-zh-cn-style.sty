@@ -155,6 +155,17 @@
 
 % 允许 hologo 断词
 \hologoSetup{discretionarybreak=true}
+% 不在 METAFONT 和 METAPOST 中断行，避免出现字体缺失警告（该字体不包含连字符）
+\def\HoLogo@METAFONT#1{%
+  \HoLogoFont@font{METAFONT}{logo}{%
+    \HOLOGO@mbox{METAFONT}%
+  }%
+}
+\def\HoLogo@METAPOST#1{%
+  \HoLogoFont@font{METAPOST}{logo}{%
+    \HOLOGO@mbox{METAPOST}%
+  }%
+}
 % 新定义 hologo
 \def\HoLogo@TeXLive#1{%
   \hologo{TeX}\HOLOGO@space\HOLOGO@mbox{Live}%
