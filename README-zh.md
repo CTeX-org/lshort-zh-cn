@@ -2,8 +2,8 @@
 
 # 一份（不太）简短的 LaTeX2ε 介绍
 
-![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)
+[![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)](https://ctan.org/pkg/lshort)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)](https://github.com/CTeX-org/lshort-zh-cn/releases/latest)
 
 ## 许可证
 

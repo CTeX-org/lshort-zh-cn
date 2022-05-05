@@ -2,8 +2,8 @@
 
 # The Not So Short Introduction To LaTeX2ε (Chinese Edition)
 
-![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)
+[![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)](https://ctan.org/pkg/lshort)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)](https://github.com/CTeX-org/lshort-zh-cn/releases/latest)
 
 ## License
 
