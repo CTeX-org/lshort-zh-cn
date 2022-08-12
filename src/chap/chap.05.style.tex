@@ -731,7 +731,7 @@ but it also breaks the line.
 \subsection{\pkg{fancyhdr} 宏包}\label{subsec:fancyhdr}
 
 \pkgindex{fancyhdr}
-\pkg{fancyhdr} 宏包改善了页眉页脚样式的定义方式，允许我们将内容自由安置在页眉和页脚的左、中、右三个位置，还为页眉和页脚各加了一条横线。
+\pkg{fancyhdr} 宏包改善了页眉页脚样式的定义方式，允许我们将内容自由安置在页眉和页脚的左、中、右三个位置，还为页眉加了一条横线。
 
 \cmdindex[fancyhdr]{fancyhead,fancyfoot,fancyhf}
 \pkg{fancyhdr} 自定义了样式名称 \texttt{fancy}。使用 \pkg{fancyhdr} 宏包定义页眉页脚之前，通常先用 \cmd{page\-style}\marg*{fancy} 调用这个样式。
@@ -745,7 +745,7 @@ but it also breaks the line.
 习惯上使用 \cmd{fancyhf}\marg*{} 来清空页眉页脚的设置。
 
 源代码 \ref{code:fancyhdr} 给出了 \pkg{fancyhdr} 基础用法的一个示例，效果为将章节标题放在和 headings 一致的位置，但使用加粗格式；
-页码都放在页脚正中；修改横线宽度，“去掉”页脚的横线。
+页码都放在页脚正中；修改页眉的横线宽度（初始值为 0.4pt）。
 
 \begin{sourcecode}[htp]
   \begin{Verbatim}
@@ -758,8 +758,7 @@ but it also breaks the line.
   \fancyfoot[C]{\bfseries\thepage}
   \fancyhead[LO]{\bfseries\rightmark}
   \fancyhead[RE]{\bfseries\leftmark}
-  \renewcommand{\headrulewidth}{0.4pt} % 注意不用 \setlength
-  \renewcommand{\footrulewidth}{0pt}
+  \renewcommand{\headrulewidth}{0.6pt} % 注意不用 \setlength
   \end{Verbatim}
   \caption{\pkg{fancyhdr} 宏包的使用方法示例。}\label{code:fancyhdr}
 \end{sourcecode}
