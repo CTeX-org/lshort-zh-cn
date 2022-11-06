@@ -205,8 +205,8 @@
 
 \begin{itemize}
   \item \texttt{color/draw/fill=\Arg{color}} 为 \cmd{draw} 或 \cmd{fill} 等命令指定颜色。
-  \texttt{draw} 和 \texttt{fill} 分别指定填充和描边的颜色，而 \texttt{color} 同时指定，
-  可以省略 \texttt{color=} 直接写颜色名称。
+  \texttt{draw} 和 \texttt{fill} 分别指定描边和填充的颜色，而 \texttt{color} 同时指定，
+  也可以省略 \texttt{color=} 直接写颜色名称。
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}[thick]
@@ -339,7 +339,7 @@
 \begin{itemize}
   \item \texttt{anchor=\Arg{position}} 令结点的某个角落 \Arg{position} 与 \Arg{coordinate} 对应。
   \item \texttt{centered / above / below / left / right / above left / ... \oarg*{=\Arg{length}}} \\
-  与 \texttt{anchor} 等效的选项。可选的 \Arg{length} 为节点相对于 \Arg{coordinate} 的距离。
+  与 \texttt{anchor} 等效的选项。可选的 \Arg{length} 为结点相对于 \Arg{coordinate} 的距离。
 \end{itemize}
 \begin{example}
 \begin{tikzpicture}
@@ -356,7 +356,7 @@
   \cmd{use\-tikz\-library}\marg*{shapes.geometric} 可用更多的形状。
   \item \texttt{text=\Arg{color}}
   结点文字的颜色。
-  \item \texttt{node font=\Arg{font command}}
+  \item \texttt{node font=\marg*{\Arg{font command}}}
   结点文字的字体，形如 \cmd{bfseries} 或 \cmd{itshape} 等。
 \end{itemize}
 \begin{example}
@@ -389,7 +389,7 @@
 \end{tikzpicture}
 \end{example}
 
-\cmd{node} 命令的一种等效用法是在 \cmd{draw} 等命令的路径中使用 \texttt{node}，不仅可以对某个位置标记节点，还能够对线标记：
+\cmd{node} 命令的一种等效用法是在 \cmd{draw} 等命令的路径中使用 \texttt{node}，不仅可以对某个位置标记结点，还能够对线标记：
 \begin{example}
 \begin{tikzpicture}
 \draw (2,1.5) node[above] {$A$}

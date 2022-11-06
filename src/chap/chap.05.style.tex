@@ -714,7 +714,7 @@ but it also breaks the line.
 事实上 \cmd{chapter} 和 \cmd{section} 等章节命令内部也使用 \cmd{mark\-both} 或者 \cmd{mark\-right} 生成页眉。
 
 \LaTeX{} 默认将页眉的内容都转为大写字母。如果需要保持字母的大小写，可以尝试以下代码
-（\cmd{\renewcommand} 命令的用法详见 \ref{subsec:newcmd} 节）%
+（\cmd{renewcommand} 命令的用法详见 \ref{subsec:newcmd} 节）%
 \footnote{但是这不能改变页眉的斜体样式（\cmd{slshape}），斜体是定义在 \texttt{headings} 样式里的。
 如果不喜欢斜体，可在 \cmd{mark\-both} 等命令的参数里先使用 \cmd{normal\-font}，再使用想要的字体样式命令，
 或直接尝试使用 \pkg{fancyhdr} 宏包。}：
