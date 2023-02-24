@@ -450,7 +450,8 @@ or \TeX{} users?
   底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和对 TrueType / OpenType 字体的调用。
   当前较为方便的中文排版解决方案基于 \texttt{xelatex}，详见 \ref{sec:chinese} 节。
   \item[\texttt{lualatex}]
-  底层调用的引擎是 \hologo{LuaTeX}，这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
+  底层调用的引擎是 \hologo{LuaTeX}（从 \TeX{} Live 2020 开始是 LuaHB\TeX），
+  这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
   除了支持 UTF-8 编码和对 TrueType / OpenType 字体的调用外，还支持通过 Lua 语言扩展 \TeX{} 的功能。
   \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatexja} 宏包。
 \end{description}
