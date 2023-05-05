@@ -13,8 +13,8 @@
 \section{自定义命令和环境}\label{sec:defs}
 
 你也许已经意识到了，在本手册中介绍的所有命令都被包含在一个带颜色的矩形背景框中。
-笔者并没有直接使用基础的 \LaTeX{} 命令来实现这个效果，而是创建了一个\textbf{宏包}，
-并在其中定义了笔者所需要的命令和环境。现在我只需写成这样简单的形式：
+我们并没有直接使用基础的 \LaTeX{} 命令来实现这个效果，而是创建了一个\textbf{宏包}，
+并在其中定义了所需要的命令和环境。现在只需写成这样简单的形式：
 
 \begin{example}
 \begin{command}
@@ -25,7 +25,7 @@
 这个例子中使用了一个新的环境 \env{command}。这个环境负责给命令代码加上一个带颜色的矩形背景框。
 同时还使用了一个命令：\cmd{cmd}， 这个命令负责输出命令的名字，包括前面的反斜线。
 
-一旦笔者想要修改命令代码的样式，比如更换颜色、加边框等等，可以通过改变 \env{command} 环境的定义来很容易地创建新的外观，
+一旦想要修改命令代码的样式，比如更换颜色、加边框等等，可以通过改变 \env{command} 环境的定义来很容易地创建新的外观，
 而不是挨个修改每个命令示例。
 
 \subsection{定义新命令}\label{subsec:newcmd}
@@ -384,7 +384,7 @@ My humble subjects \ldots
 \LaTeX{} 标准文档类对章节划分了层级：
 \begin{itemize}
   \item 在 \cls{article} 文档类里 part 为 0，section 为 1，依此类推；
-  \item 在 \cls{report} / \cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
+  \item 在 \cls{report} 和 \cls{book} 文档类里 part 为 -1，chapter 为 0，section 为 1，等等。
 \end{itemize}
 
 secnumdepth 计数器控制章节编号的深度，如果章节的层级大于 secnumdepth，那么章节的标题、在目录和页眉页脚的标题都不编号
@@ -435,7 +435,7 @@ tocdepth 计数器控制目录的深度，如果章节的层级大于 tocdepth�
  \cmd{refname}        & References      & \env{thebibliography} 环境或 \cmd{biblio\-graphy}
                                           命令生成的参考文献标题（\cls{article} 文档类） \\
  \cmd{bibname}        & Bibliography    & \env{thebibliography} 环境或 \cmd{biblio\-graphy}
-                                          命令生成的参考文献标题（\cls{report} / \cls{book} 文档类）\\
+                                          命令生成的参考文献标题（\cls{report} 和 \cls{book} 文档类）\\
  \cmd{indexname}      & Index           & \cmd{printindex} 命令生成的索引标题 \\
  \hline
 \end{tabular}

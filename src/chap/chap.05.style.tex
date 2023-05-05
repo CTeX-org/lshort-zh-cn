@@ -122,7 +122,7 @@ He likes {\LARGE large and
 
 至此已经介绍了如何改变字体样式如粗体、斜体等等，以及如何改变字号，
 但你依然用着 \LaTeX{} 默认的那套、由高德纳设计制作的 Computer Modern 字体。
-有的人可能很喜欢 Times / Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX{} 里还不太容易。
+有的人可能很喜欢 Times 和 Palatino，或者更好看的字体。这些字体样式的自由设置在 \LaTeX{} 里还不太容易。
 
 幸好大部分时候，许多字体宏包为我们完成了整套配置，我们可以在调用宏包之后，照常使用 \cmd{bfseries} 或 \cmd{ttfamily} 等我们熟悉的命令。
 表 \ref{tbl:font-pkgs} 列出了较为常用的字体宏包，其中相当多的宏包还配置了数学字体，或者文本、数学字体兼而有之。
@@ -170,16 +170,16 @@ He likes {\LARGE large and
  \pkg{fourier}     & Fourier 风格数学字体，配合 Utopia 正文字体 \\
  \pkg{fouriernc}   & Fourier 风格数学字体，配合 New Century Schoolbook 正文字体 \\
  \pkg{arev}        & Arev 无衬线字体宏包，Vera Sans 风格 \\
- \pkg{mathdesign}  & 配合 Charter / Garamond / Utopia 正文字体的数学字体宏包 \\
+ \pkg{mathdesign}  & 配合 Charter/Garamond/Utopia 正文字体的数学字体宏包 \\
  \hline
  \multicolumn{2}{c}{\textbf{文本字体宏包}} \\
- \multicolumn{2}{l}{\footnotesize 以下字体包括传统的 \LaTeX{} 字体格式以及 TrueType / OpenType 格式。} \\
+ \multicolumn{2}{l}{\footnotesize 以下字体包括传统的 \LaTeX{} 字体格式以及 TrueType/OpenType 格式。} \\
  \hline
  \pkg{cm-unicode}  & Computer Modern 风格的 Unicode 字体，支持多种西方语言 \\
  \pkg{dejavu}      & DejaVu 开源字体 \\
  \pkg{droid}       & Droid 开源字体 \\
  \pkg{inconsolata} & Inconsolata 开源等宽字体 \\
- \pkg{libertine}   & Linux Libertine / Linux Biolium 开源字体 \\
+ \pkg{libertine}   & Linux Libertine 和 Linux Biolium 开源字体 \\
  \pkg{roboto}      & Roboto 开源无衬线字体 \\
  \pkg{sourcesanspro} & Source Sans Pro 开源无衬线字体 \\
  \pkg{sourcecodepro} & Source Code Pro 开源等宽字体 \\
@@ -327,7 +327,7 @@ words}, are shown here.
 
 \begin{table}[htp]
 \centering
-\caption{\TeX{} / \LaTeX{} 中的长度单位}\label{tbl:length-unit}
+\caption{\TeX{}/\LaTeX{} 中的长度单位}\label{tbl:length-unit}
 \begin{tabular}{ll}
  \hline
  \texttt{pt}\unitindex{pt} & 点（point，也译作“磅”），$=1/72.27$\,\texttt{in} \\
@@ -685,8 +685,8 @@ but it also breaks the line.
 \begin{description}
   \item[\cls{article} 文档类，\texttt{twoside} 选项] 偶数页为页码和节标题，奇数页为小节标题和页码；
   \item[\cls{article} 文档类，\texttt{oneside} 选项] 页眉为节标题和页码；
-  \item[\cls{report} / \cls{book} 文档类，\texttt{twoside} 选项] 偶数页为页码和章标题，奇数页为节标题和页码；
-  \item[\cls{report} / \cls{book} 文档类，\texttt{oneside} 选项] 页眉为章标题和页码。
+  \item[\cls{report} 和 \cls{book} 文档类，\texttt{twoside} 选项] 偶数页为页码和章标题，奇数页为节标题和页码；
+  \item[\cls{report} 和 \cls{book} 文档类，\texttt{oneside} 选项] 页眉为章标题和页码。
 \end{description}
 
 \cmdindex{pagenumbering}
@@ -710,7 +710,7 @@ but it also breaks the line.
 \cmd{markboth}\marg{left-mark}\marg{right-mark}
 \end{command}
 
-在双面排版、\texttt{headings / myheadings} 页眉页脚样式下，\Arg{left-mark} 和 \Arg{right-mark} 的内容分别预期出现在左页（偶数页）和右页（奇数页）。
+在双面排版、\texttt{headings} 或 \texttt{myheadings} 页眉页脚样式下，\Arg{left-mark} 和 \Arg{right-mark} 的内容分别预期出现在左页（偶数页）和右页（奇数页）。
 事实上 \cmd{chapter} 和 \cmd{section} 等章节命令内部也使用 \cmd{mark\-both} 或者 \cmd{mark\-right} 生成页眉。
 
 \LaTeX{} 默认将页眉的内容都转为大写字母。如果需要保持字母的大小写，可以尝试以下代码
@@ -725,8 +725,9 @@ but it also breaks the line.
   \markright{\thesection\quad #1}}
 \end{verbatim}
 
-其中 \cmd{thechapter}、\cmd{thesection} 等命令为章节计数器的数值（详见 \ref{sec:counters} 节）。以上代码适用于 \cls{report} / \cls{book} 文档类。
-对于 \cls{article} 文档类，与两个页眉相关的命令分别为 \cmd{sec\-tion\-mark} 和 \cmd{sub\-sec\-tion\-mark}。
+其中 \cmd{thechapter}、\cmd{thesection} 等命令为章节计数器的数值（详见 \ref{sec:counters} 节）。
+注意以上代码适用于 \cls{report} 和 \cls{book} 文档类；对于 \cls{article} 文档类，
+与两个页眉相关的命令分别为 \cmd{sec\-tion\-mark} 和 \cmd{sub\-sec\-tion\-mark}。
 
 \subsection{\pkg{fancyhdr} 宏包}\label{subsec:fancyhdr}
 
@@ -741,7 +742,7 @@ but it also breaks the line.
 \cmd{fancyhead}\oarg{position}\marg*{\ldots}\\
 \cmd{fancyfoot}\oarg{position}\marg*{\ldots}
 \end{command}
-其中 \Arg{position} 为 L（左）/C（中）/R（右）以及与 O（奇数页）/E（偶数页）字母的组合。\cmd{fancyhf} 用于同时定义页眉和页脚，
+其中 \Arg{position} 为 L（左）/ C（中）/ R（右）以及与 O（奇数页）/ E（偶数页）字母的组合。\cmd{fancyhf} 用于同时定义页眉和页脚，
 习惯上使用 \cmd{fancyhf}\marg*{} 来清空页眉页脚的设置。
 
 源代码 \ref{code:fancyhdr} 给出了 \pkg{fancyhdr} 基础用法的一个示例，效果为将章节标题放在和 headings 一致的位置，但使用加粗格式；
@@ -778,6 +779,5 @@ but it also breaks the line.
 \end{verbatim}
 
 更多用法请参考 \pkg{fancyhdr} 宏包的帮助文档。
-
 
 \endinput

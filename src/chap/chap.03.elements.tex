@@ -37,8 +37,8 @@
 
 较低层次如 \cmd{paragraph} 和 \cmd{subparagraph} 即使不用带星号的变体，生成的标题默认也不带编号，事实上，除 \cmd{part} 外：
 \begin{itemize}
-  \item \cls{article} 文档类带编号的层级为 \cmd{section} / \cmd{subsection} / \cmd{sub\-sub\-section} 三级；
-  \item \cls{report} / \cls{book} 文档类带编号的层级为 \cmd{chapter} / \cmd{section} / \cmd{sub\-section} 三级。
+  \item \cls{article} 文档类带编号的层级为 \cmd{section}、\cmd{subsection}、\cmd{sub\-sub\-section} 三级；
+  \item \cls{report} 和 \cls{book} 文档类带编号的层级为 \cmd{chapter}、\cmd{section}、\cmd{sub\-section} 三级。
 \end{itemize}
 对此的详细解释和调整方法见 \ref{subsec:latex-counts} 小节。
 
@@ -54,7 +54,7 @@
 \cmd{tableofcontents}
 \end{command}
 
-这个命令会生成单独的一章（\cls{report} / \cls{book}）或一节（\cls{article}），标题默认为“Contents”，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
+这个命令会生成单独的一章（\cls{report}/\cls{book}）或一节（\cls{article}），标题默认为“Contents”，可通过 \ref{sec:latex-settings} 节给出的方法定制标题。
 \cmd{tableof\-contents} 生成的章节默认不写入目录（\cmd{section*} 或 \cmd{chapter*}），可使用 \pkg{tocbibind} 等宏包修改设置。
 
 正确生成目录项，一般需要编译两次源代码。
@@ -74,7 +74,7 @@
 
 \cmdindex{appendix}
 所有标准文档类都提供了一个 \cmd{appendix} 命令将正文和附录分开%
-\footnote{有的参考文档可能使用 \cmd{begin} \marg*{appendix} \ldots \cmd{end} \marg*{appendix} 这样的写法，
+\footnote{有的参考文档可能使用 \cmd{begin}\marg*{appendix} \ldots{} \cmd{end}\marg*{appendix} 这样的写法，
 虽然有效，但并不规范，只要使用 \cmd{appendix} 命令就够了。}，
 使用 \cmd{appendix} 后，最高一级章节改为使用拉丁字母编号，从 A 开始。
 
@@ -145,7 +145,7 @@
 在信息给定后，就可以使用 \cmd{maketitle} 命令生成一个简单的标题页了。
 源代码 \ref{code:titlepage} 给出了一个标题页的示例和大致效果。
 \cls{article} 文档类的标题默认不单独成页，而 \cls{report} 和 \cls{book} 默认单独成页。
-可在 \cmd{document\-class} 命令调用文档类时指定 \texttt{titlepage / notitlepage} 选项以修改默认的行为。
+可在 \cmd{document\-class} 命令调用文档类时指定 \texttt{titlepage} 或 \texttt{notitlepage} 选项以修改默认的行为。
 
 \begin{sourcecode}[htp]
 \begin{Verbatim}
@@ -808,7 +808,7 @@ for (int i=0; i<4; ++i)
 读者可能听说过“\LaTeX{} 只能插入 \texttt{.eps} 格式的图片，需要把 \texttt{.jpg} 转成 \texttt{.eps} 格式”的观点。
 \LaTeX{} 发展到今天，这个观点早已过时。事实上不同编译命令支持的图片格式种类各异，见表~\ref{tbl:figure-format}。
 这个表格也能解答诸如“为什么 \texttt{.eps} 格式图片在 \texttt{pdflatex} 编译命令下出错”之类的问题。本表格也再一次说明，使用
-\texttt{xelatex} 命令是笔者最推荐的方式。
+\texttt{xelatex} 命令是我们最推荐的方式。
 
 \begin{table}[htp]
 \centering

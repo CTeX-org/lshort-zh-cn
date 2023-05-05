@@ -14,7 +14,7 @@
 
 ### 命令和环境名称
 
-用 `\cmd` 和 `\env` 命令生成命令名 `\cmdname` / 环境名 `envname`，以等宽字体排版：
+用 `\cmd` 和 `\env` 命令生成命令名 `\cmdname` 和环境名 `envname`，以等宽字体排版：
 ```
 \cmd{cmdname}
 \env{envname}
@@ -45,7 +45,7 @@
 ```
 独立的 meta 形式 &lt;*argument*&gt;。结合 `\marg*` 和 `\oarg*` 可排版较复杂的参数形式如 key-value。比如
 
-> \usepackage[&lt;*key1*&gt;=&lt;*value1*&gt;,...]{&lt;*pkgname*&gt;}   
+> \usepackage[&lt;*key1*&gt;=&lt;*value1*&gt;,...]{&lt;*pkgname*&gt;}
 
 使用如下命令排版：
 

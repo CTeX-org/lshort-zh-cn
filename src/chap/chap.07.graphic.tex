@@ -338,7 +338,7 @@
 \ref{subsec:tikz-draw} 小节中的参数可用于 \cmd{node} 命令的配置。除此之外，\cmd{node} 还有一些特定的参数：
 \begin{itemize}
   \item \texttt{anchor=\Arg{position}} 令结点的某个角落 \Arg{position} 与 \Arg{coordinate} 对应。
-  \item \texttt{centered / above / below / left / right / above left / ... \oarg*{=\Arg{length}}} \\
+  \item \texttt{centered}/\texttt{above}/\texttt{below}/\texttt{left}/\texttt{right}/\texttt{above left}/\ldots \oarg*{=\Arg{length}} \\
   与 \texttt{anchor} 等效的选项。可选的 \Arg{length} 为结点相对于 \Arg{coordinate} 的距离。
 \end{itemize}
 \begin{example}
@@ -372,9 +372,9 @@
 \end{example}
 
 \begin{itemize}
-  \item \texttt{inner sep=\Arg{length} / outer sep=\Arg{length}}
+  \item \texttt{inner sep=\Arg{length}} / \texttt{outer sep=\Arg{length}}
   结点边界向外和向内的额外距离。
-  \item \texttt{minimum size=\Arg{length} / minimum height=\Arg{length} / minimum width=\Arg{length}} \\
+  \item \texttt{minimum size=\Arg{length}} / \texttt{minimum height=\Arg{length}} / \texttt{minimum width=\Arg{length}} \\
   结点的最小大小或最小高度/宽度。
 \end{itemize}
 
@@ -447,7 +447,7 @@
 \end{command}
 上述语法定义了 \cmd{a} 为变量，在 \marg{commands} 中使用 \cmd{a} 完成循环。
 
-\Arg{list} 可以直接将所有值写出来，如 1,2,3,4；也可以写成省略形式，如 1,2,\ldots,10。
+\Arg{list} 可以直接将所有值写出来，如 \texttt{1,2,3,4}；也可以写成省略形式，如 \texttt{1,2,...,10}。
 \begin{example}
 \begin{tikzpicture}
 \draw (0,0)--(5,0);

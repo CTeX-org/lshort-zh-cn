@@ -35,9 +35,9 @@
 \Arg{item number} 自定义参考文献的序号，如果省略，则按自然排序给定序号。
 \Arg{widest label} 用以限制参考文献序号的宽度，如 99 意味着不超过两位数字。通常设定为与参考文献的数目一致。
 
-\env{thebibliography} 环境自动生成不带编号的一节（\cls{article} 文档类）或一章（\cls{report} / \cls{book} 文档类）。
-在 \cls{article} 文档类的节标题默认为“References”，而在 \cls{report} / \cls{book} 文档类
-的章标题默认为“Bibliography”。用户可通过 \ref{sec:latex-settings} 节给出的方法定制参考文献的标题。
+在 \cls{article} 文档类，\env{thebibliography} 环境自动生成不带编号的一节，标题默认为“References”；
+而在 \cls{report} 或 \cls{book} 文档类中，则会生成不带编号的一章，标题默认为“Bibliography”。
+用户可通过 \ref{sec:latex-settings} 节给出的方法定制参考文献的标题。
 
 以下为一个使用 \env{the\-biblio\-graphy} 排版参考文献的例子：
 \begin{verbatim}
@@ -506,7 +506,7 @@ Test index.
 \subsection{带颜色的文本和盒子}\label{subsec:colorbox}
 
 原始的 \cmd{color} 命令类似于字体命令 \cmd{bfseries}，它使之后排版的内容全部变成指定的颜色，
-所以直接使用时通常要加花括号分组。\pkg{color} / \pkg{xcolor} 宏包都定义了一些方便用户使用的带颜色元素。
+所以直接使用时通常要加花括号分组。\pkg{color} 和 \pkg{xcolor} 宏包都定义了一些方便用户使用的带颜色元素。
 
 \cmdindex[color/xcolor]{textcolor}
 输入带颜色的文本可以用类似 \cmd{textbf} 的命令：

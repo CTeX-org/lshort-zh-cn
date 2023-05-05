@@ -239,9 +239,9 @@ or \TeX{} users?
 
 \clsindex{article,report,book}
 \clsindex{ctexart,ctexrep,ctexbook}
-其中 \Arg{class-name} 为文档类的名称，如 \LaTeX{} 提供的 \cls{article}, \cls{report}, \cls{book}，
-在其基础上派生的一些文档类如支持中文排版的 \cls{ctexart} / \cls{ctexrep} / \cls{ctexbook}，
-或者有其它功能的一些文档类，如 \cls{moderncv} / \cls{beamer} 等。
+其中 \Arg{class-name} 为文档类的名称，如 \LaTeX{} 提供的 \cls{article}、\cls{report}、\cls{book}，
+在其基础上派生的一些文档类，如支持中文排版的 \cls{ctexart}、\cls{ctexrep}、\cls{ctexbook}，
+或者有其它功能的一些文档类，如 \cls{moderncv}、\cls{beamer} 等。
 \LaTeX{} 提供的基础文档类见表 \ref{tbl:ltx-classes}，其中前三个习惯上称为“标准文档类”。
 
 \begin{table}[htp]
@@ -447,13 +447,13 @@ or \TeX{} users?
   \item[\texttt{pdflatex}]
   底层调用的引擎也是 \hologo{pdfTeX}，可以直接生成 \texttt{pdf} 格式的文档。
   \item[\texttt{xelatex}]
-  底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和对 TrueType / OpenType 字体的调用。
+  底层调用的引擎是 \hologo{XeTeX}，支持 UTF-8 编码和对 TrueType/OpenType 字体的调用。
   当前较为方便的中文排版解决方案基于 \texttt{xelatex}，详见 \ref{sec:chinese} 节。
   \item[\texttt{lualatex}]
   底层调用的引擎是 \hologo{LuaTeX}\footnote{从 \TeX{} Live 2020 开始，\texttt{lualatex} 调用的
   引擎变为 LuaHB\TeX。LuaHB\TeX{} 是 \hologo{LuaTeX} 与 HarfBuzz 库的结合，对复杂语言的支持更好。}，
   这个引擎在 \hologo{pdfTeX} 引擎基础上发展而来，
-  除了支持 UTF-8 编码和对 TrueType / OpenType 字体的调用外，还支持通过 Lua 语言扩展 \TeX{} 的功能。
+  除了支持 UTF-8 编码和对 TrueType/OpenType 字体的调用外，还支持通过 Lua 语言扩展 \TeX{} 的功能。
   \texttt{lualatex} 编译命令下的中文排版支持需要借助 \pkg{luatexja} 宏包。
 \end{description}
 
