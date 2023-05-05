@@ -197,13 +197,15 @@ yes---or no?
 \LaTeX{} 提供了 \cmd{ldots} 命令表示省略号，相对于直接输入三个点的方式更为合理。
 \cmd{dots} 与 \cmd{ldots} 命令等效。
 \begin{example}
-one, two, three, \ldots one hundred.
+one, two, three, \ldots{} one hundred.
 \end{example}
 
 \subsubsection{波浪号}
 
 我们在 \ref{subsec:special-chars} 小节中了解了 \cmd{\textasciitilde} 命令，它可以用来输入波浪号，
-但位置靠顶端（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。西文中较少将波浪号作为标点符号使用，在中文环境中一般直接使用全角波浪号（～）。
+但位置靠顶端（\cmd{\textasciitilde} 命令主要用作重音，参考下一小节）。西文中较少将波浪号作为标点符号使用，
+% HACK: fix full width tilde position for FandolSong
+在中文环境中一般直接使用全角波浪号（\!\raisebox{-0.75ex}{～}\!）。
 
 \subsection{拉丁文扩展与重音}\label{subsec:accents}
 
