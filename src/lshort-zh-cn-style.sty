@@ -1,12 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{lshort-zh-cn-style}
-
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % lshort 调用的宏包
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 基本工具宏包
-%
 \RequirePackage{amsmath,amsthm,bm}
 \RequirePackage{hologo,verbatim,fancyvrb,layout,multicol}
 \RequirePackage[normalem]{ulem}
@@ -15,18 +14,14 @@
 \RequirePackage{makeidx}
 \RequirePackage[inner=1in,outer=1.5in,vmargin=1in,marginparwidth=1in]{geometry}
 \RequirePackage{tikz}
-
 %
 % ctex 宏包 2.2(2015/06/24) 或以上版本
 % ctex 宏包的字号设定会让许多固定字号的字体宏包报太多 warning，应当抑制
 % 中文正文字体使用 Fandol
-%
 \PassOptionsToPackage{no-math}{fontspec}
 \RequirePackage[zihao=false,scheme=chinese,heading=true,fontset=fandol]{ctex}[2015/06/24]
-
 %
 % 字体和符号宏包
-%
 \setmainfont{cmun}[
   Extension       = .otf,
   UprightFont     = *rm,
@@ -50,12 +45,11 @@
   BoldFont       = *tb,
   BoldItalicFont = *tx,
 ]
-\RequirePackage{amssymb,latexsym,textcomp,mathrsfs,euscript,yhmath} % 与默认字体不冲突的一些符号包
+\RequirePackage{amssymb,latexsym,textcomp,mathrsfs,euscript,yhmath}% 与默认字体不冲突的一些符号包
 % 消除 \t 命令的字体 warning
-\AtBeginDocument{%}
-  \renewcommand*\t[1]{{\edef\restore@font{\the\font}\usefont{OML}{cmm}{m}{it}\accent"7F\restore@font#1}}
+\AtBeginDocument{%
+  \DeclareRobustCommand*\t[1]{{\edef\restore@font{\the\font}\usefont{OML}{cmm}{m}{it}\accent"7F\restore@font#1}}%
 }
-
 % 调整 layout 宏包的命令使之能够放入浮动体，手动指定奇偶页的 layout
 \input lshort-zh-cn-layout
 \oddsidelayouttrue
@@ -66,22 +60,18 @@
 \def\MarginNotestext{边注}
 \def\oneinchtext{1in}
 \def\notshown{未显示}
-
 % hyperref 基本设定
 \RequirePackage{hyperref}
 \hypersetup{colorlinks,%
   bookmarksnumbered=true,%
   pdfstartview=FitH}
-
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % lshort 的版式设置
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \raggedbottom
-
 %
 % 不依赖 fancyhdr 的页眉页脚设定
-%
 \addtolength{\headheight}{1.6pt}
 \newdimen\headwidth \headwidth\textwidth
 \newdimen\headrulewidth \headrulewidth=0.4pt
@@ -94,48 +84,44 @@
     \hb@xt@\headwidth{\bfseries\rightmark\hfil\thepage}%
     \vss\hrule\@height\headrulewidth}}%
   \let\@mkboth\markboth
-  \def\chaptermark##1{\markboth{\if@mainmatter\CTEXthechapter\fi\quad ##1}{}}
-  \def\sectionmark##1{\markright{\S\thesection\quad ##1}}
+  \def\chaptermark##1{\markboth{\if@mainmatter\CTEXthechapter\fi\quad ##1}{}}%
+  \def\sectionmark##1{\markright{\S\thesection\quad ##1}}%
 }
 %\let\ps@plain\ps@fancyplain
 \pagestyle{fancy}
-
 %
 % 不依赖 tocbibind 的参考文献/索引修改
 % 索引依赖 multicols 环境排版
-%
 \renewenvironment{thebibliography}[1]
   {\chapter{\bibname}%
-  \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
-  \list{\@biblabel{\@arabic\c@enumiv}}%
-   {\settowidth\labelwidth{\@biblabel{#1}}%
-    \leftmargin\labelwidth
-    \advance\leftmargin\labelsep
-    \@openbib@code
-    \usecounter{enumiv}%
-    \let\p@enumiv\@empty
-    \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-    \sloppy
-    \clubpenalty4000
-    \@clubpenalty \clubpenalty
-    \widowpenalty4000%
-    \sfcode`\.\@m}
-   {\def\@noitemerr
-     {\@latex@warning{Empty `thebibliography' environment}}%
-  \endlist}
+    \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+    \list{\@biblabel{\@arabic\c@enumiv}}%
+      {\settowidth\labelwidth{\@biblabel{#1}}%
+        \leftmargin\labelwidth
+        \advance\leftmargin\labelsep
+        \@openbib@code
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+    \endlist}
 \renewenvironment{theindex}%
   {\chapter{\indexname}%
-   \@mkboth{\MakeUppercase\indexname}{\MakeUppercase\indexname}%
-   \parskip\z@ \@plus .3\p@\relax
-   \let\item\@idxitem
-   \small
-   \begin{multicols}{2}}
-   {\end{multicols}}
-
+    \@mkboth{\MakeUppercase\indexname}{\MakeUppercase\indexname}%
+    \parskip\z@ \@plus .3\p@\relax
+    \let\item\@idxitem
+    \small
+    \begin{multicols}{2}}
+  {\end{multicols}}
 %
 % 将主目录和源代码目录合并排版
 % 不依赖 float 宏包的 \listof，因此要补充定义 \l@sourcecode
-%
 \renewcommand\tableofcontents%
   {\chapter{\contentsname}%
   \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
@@ -145,62 +131,44 @@
   \@makeschapterhead{\sourcecodename}%
   \@starttoc{los}%
 }
-
 %
 % 令 \cleardoublepage 的偶数页页眉页脚为空
-%
 \renewcommand{\cleardoublepage}
     {\clearpage\if@twoside \ifodd\c@page\else
     \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-
 % 允许 hologo 断词
 \hologoSetup{discretionarybreak=true}
 % 不在 METAFONT 和 METAPOST 中断行，避免出现字体缺失警告（该字体不包含连字符）
 \def\HoLogo@METAFONT#1{%
-  \HoLogoFont@font{METAFONT}{logo}{%
-    \HOLOGO@mbox{METAFONT}%
-  }%
-}
+  \HoLogoFont@font{METAFONT}{logo}{\HOLOGO@mbox{METAFONT}}}
 \def\HoLogo@METAPOST#1{%
-  \HoLogoFont@font{METAPOST}{logo}{%
-    \HOLOGO@mbox{METAPOST}%
-  }%
-}
+  \HoLogoFont@font{METAPOST}{logo}{\HOLOGO@mbox{METAPOST}}}
 % 新定义 hologo
 \def\HoLogo@TeXLive#1{%
-  \hologo{TeX}\HOLOGO@space\HOLOGO@mbox{Live}%
-}
+  \hologo{TeX}\HOLOGO@space\HOLOGO@mbox{Live}}
 \def\HoLogo@MacTeX#1{%
-  \HOLOGO@mbox{Mac}\hologo{TeX}%
-}
+  \HOLOGO@mbox{Mac}\hologo{TeX}}
 \def\HoLogo@CTeX#1{%
-  \HOLOGO@mbox{C}\hologo{TeX}%
-}
+  \HOLOGO@mbox{C}\hologo{TeX}}
 \def\HoLogo@TikZ#1{%
-  \HOLOGO@mbox{Ti\textit{k\/}Z}%
-}
-
+  \HOLOGO@mbox{Ti\textit{k\/}Z}}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % lshort 用到的自定义命令
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 源自 TeX FAQ 的超链接命令
 % CTAN 镜像暂用清华源
-%
 \newcommand{\Email}{\begingroup \def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}\Url}     % email address
 \def\mailto|#1|{\href{mailto:#1}{\Email|#1|}}        % url to mail somewhere
 \def\CTANref{\begingroup \urlstyle{tt}\Url}
 \def\CTAN|#1|{\href{https://mirrors.tuna.tsinghua.edu.cn/CTAN/#1}{\CTANref|CTAN://#1|}}
 \newcommand{\contrib}[3]{#1\quad\mailto|#2|{\small\\\quad\textit{#3}}\\[1ex]}
-
 %
 % 示意长度
-%
 \def\demowidth#1{\rule{.6pt}{1ex}\rule{#1}{.6pt}\rule{.6pt}{1ex}}
-
 %
 % 命令和环境的写法
-%
 \DeclareRobustCommand*\cmd[1]{\texttt{\char`\\#1}}
 \DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
 \def\crcmd{\cmd{\char`\\}}
@@ -215,10 +183,8 @@
 \def\@marg#1{\texttt{\{#1\}}}
 \def\@margmeta#1{\@marg{\@meta{#1}}}
 \def\@meta#1{$\m@th\langle$\textnormal{\textit{#1}}$\m@th\rangle$}
-
 %
 % 命令和环境的索引
-%
 \def\pkgindex#1{\@for\pkgname:=#1\do{\index{\pkgname @\pkg{\pkgname} 宏包}}}
 \def\clsindex#1{\@for\clsname:=#1\do{\index{\clsname @\cls{\clsname} 文档类}}}
 \def\cmdindex{\@ifnextchar[{\pkgcmdindex}{\ltxcmdindex}}
@@ -227,46 +193,37 @@
 \def\ltxenvindex#1{\@for\@ltxenv:=#1\do{\index{\@ltxenv @\env{\@ltxenv} 环境}}}
 \def\pkgcmdindex[#1]#2{\@for\@pkgcmd:=#2\do{\index{\@pkgcmd @\cmd{\@pkgcmd} (\pkg{#1})}}}
 \def\pkgenvindex[#1]#2{\@for\@pkgenv:=#2\do{\index{\@pkgenv @\env{\@pkgenv} 环境 (\pkg{#1})}}}
-
 %
 % 文本和数学符号索引
-%
 \def\symindex#1{\@for\t@xtsym:=#1\do{\index{\t@xtsym @\cmd{\t@xtsym} (\textit{符号} \expandafter\protect\csname \t@xtsym\endcsname)}}}
 \def\mathindex#1{\@for\m@thcmd:=#1\do{\index{\m@thcmd @\cmd{\m@thcmd} (\textit{数学命令})}}}
 \def\msymindex#1{\@for\m@thsym:=#1\do{\index{\m@thsym @\cmd{\m@thsym} (\textit{数学符号}$\expandafter\protect\csname \m@thsym\endcsname$)}}}
 \def\maccindex#1{\@for\m@thacc:=#1\do{\index{\m@thacc @\cmd{\m@thacc} (\textit{数学重音}$\expandafter\protect\csname \m@thacc\endcsname{a}$)}}}
 \def\waccindex#1{\@for\wideacc:=#1\do{\index{\wideacc @\cmd{\wideacc} (\textit{数学重音}$\expandafter\protect\csname \wideacc\endcsname{AB}$)}}}
-
 %
 % 拼音索引
-%
 \def\pinyinindex#1#2{\index{#1@#2}}
-
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % lshort 用到的自定义环境
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 每章最前的介绍内容环境 intro
-%
 \newenvironment{intro}
   {\advance\leftskip\parindent\advance\rightskip\parindent\sffamily}%
   {\par\vspace*{2ex minus 1.5ex}}
-
 %
 % 展示命令
-%
 \newenvironment{command}%
   {\trivlist\item\relax%
   \def\arraystretch{1.2}%
   \hskip\parindent%
   \begin{tabular}{>{\columncolor{blue!5}}l}
   }{\end{tabular}\endtrivlist}
-
 %
 % 示例环境 example
 % 环境中的代码写入临时文件 lshort-zh-cn-example.aux
 % 再从临时文件中读取，分别生成代码盒子和示例盒子
-%
 \newwrite\example@out
 \newlength\savefboxrule
 \newlength\savefboxsep
@@ -301,15 +258,13 @@
   }%
   \endtrivlist
 }
-
 %
 % sourcecode 浮动体
-%
 \belowcaptionskip\abovecaptionskip
 \fvset{fontsize=\small,frame=lines}
 \newfloat{sourcecode}{tbp}{los}[chapter]
 \floatname{sourcecode}{源代码}
 \def\sourcecodename{源代码示例列表}
 \def\l@sourcecode{\@dottedtocline{1}{1.5em}{2.3em}}
-
+%
 \endinput
