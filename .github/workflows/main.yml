@@ -14,5 +14,5 @@ jobs:
         args: -r latexmkrc
     - uses: actions/upload-artifact@v4
       with:
-        name: PDF
+        name: lshort-zh-cn
         path: src/lshort-zh-cn.pdf

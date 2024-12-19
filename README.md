@@ -2,12 +2,13 @@
 
 # The Not So Short Introduction To LaTeX2ε (Chinese Edition)
 
+[![build](https://github.com/CTeX-org/lshort-zh-cn/workflows/build/badge.svg)](https://github.com/CTeX-org/lshort-zh-cn/actions)
 [![CTAN](https://img.shields.io/ctan/v/lshort-zh-cn)](https://ctan.org/pkg/lshort-zh-cn)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/CTeX-org/lshort-zh-cn)](https://github.com/CTeX-org/lshort-zh-cn/releases/latest)
 
 ## License
 
-This document is distributed under the **GNU Free Documentation License, version 1.3**.
+This document is distributed under the [**GNU Free Documentation License, version 1.3**](LICENSE).
 For detailed information, see the section entitled &ldquo;GNU Free Documentation License&rdquo; in the document, or the source code file `fdl.tex`.
 
 ## Preparation for typesetting
