@@ -264,3 +264,5 @@ TSWLatexianTemp*
 
 # Zip files
 *.zip
+
+.vscode
