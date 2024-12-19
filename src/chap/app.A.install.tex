@@ -29,6 +29,9 @@
 
 \subsection{安装发行版}\label{subsec:install-dists}
 
+本节仅简述了主流操作系统安装 \TeX{} 发行版的方式，其他系统如 WSL（Windows Subsystem for Linux）等可参考 install\--latex\--guide\--zh\--cn 的教程
+（可通过命令 \texttt{texdoc \-install\--latex\--guide\--zh\--cn} 在本地查看，或在 \href{http://mirrors.ctan.org/info/install-latex-guide-zh-cn/install-latex-guide-zh-cn.pdf}{CTAN} 上下载）。
+
 \subsubsection{\hologo{TeXLive}}
 
 \hologo{TeXLive} 的光盘镜像发布于 \url{https://www.tug.org/texlive/}%
@@ -62,8 +65,10 @@ Linux 下 \hologo{TeXLive} 安装完毕后，一般还需要在 root 权限下�
 
 \section{安装和更新宏包}\label{sec:pkg-manager}
 
-\hologo{TeXLive} 和 \hologo{MiKTeX} 分别提供了图形界面的宏包管理器 \hologo{TeXLive} Manager 和
-\hologo{MiKTeX} Package Manager，用于安装、管理和更新宏包。一般情况下，直接在图形界面的工具下按提示操作即可
+\hologo{TeXLive} 和 \hologo{MiKTeX} 分别提供了图形界面的宏包管理器 \hologo{TeXLive} Manager%
+\footnote{\href{https://github.com/syvshc/tlmgr-intro-zh-cn/releases/latest/download/tlmgr-intro-zh-cn.pdf}{GitHub tlmgr-intro-zh-cn} 提供了更加简明实用的 \texttt{tlmgr} 教程。}%
+和 \hologo{MiKTeX} Package Manager，用于安装、管理和更新宏包。
+一般情况下，直接在图形界面的工具下按提示操作即可
 （\hologo{MiKTeX} Package Manager 有普通权限和管理员权限的版本，建议总是使用管理员权限的版本）。
 
 两者也可以通过各自的命令行工具安装和更新宏包：
