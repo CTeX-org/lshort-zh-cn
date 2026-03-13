@@ -337,6 +337,17 @@ xelatex demo
   兼容 \pkg{IEEEtran} 风格的样式，著录按顺序编码排版。另外还包括按作者—年份顺序排版著录的样式 \texttt{ieee-alphabetic}。
 \end{description}
 
+\subsubsection{新项目的参考文献选型建议}
+
+以上介绍的几种方案各有适用场景。对于今天新建的文档项目，如果模板没有预先指定参考文献工具，通常可\textbf{优先考虑
+\pkg{biblatex} + \texttt{biber}} 的组合：它对 UTF-8 编码和中文文献的支持更好，样式定制能力也更强。
+
+另一方面，许多期刊模板、会议模板和历史项目仍然沿用 \hologo{BibTeX} 工作流，或者显式要求 \pkg{natbib} 宏包配合特定的 \texttt{.bst}
+样式文件。这种情况下，应当以模板或投稿说明为准，继续采用它既有的参考文献方案，而不要随意切换为 \pkg{biblatex}。
+
+如果只是自己撰写课程论文、技术文档或书稿，且需要较好的 Unicode 支持、中文著录支持和更灵活的格式控制，那么 \pkg{biblatex}
+往往是更省事的选择。若要进一步改进英文引文中的引号、语言切换等细节，可结合相关样式文档，按需了解 \pkg{csquotes} 等配套工具。
+
 \section{索引和 makeindex 工具}\label{sec:index}
 
 \pinyinindex{suoyin}{索引}
@@ -555,6 +566,9 @@ PDF 文档格式是现今最流行的电子文档格式，而电子文档最实�
 \pkg{hyperref} 宏包涉及的链接遍布 \LaTeX{} 的每一个角落——目录、引用、脚注、索引、参考文献等等都被封装成超链接。
 但这也使得它与其它宏包发生冲突的可能性大大增加，虽然宏包已经尽力解决各方面的兼容性，但仍不能面面俱到。
 为减少可能的冲突，习惯上将 \pkg{hyperref} 宏包\textbf{放在其它宏包之后调用}。
+
+由于 \pkg{hyperref} 宏包更新较为频繁，不同版本在驱动支持、书签处理和部分选项细节上可能会有变化。
+本节只介绍较稳定、常见的用法；如果实际行为与这里的描述不完全一致，应优先查阅当前版本的 \pkg{hyperref} 帮助手册。
 
 \pinyinindex{xuanxiang}{选项（宏包/文档类）}
 与 \pkg{graphicx} 宏包类似，\texttt{latex} + \texttt{dvipdfmx} 命令下调用 \pkg{hyperref} 宏包时，需要指定选项 \texttt{dvipdfmx}；
