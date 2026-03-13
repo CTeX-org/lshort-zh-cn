@@ -16,6 +16,8 @@ For detailed information, see the section entitled &ldquo;GNU Free Documentation
 Update `ctex` and `xeCJK` (and all the packages they rely on) in your TeX distritusion. And make sure you've installed
 all the other packages used in `lshort-zh-cn-style.sty` and updated them to the newest version.
 
+The examples and explanations in this handbook reflect common practice at a certain point in time. If you notice behavior that differs in a newer TeX distribution, first make sure your distribution and packages are up to date, then consult the current documentation of the relevant package.
+
 ## Typesetting
 
 ### Manually typesetting

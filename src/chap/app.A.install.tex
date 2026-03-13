@@ -99,6 +99,30 @@ mpm --admin --set-repository=<CTAN mirrors>/systems/win32/miktex/tm/packages
 mpm --admin --print-package-info <package-name>
 \end{verbatim}
 
+\subsection{检查环境版本和更新状态}\label{subsec:dist-version-check}
+
+当读者发现手册中的示例与自己电脑上的实际结果不完全一致时，首先应当检查\TeX{} 发行版和相关宏包是否足够新。
+对于多数新手而言，比起一开始就怀疑源代码写错，更常见的情况是发行版年份、宏包版本或更新状态不同。
+
+例如，\hologo{TeXLive} 用户可先查看 \texttt{tlmgr} 本身的版本，并检查是否存在尚未安装的更新：
+\begin{verbatim}
+tlmgr --version
+tlmgr update --list
+\end{verbatim}
+
+\hologo{MiKTeX} 用户则可查看包管理器版本，并列出可更新的宏包：
+\begin{verbatim}
+mpm --version
+mpm --admin --find-updates
+\end{verbatim}
+
+如果已经确定环境较新，而某个命令、选项或宏包行为仍与手册描述不同，那么下一步应优先查阅该宏包当前版本的帮助文档。
+例如可用 \texttt{texdoc} 查找对应文档：
+\begin{verbatim}
+texdoc hyperref
+texdoc biblatex
+\end{verbatim}
+
 \hologo{TeXLive} 默认安装所有宏包，而 \hologo{MiKTeX} 的安装程序只包含了 \LaTeX{} 的一些基本宏包。从 \hologo{TeXLive} 的光盘镜像和 \hologo{MiKTeX} 的安装包体积可见一斑。
 默认情况下，编译过程中如果遇到宏包未安装而报错的情况下，\hologo{MiKTeX} 会弹出一个对话框，让用户可以选择临时安装宏包，安装成功后继续编译。
 
