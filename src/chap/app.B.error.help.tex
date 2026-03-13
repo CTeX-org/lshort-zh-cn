@@ -35,6 +35,15 @@ l.3 Test \LaTEx
 将“Test and it's friends.”排版出来。但这个例子过于简单，有些复杂的代码中，有可能会由于一个小问题导致一连串的错误。
 此时可以选择按 \textbf{S/R/Q} 选择跳过接下来的所有错误，或者按 \textbf{X} 直接退出编译，将源代码中的错误修改后重新编译。
 
+\subsubsection{排错三步法}
+
+遇到错误很多、看起来无从下手时，可先按以下顺序处理：
+\begin{enumerate}
+  \item \textbf{先定位第一条真正错误。}编译日志里后续报错往往是连锁反应，优先修复最早出现、且能指向源代码位置的错误。
+  \item \textbf{再缩小问题范围。}优先回看最近改动的几行代码；必要时把可疑部分临时删减，逐步恢复，直到找出触发错误的最小片段。
+  \item \textbf{最后清理辅助文件并重编。}在编译异常中断后，\texttt{.aux/.toc/.out} 等辅助文件可能残留不完整信息，删除后重编可避免误导性错误。
+\end{enumerate}
+
 \subsubsection{常见的 \LaTeX{} 错误信息}
 
 我们在此总结一些经常发生、问题比较明确的 \LaTeX{} 错误：
@@ -155,6 +164,27 @@ texdoc fancyhdr
   \item 在互联网上搜索自己不清楚的命令；
   \item 在论坛上提问求助有经验的人。
 \end{enumerate}
+
+\subsection{提问时的最小复现模板}\label{subsec:mwe-help}
+
+无论是在论坛、问答社区还是代码托管平台提问，\textbf{最小可复现示例（MWE）}都能显著提高问题被快速定位的概率。
+一个常用的最小模板如下：
+\begin{verbatim}
+\documentclass{article}
+% 仅保留与问题相关的宏包
+\begin{document}
+% 仅保留能触发问题的最小内容
+\end{document}
+\end{verbatim}
+
+提交问题时，建议至少同时提供以下信息：
+\begin{itemize}
+  \item 使用的编译命令（如 \texttt{xelatex}、\texttt{pdflatex} 等）；
+  \item 编译日志中的\textbf{第一条}关键错误信息；
+  \item 能稳定触发问题的最小源代码片段。
+\end{itemize}
+
+如果问题与特定模板有关，还应说明模板来源和版本，并尽量在不泄露隐私的前提下给出可复现的最小工程结构。
 
 \section{常用宏包简介}\label{sec:pkg-list}
 
